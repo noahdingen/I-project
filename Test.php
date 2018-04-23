@@ -19,13 +19,12 @@
 <p>Het werkte net niet, dus misschien nu wel? </p>
 <p>test zoveel</p>
 <p>opnieuw</p>
-LAATATESKJKJKAJDF"jk'laws
-fiaeofjpaj
+
 
 ik probeer nu een workspace die git ignore moet gaan ignoren.
 
 
-ik ben nie homo
+ik ben nie homo mss ook wel
 
 jjjjk
 
