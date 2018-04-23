@@ -9,4 +9,5 @@
 
 <H1> DIT IS OOK EEN TEST OF GITHUB WERKT</H1>
 <h2> dit is een regel </h2>
+<<<<<<< HEAD
 <h3>Testregel Dirk</h3>
