@@ -21,6 +21,8 @@
 <p>opnieuw</p>
 hghjkl
 
+ik probeer nu een workspace die git ignore moet gaan ignoren
+
 ik ben nie homo
 
 jjjjk
