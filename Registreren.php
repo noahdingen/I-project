@@ -19,7 +19,7 @@
 
 <body class="text-center">
 <?php include 'header.php' ?>
-
+<div class="registreren">
 <form class="form-signin">
 
     <h1 class="h3 mb-3 font-weight-normal">Gebruiker Aanmaken</h1>
@@ -66,7 +66,7 @@
         </div>
 
         <div class="form-group">
-            <input type="text" name="adres" id="adres" class="form-control input-sm" placeholder="adres">
+            <input type="text" name="adres" id="adres" class="form-control input-sm" placeholder="Adres">
         </div>
 
 
@@ -74,12 +74,12 @@
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <input type="text" name="postcode" id="postcode" class="form-control input-sm" placeholder="postcode">
+                    <input type="text" name="postcode" id="postcode" class="form-control input-sm" placeholder="Postcode">
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <input type="text" name="plaatsnaam" id="plaatsnaam" class="form-control input-sm" placeholder="plaatsnaam">
+                    <input type="text" name="plaatsnaam" id="plaatsnaam" class="form-control input-sm" placeholder="Plaatsnaam">
                 </div>
             </div>
         </div>
@@ -88,13 +88,13 @@
             <select>
                 <option value="volvo">Geheime vraag</option>
                 <option value="saab">Waar ben je geboren?</option>
-                <option value="mercedes">Wat is je Lievelingsdier?</option>
+                <option value="mercedes">Wat is je lievelingsdier?</option>
                 <option value="audi">Wie is jou superheld?</option>
             </select>
         </div>
 
         <div class="form-group">
-            <input type="text" name="antwoord" id="antwoord" class="form-control input-sm" placeholder="antwoord">
+            <input type="text" name="antwoord" id="antwoord" class="form-control input-sm" placeholder="Antwoord">
         </div>
         <input type="checkbox" name="vehicle" value="Car">Ik ga akkoord met de algemene voorwaarden
 
@@ -102,11 +102,7 @@
 
         <p class="mt-5 mb-3 text-muted">&copy; EenmaalAndermaal 2018</p>
     </form>
-
-
-
-</form>
-
+</div>
 <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
