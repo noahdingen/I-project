@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>iConcepts</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/styles.css" rel="stylesheet">
@@ -20,35 +20,36 @@
 
   <body>
     <?php include 'header.php' ?>
-
     <main role="main">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Hello, IConcepts</h1>
-          <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-          <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+          <h1 class="display-3">Geachte bezoeker,</h1>
+          <p>Wij van iConcepts willen U prodcuten aanbieden waar U zelf kunt bepalen wat de prijs is.</p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Lees meer &raquo;</a></p>
         </div>
       </div>
 
       <div class="container">
         <!-- Example row of columns -->
+
+          <h1>Jongstleden veilingen</h1>
         <div class="row">
           <div class="col-md-4">
-            <h2>Heading</h2>
+            <h2>Veiling</h2>
             <p>Hier staat een veiling!</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
           </div>
           <div class="col-md-4">
-            <h2>Heading</h2>
+            <h2>Veiling</h2>
             <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
           </div>
           <div class="col-md-4">
-            <h2>Heading</h2>
+            <h2>Veiling</h2>
             <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
           </div>
         </div>
 
