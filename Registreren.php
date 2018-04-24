@@ -22,7 +22,7 @@
 <div class="registreren">
 <form class="form-signin">
 
-    <h1 class="h3 mb-3 font-weight-normal">Gebruiker wel of niet Aanmaken</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Gebruiker wel of niet Aanmaken trying</h1>
     <form role="form">
 
         <div class="form-group">
