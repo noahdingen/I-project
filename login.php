@@ -29,7 +29,7 @@
 
     <div class="checkbox mb-3">
         <label>
-            <input type="checkbox" value="remember-me"> Onthoud mij
+            <input type="checkbox" value="remember-me"> Onthoud mij niet
         </label>
     </div>
 
