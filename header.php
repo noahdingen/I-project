@@ -1,9 +1,3 @@
-/**
- * Created by PhpStorm.
- * User: MO
- * Date: 24-4-2018
- * Time: 09:46
- */
 <link href="assets/css/styles.css" rel="stylesheet">
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">

@@ -1,9 +1,4 @@
-/**
- * Created by PhpStorm.
- * User: MO
- * Date: 24-4-2018
- * Time: 09:52
- */
+
 
 <!doctype html>
 <html lang="en">
