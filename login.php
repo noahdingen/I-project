@@ -13,7 +13,7 @@
     <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/styles.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/signin.css" rel="stylesheet">
     <!-- Custom styles for this template -->
 
