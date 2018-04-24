@@ -1,3 +1,13 @@
 nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top{
     background-color: #F2552C!important;
 }
+
+.btn-secondary, .btn-primary{
+    background-color: #3A80A2!important;
+    border-color: #3A80A2!important;
+}
+
+.btn-secondary:hover, .btn-primary:hover{
+    background-color: #0C5F88!important;
+    border-color: #0C5F88!important;
+}

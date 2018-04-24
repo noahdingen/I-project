@@ -13,7 +13,7 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
+    <link href="assets/css/index.css" rel="stylesheet">
   </head>
 
   <body>
