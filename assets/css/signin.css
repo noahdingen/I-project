@@ -62,3 +62,7 @@ body {
   margin-top: 250px;
   margin-bottom: 50px;
 }
+
+.text-center .form-signin .gebruikersnaam{
+  margin-bottom: 10px;
+}
