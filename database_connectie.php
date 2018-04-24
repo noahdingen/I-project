@@ -10,4 +10,5 @@ try {
     $handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $error) {
     echo 'Er ging eventjes iets mis in de database. <br>';
+    echo 'test.<br>';
 }
