@@ -20,6 +20,7 @@
 <body class="text-center">
 <?php include 'header.php' ?>
 <form class="form-signin">
+
     <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Hier inloggen</h1>
     <label for="Gebruikersnaam" class="sr-only">Gebruikersnaam</label>
