@@ -66,3 +66,7 @@ body {
 .text-center .form-signin .gebruikersnaam{
   margin-bottom: 10px;
 }
+
+p.mt-5.mb-3.text-muted {
+  color: black!important;
+}
