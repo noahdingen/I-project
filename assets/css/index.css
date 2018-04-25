@@ -17,8 +17,8 @@ h1.display-4{
 }
 
 img{
-    width: inherit!important;
-}
+     width: inherit!important;
+ }
 
 .col-md-4{
     text-align: center;
