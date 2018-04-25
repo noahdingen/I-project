@@ -1,7 +1,25 @@
 main{
-    background-color: #FF7753!important;
+    background-color: #FF7753;
 }
 
 .jumbotron{
     background-color: #FF7753!important;
+}
+
+h1.display-4{
+    text-align: center;
+}
+
+.row{
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 2em;
+}
+
+img{
+    width: inherit!important;
+}
+
+.col-md-4{
+    text-align: center;
 }

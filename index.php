@@ -29,12 +29,12 @@
 
       <div class="container">
         <!-- Example row of columns -->
-
-          <h1>Jongstleden veilingen</h1>
+       <h1 class="display-4">Nieuwste veilingen</h1>
         <div class="row">
           <div class="col-md-4">
             <h2>Veiling</h2>
-            <p>Hier staat een veiling!</p>
+            <img src="assets/images/hammer.png" >
+            <p>Hier staat de beschrijving van bovenstaande veiling</p>
             <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
           </div>
           <div class="col-md-4">
