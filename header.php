@@ -1,3 +1,12 @@
+
+<!doctype html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
 <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
 <link href="assets/css/header.css" rel="stylesheet">
@@ -28,6 +37,5 @@
           </li>
         </ul>
           <a href="login.php"><button class="btn btn-primary btn-lg" type="submit">Login</button></a>
-
       </div>
     </nav>
