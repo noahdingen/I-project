@@ -8,21 +8,26 @@
 include_once('header.php');
 include_once('Database_verbinding/database_connectie.php');
 ?>
-    <title>Verkoper</title>
-
- <link href="assets/css/signin.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-
 <body class="text-center">
-            <form action="mailto:dirk47a@gmail.com" method="post" class="form-signin" enctype="text/plain">
+            <form action="PHP_bestanden/verkoperworden.php" method="post" class="form-signin" enctype="text/plain">
+            <link href="assets/css/signin.css" rel="stylesheet">
+ <?php
+if (!isset($_SESSION['user'])) {
+
+    echo "<H1 class=\"text-center\">U bent niet ingelogd, <br> U wordt zo doorgestuurd!</H1></form>";
+    header("Refresh: 2; URL=index.php");
+}
+else{
+
+?>
+    <title>Verkoper</title>
             <h1 class="h3 mb-3 font-weight-normal">Verkoper worden?</h1>
             <div class="form-group">
-                <select id="test">
+                <select>
                     <option value="">Kies uw bank</option>
                     <option value="Rabobank">Rabobank</option>
                     <option value="ING">ING</option>
                     <option value="ABN Ambro">ABN Ambro</option>
-                    <option value="">Ik heb geen bank</option>
                 </select>
             </div>
             <div class="form-group">
@@ -40,3 +45,4 @@ include_once('Database_verbinding/database_connectie.php');
             </div>
             <input type="submit" value="Upgrade naar verkoper" class="btn btn-info btn-block">
             <input type="reset" value="Gegevens verwijderen" class="btn btn-info btn-block">
+<?php } ?>
