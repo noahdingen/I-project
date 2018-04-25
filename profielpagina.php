@@ -1,18 +1,18 @@
 <?php include 'header.php' ?>
 
-<HTML>
-<HEAD>
-    <TITLE>Dit is mijn eerste homepage</TITLE>
+<html>
+<head>
+    <title>Dit is mijn eerste homepage</title>
 
     <link href="assets/css/styles.css" rel="stylesheet">
     <link href="assets/css/profielpagina.css" rel="stylesheet">
 
-</HEAD>
-<BODY>
+</head>
+<body>
 
 <div class="kolommen">
 
-<div class="PersoonsGegevens">
+<div class="persoons-gegevens">
 <p>Gebruikersnaam: </p>
 <p>E-mail adres: </p>
 <p>Voornaam: </p>
@@ -22,13 +22,13 @@
 <p>Straatnaam: </p>
 <p>Postcode: </p>
 <p>Type account: </p>
-    <P>
-    <a href="verkoper.php">Ugrade naar verkoper</a>
-    </P>
+    <p>
+    <a href="verkoper.php">Upgraden naar verkoper</a>
+    </p>
     <a href="verkoper.php">Gegevens bijwerken</a>
 </div>
 
-    <div class="persoonlijkeVeilingen">
+    <div class="persoonlijke-veilingen">
            <h1>Mijn lopende veilingen</h1>
 
         <div class="container">
@@ -59,5 +59,5 @@
 <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-</BODY>
-</HTML>
+</body>
+</html>
