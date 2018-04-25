@@ -1,9 +1,9 @@
 <?php
 include_once '../Database_verbinding/database_connectie.php';
 
-$gebruiker=$fout="";
-$pagina= './index.php';
-$paginaFout = './inloggen.php';
+$gebruiker= '';
+$pagina= '../index.php';
+$paginaFout = '../inloggen.php';
 
 if (isset($_POST['aanmelden'])){
 
@@ -12,7 +12,7 @@ if (isset($_POST['aanmelden'])){
         $gebruiker = $_POST['Gebruikersnaam'];
         $wachtwoord =$_POST['wachtwoord'];
 
-        $sql = "SELECT gebruikersnaam FROM Gebruiker WHERE gebruikersnaam = $gebruiker AND wachtwoord = $wachtwoord";
+        $sql = "SELECT gebruikersnaam FROM Gebruiker WHERE gebruikersnaam = '$gebruiker' AND wachtwoord = '$wachtwoord'";
         $opdracht = $dbh->prepare($sql);
         $opdracht->execute(array($gebruiker, $wachtwoord));
 
@@ -22,7 +22,7 @@ if (isset($_POST['aanmelden'])){
 //            $sqlInsert = "INSERT INTO ingelogde(Naam)
 //		  				  VALUES (?)";
             $naam = $gebruiker;
-            $opdracht = $dbh->prepare($sqlInsert);
+            $opdracht = $dbh->prepare($sql);
             $opdracht->execute (array($gebruiker));
             header("refresh:0; url=$pagina.?Gebruiker=$gebruiker");
         }
