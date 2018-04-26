@@ -9,8 +9,8 @@ include_once('header.php');
 include_once('Database_verbinding/database_connectie.php');
 ?>
 <body class="text-center">
-            <form action="PHP_bestanden/verkoperworden.php" method="post" class="form-signin" >
-            <link href="assets/css/signin.css" rel="stylesheet">
+    <form action="PHP_bestanden/verkoperworden.php" method="post" class="form-signin" >
+    <link href="assets/css/signin.css" rel="stylesheet">
  <?php
 
 if (!isset($_SESSION['user'])) {
@@ -24,7 +24,7 @@ $gast = $_SESSION['user'];
 $state = "SELECT verkoper FROM gebruiker WHERE gebruikersnaam = $gast";
 if($state = 'wel'){
     echo 'U bent al verkoper!';
-    header("Refresh: 2; URL=index.php");
+    header("Refresh: 2; URL=profielpagina.php");
 }
 else{
 ?>
