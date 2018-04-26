@@ -6,7 +6,6 @@
  * Time: 15:45
  */
 include_once('header.php');
-//include_once('Database_verbinding/database_connectie.php');
 ?>
 <body class="text-center">
             <form action="PHP_bestanden/verkoperworden.php" method="post" class="form-signin" >
