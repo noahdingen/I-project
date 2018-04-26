@@ -30,7 +30,7 @@
       <div class="container">
         <!-- Example row of columns -->
        <h1 class="display-4">Nieuwste veilingen</h1>
-        <div class="row">
+        <div class="column">
           <div class="col-md-4">
             <h2>Veiling</h2>
             <img src="assets/images/hammer.png" >
