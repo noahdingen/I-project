@@ -13,7 +13,7 @@ body {
   background-color: white;
 }
 .kleurenBox{
-  /*background-color: #F2552C;*/
+  background-color: #F2552C;
 }
 
 .form-signin {
@@ -61,16 +61,4 @@ body {
   width: 1000px;
   margin-top: 250px;
   margin-bottom: 50px;
-}
-
-.text-center .form-signin .gebruikersnaam{
-  margin-bottom: 10px;
-}
-
-p.mt-5.mb-3.text-muted {
-  color: black!important;
-}
-
-.error {
-	align-items: flex-start;
 }
