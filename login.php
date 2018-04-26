@@ -19,20 +19,44 @@
 
 <body class="text-center">
 <?php include 'header.php' ?>
-<form class="form-signin">
 
-    <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Hier inloggen</h1>
-    <label for="Gebruikersnaam" class="sr-only">Gebruikersnaam</label>
-    <input type="text" id="Gebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required autofocus>
-    <label for="inputPassword" class="sr-only">Wachtwoord</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <div class="photo">
+    <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="200" height="200">
+    </div>
 
+<div class="container">
+    <form class="col-form-label-lg">
+        <div class="form-group">
+            <label for="inputAddress">Gebruikersnaam</label>
+            <input type="text" class="form-control" name="gebruikersnaam" id="gebruikersnaam" placeholder="Gebruikersnaam">
+        </div>
+        <div class="form-group">
+            <label for="inputAddress">Wachtwoord</label>
+            <input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord">
+        </div>
 
-
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Inloggen</button>
+        <button type="submit" class="btn btn-primary">Inloggen</button>
+    </form>
+</div>
+<!--<form class="col-form-label-lg">-->
+<!--    <div class="form-group">-->
+<!--        <label for="inputAddress">Gebruikersnaam</label>-->
+<!--        <input type="text" class="form-control" name="gebruikersnaam" id="gebruikersnaam" placeholder="Gebruikersnaam">-->
+<!--    </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="wachtwoord">Password</label>-->
+<!--            <input type="password" class="form-control" id="wachtwoord" placeholder="wachtwoord">-->
+<!--        </div>-->
+<!--        <button type="submit" class="btn btn-primary">Inloggen</button>-->
+<!--    </form>-->
+<!--    <label for="Gebruikersnaam" class="sr-only">Gebruikersnaam</label>-->
+<!--    <input type="text" id="Gebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required autofocus>-->
+<!--    <label for="inputPassword" class="sr-only">Wachtwoord</label>-->
+<!--    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>-->
+<!---->
+<!--    <button class="btn btn-lg btn-primary btn-block" type="submit">Inloggen</button>-->
     <p class="mt-5 mb-3 text-muted">&copy; EenmaalAndermaal 2018</p>
-</form>
+
 <?php
 if (isset($_SESSION['errors'])) {
     $error = $_SESSION['errors'];
