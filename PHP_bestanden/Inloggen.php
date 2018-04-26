@@ -1,40 +1,60 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 
+if (isset($_SESSION['errors'])) {
+    unset($_SESSION['errors']);
+}
 
-$gebruiker= '';
-$pagina= '../index.php';
-$paginaFout = '../login.php';
-$error = '';
+include_once '../Database_verbinding/database_connectie.php';
+setlocale(LC_ALL, 'nld_nld');
 
-if (isset($_POST['aanmelden'])){
-    include_once '../Database_verbinding/database_connectie.php';
-    if(!empty($_POST['gebruikersnaam']) && !empty($_POST['wachtwoord'])){
-        $gebruiker = $_POST['gebruikersnaam'];
-        $wachtwoord =$_POST['wachtwoord'];
+$gebruikersnaam = valideerFormulierinput($_POST['gebruikersnaam']);
+$wachtwoord = valideerFormulierinput($_POST['wachtwoord']);
 
-        $sql = "SELECT gebruikersnaam FROM Gebruiker WHERE gebruikersnaam = ? AND wachtwoord = ?";
-        $opdracht = $dbh->prepare($sql);
-        $opdracht->execute(array($gebruiker, $wachtwoord));
-
-        if (isset( $opdracht->fetch()['gebruikersnaam'])){
-            session_start();
-            $_SESSION['gebruikersnaam']=$gebruiker;
-            header("refresh:0; url=$pagina.?Gebruiker=$gebruiker");
+if (!empty($gebruikersnaam) && !empty($wachtwoord)) {
+    if (bestaatGebruikersnaam($gebruikersnaam)) {
+        if (bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord)) {
+            header("location: ../index.php");
+        } else {
+            $_SESSION['errors'] =  " combinatie bestaat niet";
         }
-        else {
-            $error = "Wachtwoord en/of gebruikersnaam is verkeerd";
-            header("refresh: 3; Location: ../login.php");
-            echo $error;
-        }
+    } else {
+        $_SESSION['errors'] .= "gebruikersnaam bestaat niet";
     }
+} else {
 }
 
 if (isset($_SESSION['errors'])) {
     header("Location: ../login.php");
 }
 
-?>
+function bestaatGebruikersnaam($gebruikersnaam) {
+    $pdo = verbindMetDatabase();
 
+    $sql = "SELECT gebruikersnaam FROM Gebruiker WHERE gebruikersnaam = ?";
+    $query = $pdo->prepare($sql);
+    $query->execute([$gebruikersnaam]);
+    $gebruikersnaam = $query->fetchColumn();
+    if ($gebruikersnaam) {
+        return true;
+    }
+    return false;
+}
+
+function bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord) {
+    $pdo = verbindMetDatabase();
+    $sql = "SELECT wachtwoord FROM Gebruiker WHERE gebruikersnaam = ?";
+    $query = $pdo->prepare($sql);
+    $query->execute([$gebruikersnaam]);
+    $wachtwoord_hash = $query->fetchColumn();
+    if (password_verify($wachtwoord, $wachtwoord_hash)) {
+        return true;
+    }
+    return false;
+}
+?>
 
 
 
