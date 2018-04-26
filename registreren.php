@@ -20,71 +20,75 @@
 <main role="main">
     <div class="container">
         <h1 class="display-3">Registreren</h1>
-    <form class="col-form-label-lg">
+    <form class="col-form-label-lg" action="iProject/DB_registratie.php" method="post">
         <div class="form-group">
             <label for="inputAddress">Gebruikersnaam</label>
-            <input type="text" class="form-control" name="gebruikersnaam" id="gebruikersnaam" placeholder="Gebruikersnaam">
+            <input type="text" class="form-control" name="gebruikersnaam" id="gebruikersnaam" placeholder="Gebruikersnaam" required autofocus>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Wachtwoord</label>
-                <input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord">
+                <input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord" required>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Herhaal Wachtwoord</label>
-                <input type="password" class="form-control" name="bevestig_wachtwoord" id="wachtwoord" placeholder="Bevestig Wachtwoord">
+                <input type="password" class="form-control" name="bevestig_wachtwoord" id="wachtwoord" placeholder="Bevestig Wachtwoord" required>
             </div>
         </div>
         <div class="form-group">
             <label for="inputAddress">E-mailadres</label>
-            <input type="email" class="form-control" name="email" id="email" placeholder="E-mailadres">
+            <input type="email" class="form-control" name="email" id="email" placeholder="E-mailadres" required>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Voornaam</label>
-                <input type="text" class="form-control" name="voornaam" id="voornaam" placeholder="Voornaam">
+                <input type="text" class="form-control" name="voornaam" id="voornaam" placeholder="Voornaam" required>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Achternaam</label>
-                <input type="text" class="form-control" name="achternaam" id="achternaam" placeholder="Achternaam">
+                <input type="text" class="form-control" name="achternaam" id="achternaam" placeholder="Achternaam" required>
             </div>
         </div>
         <div class="form-group">
             <label for="inputAddress">Geboortedatum</label>
-            <input type="date" class="form-control" name="geboortedatum" id="geboortedatum" placeholder="Geboortedatum">
+            <input type="date" class="form-control" name="geboortedatum" id="geboortedatum" placeholder="Geboortedatum" required>
         </div>
         <div class="form-group">
             <label for="inputAddress">Adres</label>
-            <input type="text" class="form-control" name="adres" id="adres" placeholder="Adres">
+            <input type="text" class="form-control" name="adres" id="adres" placeholder="Adres" required>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputCity">Postcode</label>
-                <input type="text" class="form-control" name="postcode" id="postcode">
+                <input type="text" class="form-control" name="postcode" id="postcode" required>
             </div>
 
             <div class="form-group col-md-6">
                 <label for="inputCity">Plaatsnaam</label>
-                <input type="text" class="form-control" name="plaatsnaam" id="plaatsnaam">
+                <input type="text" class="form-control" name="plaatsnaam" id="plaatsnaam" required>
             </div>
         </div>
         <div class="form-row">
             <label for="geheime vraag">Geheime vraag</label>
-            <select class="form-control form-control-lg" name="geheime vraag">
+            <select class="form-control form-control-lg" name="geheime vraag" required>
                 <option value="1">Waar ben je geboren?</option>
                 <option value="2">Wat is je lievelingsdier?</option>
                 <option value="3">Wie is jouw superheld?</option>
             </select>
         </div>
         <div class="form-group">
+            <label for="inputAddress">Geheim antwoord</label>
+            <input type="text" class="form-control" name="antwoord" id="antwoord" placeholder="Antwoord" required>
+        </div>
+        <div class="form-group">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="voorwaarden" id="gridCheck">
+                <input class="form-check-input" type="checkbox" name="voorwaarden" id="gridCheck" required>
                 <label class="form-check-label" for="gridCheck">
                     Ik ga akkoord met de algemene voorwaarden
                 </label>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
+        <input type="submit" name="aanmelden" class="btn btn-primary">
     </form>
     </div>
 </main>
