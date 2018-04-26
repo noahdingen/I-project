@@ -1,26 +1,36 @@
 <?php
-    include_once 'header.php';
+
 ?>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
     <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <!--<link href="assets/css/bootstrap.min.css" rel="stylesheet">-->
-    <link href="assets/css/signin.css" rel="stylesheet">
-
+    <link href="../assets/css/styles.css" rel="stylesheet">
+    <link href="../assets/css/signin.css" rel="stylesheet">
     <!-- Custom styles for this template -->
 
 <body class="text-center">
+<?php include 'header.php' ?>
+<form class="form-signin">
 
-<form class="form-signin" action="PHP_bestanden/Inloggen.php" method="post">
     <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Hier inloggen</h1>
-    <div class="gebruikersnaam">
-        <label for="Gebruikersnaam" class="sr-only">Gebruikersnaam</label>
-        <input type="text" id="Gebruikersnaam" name="gebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required autofocus>
-    </div>
+    <label for="Gebruikersnaam" class="sr-only">Gebruikersnaam</label>
+    <input type="text" id="Gebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required autofocus>
     <label for="inputPassword" class="sr-only">Wachtwoord</label>
-    <input type="password" id="inputPassword" name="wachtwoord" class="form-control" placeholder="wachtwoord" required>
-    <input type="submit" class="btn btn-lg btn-primary btn-block" name="aanmelden" value="Aanmelden">
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Inloggen</button>
     <p class="mt-5 mb-3 text-muted">&copy; EenmaalAndermaal 2018</p>
 </form>
 <?php
@@ -41,8 +51,3 @@ else if (isset($_SESSION['succes'])){
 </body>
 
 </html>
-
-
-
-
-

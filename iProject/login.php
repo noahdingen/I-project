@@ -28,15 +28,23 @@
     <label for="inputPassword" class="sr-only">Wachtwoord</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me"> Onthoud mij niet
-        </label>
-    </div>
+
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Inloggen</button>
     <p class="mt-5 mb-3 text-muted">&copy; EenmaalAndermaal 2018</p>
 </form>
+<?php
+if (isset($_SESSION['errors'])) {
+    $error = $_SESSION['errors'];
+    echo "$error <br>";
+    session_unset($_SESSION['errors']);
+}
+else if (isset($_SESSION['succes'])){
+    $succes = $_SESSION['succes'];
+    session_unset($_SESSION['succes']);
+    echo $succes;
+}
+?>
 <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
