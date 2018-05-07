@@ -1,6 +1,10 @@
 <?php
  if(isset($_GET['error'])){$error = $_GET['error'];}
     else{ $error = '';}
+if (!isset($_SESSION)) {
+    session_start();
+    $_SESSION['gebruiker'] = false;
+}
 ?>
 <!doctype html>
 <html lang="en">
