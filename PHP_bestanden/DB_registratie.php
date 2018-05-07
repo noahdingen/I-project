@@ -1,7 +1,7 @@
 <?php 
 session_start();
 // maak verbinding met database
-require_once '../Database_verbinding/database_connectie.php';
+require_once 'database_connectie.php';
 
 $title = 'registreren';
 $paginatitel = 'registreren';
@@ -13,16 +13,16 @@ $pdo = verbindMetDatabase();
 // is er op de knop aanmelden geklikt?
 if (isset($_POST['aanmelden'])){
     // zijn de velden gebruiker en wachtwoord ingevuld?
-    if(!empty($_POST['gebruikersnaam']) && !empty($_POST['wachtwoord'])){
-		if($_POST['wachtwoord'] == $_POST['bevestig_wachtwoord']){
+    if(!empty($_POST['gebruikersnaam']) && !empty($_POST['Wachtwoord'])){
+		if($_POST['Wachtwoord'] == $_POST['Bevestig_Wachtwoord']){
 			// de ingevoerde gegevens opslaan in variabelen
 			$gebruiker = $_POST['gebruikersnaam'];
-			$wachtwoord =$_POST['wachtwoord'];
+			$wachtwoord =$_POST['Wachtwoord'];
 		    $wachtwoord = password_hash($wachtwoord, PASSWORD_BCRYPT);
 			$email = $_POST['email'];
-			$voornaam = $_POST['voornaam'];
-			$achternaam = $_POST['achternaam'];
-			$geboortedatum = $_POST['geboortedatum'];
+			$voornaam = $_POST['Voornaam'];
+			$achternaam = $_POST['Achternaam'];
+			$geboortedatum = $_POST['Geboortedatum']; 
 			$adres = $_POST['adres'];
 			$postcode = $_POST['postcode'];
 			$plaatsnaam = $_POST['plaatsnaam'];
@@ -31,23 +31,32 @@ if (isset($_POST['aanmelden'])){
 			$adresregel2 = $adres;
 			$landnaam = 'nederland';
 			$verkoper = 'nee';
-            echo "hai";
 		   // voer query uit in de database voor tabel gebruikers
 		   $sql = "INSERT INTO Gebruiker(gebruikersnaam, wachtwoord, voornaam, 
 										achternaam, adresregel1, adresregel2, postcode, plaatsnaam, landnaam, datum, emailadres
 										,vraagnummer, antwoordtekst, verkoper) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            echo "hai";
 			$opdracht = $pdo->prepare($sql);
 			$opdracht->execute(array($gebruiker, $wachtwoord, $voornaam, $achternaam, $adres, $adresregel2, $postcode,
 									 $plaatsnaam, $landnaam, $geboortedatum, $email, $geheime_vraag, $antwoord, $verkoper));
-			
-			header("refresh:0; url='../login.php'");
+
+
+            $to      = 'vaningenmike@gmail.com';
+            $subject = 'the subject';
+            $message = 'hello';
+            $headers = array(
+                'From' => 'vaningenmike@gmail.com',
+                'Reply-To' => 'vaningenmike@gmail.com');
+
+            mail($to, $subject, $message, $headers);
+
+
+header("refresh:0; url='./login.php'");
 		} else{
 			$error = "*Wachtwoorden komen niet overeen";
-			header("refresh:0; url='../registreren.php?error=$error'");
+			header("refresh:0; url='./Registreren.php?error=$error'");
 			}
 	} else {
-			header("refresh:0; url='../registreren.php'");
+			header("refresh:0; url='./Registreren.php'");
         }
     }
 	
