@@ -30,10 +30,7 @@ else{
 ?>
     <title>Verkoper</title>
             <h1 class="h3 mb-3 font-weight-normal">Verkoper worden?</h1>
-                <div class="form-group">
-                    <input type="text" name="Gebruiker" id="Gebruiker" class="form-control input-sm" placeholder="Gebruiker">
-                </div>
-            <div class="form-group">
+     <div class="form-group">
                 <select Name='banknaam'>
                     <option value="">Kies uw bank</option>
                     <option value="Rabobank">Rabobank</option>
