@@ -1,10 +1,5 @@
 <?php
- if(isset($_GET['error'])){$error = $_GET['error'];}
-    else{ $error = '';}
-if (!isset($_SESSION)) {
-    session_start();
-    $_SESSION['gebruiker'] = false;
-}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -35,7 +30,7 @@ if (!isset($_SESSION)) {
             <label for="wachtwoord">Wachtwoord</label>
             <input id="wachtwoord" class="form-control" name="wachtwoord" type="password">
         </div>
-            <?php echo $error;?>
+            <?php //echo $error;?>
             <a href="">Wachtwoord vergeten?</a>
             <button type="submit" class="btn btn-primary">Inloggen</button>
     </form>

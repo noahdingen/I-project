@@ -1,3 +1,11 @@
+<?php
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -25,6 +33,9 @@
         <div class="container">
           <h1 class="display-3">Geachte bezoeker,</h1>
           <p>Wij van iConcepts willen U prodcuten aanbieden waar U zelf kunt bepalen wat de prijs is.</p>
+            <?php
+            echo $_SESSION['gebruikers'];
+            ?>
           <p><a class="btn btn-primary btn-lg" href="#" role="button">Lees meer &raquo;</a></p>
         </div>
       </div>
