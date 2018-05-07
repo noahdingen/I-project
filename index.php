@@ -16,7 +16,9 @@
   </head>
 
   <body>
-    <?php include 'header.php' ?>
+    <?php include 'header.php';
+    include_once 'Database_verbinding/database_connectie.php';
+    ?>
     <main role="main">
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
@@ -27,14 +29,39 @@
         </div>
       </div>
 
+
+        <?php
+
+$conn = verbindMetDatabase();
+
+$data = $conn->prepare("SELECT * FROM Voorwerp");
+$data->execute();
+$resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+?>
+
+
       <div class="container">
         <!-- Example row of columns -->
        <h1 class="display-4">Nieuwste veilingen</h1>
         <div class="column">
           <div class="col-md-4">
-            <h2>Veiling</h2>
-            <img src="assets/images/hammer.png" alt="Foto kan niet laden" >
-            <p>Hier staat de beschrijving van bovenstaande veiling</p>
+            <h2> <?php
+                $data = $conn->query("SELECT * FROM Voorwerp");
+                $row = $data->fetch(); echo $row['titel'],"";
+                ?>
+            </h2>
+            <img src="
+            <?php
+            $data = $conn->query("SELECT * FROM Bestand");
+            $row = $data->fetch(); echo $row['filenaam'],"";
+            ?>
+
+            " alt="Foto kan niet laden" >
+
+            <p><?php
+                $data = $conn->query("SELECT * FROM Voorwerp");
+                $row = $data->fetch(); echo $row['beschrijving'],"";
+                ?></p>
             <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
           </div>
           <div class="col-md-4">

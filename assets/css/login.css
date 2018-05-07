@@ -1,4 +1,11 @@
 form {
+    margin: 0 auto;
     background-color: #F2552C;
     border-radius: 4em;
+
+}
+.container{
+    margin-top: 3%;
+    text-align: center;
+
 }
