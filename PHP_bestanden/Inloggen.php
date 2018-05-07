@@ -1,4 +1,6 @@
 <?php
+$error = "Gebruikersnaam en/of wachtwoord is onjuist";
+
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -18,12 +20,10 @@ if (!empty($gebruikersnaam) && !empty($wachtwoord)) {
         if (bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord)) {
             header("location: ../index.php");
         } else {
-            $_SESSION['errors'] =  " combinatie bestaat niet";
+            header("location: ../login.php?error=$error");
         }
-    } else {
-        $_SESSION['errors'] .= "gebruikersnaam bestaat niet";
+
     }
-} else {
 }
 
 if (isset($_SESSION['errors'])) {
@@ -55,7 +55,3 @@ function bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtw
     return false;
 }
 ?>
-
-
-
-

@@ -3,7 +3,7 @@ function verbindMetDatabase() {
     $hostnaam = 'localhost';
     $databasenaam = 'EenmaalAndermaal';
     $gebruikersnaam = 'sa';
-    $wachtwoord = 'renotje41';
+    $wachtwoord = 'dbrules';
     global $pdo;
     $pdo = new PDO("sqlsrv:Server=$hostnaam; Database=$databasenaam; ConnectionPooling = 0", "$gebruikersnaam", "$wachtwoord");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
