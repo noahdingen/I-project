@@ -33,7 +33,7 @@
         <div class="column">
           <div class="col-md-4">
             <h2>Veiling</h2>
-            <img src="assets/images/hammer.png" >
+            <img src="assets/images/hammer.png" alt="Foto kan niet laden" >
             <p>Hier staat de beschrijving van bovenstaande veiling</p>
             <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
           </div>
