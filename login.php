@@ -14,14 +14,15 @@
     <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../assets/css/styles.css" rel="stylesheet">
-    <link href="../assets/css/signin.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/login.css" rel="stylesheet">
     <!-- Custom styles for this template -->
 
 <body class="text-center">
-<?php include 'header.php' ?>
+<?php include 'header.php'?>
 <div class="container">
     <form action="PHP_bestanden/Inloggen.php" method="post" class="col-form-label-lg">
+        <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="72" height="72">
         <div class="form-group">
             <label for="gebruikersnaam">Gebruikersnaam</label>
             <input id="gebruikersnaam" class="form-control" name="gebruikersnaam" type="text">
