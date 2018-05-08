@@ -13,6 +13,7 @@ if(isset($_SESSION['gebruikers'])){
 $titel = 'Homepagina';
 include 'header.php';
 include_once 'Database_verbinding/database_connectie.php';
+include_once 'PHP_bestanden/veilingenbekijken.php';
 ?>
     <link href="assets/css/index.css" rel="stylesheet">
   <body>
