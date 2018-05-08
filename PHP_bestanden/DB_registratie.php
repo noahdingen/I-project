@@ -2,13 +2,17 @@
 session_start();
 // maak verbinding met database
 require_once '../Database_verbinding/database_connectie.php';
+//Regel hieronder is voor server!
+//require_once '../Server_verbinding/SQLSrvConnect.php';
 
 $title = 'registreren';
 $paginatitel = 'registreren';
 $gebruiker=$fout="";
 $pagina= './login.php';
 $pdo = verbindMetDatabase();
-//$paginaFout = './DB_registratie.php';
+//Regel hieronder is voor server!
+//$pdo = $conn;
+$paginaFout = './DB_registratie.php';
 
 // is er op de knop aanmelden geklikt?
 if (isset($_POST['aanmelden'])){
