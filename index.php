@@ -17,7 +17,7 @@ include_once 'Database_verbinding/database_connectie.php';
 include_once 'PHP_bestanden/veilingenbekijken.php';
 //include_once 'Server_verbinding/SQLSrvConnect.php';
 ?>
-?>
+
     <link href="assets/css/index.css" rel="stylesheet">
   <body>
     <main role="main">
