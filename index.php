@@ -3,9 +3,13 @@ include_once 'Database_verbinding/database_connectie.php';
 include 'PHP_bestanden/sessie_bezoeker.php';
 $titel = 'Homepagina';
 include 'header.php';
+// regel hieronder uit commentarisiren voor server
+//include_once 'Database_verbinding/database_connectie.php';
+//include_once 'PHP_bestanden/veilingenbekijken.php';
+//include_once 'Server_verbinding/SQLSrvConnect.php';
 ?>
     <link href="assets/css/index.css" rel="stylesheet">
-<body>
+  <body>
     <main role="main">
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
@@ -15,38 +19,20 @@ include 'header.php';
           <p><a class="btn btn-primary btn-lg" href="#" role="button">Lees meer &raquo;</a></p>
         </div>
       </div>
-        <?php
-
-$conn = verbindMetDatabase();
-
-$data = $conn->prepare("SELECT * FROM Voorwerp");
-$data->execute();
-$resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-?>
-
-
       <div class="container">
         <!-- Example row of columns -->
        <h1 class="display-4">Nieuwste veilingen</h1>
         <div class="column">
           <div class="col-md-4">
-            <h2> <?php
-                $data = $conn->query("SELECT * FROM Voorwerp");
-                $row = $data->fetch(); echo $row['titel'],"";
-                ?>
-            </h2>
-            <img src="
-            <?php
-            $data = $conn->query("SELECT * FROM Bestand");
-            $row = $data->fetch(); echo $row['filenaam'],"";
-            ?>
 
-            " alt="Foto kan niet laden" >
 
-            <p><?php
-                $data = $conn->query("SELECT * FROM Voorwerp");
-                $row = $data->fetch(); echo $row['beschrijving'],"";
-                ?></p>
+              <?php
+              haalinformatieop();
+//            ?>
+
+            <p>
+
+            </p>
             <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
           </div>
           <div class="col-md-4">

@@ -1,19 +1,60 @@
 <?php
-include_once '../Database_verbinding/database_connectie.php';
 
-$conn = verbindMetDatabase();
+function haalplaatjeop(){
+    $conn = verbindMetDatabase();
 
-$data = $conn->prepare("SELECT * FROM Voorwerp");
-$data->execute();
-$resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-echo "<div>";
-for($i = 0; $i < count($resultaat); $i++){
-//    echo "<a href='veilingenbekijken.php?id=" . $resultaat[$i]['voorwerpnummer'] . "'>";
-    echo "<h1>"  . $resultaat[$i]['titel'] . $resultaat[$i]['titel'] ."</h1>";
+      $data = $conn->query("SELECT * FROM Bestand");
+      $data->execute();
+      $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+//      for($i = 0; $i < count($resultaat); $i++){
+         for($i = 0; $i < 1; $i++){
+          echo '<img src="'. $resultaat[$i]['filenaam'].'">';
+    }
+    }
 
 
+function haaltitelop(){
+    $conn = verbindMetDatabase();
 
+    $data = $conn->prepare("SELECT * FROM Voorwerp");
+    $data->execute();
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    for($i = 0; $i < count($resultaat); $i++){
+        echo "<h2>". $resultaat[$i]['titel']. "</h2>";
+    }
 }
 
-echo "</div>";
-?>
+function haalbeschrijvingop(){
+    $conn = verbindMetDatabase();
+
+    $data = $conn->prepare("SELECT * FROM Voorwerp");
+    $data->execute();
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    for($i = 0; $i < count($resultaat); $i++){
+        echo "<p>" . $resultaat[$i]['beschrijving'] ."</p>";
+    }
+}
+
+//function haalinformatieop(){
+//    $conn = verbindMetDatabase();
+//
+//    $data = $conn->prepare("SELECT * FROM Voorwerp");
+//    $data->execute();
+//    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+//    for($i = 0; $i < count($resultaat); $i++){
+//        echo"<h2>". $resultaat[$i]['titel']. "</h2>". haalplaatjeop(). "<p>" . $resultaat[$i]['beschrijving'] ."</p>";
+//    }
+//}
+
+function haalinformatieop(){
+    $conn = verbindMetDatabase();
+
+    $data = $conn->prepare("SELECT * FROM Voorwerp");
+    $data->execute();
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    for($i = 0; $i < count($resultaat); $i++){
+        echo"<h2>". $resultaat[$i]['titel']. "</h2>";
+        echo  haalplaatjeop();
+        echo "<p>" . $resultaat[$i]['beschrijving'] ."</p>";
+    }
+}
