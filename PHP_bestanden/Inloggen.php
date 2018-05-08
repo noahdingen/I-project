@@ -25,7 +25,8 @@ if (!empty($gebruikersnaam) && !empty($wachtwoord)) {
     }else {
         header("location: ../login.php?error=$error_twee");
     }
-} else {
+}
+else {
     header("location: ../login.php?error=$error_drie");
 }
 
@@ -36,10 +37,7 @@ function bestaatGebruikersnaam($gebruikersnaam) {
     $query = $pdo->prepare($sql);
     $query->execute([$gebruikersnaam]);
     $gebruikersnaam = $query->fetchColumn();
-    if ($gebruikersnaam) {
-        return true;
-    }
-    return false;
+    return $gebruikersnaam;
 }
 
 function bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord) {
@@ -48,9 +46,6 @@ function bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtw
     $query = $pdo->prepare($sql);
     $query->execute([$gebruikersnaam]);
     $wachtwoord_hash = $query->fetchColumn();
-    if (password_verify($wachtwoord, $wachtwoord_hash)) {
-        return true;
-    }
-    return false;
+    return password_verify($wachtwoord, $wachtwoord_hash);
 }
 ?>
