@@ -4,7 +4,9 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-$error = "Gebruikersnaam en/of wachtwoord is onjuist";
+$error_een = "Wachtwoord onjuist";
+$error_twee = "Gebruikersnaam bestaat niet";
+$error_drie = "U dient beide velden in te vullen";
 
 include_once '../Database_verbinding/database_connectie.php';
 setlocale(LC_ALL, 'nld_nld');
@@ -18,13 +20,13 @@ if (!empty($gebruikersnaam) && !empty($wachtwoord)) {
             $_SESSION['gebruikers'] = $gebruikersnaam;
             header("location: ../index.php");
         } else {
-            header("location: ../login.php?error=$error");
+            header("location: ../login.php?error=$error_een");
         }
     }else {
-        header("location: ../login.php?error=$error");
+        header("location: ../login.php?error=$error_twee");
     }
 } else {
-    header("location: ../login.php?error=$error");
+    header("location: ../login.php?error=$error_drie");
 }
 
 function bestaatGebruikersnaam($gebruikersnaam) {
