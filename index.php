@@ -29,29 +29,16 @@ include_once 'PHP_bestanden/veilingenbekijken.php';
           <p><a class="btn btn-primary btn-lg" href="#" role="button">Lees meer &raquo;</a></p>
         </div>
       </div>
-
-
-        <?php
-// Voor de server $conn = verbindMetDatabase(); commentariseren Conn is global in serverconnet
-$conn = verbindMetDatabase();
-
-$data = $conn->prepare("SELECT * FROM Voorwerp");
-$data->execute();
-$resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-?>
-
-
       <div class="container">
         <!-- Example row of columns -->
        <h1 class="display-4">Nieuwste veilingen</h1>
         <div class="column">
           <div class="col-md-4">
-            <?php
-                haaltitelop();?>
-            <img src= <?php  haalplaatjeop() ?> alt="kan geen plaatje vinden">
+
+
               <?php
-                haalbeschrijvingop();
-            ?>
+              haalinformatieop();
+//            ?>
 
             <p>
 

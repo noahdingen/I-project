@@ -1,9 +1,22 @@
-<?php
-$titel = 'Registreren';
-include 'header.php'
-?>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Registreren</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
     <link href="assets/css/registreren.css" rel="stylesheet">
+</head>
+
 <body>
+<?php include 'header.php' ?>
 <main role="main">
     <div class="container">
         <h1 class="display-3">Registreren</h1>
@@ -47,12 +60,12 @@ include 'header.php'
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="postcode">Postcode</label>
-                <input type="text" class="form-control" name="postcode" id="postcode" required>
+                <input type="text" class="form-control" name="postcode" id="postcode" maxlength="6" placeholder="Postcode" required>
             </div>
 
             <div class="form-group col-md-6">
                 <label for="plaatsnaam">Plaatsnaam</label>
-                <input type="text" class="form-control" name="plaatsnaam" id="plaatsnaam" required>
+                <input type="text" class="form-control" name="plaatsnaam" id="plaatsnaam" placeholder="Plaatsnaam" required>
             </div>
         </div>
         <div class="form-row">
