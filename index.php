@@ -30,8 +30,9 @@ if(isset($_SESSION['gebruikers'])){
   </head>
 
   <body>
-    <?php include 'header.php';
-    include_once 'Database_verbinding/database_connectie.php';
+    <?php
+    include 'header.php';
+    include 'Server_verbinding/SQLSrvConnect.php';
     ?>
     <main role="main">
       <!-- Main jumbotron for a primary marketing message or call to action -->
