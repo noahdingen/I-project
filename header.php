@@ -11,6 +11,7 @@ if (!isset($_SESSION)) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <title><?php echo $titel; ?></title>
 <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="assets/css/header.css" rel="stylesheet">
 

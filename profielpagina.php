@@ -1,5 +1,7 @@
-<?php include 'header.php' ?>
-    <title>Profiel</title>
+<?php
+$titel = 'Profielpagina';
+include 'header.php'
+?>
     <link href="assets/css/profielpagina.css" rel="stylesheet">
 <body>
 <div class="kolommen">
