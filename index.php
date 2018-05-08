@@ -1,18 +1,8 @@
 <?php
-
-if (!isset($_SESSION)) {
-    session_start();
-}
-
-if(isset($_SESSION['gebruikers'])){
-    $bezoeker = $_SESSION['gebruikers'];
-}else{
-    $bezoeker = 'bezoeker';
-}
-
+include_once 'Database_verbinding/database_connectie.php';
+include 'PHP_bestanden/sessie_bezoeker.php';
 $titel = 'Homepagina';
 include 'header.php';
-include_once 'Database_verbinding/database_connectie.php';
 ?>
     <link href="assets/css/index.css" rel="stylesheet">
 <body>
@@ -20,13 +10,11 @@ include_once 'Database_verbinding/database_connectie.php';
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Geachte <?php echo $bezoeker; ?>,</h1>
+          <h1 class="display-3">Geachte <?php echo $bezoeker[0]. $bezoeker[1];?></h1>
           <p>Wij van iConcepts willen U prodcuten aanbieden waar U zelf kunt bepalen wat de prijs is.</p>
           <p><a class="btn btn-primary btn-lg" href="#" role="button">Lees meer &raquo;</a></p>
         </div>
       </div>
-
-
         <?php
 
 $conn = verbindMetDatabase();
