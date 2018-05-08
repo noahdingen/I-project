@@ -16,7 +16,7 @@ $paginaFout = './DB_registratie.php';
 
 // is er op de knop aanmelden geklikt?
 if (isset($_POST['aanmelden'])){
-    echo "hai";
+
     // zijn de velden gebruiker en wachtwoord ingevuld?
     if(!empty($_POST['gebruikersnaam']) && !empty($_POST['wachtwoord'])){
 		if($_POST['wachtwoord'] == $_POST['bevestig_wachtwoord']){
@@ -61,7 +61,7 @@ mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f".$from );
 $sql = "INSERT INTO Gebruiker(gebruikersnaam, wachtwoord, voornaam, 
 										achternaam, adresregel1, adresregel2, postcode, plaatsnaam, landnaam, datum, emailadres
 										,vraagnummer, antwoordtekst, verkoper) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            echo "hai";
+
 			$opdracht = $pdo->prepare($sql);
 			$opdracht->execute(array($gebruiker, $wachtwoord, $voornaam, $achternaam, $adres, $adresregel2, $postcode,
 									 $plaatsnaam, $landnaam, $geboortedatum, $email, $geheime_vraag, $antwoord, $verkoper));

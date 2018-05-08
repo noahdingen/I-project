@@ -32,7 +32,7 @@ if (!isset($_SESSION)) {
                   Profiel
                   </button>
                   <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button">Mijn profiel</button>
+                        <a href="profielpagina.php"><button class="dropdown-item" type="button">Mijn profiel</button></a>
                         <a href="PHP_bestanden/Loguit.php"><button class="dropdown-item" type="button">Loguit</button></a>
                   </div>
             </div>';
