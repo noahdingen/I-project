@@ -1,5 +1,9 @@
 <?php
-
+if(isset($_GET['error'])){
+    $error = $_GET['error'];
+}else{
+    $error = '';
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -30,7 +34,7 @@
             <label for="wachtwoord">Wachtwoord</label>
             <input id="wachtwoord" class="form-control" name="wachtwoord" type="password">
         </div>
-            <?php //echo $error;?>
+            <?php echo $error;?>
             <a href="">Wachtwoord vergeten?</a>
             <button type="submit" class="btn btn-primary">Inloggen</button>
     </form>

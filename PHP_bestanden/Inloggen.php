@@ -20,7 +20,11 @@ if (!empty($gebruikersnaam) && !empty($wachtwoord)) {
         } else {
             header("location: ../login.php?error=$error");
         }
+    }else {
+        header("location: ../login.php?error=$error");
     }
+} else {
+    header("location: ../login.php?error=$error");
 }
 
 function bestaatGebruikersnaam($gebruikersnaam) {
