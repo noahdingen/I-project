@@ -12,6 +12,7 @@ $pdo = verbindMetDatabase();
 
 // is er op de knop aanmelden geklikt?
 if (isset($_POST['aanmelden'])){
+    echo "hai";
     // zijn de velden gebruiker en wachtwoord ingevuld?
     if(!empty($_POST['gebruikersnaam']) && !empty($_POST['wachtwoord'])){
 		if($_POST['wachtwoord'] == $_POST['bevestig_wachtwoord']){
@@ -31,7 +32,7 @@ if (isset($_POST['aanmelden'])){
 			$adresregel2 = $adres;
 			$landnaam = 'nederland';
 			$verkoper = 'nee';
-            echo "hai";
+
 		   // voer query uit in de database voor tabel gebruikers
 		   $sql = "INSERT INTO Gebruiker(gebruikersnaam, wachtwoord, voornaam, 
 										achternaam, adresregel1, adresregel2, postcode, plaatsnaam, landnaam, datum, emailadres
