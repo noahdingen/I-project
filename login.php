@@ -35,8 +35,10 @@ if(isset($_GET['error'])){
             <input id="wachtwoord" class="form-control" name="wachtwoord" type="password">
         </div>
             <?php echo $error;?>
+        <div>
             <a href="">Wachtwoord vergeten?</a>
             <button type="submit" class="btn btn-primary">Inloggen</button>
+        </div>
     </form>
 </div>
 
