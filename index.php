@@ -32,6 +32,7 @@ if(isset($_SESSION['gebruikers'])){
   <body>
     <?php include 'header.php';
     include_once 'Database_verbinding/database_connectie.php';
+    include_once 'PHP_bestanden/veilingenbekijken.php';
     ?>
     <main role="main">
       <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -59,23 +60,16 @@ $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
        <h1 class="display-4">Nieuwste veilingen</h1>
         <div class="column">
           <div class="col-md-4">
-            <h2> <?php
-                $data = $conn->query("SELECT * FROM Voorwerp");
-                $row = $data->fetch(); echo $row['titel'],"";
-                ?>
-            </h2>
-            <img src="
             <?php
-            $data = $conn->query("SELECT * FROM Bestand");
-            $row = $data->fetch(); echo $row['filenaam'],"";
+                haaltitelop();?>
+            <img src= <?php  haalplaatjeop() ?> alt="kan geen plaatje vinden">
+              <?php
+                haalbeschrijvingop();
             ?>
 
-            " alt="Foto kan niet laden" >
+            <p>
 
-            <p><?php
-                $data = $conn->query("SELECT * FROM Voorwerp");
-                $row = $data->fetch(); echo $row['beschrijving'],"";
-                ?></p>
+            </p>
             <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
           </div>
           <div class="col-md-4">
