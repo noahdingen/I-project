@@ -56,5 +56,8 @@ function haalinformatieop(){
         echo"<h2>". $resultaat[$i]['titel']. "</h2>";
         echo  haalplaatjeop($i);
         echo "<p>" . $resultaat[$i]['beschrijving'] ."</p>";
+        ?>
+        <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
+        <?php
     }
 }

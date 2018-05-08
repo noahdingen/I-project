@@ -5,7 +5,7 @@ $titel = 'Homepagina';
 include 'header.php';
 // regel hieronder uit commentarisiren voor server
 //include_once 'Database_verbinding/database_connectie.php';
-//include_once 'PHP_bestanden/veilingenbekijken.php';
+include_once 'PHP_bestanden/veilingenbekijken.php';
 //include_once 'Server_verbinding/SQLSrvConnect.php';
 ?>
     <link href="assets/css/index.css" rel="stylesheet">
@@ -23,27 +23,11 @@ include 'header.php';
        <h1 class="display-4">Nieuwste veilingen</h1>
         <div class="column">
           <div class="col-md-4">
-
-
               <?php
               haalinformatieop();
-//            ?>
+              ?>
+          </div>
 
-            <p>
-
-            </p>
-            <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Veiling</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Veiling</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
-          </div>
         </div>
 
         <hr>
