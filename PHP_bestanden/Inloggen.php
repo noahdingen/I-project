@@ -1,10 +1,14 @@
 <?php
 
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-$error = "Gebruikersnaam en/of wachtwoord is onjuist";
+$error_een = "Wachtwoord onjuist";
+$error_twee = "Gebruikersnaam bestaat niet";
+$error_drie = "U dient beide velden in te vullen";
 
 include_once '../Database_verbinding/database_connectie.php';
-include_once 'Ingelogt.php';
 setlocale(LC_ALL, 'nld_nld');
 
 $gebruikersnaam = valideerFormulierinput($_POST['gebruikersnaam']);
@@ -13,12 +17,17 @@ $wachtwoord = valideerFormulierinput($_POST['wachtwoord']);
 if (!empty($gebruikersnaam) && !empty($wachtwoord)) {
     if (bestaatGebruikersnaam($gebruikersnaam)) {
         if (bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord)) {
-           $_SESSION['gebruiker'] = true;
+            $_SESSION['gebruikers'] = $gebruikersnaam;
             header("location: ../index.php");
         } else {
-            header("location: ../login.php?error=$error");
+            header("location: ../login.php?error=$error_een");
         }
+    }else {
+        header("location: ../login.php?error=$error_twee");
     }
+}
+else {
+    header("location: ../login.php?error=$error_drie");
 }
 
 function bestaatGebruikersnaam($gebruikersnaam) {
@@ -28,10 +37,7 @@ function bestaatGebruikersnaam($gebruikersnaam) {
     $query = $pdo->prepare($sql);
     $query->execute([$gebruikersnaam]);
     $gebruikersnaam = $query->fetchColumn();
-    if ($gebruikersnaam) {
-        return true;
-    }
-    return false;
+    return $gebruikersnaam;
 }
 
 function bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord) {
@@ -40,9 +46,6 @@ function bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtw
     $query = $pdo->prepare($sql);
     $query->execute([$gebruikersnaam]);
     $wachtwoord_hash = $query->fetchColumn();
-    if (password_verify($wachtwoord, $wachtwoord_hash)) {
-        return true;
-    }
-    return false;
+    return password_verify($wachtwoord, $wachtwoord_hash);
 }
 ?>

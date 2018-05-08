@@ -1,9 +1,8 @@
 <?php
- if(isset($_GET['error'])){$error = $_GET['error'];}
-    else{ $error = '';}
-if (!isset($_SESSION)) {
-    session_start();
-    $_SESSION['gebruiker'] = false;
+if(isset($_GET['error'])){
+    $error = $_GET['error'];
+}else{
+    $error = '';
 }
 ?>
 <!doctype html>
@@ -25,7 +24,7 @@ if (!isset($_SESSION)) {
 <body class="text-center">
 <?php include 'header.php'?>
 <div class="container">
-    <form action="PHP_bestanden/Inloggen.php" method="post" class="col-form-label-lg">
+    <form action="PHP_bestanden/Inloggen.php" method="post" class="col-md-3 col-form-label">
         <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="72" height="72">
         <div class="form-group">
             <label for="gebruikersnaam">Gebruikersnaam</label>
@@ -36,8 +35,10 @@ if (!isset($_SESSION)) {
             <input id="wachtwoord" class="form-control" name="wachtwoord" type="password">
         </div>
             <?php echo $error;?>
+        <div>
             <a href="">Wachtwoord vergeten?</a>
             <button type="submit" class="btn btn-primary">Inloggen</button>
+        </div>
     </form>
 </div>
 

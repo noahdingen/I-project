@@ -1,5 +1,7 @@
 <?php
-
+if (!isset($_SESSION)) {
+    session_start();
+}
 ?>
 
 <!doctype html>
@@ -21,8 +23,8 @@
 
 
         <?php
-        //include_once 'PHP_bestanden/Inloggen.php';
-        if (isset($_SESSION['gebruiker']) && $_SESSION['gebruiker'] == true) {
+
+        if(isset($_SESSION['gebruikers'])) {
             echo '
               <div class="btn-group">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -30,13 +32,13 @@
                   </button>
                   <div class="dropdown-menu dropdown-menu-right">
                         <button class="dropdown-item" type="button">Mijn profiel</button>
-                        <button class="dropdown-item" type="button">Loguit</button>
+                        <a href="PHP_bestanden/Loguit.php"><button class="dropdown-item" type="button">Loguit</button></a>
                   </div>
             </div>';
         }
        else {
-           echo ' 
-        <div>
+        echo '
+           <div>
             <a href="registreren.php" class="btn btn-primary" role="button">Registreren</a>
             <a href="login.php" class="btn btn-primary" role="button">Login</a>
         </div>';
