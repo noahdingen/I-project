@@ -12,8 +12,11 @@ if(isset($_SESSION['gebruikers'])){
 
 $titel = 'Homepagina';
 include 'header.php';
+// regel hieronde uit commentarisiren voor server
 include_once 'Database_verbinding/database_connectie.php';
 include_once 'PHP_bestanden/veilingenbekijken.php';
+//include_once 'Server_verbinding/SQLSrvConnect.php';
+?>
 ?>
     <link href="assets/css/index.css" rel="stylesheet">
   <body>
@@ -26,8 +29,6 @@ include_once 'PHP_bestanden/veilingenbekijken.php';
           <p><a class="btn btn-primary btn-lg" href="#" role="button">Lees meer &raquo;</a></p>
         </div>
       </div>
-
-
       <div class="container">
         <!-- Example row of columns -->
        <h1 class="display-4">Nieuwste veilingen</h1>
