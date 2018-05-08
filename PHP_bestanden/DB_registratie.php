@@ -1,17 +1,17 @@
 <?php 
 session_start();
 // maak verbinding met database
-require_once '../Database_verbinding/database_connectie.php';
+//require_once '../Database_verbinding/database_connectie.php';
 //Regel hieronder is voor server!
-//require_once '../Server_verbinding/SQLSrvConnect.php';
+require_once '../Server_verbinding/SQLSrvConnect.php';
 
 $title = 'registreren';
 $paginatitel = 'registreren';
 $gebruiker=$fout="";
 $pagina= './login.php';
-$pdo = verbindMetDatabase();
+//$pdo = verbindMetDatabase();
 //Regel hieronder is voor server!
-//$pdo = $conn;
+$pdo = $conn;
 $paginaFout = './DB_registratie.php';
 
 // is er op de knop aanmelden geklikt?
@@ -37,8 +37,28 @@ if (isset($_POST['aanmelden'])){
 			$landnaam = 'nederland';
 			$verkoper = 'nee';
 
-		   // voer query uit in de database voor tabel gebruikers
-		   $sql = "INSERT INTO Gebruiker(gebruikersnaam, wachtwoord, voornaam, 
+
+
+$subject = 'Bedankt voor uw registratie op IConcept';
+$emailtekst = 'Dit is een verificatie mail om uw account te activeren op onze website:
+http://iproject39.icasites.nl/login.php
+            
+Met vriendelijke groeten, IConcepts.
+Deze mail is automatisch gegenereed.';
+$to = $email;
+$from = 'iconcepts39@gmail.com';
+
+$headers   = array();
+$headers[] = "MIME-Version: 1.0";
+$headers[] = "Content-type: text/plain; charset=iso-8859-1";
+$headers[] = "From: IConcepts <{$from}>";
+$headers[] = "X-Mailer: PHP/".phpversion();
+
+mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f".$from );
+
+
+
+$sql = "INSERT INTO Gebruiker(gebruikersnaam, wachtwoord, voornaam, 
 										achternaam, adresregel1, adresregel2, postcode, plaatsnaam, landnaam, datum, emailadres
 										,vraagnummer, antwoordtekst, verkoper) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             echo "hai";
