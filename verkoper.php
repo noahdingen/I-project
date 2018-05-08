@@ -1,4 +1,8 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+
 $titel = 'Upgrade';
 include_once 'header.php';
 include_once 'Database_verbinding/database_connectie.php';
@@ -8,14 +12,14 @@ include_once 'Database_verbinding/database_connectie.php';
     <form action="PHP_bestanden/verkoperworden.php" method="post" class="form-signin" >
 <?php
 
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['gebruikers'])) {
 
     echo "<H1 class=\"text-center\">U bent niet ingelogd, <br> U wordt zo doorgestuurd!</H1></form>";
     header("Refresh: 2; URL=login.php");
 }
 else{
 
-$gast = $_SESSION['user'];
+$gast = $_SESSION['gebruikers'];
 $state = "SELECT verkoper FROM gebruiker WHERE gebruikersnaam = $gast";
 if($state = 'wel'){
     echo 'U bent al verkoper!';

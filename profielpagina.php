@@ -1,20 +1,46 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 $titel = 'Profielpagina';
-include 'header.php'
-?>
+include_once 'header.php';
+include_once 'Database_verbinding/database_connectie.php';
+
+$pdo = verbindMetDatabase();
+
+$sql = "select gebruikersnaam, emailadres, voornaam, achternaam, datum, plaatsnaam, postcode, verkoper from Gebruiker where gebruikersnaam =?";
+$query = $pdo->prepare($sql);
+$query->execute([$_SESSION['gebruikers']]);
+
+$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+
+$gebruikersnaam = $rows[0]['gebruikersnaam'];
+$emailadres = $rows[0]['emailadres'];
+$voornaam = $rows[0]['voornaam'];
+$achternaam = $rows[0]['achternaam'];
+$datum = $rows[0]['datum'];
+$plaatsnaam = $rows[0]['plaatsnaam'];
+$postcode = $rows[0]['postcode'];
+$verkoper = $rows[0]['verkoper'];
+echo '
     <link href="assets/css/profielpagina.css" rel="stylesheet">
 <body>
 <div class="kolommen">
     <div class="persoons-gegevens">
-        <p>Gebruikersnaam: </p>
-        <p>E-mail adres: </p>
-        <p>Voornaam: </p>
-        <p>Achternaam: </p>
-        <p>Geboortedatum: </p>
-        <p>Woonplaats: </p>
-        <p>Straatnaam: </p>
-        <p>Postcode: </p>
-        <p>Type account: </p>
+        <p>Gebruikersnaam:' . $gebruikersnaam . '</p>
+        <p>E-mail adres: ' . $emailadres . '</p>
+        <p>Voornaam: ' . $voornaam . '</p>
+        <p>Achternaam: ' . $achternaam . '</p>
+        <p>Geboortedatum: ' . $datum . '</p>
+        <p>Woonplaats: ' . $plaatsnaam . '</p>
+        <p>Straatnaam: ' . $gebruikersnaam . '</p>
+        <p>Postcode: ' . $postcode . '</p>';
+        if($verkoper = 'nee'){
+            echo '<p>Type account: Koper</p>';
+        }else{
+            echo '<p>Type account: Verkoper</p>';
+        }
+            ?>
         <p>
         <a href="verkoper.php">Upgraden naar verkoper</a>
         </p>
