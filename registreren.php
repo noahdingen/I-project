@@ -20,51 +20,51 @@
 <main role="main">
     <div class="container">
         <h1 class="display-3">Registreren</h1>
-    <form class="col-form-label-lg" action="iProject/DB_registratie.php" method="post" >
+    <form class="col-form-label-lg" action="PHP_bestanden/DB_registratie.php" method="post">
         <div class="form-group">
-            <label for="inputAddress">Gebruikersnaam</label>
+            <label for="gebruikersnaam">Gebruikersnaam</label>
             <input type="text" class="form-control" name="gebruikersnaam" id="gebruikersnaam" placeholder="Gebruikersnaam" required autofocus>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputEmail4">Wachtwoord</label>
+                <label for="wachtwoord">Wachtwoord</label>
                 <input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord" required>
             </div>
             <div class="form-group col-md-6">
-                <label for="inputPassword4">Herhaal Wachtwoord</label>
+                <label for="wachtwoord">Herhaal Wachtwoord</label>
                 <input type="password" class="form-control" name="bevestig_wachtwoord" id="wachtwoord" placeholder="Bevestig Wachtwoord" required>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputAddress">E-mailadres</label>
+            <label for="email">E-mailadres</label>
             <input type="email" class="form-control" name="email" id="email" placeholder="E-mailadres" required>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputEmail4">Voornaam</label>
+                <label for="voornaam">Voornaam</label>
                 <input type="text" class="form-control" name="voornaam" id="voornaam" placeholder="Voornaam" required>
             </div>
             <div class="form-group col-md-6">
-                <label for="inputPassword4">Achternaam</label>
+                <label for="achternaam">Achternaam</label>
                 <input type="text" class="form-control" name="achternaam" id="achternaam" placeholder="Achternaam" required>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputAddress">Geboortedatum</label>
+            <label for="geboortedatum">Geboortedatum</label>
             <input type="date" class="form-control" name="geboortedatum" id="geboortedatum" placeholder="Geboortedatum" required>
         </div>
         <div class="form-group">
-            <label for="inputAddress">Adres</label>
+            <label for="adres">Adres</label>
             <input type="text" class="form-control" name="adres" id="adres" placeholder="Adres" required>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputCity">Postcode</label>
+                <label for="postcode">Postcode</label>
                 <input type="text" class="form-control" name="postcode" id="postcode" required>
             </div>
 
             <div class="form-group col-md-6">
-                <label for="inputCity">Plaatsnaam</label>
+                <label for="plaatsnaam">Plaatsnaam</label>
                 <input type="text" class="form-control" name="plaatsnaam" id="plaatsnaam" required>
             </div>
         </div>
@@ -77,7 +77,7 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="inputAddress">Geheim antwoord</label>
+            <label for="antwoord">Geheim antwoord</label>
             <input type="text" class="form-control" name="antwoord" id="antwoord" placeholder="Antwoord" required>
         </div>
         <div class="form-group">
