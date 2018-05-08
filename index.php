@@ -10,29 +10,12 @@ if(isset($_SESSION['gebruikers'])){
     $bezoeker = 'bezoeker';
 }
 
+$titel = 'Homepagina';
+include 'header.php';
+include_once 'Database_verbinding/database_connectie.php';
 ?>
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>iConcepts</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="assets/css/index.css" rel="stylesheet">
-  </head>
-
-  <body>
-    <?php include 'header.php';
-    include_once 'Database_verbinding/database_connectie.php';
-    ?>
+<body>
     <main role="main">
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
@@ -97,7 +80,7 @@ $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     </main>
 
     <footer class="container">
-      <p>&copy; Company 2017-2018</p>
+      <p>&copy; EenmaalAndermaal 2018</p>
     </footer>
 
     <!-- Bootstrap core JavaScript

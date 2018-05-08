@@ -4,25 +4,14 @@ if(isset($_GET['error'])){
 }else{
     $error = '';
 }
+
+$titel = 'Login';
+include 'header.php'
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Signin Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/login.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
+<link href="assets/css/login.css" rel="stylesheet">
 
 <body class="text-center">
-<?php include 'header.php'?>
 <div class="container">
     <form action="PHP_bestanden/Inloggen.php" method="post" class="col-md-3 col-form-label">
         <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="72" height="72">

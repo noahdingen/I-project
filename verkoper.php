@@ -1,17 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Gebruiker
- * Date: 24-4-2018
- * Time: 15:45
- */
-include_once('header.php');
-include_once('Database_verbinding/database_connectie.php');
+$titel = 'Upgrade';
+include_once 'header.php';
+include_once 'Database_verbinding/database_connectie.php';
 ?>
+    <link href="assets/css/signin.css" rel="stylesheet">
 <body class="text-center">
     <form action="PHP_bestanden/verkoperworden.php" method="post" class="form-signin" >
-    <link href="assets/css/signin.css" rel="stylesheet">
- <?php
+<?php
 
 if (!isset($_SESSION['user'])) {
 

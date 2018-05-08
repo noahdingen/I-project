@@ -1,22 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Registreren</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
+<?php
+$titel = 'Registreren';
+include 'header.php'
+?>
     <link href="assets/css/registreren.css" rel="stylesheet">
-</head>
-
 <body>
-<?php include 'header.php' ?>
 <main role="main">
     <div class="container">
         <h1 class="display-3">Registreren</h1>
