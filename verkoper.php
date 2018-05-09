@@ -6,6 +6,8 @@ if (!isset($_SESSION)) {
 $titel = 'Upgrade';
 include_once 'header.php';
 include_once 'Database_verbinding/database_connectie.php';
+//Regel hieronder is voor server!
+//require_once '../Server_verbinding/SQLSrvConnect.php';
 ?>
     <link href="assets/css/signin.css" rel="stylesheet">
 <body class="text-center">

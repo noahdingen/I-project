@@ -6,6 +6,8 @@
  * Time: 13:46
  */
 include_once('../Database_verbinding/database_connectie.php');
+//Regel hieronder is voor server!
+//require_once '../Server_verbinding/SQLSrvConnect.php';
 $_SESSION['user'] = $_POST['username'];
 $bank = $_POST['banknaam'];
 $banknummer = $_POST['bankrekeningnummer'];
