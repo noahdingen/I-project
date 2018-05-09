@@ -22,30 +22,50 @@ $datum = $rows[0]['datum'];
 $plaatsnaam = $rows[0]['plaatsnaam'];
 $postcode = $rows[0]['postcode'];
 $verkoper = $rows[0]['verkoper'];
+if(isset($_GET["inhoudstype"])){
+    $inhoudstype = '';
+} else {
+    $inhoudstype = 'readonly';
+}
+
 echo '
     <link href="assets/css/profielpagina.css" rel="stylesheet">
 <body>
+<form class="gegevenswijzigen" method="post" action="gegevens_bijwerken.php">
 <div class="kolommen">
     <div class="persoons-gegevens">
-        <p>Gebruikersnaam:' . $gebruikersnaam . '</p>
-        <p>E-mail adres: ' . $emailadres . '</p>
-        <p>Voornaam: ' . $voornaam . '</p>
-        <p>Achternaam: ' . $achternaam . '</p>
-        <p>Geboortedatum: ' . $datum . '</p>
-        <p>Woonplaats: ' . $plaatsnaam . '</p>
-        <p>Straatnaam: ' . $gebruikersnaam . '</p>
-        <p>Postcode: ' . $postcode . '</p>';
-        if($verkoper = 'nee'){
-            echo '<p>Type account: Koper</p>';
-        }else{
-            echo '<p>Type account: Verkoper</p>';
-        }
-            ?>
+    <label>Gebruikersnaam</label>
+    <input class="form-control" type="text" placeholder=" ' . $gebruikersnaam . '" ' . $inhoudstype . '>
+    <label>E-mail</label>
+    <input class="form-control" type="text" placeholder=" ' . $emailadres . '" ' . $inhoudstype .'>
+    <label>Voornaam</label>
+    <input class="form-control" type="text" placeholder=" ' . $voornaam . '" ' . $inhoudstype .'>
+    <label>Achternaam</label>
+    <input class="form-control" type="text" placeholder=" ' . $achternaam . '" ' . $inhoudstype .'>
+    <label>Geboortedatum</label>
+    <input class="form-control" type="text" placeholder=" ' . $datum . '" ' . $inhoudstype .'>
+    <label>Woonplaats</label>
+    <input class="form-control" type="text" placeholder=" ' . $plaatsnaam . '" ' . $inhoudstype .'>
+    <label>Straatnaam</label>
+    <input class="form-control" type="text" placeholder=" ' . $gebruikersnaam . '" ' . $inhoudstype .'>
+    <label>Postcode</label>
+    <input class="form-control" type="text" placeholder=" ' . $postcode .'" ' . $inhoudstype .'>
+    <label>Verkoper</label>
+    <input class="form-control" type="text" placeholder=" ' . $verkoper .'" ' . $inhoudstype .'>';
+
+if(isset($_GET["inhoudstype"])){
+    echo '
+    <a href="gegevens_bijwerken.php"><button type="submit" class="btn btn-primary">Bijwerken</button></a>';
+} else {
+   echo '
         <p>
         <a href="verkoper.php">Upgraden naar verkoper</a>
         </p>
-        <a href="verkoper.php">Gegevens bijwerken</a>
+        <a href="gegevens_bijwerken.php">Gegevens bijwerken</a>';
+}
+?>
     </div>
+</form>
     <div class="persoonlijke-veilingen">
         <h1>Mijn lopende veilingen</h1>
         <div class="container">
