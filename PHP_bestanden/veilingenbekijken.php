@@ -6,9 +6,7 @@ function haalplaatjeop($i){
       $data = $conn->query("SELECT * FROM Bestand  ORDER BY voorwerpnummer ");
       $data->execute();
       $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-//      for($i = 0; $i < count($resultaat); $i++){
- //        for($i = 0; $i < 1; $i++){
-          echo '<img src="'. $resultaat[$i]['filenaam'].'">';
+         echo '<img src="'. $resultaat[$i]['filenaam'].'">';
 
     }
 
@@ -34,17 +32,6 @@ function haalbeschrijvingop(){
         echo "<p>" . $resultaat[$i]['beschrijving'] ."</p>";
     }
 }
-
-//function haalinformatieop(){
-//    $conn = verbindMetDatabase();
-//
-//    $data = $conn->prepare("SELECT * FROM Voorwerp");
-//    $data->execute();
-//    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-//    for($i = 0; $i < count($resultaat); $i++){
-//        echo"<h2>". $resultaat[$i]['titel']. "</h2>". haalplaatjeop(). "<p>" . $resultaat[$i]['beschrijving'] ."</p>";
-//    }
-//}
 
 function haalinformatieop(){
     $conn = verbindMetDatabase();
