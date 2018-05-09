@@ -24,12 +24,12 @@ if (!isset($_SESSION)) {
 
 
         <?php
-
+        include 'PHP_bestanden/sessie_bezoeker.php';
         if(isset($_SESSION['gebruikers'])) {
             echo '
               <div class="btn-group">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Profiel
+                  '.$bezoeker[0].'
                   </button>
                   <div class="dropdown-menu dropdown-menu-right">
                         <a href="profielpagina.php"><button class="dropdown-item" type="button">Mijn profiel</button></a>
