@@ -13,8 +13,16 @@ $verkoper = 'wel';
 $gast = $_SESSION['gebruikers'];
 
 $dbh = verbindMetDatabase();
+$error = "Vul alle gegevens in";
+$error2 = "Geen letters invullen";
 
+    if(ctype_alpha($banknummer) || ctype_alpha($creditnummer)){
+    header("location: ../verkoper.php?error=$error2");
+}
 
+if (empty($banknummer) || empty($creditnummer)|| empty($bank)|| empty($controle)) {
+        header("location: ../verkoper.php?error=$error");
+    }
 
 $sql = "INSERT INTO Verkoper  VALUES('$gast','$bank','$banknummer','$controle','$creditnummer')";
 $query = $dbh->prepare($sql);

@@ -3,9 +3,10 @@ if (!isset($_SESSION)) {
     session_start();
 }
 $titel = 'Profielpagina';
-include_once 'header.php';
-include_once 'Database_verbinding/database_connectie.php';
 
+
+include_once 'Database_verbinding/database_connectie.php';
+include_once 'header.php';
 $pdo = verbindMetDatabase();
 
 $sql = "select gebruikersnaam, emailadres, voornaam, achternaam, datum, plaatsnaam, postcode, verkoper from Gebruiker where gebruikersnaam =?";
