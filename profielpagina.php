@@ -35,7 +35,7 @@ $verkoper = $rows[0]['verkoper'];if($verkoper == 'ja  ') {
     $creditcardnummer = $rows_2[0]['creditcardnummer'];
 }
 
-if(empty($_GET)){
+if($_GET["bewerken"] == 'false'){
     $inhoudstype = 'readonly';
 }
 else{
@@ -46,7 +46,7 @@ else{
 echo '
     <link href="assets/css/profielpagina.css" rel="stylesheet">
 <body>
-<form class="gegevenswijzigen" method="get">
+<form class="gegevenswijzigen" method="get" action="PHP_bestanden/gegevens_bijwerken.php">
 <div class="kolommen">
     <div class="persoons-gegevens">
     <label>Gebruikersnaam</label>

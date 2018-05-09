@@ -1,12 +1,11 @@
 <?php
 
-include "../profielpagina.php";
 
 foreach ($klantgegevens as $value){
     if(isset($value)){
-        echo
+        echo $value;
     }
 }
 
-//header("location: ../profielpagina.php?bewerken=true");
+header("location: ../profielpagina.php?bewerken=false");
 ?>
