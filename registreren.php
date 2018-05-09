@@ -1,5 +1,7 @@
-<body>
-<?php include 'header.php' ?>
+<?php
+include 'header.php';
+$titel = 'Registreren';
+?>
 <main role="main">
     <div class="container">
         <h1 class="display-3">Registreren</h1>
@@ -15,7 +17,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="wachtwoord">Herhaal Wachtwoord</label>
-                <input type="password" class="form-control" name="bevestig_wachtwoord" id="wachtwoord" placeholder="Bevestig Wachtwoord" required>
+                <input type="password" class="form-control" name="bevestig_wachtwoord" id="wachtwoord_bevestigen" placeholder="Bevestig Wachtwoord" required>
             </div>
         </div>
         <div class="form-group">
@@ -34,7 +36,7 @@
         </div>
         <div class="form-group">
             <label for="geboortedatum">Geboortedatum</label>
-            <input type="date" class="form-control" name="geboortedatum" id="geboortedatum" placeholder="Geboortedatum" required>
+            <input type="date" class="form-control" name="geboortedatum" id="geboortedatum" required>
         </div>
         <div class="form-group">
             <label for="adres">Adres</label>
@@ -52,8 +54,9 @@
             </div>
         </div>
         <div class="form-row">
-            <label for="geheime vraag">Geheime vraag</label>
-            <select class="form-control form-control-lg" id="geheime vraag" name="geheime vraag" required>
+            <label for="geheime_vraag">Geheime vraag</label>
+            <select class="form-control form-control-lg" id="geheime_vraag" name="geheime vraag" required>
+                <option value="">...</option>
                 <option value="1">Waar ben je geboren?</option>
                 <option value="2">Wat is je lievelingsdier?</option>
                 <option value="3">Wie is jouw superheld?</option>

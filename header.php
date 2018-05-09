@@ -14,7 +14,8 @@ if (!isset($_SESSION)) {
     <title><?php echo $titel; ?></title>
 <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="assets/css/header.css" rel="stylesheet">
-
+</head>
+<body>
     <nav class="navbar navbar-light bg-dark justify-content-between">
         <a href="index.php" class="btn btn-primary" role="button">Home</a>
         <form class="form-inline">
@@ -46,5 +47,4 @@ if (!isset($_SESSION)) {
         }
         ?>
     </nav>
-</head>
 
