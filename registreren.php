@@ -1,20 +1,3 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Registreren</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="assets/css/registreren.css" rel="stylesheet">
-</head>
-
 <body>
 <?php include 'header.php' ?>
 <main role="main">
@@ -70,7 +53,7 @@
         </div>
         <div class="form-row">
             <label for="geheime vraag">Geheime vraag</label>
-            <select class="form-control form-control-lg" name="geheime vraag" required>
+            <select class="form-control form-control-lg" id="geheime vraag" name="geheime vraag" required>
                 <option value="1">Waar ben je geboren?</option>
                 <option value="2">Wat is je lievelingsdier?</option>
                 <option value="3">Wie is jouw superheld?</option>
