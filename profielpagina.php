@@ -23,16 +23,19 @@ $datum = $rows[0]['datum'];
 $plaatsnaam = $rows[0]['plaatsnaam'];
 $postcode = $rows[0]['postcode'];
 $verkoper = $rows[0]['verkoper'];
-if(isset($_GET["inhoudstype"])){
-    $inhoudstype = '';
-} else {
+
+if(empty($_GET)){
     $inhoudstype = 'readonly';
 }
+else{
+    $inhoudstype = '';
+}
+
 
 echo '
     <link href="assets/css/profielpagina.css" rel="stylesheet">
 <body>
-<form class="gegevenswijzigen" method="post" action="gegevens_bijwerken.php">
+<form class="gegevenswijzigen" method="get">
 <div class="kolommen">
     <div class="persoons-gegevens">
     <label>Gebruikersnaam</label>
@@ -54,16 +57,18 @@ echo '
     <label>Verkoper</label>
     <input class="form-control" type="text" placeholder=" ' . $verkoper .'" ' . $inhoudstype .'>';
 
-if(isset($_GET["inhoudstype"])){
+if(($_GET["bewerken"]=='true')){
     echo '
-    <a href="gegevens_bijwerken.php"><button type="submit" class="btn btn-primary">Bijwerken</button></a>';
-} else {
-   echo '
-        <p>
-        <a href="verkoper.php">Upgraden naar verkoper</a>
-        </p>
-        <a href="gegevens_bijwerken.php">Gegevens bijwerken</a>';
+    <a href="PHP_bestanden/gegevens_bijwerken.php"><button type="submit" class="btn btn-primary">Bijwerken</button></a>';
 }
+else {
+    echo '
+    <p>
+    <a href="verkoper.php">Upgraden naar verkoper</a>
+    </p>
+    <a href="profielpagina.php?bewerken=true">Gegevens bijwerken</a>';
+}
+
 ?>
     </div>
 </form>
