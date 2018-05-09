@@ -1,16 +1,15 @@
 <?php
 if (!isset($_SESSION)) {
     session_start();
+    $titel = 'Verkoper';
 }
-
-$titel = 'Upgrade';
 include_once 'header.php';
 include_once 'Database_verbinding/database_connectie.php';
 //Regel hieronder is voor server!
 //require_once '../Server_verbinding/SQLSrvConnect.php';
 ?>
     <link href="assets/css/signin.css" rel="stylesheet">
-<body class="text-center">
+    <body class="text-center">
     <form action="PHP_bestanden/verkoperworden.php" method="post" class="form-signin" >
 <?php
 
@@ -19,15 +18,23 @@ if (!isset($_SESSION['gebruikers'])) {
     echo "<H1 class=\"text-center\">U bent niet ingelogd, <br> U wordt zo doorgestuurd!</H1></form>";
     header("Refresh: 2; URL=login.php");
 }
-else{
+else if(isset($_SESSION['gebruikers'])){
 
-$gast = $_SESSION['gebruikers'];
-$state = "SELECT verkoper FROM gebruiker WHERE gebruikersnaam = $gast";
-if($state = 'wel'){
+$conn = verbindMetDatabase();
+
+$data = $conn->prepare("SELECT verkoper FROM Gebruiker WHERE gebruikersnaam = 'Mike' AND verkoper = 'wel'");
+$data->execute();
+$resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+for($i = 0; $i < count($resultaat); $i++){
+
+}
+
+$test = 'wel';
+if($i == 1){
     echo 'U bent al verkoper!';
     header("Refresh: 2; URL=profielpagina.php");
 }
-else{
+    else{
 ?>
     <title>Verkoper</title>
             <h1 class="h3 mb-3 font-weight-normal">Verkoper worden?</h1>

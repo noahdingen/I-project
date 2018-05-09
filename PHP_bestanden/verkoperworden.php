@@ -16,6 +16,7 @@ $creditnummer = $_POST['rekeningnummer'];
 $verkoper = 'wel';
 $gast = $_SESSION['user'];
 
+$dbh = verbindMetDatabase();
 
 
 
