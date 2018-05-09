@@ -21,8 +21,9 @@ if (!isset($_SESSION['gebruikers'])) {
 else if(isset($_SESSION['gebruikers'])){
 
 $conn = verbindMetDatabase();
+$Gebruiker = $_SESSION['gebruikers'];
 
-$data = $conn->prepare("SELECT verkoper FROM Gebruiker WHERE gebruikersnaam = 'Mike' AND verkoper = 'wel'");
+$data = $conn->prepare("SELECT verkoper FROM Gebruiker WHERE gebruikersnaam = '$Gebruiker'AND verkoper = 'wel'");
 $data->execute();
 $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
 for($i = 0; $i < count($resultaat); $i++){
