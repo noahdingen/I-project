@@ -13,10 +13,29 @@ include_once '../Database_verbinding/database_connectie.php';
 //require_once '../Server_verbinding/SQLSrvConnect.php';
 setlocale(LC_ALL, 'nld_nld');
 
+
 $gebruikersnaam = valideerFormulierinput($_POST['gebruikersnaam']);
 $wachtwoord = valideerFormulierinput($_POST['wachtwoord']);
 
-if (!empty($gebruikersnaam) && !empty($wachtwoord)) {
+
+
+function checkvalidatie(){
+    $conn = verbindMetDatabase();
+    $Gebruiker = $_SESSION['gebruikers'];
+
+    $data = $conn->prepare("SELECT verkoper FROM Gebruiker WHERE gebruikersnaam = '$Gebruiker'AND activatie = 1");
+    $data->execute();
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    for($i = 0; $i < count($resultaat); $i++){
+
+    }
+
+    if($i == 1){
+        return true;
+    }
+}
+
+if (!empty($gebruikersnaam) && !empty($wachtwoord) && (checkvalidatie() == true)) {
     if (bestaatGebruikersnaam($gebruikersnaam)) {
         if (bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord)) {
             $_SESSION['gebruikers'] = $gebruikersnaam;
