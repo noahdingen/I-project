@@ -1,11 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Gebruiker
- * Date: 25-4-2018
- * Time: 13:46
- */
+
 include_once('../Database_verbinding/database_connectie.php');
+session_start();
 //Regel hieronder is voor server!
 //require_once '../Server_verbinding/SQLSrvConnect.php';
 $_SESSION['user'] = $_POST['username'];
