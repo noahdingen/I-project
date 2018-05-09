@@ -9,7 +9,7 @@ include_once 'Database_verbinding/database_connectie.php';
 include_once 'header.php';
 $pdo = verbindMetDatabase();
 
-$sql = "select gebruikersnaam, emailadres, voornaam, achternaam, datum, plaatsnaam, postcode, verkoper from Gebruiker where gebruikersnaam =?";
+$sql = "select gebruikersnaam, emailadres, voornaam, achternaam, datum, plaatsnaam, adresregel1, postcode, verkoper from Gebruiker where gebruikersnaam =?";
 $query = $pdo->prepare($sql);
 $query->execute([$_SESSION['gebruikers']]);
 
@@ -27,6 +27,7 @@ $voornaam = $rows[0]['voornaam'];
 $achternaam = $rows[0]['achternaam'];
 $datum = $rows[0]['datum'];
 $plaatsnaam = $rows[0]['plaatsnaam'];
+$adres = $rows[0]['adresregel1'];
 $postcode = $rows[0]['postcode'];
 $verkoper = $rows[0]['verkoper'];if($verkoper == 'ja  ') {
     $banknaam = $rows_2[0]['banknaam'];
@@ -50,33 +51,33 @@ echo '
 <div class="kolommen">
     <div class="persoons-gegevens">
     <label>Gebruikersnaam</label>
-    <input class="form-control" type="text" placeholder=" ' . $gebruikersnaam . '" ' . $inhoudstype . '>
+    <input name="Gebruikersnaam" class="form-control" type="text" placeholder=" ' . $gebruikersnaam . '" ' . $inhoudstype . '>
     <label>E-mail</label>
-    <input class="form-control" type="text" placeholder=" ' . $emailadres . '" ' . $inhoudstype .'>
+    <input name="E-mail" class="form-control" type="text" placeholder=" ' . $emailadres . '" ' . $inhoudstype .'>
     <label>Voornaam</label>
-    <input class="form-control" type="text" placeholder=" ' . $voornaam . '" ' . $inhoudstype .'>
+    <input name="Voornaam" class="form-control" type="text" placeholder=" ' . $voornaam . '" ' . $inhoudstype .'>
     <label>Achternaam</label>
-    <input class="form-control" type="text" placeholder=" ' . $achternaam . '" ' . $inhoudstype .'>
+    <input name="Achternaam" class="form-control" type="text" placeholder=" ' . $achternaam . '" ' . $inhoudstype .'>
     <label>Geboortedatum</label>
-    <input class="form-control" type="text" placeholder=" ' . $datum . '" ' . $inhoudstype .'>
+    <input name="Geboortedatum" class="form-control" type="text" placeholder=" ' . $datum . '" ' . $inhoudstype .'>
     <label>Woonplaats</label>
-    <input class="form-control" type="text" placeholder=" ' . $plaatsnaam . '" ' . $inhoudstype .'>
+    <input name="Woonplaats" class="form-control" type="text" placeholder=" ' . $plaatsnaam . '" ' . $inhoudstype .'>
     <label>Straatnaam</label>
-    <input class="form-control" type="text" placeholder=" ' . $gebruikersnaam . '" ' . $inhoudstype .'>
+    <input name="Straatnaam" class="form-control" type="text" placeholder=" ' . $adres . '" ' . $inhoudstype .'>
     <label>Postcode</label>
-    <input class="form-control" type="text" placeholder=" ' . $postcode .'" ' . $inhoudstype .'>
+    <input name="Postcode" class="form-control" type="text" placeholder=" ' . $postcode .'" ' . $inhoudstype .'>
     <label>Verkoper</label>
-    <input class="form-control" type="text" placeholder=" ' . $verkoper .'" ' . $inhoudstype .'>';
+    <input name="Verkoper" class="form-control" type="text" placeholder=" ' . $verkoper .'" ' . $inhoudstype .'>';
     if($verkoper == 'ja  '){
     echo '
             <label>Bank</label>
-            <input class="form-control" type="text" placeholder=" ' . $banknaam . '" ' . $inhoudstype .'>
+            <input name="Bank" class="form-control" type="text" placeholder=" ' . $banknaam . '" ' . $inhoudstype .'>
             <label>Rekeningnummer</label>
-            <input class="form-control" type="text" placeholder=" ' . $rekingnummer .' ' . $inhoudstype .'>
+            <input name="Rekeningnummer" class="form-control" type="text" placeholder=" ' . $rekingnummer .' "' . $inhoudstype .'>
             <label>Controle optie</label>
-            <input class="form-control" type="text" placeholder=" ' . $controle_optie .' ' . $inhoudstype .'>
+            <input name="Controle" class="form-control" type="text" placeholder=" ' . $controle_optie .' "' . $inhoudstype .'>
             <label>Creditcard</label>
-            <input class="form-control" type="text" placeholder=" ' . $creditcardnummer .' ' . $inhoudstype .'>';
+            <input name="Creditcard" class="form-control" type="text" placeholder=" ' . $creditcardnummer .' "' . $inhoudstype .'>';
     }
 
 if(($_GET["bewerken"]=='true')){
