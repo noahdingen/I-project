@@ -15,6 +15,12 @@ $query->execute([$_SESSION['gebruikers']]);
 
 $rows = $query->fetchAll(PDO::FETCH_ASSOC);
 
+$sql_2 = "select banknaam, rekeningnummer, controleoptienaam, creditcardnummer from Verkoper where gebruikersnaam =?";
+$query_2 = $pdo->prepare($sql_2);
+$query_2->execute([$_SESSION['gebruikers']]);
+
+$rows_2 = $query_2->fetchAll(PDO::FETCH_ASSOC);
+
 $gebruikersnaam = $rows[0]['gebruikersnaam'];
 $emailadres = $rows[0]['emailadres'];
 $voornaam = $rows[0]['voornaam'];
@@ -22,7 +28,12 @@ $achternaam = $rows[0]['achternaam'];
 $datum = $rows[0]['datum'];
 $plaatsnaam = $rows[0]['plaatsnaam'];
 $postcode = $rows[0]['postcode'];
-$verkoper = $rows[0]['verkoper'];
+$verkoper = $rows[0]['verkoper'];if($verkoper == 'ja  ') {
+    $banknaam = $rows_2[0]['banknaam'];
+    $rekingnummer = $rows_2[0]['rekeningnummer'];
+    $controle_optie = $rows_2[0]['controleoptienaam'];
+    $creditcardnummer = $rows_2[0]['creditcardnummer'];
+}
 
 if(empty($_GET)){
     $inhoudstype = 'readonly';
@@ -56,6 +67,17 @@ echo '
     <input class="form-control" type="text" placeholder=" ' . $postcode .'" ' . $inhoudstype .'>
     <label>Verkoper</label>
     <input class="form-control" type="text" placeholder=" ' . $verkoper .'" ' . $inhoudstype .'>';
+    if($verkoper == 'ja  '){
+    echo '
+            <label>Bank</label>
+            <input class="form-control" type="text" placeholder=" ' . $banknaam . '" ' . $inhoudstype .'>
+            <label>Rekeningnummer</label>
+            <input class="form-control" type="text" placeholder=" ' . $rekingnummer .' ' . $inhoudstype .'>
+            <label>Controle optie</label>
+            <input class="form-control" type="text" placeholder=" ' . $controle_optie .' ' . $inhoudstype .'>
+            <label>Creditcard</label>
+            <input class="form-control" type="text" placeholder=" ' . $creditcardnummer .' ' . $inhoudstype .'>';
+    }
 
 if(($_GET["bewerken"]=='true')){
     echo '
@@ -73,6 +95,9 @@ else {
     </div>
 </form>
     <div class="persoonlijke-veilingen">
+<?php
+if($verkoper == 'ja  '){
+    echo '
         <h1>Mijn lopende veilingen</h1>
         <div class="container">
             <!-- Example row of columns -->
@@ -92,7 +117,32 @@ else {
                     <p>Hier staat de beschrijving van bovenstaande veiling</p>
                     <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
                 </div>
+            </div>';
+        }
+        else{
+        echo'
+            <h1>Mijn geboden veilingen</h1>
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <img src="assets/images/hammer.png" >
+                <p>Hier staat de beschrijving van bovenstaande veiling</p>
+                <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
             </div>
+            <div class="col-md-4">
+                <img src="assets/images/hammer.png" >
+                <p>Hier staat de beschrijving van bovenstaande veiling</p>
+                <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <img src="assets/images/hammer.png" >
+                <p>Hier staat de beschrijving van bovenstaande veiling</p>
+                <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
+            </div>
+        </div>';
+        }
+        ?>
         </div>
     </div>
 </div>
