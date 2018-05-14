@@ -16,33 +16,35 @@ include_once 'PHP_bestanden/php_verkoper.php'
 //require_once '../Server_verbinding/SQLSrvConnect.php';
 ?>
     <link href="assets/css/login.css" rel="stylesheet">
-    <body class="text-center">
-    <form action="PHP_bestanden/verkoperworden.php" method="post" class="form-signin" >
 
-
-    <title>Verkoper</title>
-            <h1 class="h3 mb-3 font-weight-normal">Verkoper worden?</h1>
-     <div class="form-group">
-                <select Name='banknaam'>
-                    <option value="">Kies uw bank</option>
-                    <option value="Rabobank">Rabobank</option>
-                    <option value="ING">ING</option>
-                    <option value="ABN Ambro">ABN Ambro</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="text" name="bankrekeningnummer" id="bankrekeningnummer" class="form-control input-sm" placeholder="bankrekeningnummer">
-            </div>
-            <div class="form-group">
-                <select Name='controleoptienaam'>
-                    <option value="">Kies uw controleoptie</option>
-                    <option value="Creditcard">Creditcard</option>
-                    <option value="Post">Post</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="text" name="rekeningnummer" id="rekeningnummer" class="form-control input-sm" placeholder="rekeningnummer">
-            </div>
-            <?php echo $error;?>
-            <input type="submit" value="Upgrade naar verkoper" class="btn btn-info btn-block">
-    <input type="reset" value="Gegevens verwijderen" class="btn btn-info btn-block"></form>
+<body>
+<div class="container">
+    <form action="PHP_bestanden/verkoperworden.php" method="post" class="col-md-4 col-form-label">
+        <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="72" height="72">
+        <div class="form-group">
+            <select Name='banknaam' required>
+                <option value="">Kies uw bank</option>
+                <option value="Rabobank">Rabobank</option>
+                <option value="ING">ING</option>
+                <option value="ABN Ambro">ABN Ambro</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="bankrekeningnummer">Bankrekeningnummer</label>
+            <input id="bankrekeningnummer" class="form-control" name="bankrekeningnummer" type="text" required>
+        </div>
+        <div class="form-group">
+            <label for="creditcardnummer">Creditcardnummer (controle)</label>
+            <input id="creditcardnummer" class="form-control" name="creditcardnummer" type="text" required>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Verzenden</button>
+        </div>
+        <?php echo $error;?>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+</body>

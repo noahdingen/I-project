@@ -7,29 +7,29 @@ session_start();
 
 $bank = $_POST['banknaam'];
 $banknummer = $_POST['bankrekeningnummer'];
-$controle = $_POST['controleoptienaam'];
-$creditnummer = $_POST['rekeningnummer'];
+var_dump($banknummer);
+$creditcardnummer = $_POST['creditcardnummer'];
 $verkoper = 'wel';
 $gast = $_SESSION['gebruikers'];
-
+$controle = 'Creditcard';
 $dbh = verbindMetDatabase();
 $error = "Vul alle gegevens in";
 $error2 = "Geen letters invullen";
 
-    if(ctype_alpha($banknummer) || ctype_alpha($creditnummer)){
+if(!is_int($banknummer) || !is_int($creditcardnummer)){
     header("location: ../verkoper.php?error=$error2");
 }
 
-if (empty($banknummer) || empty($creditnummer)|| empty($bank)|| empty($controle)) {
+if (empty($banknummer) || empty($creditcardnummer)|| empty($bank)) {
         header("location: ../verkoper.php?error=$error");
     }
 
-$sql = "INSERT INTO Verkoper  VALUES('$gast','$bank','$banknummer','$controle','$creditnummer')";
+$sql = "INSERT INTO Verkoper  VALUES('$gast','$bank','$banknummer','$controle','$creditcardnummer')";
 $query = $dbh->prepare($sql);
-$query->execute(array($gast,$bank,$banknummer,$controle,$creditnummer));
+$query->execute(array($gast,$bank,$banknummer,'$controle',$creditcardnummer));
 
 $sql2 = "UPDATE Gebruiker  set verkoper = '$verkoper' WHERE gebruikersnaam = '$gast' ";
 $query = $dbh->prepare($sql2);
 $query->execute();
 
-header("Location: ../profielpagina.php");
+header("Location: ../profielpagina.php?bewerken=false");
