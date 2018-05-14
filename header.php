@@ -20,7 +20,7 @@ if (!isset($_SESSION)) {
         <a href="index.php" class="btn btn-primary" role="button">Home</a>
         <form class="form-inline">
             <input class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-primary" type="submit">Zoeken</button>
         </form>
 
 
