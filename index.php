@@ -15,7 +15,7 @@ include_once 'PHP_bestanden/veilingenbekijken.php';
         <div class="container">
             <h1 class="display-3">Geachte <?php echo $bezoeker[0]. $bezoeker[1];?></h1>
             <p>Wij van iConcepts willen U prodcuten aanbieden waar U zelf kunt bepalen wat de prijs is.</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Lees meer &raquo;</a></p>
+
         </div>
     </div>
     <div class="container">

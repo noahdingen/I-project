@@ -2,6 +2,7 @@
 include 'header.php';
 $titel = 'Registreren';
 ?>
+<link href="assets/css/registreren.css" rel="stylesheet">
 <main role="main">
     <div class="container">
         <h1 class="display-3">Registreren</h1>
