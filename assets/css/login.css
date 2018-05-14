@@ -10,3 +10,11 @@ form {
 
 }
 body {background-color: #FF7753;}
+
+a{
+    color:black;
+}
+
+a:hover {
+    color: #3A80A2;
+}
