@@ -29,7 +29,8 @@ $datum = $rows[0]['datum'];
 $plaatsnaam = $rows[0]['plaatsnaam'];
 $adres = $rows[0]['adresregel1'];
 $postcode = $rows[0]['postcode'];
-$verkoper = $rows[0]['verkoper'];if($verkoper == 'ja  ') {
+$verkoper = $rows[0]['verkoper'];
+if($verkoper == 'ja  ') {
     $banknaam = $rows_2[0]['banknaam'];
     $rekingnummer = $rows_2[0]['rekeningnummer'];
     $controle_optie = $rows_2[0]['controleoptienaam'];
@@ -85,11 +86,15 @@ if(($_GET["bewerken"]=='true')){
     <a href="PHP_bestanden/gegevens_bijwerken.php"><button type="submit" class="btn btn-primary">Bijwerken</button></a>';
 }
 else {
-    echo '
-    <p>
-    <a href="verkoper.php">Upgraden naar verkoper</a>
-    </p>
-    <a href="profielpagina.php?bewerken=true">Gegevens bijwerken</a>';
+	if($verkoper == 'ja  '){
+		echo '<a href="profielpagina.php?bewerken=true">Gegevens bijwerken</a>';
+	} else{ 
+		echo '
+		<p>
+		<a href="verkoper.php">Upgraden naar verkoper</a>
+		</p>
+		<a href="profielpagina.php?bewerken=true">Gegevens bijwerken</a>'; }
+		
 }
 
 ?>
