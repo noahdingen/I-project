@@ -38,6 +38,19 @@ if (isset($_POST['aanmelden'])){
 			$verkoper = 'nee';
 
 
+            $conn = verbindMetDatabase();
+
+    $data = $conn->prepare("SELECT verkoper FROM Gebruiker WHERE gebruikersnaam = '$gebruiker' ");
+    $data->execute();
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    for($i = 0; $i < count($resultaat); $i++){
+
+    }
+    if($i == 1) {
+        $error = "Gebruiksnaam bestaat al";
+        header("refresh:0; url='../registreren.php?error=$error'");
+    }
+
 
 $subject = 'Bedankt voor uw registratie op IConcept';
 $emailtekst = 'Dit is een verificatie mail om uw account te activeren op onze website:
@@ -68,7 +81,7 @@ $sql = "INSERT INTO Gebruiker(gebruikersnaam, wachtwoord, voornaam,
 			
 			header("refresh:0; url='../login.php'");
 		} else{
-			$error = "*Wachtwoorden komen niet overeen";
+			$error = "Wachtwoorden komen niet overeen";
 			header("refresh:0; url='../registreren.php?error=$error'");
 			}
 	} else {

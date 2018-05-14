@@ -1,6 +1,12 @@
 <?php
 include 'header.php';
 $titel = 'Registreren';
+
+if(isset($_GET['error'])){
+    $error = $_GET['error'];
+}else{
+    $error = '';
+}
 ?>
 <link href="assets/css/registreren.css" rel="stylesheet">
 <main role="main">
@@ -78,6 +84,9 @@ $titel = 'Registreren';
         <input type="submit" name="aanmelden" class="btn btn-primary">
     </form>
     </div>
+    <h1 class="error">
+    <?php echo $error;?>
+    </h1>
 </main>
 
 <footer class="container">
