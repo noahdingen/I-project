@@ -1,13 +1,15 @@
 <?php
-include 'header.php';
 $titel = 'Registreren';
+include 'header.php';
 
 if(isset($_GET['error'])){
     $error = $_GET['error'];
 }else{
     $error = '';
 }
+
 ?>
+
 <link href="assets/css/registreren.css" rel="stylesheet">
 <main role="main">
     <div class="container">
@@ -20,11 +22,12 @@ if(isset($_GET['error'])){
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="wachtwoord">Wachtwoord</label>
-                <input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord" required>
+                <input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord" required pattern=".{8,25}" title="Wachtwoord moet tussen de 8 en 25 karakters bevatten">
             </div>
             <div class="form-group col-md-6">
                 <label for="wachtwoord">Herhaal Wachtwoord</label>
                 <input type="password" class="form-control" name="bevestig_wachtwoord" id="wachtwoord_bevestigen" placeholder="Bevestig Wachtwoord" required>
+
             </div>
         </div>
         <div class="form-group">

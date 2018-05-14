@@ -51,6 +51,11 @@ if (isset($_POST['aanmelden'])){
         header("refresh:0; url='../registreren.php?error=$error'");
     }
 
+//    if(strlen($wachtwoord)<8){
+//        $error = "Wachtwoord moet minimaal 8 tekens bevatten";
+//        header("refresh:0; url='../registreren.php?error=$error'");
+//    }
+
 
 $subject = 'Bedankt voor uw registratie op IConcept';
 $emailtekst = 'Dit is een verificatie mail om uw account te activeren op onze website:
