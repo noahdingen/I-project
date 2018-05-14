@@ -11,15 +11,23 @@ h1.display-4{
 }
 
 .row{
+    justify-content: space-evenly;
+}
+
+.col-md-4{
     background-color: whitesmoke;
-    color: black;
-    border-radius: 2em;
+    margin-bottom: 10px;
+
+    max-width: 30%;
+    border-radius: 10px;
+    text-align: center;
 }
 
 img{
-     width: inherit!important;
- }
-
-.col-md-4{
-    text-align: center;
+    max-height: 100%;
+    max-width: 100%;
+    vertical-align: middle;
+}
+figure{
+    height: 100px;
 }

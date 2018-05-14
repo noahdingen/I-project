@@ -21,12 +21,10 @@ include_once 'PHP_bestanden/veilingenbekijken.php';
     <div class="container">
         <!-- Example row of columns -->
         <h1 class="display-4">Nieuwste veilingen</h1>
-        <div class="column">
-          <div class="col-md-4">
+        <div class="row">
               <?php
               haalinformatieop();
               ?>
-          </div>
 
 
         </div>
@@ -42,7 +40,6 @@ include_once 'PHP_bestanden/veilingenbekijken.php';
 </footer>
 
 <!-- Bootstrap core JavaScript
-================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
