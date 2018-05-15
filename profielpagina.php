@@ -46,7 +46,7 @@ else{
 
 echo '
     <link href="assets/css/profielpagina.css" rel="stylesheet">
-<body>
+
 <form class="gegevenswijzigen" method="get" action="PHP_bestanden/gegevens_bijwerken.php">
 <div class="kolommen">
     <div class="persoons-gegevens">
