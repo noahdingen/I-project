@@ -1,18 +1,17 @@
 <?php
 
-include_once('../Database_verbinding/database_connectie.php');
+//include_once('../Database_verbinding/database_connectie.php');
 session_start();
 //Regel hieronder is voor server!
-//require_once '../Server_verbinding/SQLSrvConnect.php';
+require_once '../Server_verbinding/SQLSrvConnect.php';
 
 $bank = $_POST['banknaam'];
 $banknummer = $_POST['bankrekeningnummer'];
-var_dump($banknummer);
 $creditcardnummer = $_POST['creditcardnummer'];
 $verkoper = 'wel';
 $gast = $_SESSION['gebruikers'];
 $controle = 'Creditcard';
-$dbh = verbindMetDatabase();
+$dbh = $conn;
 $error = "Vul alle gegevens in";
 $error2 = "Geen letters invullen";
 

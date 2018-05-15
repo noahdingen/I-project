@@ -10,7 +10,7 @@ $error_drie = "U dient beide velden in te vullen";
 
 include_once '../Database_verbinding/database_connectie.php';
 //Regel hieronder is voor server!
-//require_once '../Server_verbinding/SQLSrvConnect.php';
+require_once '../Server_verbinding/SQLSrvConnect.php';
 setlocale(LC_ALL, 'nld_nld');
 
 
@@ -52,8 +52,10 @@ else {
 }
 
 function bestaatGebruikersnaam($gebruikersnaam) {
-    $pdo = verbindMetDatabase();
-
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = $conn;
     $sql = "SELECT gebruikersnaam FROM Gebruiker WHERE gebruikersnaam = ?";
     $query = $pdo->prepare($sql);
     $query->execute([$gebruikersnaam]);
@@ -62,8 +64,11 @@ function bestaatGebruikersnaam($gebruikersnaam) {
 }
 
 function bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord) {
-    $pdo = verbindMetDatabase();
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "SELECT wachtwoord FROM Gebruiker WHERE gebruikersnaam = ?";
+    $pdo = $conn;
     $query = $pdo->prepare($sql);
     $query->execute([$gebruikersnaam]);
     $wachtwoord_hash = $query->fetchColumn();

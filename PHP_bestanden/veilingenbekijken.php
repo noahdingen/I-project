@@ -1,9 +1,13 @@
 <?php
 
 function haalplaatjeop($i){
-    $conn = verbindMetDatabase();
+    //$conn = verbindMetDatabase();
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = $conn;
 
-      $data = $conn->query("SELECT * FROM Bestand  ORDER BY voorwerpnummer ");
+      $data = $pdo->query("SELECT * FROM Bestand  ORDER BY voorwerpnummer ");
       $data->execute();
       $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
          echo '<figure>
@@ -14,8 +18,11 @@ function haalplaatjeop($i){
 
 
 function haaltitelop($i){
-    $conn = verbindMetDatabase();
-
+    //$conn = verbindMetDatabase();
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = $conn;
     $data = $conn->prepare("SELECT * FROM Voorwerp");
     $data->execute();
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
@@ -29,8 +36,11 @@ function haaltitelop($i){
 }
 
 function haalbeschrijvingop(){
-    $conn = verbindMetDatabase();
-
+    //$conn = verbindMetDatabase();
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = $conn;
     $data = $conn->prepare("SELECT * FROM Voorwerp");
     $data->execute();
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
@@ -60,8 +70,9 @@ function haallooptijdop($i){
 }
 
 function haalinformatieop(){
-    $conn = verbindMetDatabase();
-
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $data = $conn->prepare("SELECT * FROM Voorwerp");
     $data->execute();
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);

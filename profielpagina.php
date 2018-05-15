@@ -7,7 +7,10 @@ $titel = 'Profielpagina';
 
 include_once 'Database_verbinding/database_connectie.php';
 include_once 'header.php';
-$pdo = verbindMetDatabase();
+global $conn;
+$conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo = $conn;
 
 $sql = "select gebruikersnaam, emailadres, voornaam, achternaam, datum, plaatsnaam, adresregel1, postcode, verkoper from Gebruiker where gebruikersnaam =?";
 $query = $pdo->prepare($sql);
@@ -30,7 +33,8 @@ $plaatsnaam = $rows[0]['plaatsnaam'];
 $adres = $rows[0]['adresregel1'];
 $postcode = $rows[0]['postcode'];
 $verkoper = $rows[0]['verkoper'];
-if($verkoper == 'ja  ') {
+$verkoper2 = 'wel';
+if($rows[0]['verkoper'] =) {
     $banknaam = $rows_2[0]['banknaam'];
     $rekingnummer = $rows_2[0]['rekeningnummer'];
     $controle_optie = $rows_2[0]['controleoptienaam'];
@@ -86,12 +90,12 @@ if(($_GET["bewerken"]=='true')){
     <a href="PHP_bestanden/gegevens_bijwerken.php"><button type="submit" class="btn btn-primary">Bijwerken</button></a>';
 }
 else {
-	if($verkoper == 'ja  '){
+	if($verkoper == 'wel'){
 		echo '<a href="profielpagina.php?bewerken=true">Gegevens bijwerken</a>';
 	} else{ 
 		echo '
 		<p>
-		<a href="verkoper.php">Upgraden naar verkoper</a>
+		
 		</p>
 		<a href="profielpagina.php?bewerken=true">Gegevens bijwerken</a>'; }
 		
