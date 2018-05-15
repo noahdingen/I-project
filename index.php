@@ -18,7 +18,7 @@ include_once 'PHP_bestanden/veilingenbekijken.php';
         </div>
     </div>
     <div class="container">
-        <!-- Example row of columns -->
+
         <h1 class="display-4">Nieuwste veilingen</h1>
         <div class="row">
               <?php
@@ -28,13 +28,11 @@ include_once 'PHP_bestanden/veilingenbekijken.php';
 
         </div>
 
-        <hr>
-
-    </div> <!-- /container -->
+    </div>
 
 </main>
 
-<footer class="container">
+<footer class="container text-center">
     <p>&copy; EenmaalAndermaal 2018</p>
 </footer>
 
