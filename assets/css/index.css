@@ -11,13 +11,14 @@ h1.display-4{
 }
 
 .row{
-    justify-content: space-evenly;
+    justify-content: space-between;
+    flex-basis: 33%;
 }
 
 .col-md-4{
-    background-color: whitesmoke;
+    background-color: white;
     margin-bottom: 10px;
-
+    float: left;
     max-width: 30%;
     border-radius: 10px;
     text-align: center;
