@@ -5,7 +5,7 @@ include 'header.php';
 if(isset($_GET['error'])){
     $error = $_GET['error'];
 }else{
-    $error = '';
+    $error = 'Gebruikersnaam';
 }
 
 ?>
@@ -14,10 +14,10 @@ if(isset($_GET['error'])){
 <main role="main">
     <div class="container">
         <h1 class="display-3">Registreren</h1>
-    <form class="col-form-label-lg" action="PHP_bestanden/DB_registratie.php" method="post">
+    <form class="col-form-label-lg" action="PHP_bestanden/db_registratie.php" method="post">
         <div class="form-group">
             <label for="gebruikersnaam">Gebruikersnaam</label>
-            <input type="text" class="form-control" name="gebruikersnaam" id="gebruikersnaam" placeholder="Gebruikersnaam" required autofocus>
+            <input type="text" class="form-control" name="gebruikersnaam" id="gebruikersnaam" placeholder="<?php echo $error;?>" required autofocus>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -87,9 +87,6 @@ if(isset($_GET['error'])){
         <input type="submit" name="aanmelden" class="btn btn-primary">
     </form>
     </div>
-    <h1 class="error">
-    <?php echo $error;?>
-    </h1>
 </main>
 
 <footer class="container">

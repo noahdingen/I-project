@@ -20,7 +20,7 @@ else if(isset($_SESSION['gebruikers'])){
     $test = 'wel';
     if($i == 1){
         echo 'U bent al verkoper!';
-        header("Refresh: 2; URL=profielpagina.php");
+        header("Refresh: 2; URL=profielpagina.php?bewerken=false");
     }
     else {
 

@@ -13,7 +13,6 @@ function verbindMetDatabase() {
 function valideerFormulierinput($data) {
     strip_tags($data);
     trim($data);
-
     return $data;
 }
 

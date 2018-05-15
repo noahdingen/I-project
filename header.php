@@ -15,6 +15,7 @@ if (!isset($_SESSION)) {
 <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="assets/css/header.css" rel="stylesheet">
 </head>
+<body>
 <header>
     <nav class="navbar navbar-light bg-dark justify-content-between">
         <a href="index.php" class="btn btn-primary" role="button">Home</a>

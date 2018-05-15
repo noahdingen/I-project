@@ -3,13 +3,12 @@ include_once 'Database_verbinding/database_connectie.php';
 //include 'PHP_bestanden/sessie_bezoeker.php';
 $titel = 'Homepagina';
 include 'header.php';
-// regel hieronder uit commentarisiren voor server
+// regel hieronder uit commentariëren voor server
 //include_once 'Database_verbinding/database_connectie.php';
 include_once 'PHP_bestanden/veilingenbekijken.php';
 //include_once 'Server_verbinding/SQLSrvConnect.php';
 ?>
 <link href="assets/css/index.css" rel="stylesheet">
-<body>
 <main role="main">
     <div class="jumbotron">
         <div class="container">
