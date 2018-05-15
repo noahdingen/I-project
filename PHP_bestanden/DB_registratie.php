@@ -49,7 +49,7 @@ if (isset($_POST['aanmelden'])){
     if($i == 1) {
         $error = "Gebruiksnaam bestaat al";
         header("refresh:0; url='../registreren.php?error=$error'");
-    }
+    } else{
 
 //    if(strlen($wachtwoord)<8){
 //        $error = "Wachtwoord moet minimaal 8 tekens bevatten";
@@ -85,7 +85,7 @@ $sql = "INSERT INTO Gebruiker(gebruikersnaam, wachtwoord, voornaam,
 									 $plaatsnaam, $landnaam, $geboortedatum, $email, $geheime_vraag, $antwoord, $verkoper));
 			
 			header("refresh:0; url='../login.php'");
-		} else{
+	}	} else{
 			$error = "Wachtwoorden komen niet overeen";
 			header("refresh:0; url='../registreren.php?error=$error'");
 			}
