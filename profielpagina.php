@@ -2,11 +2,10 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-$titel = 'Profielpagina';
-
-
 include_once 'Database_verbinding/database_connectie.php';
+$titel = 'Profielpagina';
 include_once 'header.php';
+
 $pdo = verbindMetDatabase();
 
 $sql = "select gebruikersnaam, emailadres, voornaam, achternaam, datum, plaatsnaam, adresregel1, postcode, verkoper from Gebruiker where gebruikersnaam =?";
@@ -90,10 +89,12 @@ else {
 		echo '<a href="profielpagina.php?bewerken=true">Gegevens bijwerken</a>';
 	} else{ 
 		echo '
-		<p>
-		<a href="verkoper.php">Upgraden naar verkoper</a>
-		</p>
-		<a href="profielpagina.php?bewerken=true">Gegevens bijwerken</a>'; }
+        <div class="linkjes">
+            <p>
+            <a href="verkoper.php">Upgraden naar verkoper</a>
+            </p>
+            <a href="profielpagina.php?bewerken=true">Gegevens bijwerken</a>
+        </div>'; }
 
 }
 
