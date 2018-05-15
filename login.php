@@ -1,4 +1,5 @@
 <?php
+//error voor wat er fout is gegaan met het inloggen, al geset of niet?
 if(isset($_GET['error'])){
     $error = $_GET['error'];
 }else{
@@ -7,9 +8,7 @@ if(isset($_GET['error'])){
 $titel = 'Login';
 include 'header.php'
 ?>
-
 <link href="assets/css/login.css" rel="stylesheet">
-<body>
 <div class="container">
     <form action="PHP_bestanden/inloggen.php" method="post" class="col-md-3 col-form-label">
         <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="72" height="72">
@@ -30,12 +29,11 @@ include 'header.php'
         </div>
     </form>
 </div>
-
 <footer class="container">
     <p>&copy; EenmaalAndermaal 2018</p>
 </footer>
-
 <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 </body>
+</html>
