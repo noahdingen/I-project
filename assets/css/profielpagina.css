@@ -16,6 +16,9 @@
     display: flex;
 }
 
+.btn-primary{
+    margin-top: 10px;
+}
 
 h1.display-4{
     text-align: center;
@@ -33,12 +36,12 @@ body{
     background-color: #FF7753!important;
 }
 
-a{
+.linkjes a{
     color: black;
     text-decoration: underline;
 }
 
-a:hover{
+.linkjes a:hover{
     color: black;
     text-decoration: none;
 }
