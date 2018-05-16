@@ -12,9 +12,5 @@ form {
 body {background-color: #FF7753!important;}
 
 a{
-    color:black;
-}
-
-a:hover {
-    color: #3A80A2;
+    color:#212529;
 }

@@ -3,12 +3,12 @@
 //include_once('../database_verbinding/database_connectie.php');
 session_start();
 //Regel hieronder is voor server!
-require_once '../server_verbinding/sql_srv_connect.php';
+//require_once '../server_verbinding/sql_srv_connect.php';
 
 $bank = $_POST['banknaam'];
 $banknummer = $_POST['bankrekeningnummer'];
 $creditcardnummer = $_POST['creditcardnummer'];
-$verkoper = 'wel';
+$verkoper ='ja  ';
 $gast = $_SESSION['gebruikers'];
 $controle = 'Creditcard';
 global $conn;

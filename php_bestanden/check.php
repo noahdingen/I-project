@@ -6,7 +6,7 @@ $error_drie = "U dient beide velden in te vullen";
 
 include_once '../database_verbinding/database_connectie.php';
 //Regel hieronder is voor server!
-require_once '../server_verbinding/sql_srv_connect.php';
+//require_once '../server_verbinding/sql_srv_connect.php';
 global $conn;
 $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );

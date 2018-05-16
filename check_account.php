@@ -11,8 +11,7 @@ include 'header.php'
 
 <link href="assets/css/login.css" rel="stylesheet">
 
-<body class="text-center">
-<h3>Account is succesvol geregistreerd.</h3>
+<h3 class="text-center">Account is succesvol geregistreerd.</h3>
 <div class="container">
     <form action="php_bestanden/check.php" method="post" class="col-md-3 col-form-label">
         <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="72" height="72">
