@@ -59,37 +59,25 @@ include 'header.php';
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label for="einde_dag">Einde dag</label>
-                    <input type="text" class="form-control" name="einde_dag" id="einde_dag" placeholder="BEREKENING" required>
+                    <label for="betalingswijze">Betalingswijze</label>
+                    <input type="text" class="form-control" name="betalingswijze" id="betalingswijze" placeholder="Betalingswijze" required>
                 </div>
 
+
                 <div class="form-group col-md-4">
-                    <label for="einde_tijdstip">Einde tijdstip</label>
-                    <input type="text" class="form-control" name="einde_tijdstip" id="einde_tijdstip" placeholder="BEREKENING" required>
+                    <label for="afbeelding">Afbeelding</label>
+                    <input type="file" class="form-control" name="afbeelding" id="afbeelding" placeholder="Afbeelding" required>
                 </div>
+
+
             </div>
+
 
             <div class="form-group">
                 <label for="betalingsinstructies">Betalingsinstructies</label>
                 <input type="text" class="form-control" name="betalingsinstructies" id="betalingsinstructies" placeholder="Betalingsinstructies" required>
             </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="betalingswijze">Betalingswijze</label>
-                    <input type="text" class="form-control" name="betalingswijze" id="betalingswijze" placeholder="Betalingswijze" required>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label for="Verkoper">verkoper</label>
-                    <input type="text" class="form-control" name="verkoper" id="verkoper" placeholder="Verkoper" required>
-                </div>
-                
-                <div class="form-group col-md-4">
-                    <label for="afbeelding">Afbeelding (max 3)</label>
-                    <input type="text" class="form-control" name="afbeelding" id="afbeelding" placeholder="Afbeelding" required>
-                </div>
-            </div>
 
             <div class="form-row">
                 <div class="form-group col-md-4">
@@ -123,7 +111,7 @@ include 'header.php';
     </div>
 </main>
 
-<footer class="container">
+<footer class="container text-center">
     <p>&copy; Company 2017-2018</p>
 </footer>
 
