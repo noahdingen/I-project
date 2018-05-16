@@ -28,17 +28,6 @@ function haaltitelop($i){
 
 }
 
-function haalbeschrijvingop(){
-    $conn = verbindMetDatabase();
-
-    $data = $conn->prepare("SELECT * FROM Voorwerp");
-    $data->execute();
-    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-    for($i = 0; $i < count($resultaat); $i++){
-        echo "<p>" . $resultaat[$i]['beschrijving'] ."</p>";
-    }
-}
-
 function haalprijsop($i){
     $conn = verbindMetDatabase();
 
