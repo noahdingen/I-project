@@ -46,7 +46,6 @@ else{
 
 echo '
     <link href="assets/css/profielpagina.css" rel="stylesheet">
-<body>
 <form class="gegevenswijzigen" method="get" action="PHP_bestanden/gegevens_bijwerken.php">
 <div class="kolommen">
     <div class="persoons-gegevens">
@@ -97,10 +96,8 @@ else {
         </div>'; }
 
 }
-
 ?>
-    </div>
-</form>
+</div>
     <div class="persoonlijke-veilingen">
 <?php
 if($verkoper == 'ja  '){
@@ -133,17 +130,17 @@ if($verkoper == 'ja  '){
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-4">
-                <img src="assets/images/hammer.png" >
+                <img src="assets/images/hammer.png" alt="logo">
                 <p>Hier staat de beschrijving van bovenstaande veiling</p>
                 <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
             </div>
             <div class="col-md-4">
-                <img src="assets/images/hammer.png" >
+                <img src="assets/images/hammer.png" alt="logo">
                 <p>Hier staat de beschrijving van bovenstaande veiling</p>
                 <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
             </div>
             <div class="col-md-4">
-                <img src="assets/images/hammer.png" >
+                <img src="assets/images/hammer.png" alt="logo">
                 <p>Hier staat de beschrijving van bovenstaande veiling</p>
                 <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
             </div>
@@ -153,13 +150,13 @@ if($verkoper == 'ja  '){
         </div>
     </div>
 </div>
-</main>
+</form>
 
 <footer class="container">
     <p>&copy; EenmaalAndermaal 2018</p>
 </footer>
 
-<!-- Bootstrap core JavaScript
+<!-- Bootstrap core JavaScript -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>

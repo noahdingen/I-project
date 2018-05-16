@@ -11,7 +11,7 @@ if(isset($_GET['error'])){
 ?>
 
 <link href="assets/css/registreren.css" rel="stylesheet">
-<main role="main">
+<main>
     <div class="container">
         <h1 class="display-3">Registreren</h1>
     <form class="col-form-label-lg" action="PHP_bestanden/db_registratie.php" method="post">

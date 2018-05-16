@@ -29,19 +29,19 @@ if (!isset($_SESSION)) {
         include 'PHP_bestanden/sessie_bezoeker.php';
         if(isset($_SESSION['gebruikers'])) {
             echo '
-              <div class="btn-group">
+             <div class="btn-group">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   '.$bezoeker[0].'
                   </button>
                   <div class="dropdown-menu dropdown-menu-right">
-                        <a href="profielpagina.php?bewerken=false"><button class="dropdown-item" type="button">Mijn profiel</button></a>
-                        <a href="PHP_bestanden/Loguit.php"><button class="dropdown-item" type="button">Loguit</button></a>
+                        <a href="profielpagina.php?bewerken=false" class="dropdown-item" role="button">Mijn profiel</a>
+                        <a href="PHP_bestanden/Loguit.php" class="dropdown-item" role="button">Loguit</a>
                   </div>
-            </div>';
+             </div>';
         }
         else {
             echo '
-           <div>
+        <div>
             <a href="registreren.php" class="btn btn-primary" role="button">Registreren</a>
             <a href="login.php" class="btn btn-primary" role="button">Login</a>
         </div>';

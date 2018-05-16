@@ -22,7 +22,7 @@ include 'header.php'
         </div>
         <?php echo $error;?>
         <div class="container">
-            <a href=""><button type="submit" class="btn btn-primary">Wachtwoord vergeten?</button></a>
+            <a href="" class="btn btn-primary" role="button">Wachtwoord vergeten?</a>
         </div>
         <div class="container">
             <button type="submit" class="btn btn-primary">Inloggen</button>
