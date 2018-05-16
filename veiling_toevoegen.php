@@ -1,6 +1,7 @@
 <?php
-$titel = 'Veiling_Toevoegen';
+$titel = 'Veiling toevoegen';
 include 'header.php';
+
 ?>
 
 <link href="assets/css/veiling_toevoegen.css" rel="stylesheet">
@@ -10,11 +11,11 @@ include 'header.php';
         <form class="col-form-label-lg" action="PHP_bestanden/db_registratie.php" method="post">
             <div class="form-group">
                 <label for="titel">Titel</label>
-                <input type="text" class="form-control" name="titel" id="titel" placeholder="Titel" required autofocus maxlength="60">
+                <input type="text" class="form-control" name="titel" id="titel" placeholder="Titel" required autofocus>
             </div>
             <div class="form-group">
                 <label for="beschrijving">Beschrijving</label>
-                <input type="text" class="form-control" name="beschrijving" id="beschrijving" placeholder="Beschrijving" required autofocus maxlength="255">
+                <input type="text" class="form-control" name="beschrijving" id="beschrijving" placeholder="Beschrijving" required autofocus>
             </div>
             <div class="form-group">
                 <label for="rubriek">Wat wil je precies verkopen? Type een steekwoord in om je rubriek te kiezen.</label>
@@ -33,7 +34,7 @@ include 'header.php';
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="startprijs">Startprijs</label>
-                    <input type="number" class="form-control" name="startprijs" id="startprijs" placeholder="Startprijs" required>
+                    <input type="text" class="form-control" name="startprijs" id="startprijs" placeholder="Startprijs" required>
                 </div>
 
                 <div class="form-group col-md-4">
@@ -47,29 +48,26 @@ include 'header.php';
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label for="betalingswijze">Betalingswijze</label>
-                    <input type="text" class="form-control" name="betalingswijze" id="betalingswijze" placeholder="Betalingswijze" required maxlength="10">
+                    <label for="begin_dag">Begin dag</label>
+                    <input type="date" class="form-control" name="begin_dag" id="begin_dag" placeholder="Begin dag" required>
                 </div>
-
             </div>
-
-
 
             <div class="form-row">
                 <div class="form-group col-md-4">
+                    <label for="begin_tijdstip">Begin tijdstip</label>
+                    <input type="time" class="form-control" name="begin_tijdstip" id="begin_tijdstip" placeholder="Begin tijdstip" required>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="betalingswijze">Betalingswijze</label>
+                    <input type="text" class="form-control" name="betalingswijze" id="betalingswijze" placeholder="Betalingswijze" required>
+                </div>
+
+
+                <div class="form-group col-md-4">
                     <label for="afbeelding">Afbeelding</label>
                     <input type="file" class="form-control" name="afbeelding" id="afbeelding" placeholder="Afbeelding" required>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label for="afbeelding2">Afbeelding (optioneel)</label>
-                    <input type="file" class="form-control" name="afbeelding2" id="afbeelding2" placeholder="Afbeelding" required>
-                </div>
-
-
-                <div class="form-group col-md-4">
-                    <label for="afbeelding3">Afbeelding (optineel)</label>
-                    <input type="file" class="form-control" name="afbeelding3" id="afbeelding3" placeholder="Afbeelding" required>
                 </div>
 
 
@@ -92,21 +90,19 @@ include 'header.php';
                     <label for="land">Land</label>
                     <select class="form-control form-control-md" id="land" name="land" required>
                         <option value="">Land</option>
-                        <option value="1">Nederland</option>
-                        <option value="2">Uit de database</option>
-                        <option value="3">Uit de database</option>
+                        <?php include 'PHP_bestanden/landen.php' ?>
                     </select>
                 </div>
 
                 <div class="form-group col-md-4">
                     <label for="plaatsnaam">Plaatsnaam</label>
-                    <input type="text" class="form-control" name="plaatsnaam" id="plaatsnaam" placeholder="Plaatsnaam" required maxlength="28">
+                    <input type="text" class="form-control" name="plaatsnaam" id="plaatsnaam" placeholder="Plaatsnaam" required>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="verzendinstructies">Verzendinstructies</label>
-                <input type="text" class="form-control" name="verzendinstructies" id="verzendinstructies" placeholder="Verzendinstructies" required maxlength="27">
+                <label for="antwoord">Geheim antwoord</label>
+                <input type="text" class="form-control" name="antwoord" id="antwoord" placeholder="Antwoord" required>
             </div>
 
             <input type="submit" name="Verzenden" class="btn btn-primary">
