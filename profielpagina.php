@@ -5,7 +5,7 @@ if (!isset($_SESSION)) {
 $titel = 'Profielpagina';
 
 
-include_once 'Database_verbinding/database_connectie.php';
+include_once 'database_verbinding/database_connectie.php';
 include_once 'header.php';
 global $conn;
 $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
@@ -52,7 +52,7 @@ else{
 echo '
     <link href="assets/css/profielpagina.css" rel="stylesheet">
 <body>
-<form class="gegevenswijzigen" method="get" action="PHP_bestanden/gegevens_bijwerken.php">
+<form class="gegevenswijzigen" method="get" action="php_bestanden/gegevens_bijwerken.php">
 <div class="kolommen">
     <div class="persoons-gegevens">
     <label>Gebruikersnaam</label>
@@ -87,7 +87,7 @@ echo '
 
 if(($_GET["bewerken"]=='true')){
     echo '
-    <a href="PHP_bestanden/gegevens_bijwerken.php"><button type="submit" class="btn btn-primary">Bijwerken</button></a>';
+    <a href="php_bestanden/gegevens_bijwerken.php"><button type="submit" class="btn btn-primary">Bijwerken</button></a>';
 }
 else {
 	if($verkoper == 'wel'){

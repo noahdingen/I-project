@@ -1,11 +1,11 @@
 <?php
-//include_once 'Database_verbinding/database_connectie.php';
-//include 'PHP_bestanden/sessie_bezoeker.php';
+//include_once 'database_verbinding/database_connectie.php';
+//include 'php_bestanden/sessie_bezoeker.php';
 // regel hieronder uit commentarisiren voor server
-include_once 'Server_verbinding/sql_srv_connect.php';
+include_once 'server_verbinding/sql_srv_connect.php';
 $titel = 'Homepagina';
 include 'header.php';
-include_once 'PHP_bestanden/veilingenbekijken.php';
+include_once 'php_bestanden/veilingenbekijken.php';
 
 ?>
 <link href="assets/css/index.css" rel="stylesheet">

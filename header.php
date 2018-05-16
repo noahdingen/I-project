@@ -25,16 +25,16 @@ if (!isset($_SESSION)) {
 
 
         <?php
-        include 'PHP_bestanden/sessie_bezoeker.php';
+        include 'php_bestanden/sessie_bezoeker.php';
         if(isset($_SESSION['gebruikers'])) {
             echo '
               <div class="btn-group">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  '.$bezoeker[0].'
+                  '.$bezoeker[0]. '
                   </button>
                   <div class="dropdown-menu dropdown-menu-right">
                         <a href="profielpagina.php?bewerken=false"><button class="dropdown-item" type="button">Mijn profiel</button></a>
-                        <a href="PHP_bestanden/loguit.php"><button class="dropdown-item" type="button">Loguit</button></a>
+                        <a href="php_bestanden/loguit.php"><button class="dropdown-item" type="button">Loguit</button></a>
                   </div>
             </div>';
         }

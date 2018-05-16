@@ -14,7 +14,7 @@ if(isset($_GET['error'])){
 <main role="main">
     <div class="container">
         <h1 class="display-3">Registreren</h1>
-    <form class="col-form-label-lg" action="PHP_bestanden/db_registratie.php" method="post">
+    <form class="col-form-label-lg" action="php_bestanden/db_registratie.php" method="post">
         <div class="form-group">
             <label for="gebruikersnaam">Gebruikersnaam</label>
             <input type="text" class="form-control" name="gebruikersnaam" id="gebruikersnaam" placeholder="Gebruikersnaam" required autofocus>

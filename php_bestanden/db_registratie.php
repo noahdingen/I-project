@@ -1,9 +1,9 @@
 <?php 
 session_start();
 // maak verbinding met database
-require_once '../Database_verbinding/database_connectie.php';
+require_once '../database_verbinding/database_connectie.php';
 //Regel hieronder is voor server!
-//require_once '../Server_verbinding/';
+//require_once '../server_verbinding/';
 
 $title = 'registreren';
 $paginatitel = 'registreren';

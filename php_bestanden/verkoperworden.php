@@ -1,9 +1,9 @@
 <?php
 
-//include_once('../Database_verbinding/database_connectie.php');
+//include_once('../database_verbinding/database_connectie.php');
 session_start();
 //Regel hieronder is voor server!
-require_once '../Server_verbinding/sql_srv_connect.php';
+require_once '../server_verbinding/sql_srv_connect.php';
 
 $bank = $_POST['banknaam'];
 $banknummer = $_POST['bankrekeningnummer'];
