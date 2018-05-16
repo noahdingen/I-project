@@ -9,7 +9,7 @@ $bank = $_POST['banknaam'];
 $banknummer = $_POST['bankrekeningnummer'];
 var_dump($banknummer);
 $creditcardnummer = $_POST['creditcardnummer'];
-$verkoper = 'wel';
+$verkoper = 'ja  ';
 $gast = $_SESSION['gebruikers'];
 $controle = 'Creditcard';
 $dbh = verbindMetDatabase();
