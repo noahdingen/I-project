@@ -1,3 +1,91 @@
 <?php
-echo "Helemooie dingen hier";
+include 'php_bestanden/veiling_gegevens.php';
+//include 'PHP_bestanden/sessie_bezoeker.php';
+$titel = 'Detailpagina';
+$voorwerp = haaldetailsop($_GET['voorwerpnummer']);
+include 'header.php';
 ?>
+<link href="assets/css/detailpagina.css" rel="stylesheet">
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5 bg-light text-center">
+                <div class="container">
+                <h1><?php echo $voorwerp['titel'] ?></h1>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="w-75 h-75" src="<?php echo $voorwerp['afbeelding'] ?>" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="w-75 h-75" src="<?php echo $voorwerp['afbeelding'] ?>" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="w-75 h-75" src="<?php echo $voorwerp['afbeelding'] ?>" alt="Third slide">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-5">
+                <div class="container bg-light">
+                    <h1>
+                        <?php echo $voorwerp['looptijd'] ?> dagen
+                    </h1>
+                    <div class="row">
+                        <div class="col text-center">
+                            <?php echo $voorwerp['koper'] ?>
+                        </div>
+                        <div class="col text-center">
+                            &euro;<?php echo $voorwerp['bodbedrag']?>
+                        </div>
+                        <div class="col text-center">
+                            <?php echo $voorwerp['bodtijdstip'] ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100"></div>
+            <div class="col text-center">
+                <h1>
+                    Beschrijving
+                </h1>
+
+            </div>
+            <div class="col text-center">
+                <h1>
+                    Verkoper informatie
+                </h1>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="container text-center">
+    <p>&copy; EenmaalAndermaal 2018</p>
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>

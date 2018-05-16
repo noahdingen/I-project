@@ -1,4 +1,4 @@
-main{
+body{
     background-color: #FF7753;
 }
 
@@ -29,6 +29,7 @@ img{
     max-width: 100%;
     vertical-align: middle;
 }
+
 figure{
     height: 100px;
 }

@@ -18,14 +18,11 @@ include_once 'PHP_bestanden/veilingenbekijken.php';
         </div>
     </div>
     <div class="container">
-
         <h1 class="display-4">Nieuwste veilingen</h1>
         <div class="row">
               <?php
               haalinformatieop();
               ?>
-
-
         </div>
 
     </div>

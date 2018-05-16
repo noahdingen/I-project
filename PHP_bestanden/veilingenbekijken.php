@@ -60,9 +60,7 @@ function haalinformatieop(){
         echo  haalplaatjeop($i);
         echo haallooptijdop($i);
         echo haalprijsop($i);
-        ?>
-        <p><a class="btn btn-secondary" href="detailpagina.php" role="button">Zie details &raquo;</a></p>
-        </div>
-        <?php
+        echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . ($i+1) . '" role="button">Zie details &raquo;</a></p>
+        </div>';
     }
 }
