@@ -1,6 +1,5 @@
 <?php
 
-
 foreach ($klantgegevens as $value){
     if(isset($value)){
         echo $value;

@@ -1,5 +1,5 @@
 <?php
-
+// controleren of gebruiker is ingelogd en of deze al verkoper is
 if (!isset($_SESSION['gebruikers'])) {
 
     echo "<H1 class=\"text-center\">U bent niet ingelogd, <br> U wordt zo doorgestuurd!</H1></form>";

@@ -2,7 +2,7 @@
 //include_once 'Database_verbinding/database_connectie.php';
 //include 'PHP_bestanden/sessie_bezoeker.php';
 // regel hieronder uit commentarisiren voor server
-include_once 'Server_verbinding/SQLSrvConnect.php';
+include_once 'Server_verbinding/sql_srv_connect.php';
 $titel = 'Homepagina';
 include 'header.php';
 include_once 'PHP_bestanden/veilingenbekijken.php';

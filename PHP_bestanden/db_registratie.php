@@ -3,17 +3,20 @@ session_start();
 // maak verbinding met database
 require_once '../Database_verbinding/database_connectie.php';
 //Regel hieronder is voor server!
-//require_once '../Server_verbinding/SQLSrvConnect.php';
+//require_once '../Server_verbinding/';
 
 $title = 'registreren';
 $paginatitel = 'registreren';
 $gebruiker=$fout="";
 $pagina= './login.php';
-$pdo = verbindMetDatabase();
+//$pdo = verbindMetDatabase();
 //Regel hieronder is voor server!
 //$pdo = $conn;
-$paginaFout = './DB_registratie.php';
-
+$paginaFout = './db_registratie.php';
+global $conn;
+$conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo = $conn;
 // is er op de knop aanmelden geklikt?
 if (isset($_POST['aanmelden'])){
 
@@ -36,9 +39,10 @@ if (isset($_POST['aanmelden'])){
 			$adresregel2 = $adres;
 			$landnaam = 'nederland';
 			$verkoper = 'nee';
+			$activatie = 0;
 
 
-            $conn = verbindMetDatabase();
+
 
     $data = $conn->prepare("SELECT verkoper FROM Gebruiker WHERE gebruikersnaam = '$gebruiker' ");
     $data->execute();
@@ -56,10 +60,25 @@ if (isset($_POST['aanmelden'])){
 //        header("refresh:0; url='../registreren.php?error=$error'");
 //    }
 
-
+        function genereerRandomString($length = 15) {
+            $karakters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $karakterLength = strlen($karakters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $karakters[rand(0, $karakterLength - 1)];
+            }
+            return $randomString;
+        }
+// versturen van verificatie mail
+$code = genereerRandomString();
 $subject = 'Bedankt voor uw registratie op IConcept';
-$emailtekst = 'Dit is een verificatie mail om uw account te activeren op onze website:
-http://iproject39.icasites.nl/login.php
+$emailtekst =
+
+'
+Dit is een verificatie mail om uw account te activeren op onze website: 
+Dit is uw activatie code: '.$code.'
+Deze dient in gevoerd te worden op:
+http://iproject39.icasites.nl/check_account.php
             
 Met vriendelijke groeten, IConcepts.
 Deze mail is automatisch gegenereed.';
@@ -75,16 +94,15 @@ $headers[] = "X-Mailer: PHP/".phpversion();
 mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f".$from );
 
 
-
+// invoegen van de gegevens in de database
 $sql = "INSERT INTO Gebruiker(gebruikersnaam, wachtwoord, voornaam, 
 										achternaam, adresregel1, adresregel2, postcode, plaatsnaam, landnaam, datum, emailadres
-										,vraagnummer, antwoordtekst, verkoper) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+										,vraagnummer, antwoordtekst, verkoper, activatie, mailcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
 			$opdracht = $pdo->prepare($sql);
 			$opdracht->execute(array($gebruiker, $wachtwoord, $voornaam, $achternaam, $adres, $adresregel2, $postcode,
-									 $plaatsnaam, $landnaam, $geboortedatum, $email, $geheime_vraag, $antwoord, $verkoper));
-			
-			header("refresh:0; url='../login.php'");
+									 $plaatsnaam, $landnaam, $geboortedatum, $email, $geheime_vraag, $antwoord, $verkoper, $activatie, $code));
+			header("refresh:0; url='../check_account.php'");
 	}	} else{
 			$error = "Wachtwoorden komen niet overeen";
 			header("refresh:0; url='../registreren.php?error=$error'");

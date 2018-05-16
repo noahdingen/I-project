@@ -11,9 +11,9 @@ if (!isset($_SESSION)) {
 }
 include_once 'Database_verbinding/database_connectie.php';
 include_once 'header.php';
-include_once 'PHP_bestanden/php_verkoper.php'
+include_once 'PHP_bestanden/php_verkoper.php';
 //Regel hieronder is voor server!
-//require_once '../Server_verbinding/SQLSrvConnect.php';
+//require_once '../Server_verbinding/sql_srv_connect.php';
 ?>
     <link href="assets/css/login.css" rel="stylesheet">
 
@@ -43,6 +43,9 @@ include_once 'PHP_bestanden/php_verkoper.php'
         <?php echo $error;?>
     </form>
 </div>
+<footer class="container">
+    <p>&copy; EenmaalAndermaal 2018</p>
+</footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
 <script src="assets/js/popper.min.js"></script>

@@ -10,32 +10,29 @@ $error_drie = "U dient beide velden in te vullen";
 
 include_once '../Database_verbinding/database_connectie.php';
 //Regel hieronder is voor server!
-require_once '../Server_verbinding/SQLSrvConnect.php';
+//require_once '../Server_verbinding/sql_srv_connect.php';
 setlocale(LC_ALL, 'nld_nld');
 
 
 $gebruikersnaam = valideerFormulierinput($_POST['gebruikersnaam']);
 $wachtwoord = valideerFormulierinput($_POST['wachtwoord']);
 
+// functie om te controleren of een account is geactiveerd
+function checkvalidatie($gebruiker){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-//
-//function checkvalidatie(){
-//    $conn = verbindMetDatabase();
-//    $Gebruiker = $_SESSION['gebruikers'];
-//
-//    $data = $conn->prepare("SELECT verkoper FROM Gebruiker WHERE gebruikersnaam = '$Gebruiker'AND activatie = 1");
-//    $data->execute();
-//    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-//    for($i = 0; $i < count($resultaat); $i++){
-//
-//    }
-//
-//    if($i == 1){
-//        return true;
-//    }
-//}
+    $data = $conn->prepare("SELECT gebruikersnaam FROM Gebruiker WHERE gebruikersnaam = '$gebruiker'AND activatie = 1");
+    $data->execute();
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    for($i = 0; $i < count($resultaat); $i++){
 
-if (!empty($gebruikersnaam) && !empty($wachtwoord)) {
+    }
+return $i;
+}
+// checkt alle ingevoegde waardes
+if (!empty($gebruikersnaam) && !empty($wachtwoord) && checkvalidatie($gebruikersnaam)) {
     if (bestaatGebruikersnaam($gebruikersnaam)) {
         if (bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord)) {
             $_SESSION['gebruikers'] = $gebruikersnaam;
@@ -48,9 +45,10 @@ if (!empty($gebruikersnaam) && !empty($wachtwoord)) {
     }
 }
 else {
-    header("location: ../login.php?error=$error_drie");
-}
+    header("refresh:10; location: ../login.php?error=$error_drie");
 
+}
+// controleert of gebruikersnaam bestaat
 function bestaatGebruikersnaam($gebruikersnaam) {
     global $conn;
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
@@ -62,7 +60,7 @@ function bestaatGebruikersnaam($gebruikersnaam) {
     $gebruikersnaam = $query->fetchColumn();
     return $gebruikersnaam;
 }
-
+// controleert of combinatie van gebruikersnaam met wachtwoord bestaat
 function bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord) {
     global $conn;
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");

@@ -1,4 +1,5 @@
 <?php
+// log een persoon uit
 if (!isset($_SESSION)) {
     session_start();
 }

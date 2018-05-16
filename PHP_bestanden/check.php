@@ -1,23 +1,23 @@
 <?php
-
+// fout meldingen voor account activatie
 $error_een = "Activatie code onjuist";
 $error_twee = "Gebruikersnaam bestaat niet";
 $error_drie = "U dient beide velden in te vullen";
 
 include_once '../Database_verbinding/database_connectie.php';
 //Regel hieronder is voor server!
-require_once '../Server_verbinding/SQLSrvConnect.php';
+require_once '../Server_verbinding/sql_srv_connect.php';
 global $conn;
 $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
 setlocale(LC_ALL, 'nld_nld');
-
+// Hier wordt gecontroleerd of de activatie code die per mail wordt verstuurd gekoppeld is aan het account en deze dan vervolgens op actief zet
 $gebruikersnaam = valideerFormulierinput($_POST['gebruikersnaam']);
 $mailcode = valideerFormulierinput($_POST['mailcode']);
 if (!empty($gebruikersnaam) && !empty($mailcode)) {
     if (bestaatGebruikersnaam($gebruikersnaam)) {
-        $bool = bestaatCombinatieVanGebruikersnaamEnWachtwoord($mailcode);
+        $bool = bestaatCombinatieVanGebruikersnaamEnmailcode($mailcode);
         if ($bool) {
             $_SESSION['gebruikers'] = $gebruikersnaam;
             $activeren = "UPDATE Gebruiker set activatie = 1 FROM Gebruiker WHERE gebruikersnaam = '$gebruikersnaam' ";
@@ -34,7 +34,7 @@ if (!empty($gebruikersnaam) && !empty($mailcode)) {
 else {
     header("location: ../check_account.php?error=$error_drie");
 }
-
+// controleert of gebruikersnaam bestaat
 function bestaatGebruikersnaam($gebruikersnaam) {
     global $conn;
     $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
@@ -46,8 +46,8 @@ function bestaatGebruikersnaam($gebruikersnaam) {
     $gebruikersnaam = $query->fetchColumn();
     return $gebruikersnaam;
 }
-
-function bestaatCombinatieVanGebruikersnaamEnWachtwoord($mailcode) {
+// controleert de activatie code
+function bestaatCombinatieVanGebruikersnaamEnmailcode($mailcode) {
     global $conn;
     $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
     $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );

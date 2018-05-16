@@ -19,7 +19,7 @@ if (!isset($_SESSION)) {
     <nav class="navbar navbar-light bg-dark justify-content-between">
         <a href="index.php" class="btn btn-primary" role="button">Home</a>
         <form class="form-inline">
-            <input class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control mr-sm-4" type="search" placeholder="Zoeken..." aria-label="Search">
             <button class="btn btn-primary" type="submit">Zoeken</button>
         </form>
 
@@ -34,7 +34,7 @@ if (!isset($_SESSION)) {
                   </button>
                   <div class="dropdown-menu dropdown-menu-right">
                         <a href="profielpagina.php?bewerken=false"><button class="dropdown-item" type="button">Mijn profiel</button></a>
-                        <a href="PHP_bestanden/Loguit.php"><button class="dropdown-item" type="button">Loguit</button></a>
+                        <a href="PHP_bestanden/loguit.php"><button class="dropdown-item" type="button">Loguit</button></a>
                   </div>
             </div>';
         }

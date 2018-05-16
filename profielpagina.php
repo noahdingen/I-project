@@ -33,8 +33,8 @@ $plaatsnaam = $rows[0]['plaatsnaam'];
 $adres = $rows[0]['adresregel1'];
 $postcode = $rows[0]['postcode'];
 $verkoper = $rows[0]['verkoper'];
-$verkoper2 = 'wel';
-if($rows[0]['verkoper'] =) {
+
+if($verkoper == 'wel') {
     $banknaam = $rows_2[0]['banknaam'];
     $rekingnummer = $rows_2[0]['rekeningnummer'];
     $controle_optie = $rows_2[0]['controleoptienaam'];
@@ -95,7 +95,7 @@ else {
 	} else{ 
 		echo '
 		<p>
-		
+		<a href="verkoper.php">Upgraden naar verkoper</a>
 		</p>
 		<a href="profielpagina.php?bewerken=true">Gegevens bijwerken</a>'; }
 		
@@ -156,6 +156,7 @@ if($verkoper == 'ja  '){
         </div>
     </div>
 </div>
+
 <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>

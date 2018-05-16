@@ -3,7 +3,7 @@
 //include_once('../Database_verbinding/database_connectie.php');
 session_start();
 //Regel hieronder is voor server!
-require_once '../Server_verbinding/SQLSrvConnect.php';
+require_once '../Server_verbinding/sql_srv_connect.php';
 
 $bank = $_POST['banknaam'];
 $banknummer = $_POST['bankrekeningnummer'];
@@ -11,6 +11,9 @@ $creditcardnummer = $_POST['creditcardnummer'];
 $verkoper = 'wel';
 $gast = $_SESSION['gebruikers'];
 $controle = 'Creditcard';
+global $conn;
+$conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $dbh = $conn;
 $error = "Vul alle gegevens in";
 $error2 = "Geen letters invullen";
