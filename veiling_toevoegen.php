@@ -1,6 +1,8 @@
 <?php
+
 $titel = 'Veiling toevoegen';
-include 'header.php';
+
+include_once 'header.php';
 
 ?>
 
@@ -8,14 +10,14 @@ include 'header.php';
 <main>
     <div class="container">
         <h1 class="display-3">Veiling aanmaken</h1>
-        <form class="col-form-label-lg" action="PHP_bestanden/db_registratie.php" method="post">
+        <form class="col-form-label-lg" action="PHP_bestanden/veiling_toevoegen_in_database.php" method="post">
             <div class="form-group">
                 <label for="titel">Titel</label>
                 <input type="text" class="form-control" name="titel" id="titel" placeholder="Titel" required autofocus>
             </div>
             <div class="form-group">
                 <label for="beschrijving">Beschrijving</label>
-                <input type="text" class="form-control" name="beschrijving" id="beschrijving" placeholder="Beschrijving" required autofocus>
+                <input type="text" class="form-control" name="beschrijving" id="beschrijving" placeholder="Beschrijving" required>
             </div>
             <div class="form-group">
                 <label for="rubriek">Wat wil je precies verkopen? Type een steekwoord in om je rubriek te kiezen.</label>
@@ -41,33 +43,28 @@ include 'header.php';
                     <label for="looptijd_dag">Looptijd (dag)</label>
                     <select class="form-control form-control-md" id="looptijd_dag" name="looptijd_dag" required>
                         <option value="">Looptijd (dag)</option>
-                        <option value="1">3 dagen</option>
-                        <option value="2">5 dagen</option>
-                        <option value="3">7 dagen</option>
+                        <option value="3">3 dagen</option>
+                        <option value="5">5 dagen</option>
+                        <option value="7">7 dagen</option>
                     </select>
                 </div>
-
-                <div class="form-group col-md-4">
-                    <label for="begin_dag">Begin dag</label>
-                    <input type="date" class="form-control" name="begin_dag" id="begin_dag" placeholder="Begin dag" required>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="begin_tijdstip">Begin tijdstip</label>
-                    <input type="time" class="form-control" name="begin_tijdstip" id="begin_tijdstip" placeholder="Begin tijdstip" required>
-                </div>
-
                 <div class="form-group col-md-4">
                     <label for="betalingswijze">Betalingswijze</label>
                     <input type="text" class="form-control" name="betalingswijze" id="betalingswijze" placeholder="Betalingswijze" required>
                 </div>
-
-
+            </div>
+            <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="afbeelding">Afbeelding</label>
-                    <input type="file" class="form-control" name="afbeelding" id="afbeelding" placeholder="Afbeelding" required>
+                    <label for="afbeelding">Afbeelding één</label>
+                    <input type="file" class="form-control" name="afbeelding_1" id="afbeelding_1" placeholder="Afbeelding" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="afbeelding">Afbeelding twee</label>
+                    <input type="file" class="form-control" name="afbeelding_2" id="afbeelding_2" placeholder="Afbeelding">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="afbeelding">Afbeelding drie</label>
+                    <input type="file" class="form-control" name="afbeelding_3" id="afbeelding_3" placeholder="Afbeelding">
                 </div>
 
 
@@ -82,8 +79,12 @@ include 'header.php';
 
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="verzendkosten">Verzendkosten</label>
-                    <input type="text" class="form-control" name="verzendkosten" id="verzendkosten" placeholder="Verzendkosten" required>
+                    <label for="verzendoptie">Verzendopties</label>
+                    <select class="form-control" name="verzendoptie" id="verzendoptie" placeholder="verzendoptie" required>
+                        <option value="">...</option>
+                        <option value="verzenden">Verzenden</option>
+                        <option value="ophalen">Ophalen</option>
+                    </select>
                 </div>
 
                 <div class="form-group col-md-4">
@@ -101,8 +102,8 @@ include 'header.php';
             </div>
 
             <div class="form-group">
-                <label for="antwoord">Geheim antwoord</label>
-                <input type="text" class="form-control" name="antwoord" id="antwoord" placeholder="Antwoord" required>
+                <label for="verzendinstructies">Verzendinstructies</label>
+                <input type="text" class="form-control" name="verzendinstructies" id="verzendinstructies" placeholder="verzendinstructies" required>
             </div>
 
             <input type="submit" name="Verzenden" class="btn btn-primary">
