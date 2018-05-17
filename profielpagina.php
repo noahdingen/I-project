@@ -16,7 +16,9 @@ else{
 
 echo '
     <link href="assets/css/profielpagina.css" rel="stylesheet">
+
 <form class="gegevenswijzigen" method="get" action="PHP_bestanden/test.php?;">
+
 <div class="kolommen">
     <div class="persoons-gegevens">
     <label>Gebruikersnaam</label>
@@ -53,6 +55,7 @@ echo '
 
 if(($_GET["bewerken"]=='true')){
     echo '
+
     <a href="PHP_bestanden/test.php"><button type="submit" class="btn btn-primary">Bijwerken</button></a>';
 }
 else {

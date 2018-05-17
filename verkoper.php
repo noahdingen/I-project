@@ -11,13 +11,13 @@ if (!isset($_SESSION)) {
 }
 include_once 'Database_verbinding/database_connectie.php';
 include_once 'header.php';
-include_once 'PHP_bestanden/php_verkoper.php'
+include_once 'php_bestanden/php_verkoper.php'
 //Regel hieronder is voor server!
 //require_once '../Server_verbinding/SQLSrvConnect.php';
 ?>
     <link href="assets/css/login.css" rel="stylesheet">
 <div class="container">
-    <form action="PHP_bestanden/verkoperworden.php" method="post" class="col-md-4 col-form-label">
+    <form action="php_bestanden/verkoperworden.php" method="post" class="col-md-4 col-form-label">
         <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="72" height="72">
         <div class="form-group">
             <select Name='banknaam' required>

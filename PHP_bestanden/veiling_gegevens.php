@@ -2,7 +2,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-include_once 'databaseverbinding/database_connectie.php';
+include_once '../Database_verbinding/database_connectie.php';
 function haaldetailsop($voorwerpnummer){
     $conn = verbindMetDatabase();
     $voorwerp = $conn->prepare("select titel, beschrijving, looptijd, verkoper from Voorwerp where voorwerpnummer = ?");

@@ -5,27 +5,22 @@ if(isset($_GET['error'])){
 }else{
     $error = '';
 }
-$titel = 'Login';
+$titel = 'Wachtwoord vergeten';
 include 'header.php'
 ?>
 <link href="assets/css/login.css" rel="stylesheet">
 <div class="container">
-    <form action="php_bestanden/inloggen.php" method="post" class="col-md-3 col-form-label">
+    <form class="col-md-3 col-form-label" action="login.php">
         <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="72" height="72">
+        <p>Wijzig uw wachtwoord</p>
         <div class="form-group">
-            <label for="gebruikersnaam">Gebruikersnaam</label>
-            <input id="gebruikersnaam" class="form-control" name="gebruikersnaam" type="text">
+            <input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord" required>
         </div>
         <div class="form-group">
-            <label for="wachtwoord">Wachtwoord</label>
-            <input id="wachtwoord" class="form-control" name="wachtwoord" type="password">
-        </div>
-        <?php echo $error;?>
-        <div class="container">
-            <a href="wachtwoord_vergeten.php" class="btn btn-primary" role="button">Wachtwoord vergeten?</a>
+            <input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Herhaal wachtwoord" required>
         </div>
         <div class="container">
-            <button type="submit" class="btn btn-primary">Inloggen</button>
+            <button type="submit" class="btn btn-primary">Verzenden</button>
         </div>
     </form>
 </div>
