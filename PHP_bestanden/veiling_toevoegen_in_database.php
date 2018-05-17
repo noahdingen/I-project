@@ -1,4 +1,7 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 include_once '../databaseverbinding/database_connectie.php';
 $conn = verbindMetDatabase();
 
@@ -17,15 +20,33 @@ $verzendoptie = $_POST['verzendoptie'];
 $land = $_POST['land'];
 $plaatsnaam = $_POST['plaatsnaam'];
 $verzendinstructies = $_POST['verzendinstructies'];
-$gebruiker = $_SESSION['gebruiker'];
+$gebruiker = $_SESSION['gebruikers'];
 
 $data = $conn->prepare("SELECT * FROM Voorwerp");
 $data->execute();
 $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-
 $voorwerpnummer = count($resultaat) + 1;
 
-$veilingen = $conn->prepare("INSERT INTO Voorwerp VALUES (?, ?, ?, ?, 'creditcard', ?, ?, ?, ?, CAST(GETDATE() AS DATE), convert(time,getdate()), NULL, ?, ?, NULL, DATEADD(dd, ?, CAST(GETDATE() AS DATE)), convert(time,getdate()),'nee', ?");
-$veilingen->execute(array($voorwerpnummer, $titel, $beschrijving, $startprijs, $betalingsinstructies, $plaatsnaam, $land, $looptijd_dag, $verzendinstructies, $gebruiker, $looptijd_dag, $startprijs));
-$resultaat_voorwerp = $veilingen->fetchAll(PDO::FETCH_NAMED);
+$informatie = array($titel, $beschrijving, $rubriek, $rubriek_keuze, $startprijs, $looptijd_dag, $betalingswijze,
+    $afbeelding_1, $betalingsinstructies, $verzendoptie, $land, $plaatsnaam, $verzendinstructies);
+
+$sql_veiling = "INSERT INTO Voorwerp VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CAST(GETDATE() AS DATE), 
+convert(time,getdate()), NULL, ?, ?, NULL, DATEADD(dd, 5, CAST(GETDATE() AS DATE)), convert(time,getdate()),'nee', null)";
+
+$veilingen = $conn->prepare($sql_veiling);
+$veilingen->execute(array($voorwerpnummer,
+    $titel,
+    $beschrijving,
+    $startprijs,
+    $betalingswijze,
+    $betalingsinstructies,
+    $plaatsnaam,
+    $land,
+    $looptijd_dag,
+    $verzendinstructies,
+    $gebruiker
+    )
+);
+
+
 ?>

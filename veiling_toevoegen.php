@@ -1,8 +1,8 @@
 <?php
-
+include_once 'Database_verbinding/database_connectie.php';
 $titel = 'Veiling toevoegen';
 
-include_once 'header.php';
+include 'header.php';
 
 ?>
 
@@ -50,7 +50,14 @@ include_once 'header.php';
                 </div>
                 <div class="form-group col-md-4">
                     <label for="betalingswijze">Betalingswijze</label>
-                    <input type="text" class="form-control" name="betalingswijze" id="betalingswijze" placeholder="Betalingswijze" required>
+                    <select class="form-control" name="betalingswijze" id="betalingswijze" required>
+                        <option value="">...</option>
+                        <option value="iDeal">iDEAL</option>
+                        <option value="creditcard">Creditcard</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="afterpay">Afterpay</option>
+                        <option value="contant">Contant</option>
+                    </select>
                 </div>
             </div>
             <div class="form-row">
