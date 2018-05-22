@@ -6,16 +6,22 @@ if (!isset($_SESSION)) {
 }
 $pdo = verbindMetDatabase();
 $oude_gebruikersnaam = $_GET['gebruikersnaam'];
-//echo $oude_gebruikersnaam;
-//echo $_SESSION['gebruikers'];
-//header("location: ../profielpagina.php?error");
-
-
-//$sql = "UPDATE Gebruiker SET 'gebruikersnaam'='Minus' WHERE 'gebruikersnaam'=$oude_gebruikersnaam";
-//$query = $pdo->prepare($sql);
-//$query->execute($_POST['gebruikersnaam']);
-//header("location: ../profielpagina.php?bewerken=false");
-
-$data = $pdo->prepare("UPDATE Gebruiker SET gebruikersnaam = 'Bob' WHERE gebruikersnaam = 'TEST'");
-$data->execute();
+$nieuwe_gebruikersnaam = $_POST['gebruikersnaam'];
+foreach ($_POST as $key => $value){
+    if($value != '') {
+        echo "UPDATE Gebruiker SET $key = '$value' WHERE gebruikersnaam = '$oude_gebruikersnaam'";
+        if($key==='gebruikersnaam' && $nieuwe_gebruikersnaam!==''){
+            $data = $pdo->prepare("UPDATE Gebruiker SET $key = '$value' WHERE gebruikersnaam = '$oude_gebruikersnaam'");
+            $_SESSION['gebruikers'] = $nieuwe_gebruikersnaam;
+        }
+        else if($nieuwe_gebruikersnaam===''){
+            $data = $pdo->prepare("UPDATE Gebruiker SET $key = '$value' WHERE gebruikersnaam = '$oude_gebruikersnaam'");
+        }
+        else{
+            $data = $pdo->prepare("UPDATE Gebruiker SET $key = '$value' WHERE gebruikersnaam = '$nieuwe_gebruikersnaam'");
+            $_SESSION['gebruikers'] = $nieuwe_gebruikersnaam;
+        }
+        $data->execute();
+    }
+}
 header("location: ../profielpagina.php?bewerken=false");

@@ -24,17 +24,17 @@ echo '
     <label>Gebruikersnaam</label>
     <input name="gebruikersnaam" class="form-control" type="text" placeholder=" ' . $gebruikersnaam . '" ' . $inhoudstype . '>
     <label>E-mail</label>
-    <input name="e-mail" class="form-control" type="text" placeholder=" ' . $emailadres . '" ' . $inhoudstype .'>
+    <input name="emailadres" class="form-control" type="text" placeholder=" ' . $emailadres . '" ' . $inhoudstype .'>
     <label>Voornaam</label>
     <input name="voornaam" class="form-control" type="text" placeholder=" ' . $voornaam . '" ' . $inhoudstype .'>
     <label>Achternaam</label>
     <input name="achternaam" class="form-control" type="text" placeholder=" ' . $achternaam . '" ' . $inhoudstype .'>
     <label>Geboortedatum</label>
-    <input name="geboortedatum" class="form-control" type="text" placeholder=" ' . $datum . '" ' . $inhoudstype .'>
+    <input name="datum" class="form-control" type="text" placeholder=" ' . $datum . '" ' . $inhoudstype .'>
     <label>Woonplaats</label>
-    <input name="woonplaats" class="form-control" type="text" placeholder=" ' . $plaatsnaam . '" ' . $inhoudstype .'>
+    <input name="plaatsnaam" class="form-control" type="text" placeholder=" ' . $plaatsnaam . '" ' . $inhoudstype .'>
     <label>Straatnaam</label>
-    <input name="straatnaam" class="form-control" type="text" placeholder=" ' . $adres . '" ' . $inhoudstype .'>
+    <input name="adresregel1" class="form-control" type="text" placeholder=" ' . $adres . '" ' . $inhoudstype .'>
     <label>Postcode</label>
     <input name="postcode" class="form-control" type="text" placeholder=" ' . $postcode .'" ' . $inhoudstype .'>
     <label>Verkoper</label>
