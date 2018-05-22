@@ -10,7 +10,7 @@ include 'header.php';
 <main>
     <div class="container">
         <h1 class="display-3">Veiling aanmaken</h1>
-        <form class="col-form-label-lg" action="PHP_bestanden/veiling_toevoegen_in_database.php" method="post">
+        <form class="col-form-label-lg" action="PHP_bestanden/veiling_toevoegen_in_database.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="titel">Titel</label>
                 <input type="text" class="form-control" name="titel" id="titel" placeholder="Titel" required autofocus>
@@ -63,18 +63,16 @@ include 'header.php';
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="afbeelding">Afbeelding één</label>
-                    <input type="file" class="form-control" name="afbeelding_1" id="afbeelding_1" placeholder="Afbeelding" required>
+                    <input type="file" class="form-control" name="afbeelding_1" id="afbeelding_1" placeholder="Afbeelding" accept="image/*" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="afbeelding">Afbeelding twee</label>
-                    <input type="file" class="form-control" name="afbeelding_2" id="afbeelding_2" placeholder="Afbeelding">
+                    <input type="file" class="form-control" name="afbeelding_2" id="afbeelding_2" accept="image/* placeholder="Afbeelding">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="afbeelding">Afbeelding drie</label>
-                    <input type="file" class="form-control" name="afbeelding_3" id="afbeelding_3" placeholder="Afbeelding">
+                    <input type="file" class="form-control" name="afbeelding_3" id="afbeelding_3" accept="image/* placeholder="Afbeelding">
                 </div>
-
-
             </div>
 
 
