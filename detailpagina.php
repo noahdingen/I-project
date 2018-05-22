@@ -60,6 +60,17 @@ include 'header.php';
                         </div>
                     </div>
                 </div>
+
+                <form>
+                <div class="form-group">
+                        <div class="my-md-3 form-group text-center">
+                            <input type="text" class="form-control" id="bieden" name="bieden" placeholder="Doe een bod">
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
+                        </div>
+                </div>
+                </form>
             </div>
             <div class="w-100"></div>
             <div class="col text-center">
