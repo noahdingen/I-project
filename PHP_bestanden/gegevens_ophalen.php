@@ -1,8 +1,14 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+$gebruiker= $_SESSION['gebruikers'];
+
 $pdo = verbindMetDatabase();
-$sql = "select gebruikersnaam, emailadres, voornaam, achternaam, datum, plaatsnaam, adresregel1, postcode, verkoper from Gebruiker where gebruikersnaam =?";
+$sql = "select gebruikersnaam, emailadres, voornaam, achternaam, datum, plaatsnaam, adresregel1, postcode, verkoper from Gebruiker where gebruikersnaam ='$gebruiker'";
 $query = $pdo->prepare($sql);
-$query->execute([$_SESSION['gebruikers']]);
+$query->execute();
 
 $rows = $query->fetchAll(PDO::FETCH_ASSOC);
 
