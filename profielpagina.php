@@ -2,7 +2,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-include_once 'Database_verbinding/database_connectie.php';
+include_once 'databaseverbinding/database_connectie.php';
 $titel = 'Profielpagina';
 include_once 'header.php';
 include_once 'PHP_bestanden/gegevens_ophalen.php';
@@ -17,46 +17,46 @@ else{
 echo '
     <link href="assets/css/profielpagina.css" rel="stylesheet">
 
-<form class="gegevenswijzigen" method="get" action="PHP_bestanden/gegevens_bijwerken.php?;">
+<form class="gegevenswijzigen" method="post" action="php_bestanden/gegevens_bijwerken.php?gebruikersnaam=' . $gebruikersnaam .  ' ">
 
 <div class="kolommen">
     <div class="persoons-gegevens">
     <label>Gebruikersnaam</label>
-    <input name="Gebruikersnaam" class="form-control" type="text" placeholder=" ' . $gebruikersnaam . '" ' . $inhoudstype . '>
+    <input name="gebruikersnaam" class="form-control" type="text" placeholder=" ' . $gebruikersnaam . '" ' . $inhoudstype . '>
     <label>E-mail</label>
-    <input name="E-mail" class="form-control" type="text" placeholder=" ' . $emailadres . '" ' . $inhoudstype .'>
+    <input name="e-mail" class="form-control" type="text" placeholder=" ' . $emailadres . '" ' . $inhoudstype .'>
     <label>Voornaam</label>
-    <input name="Voornaam" class="form-control" type="text" placeholder=" ' . $voornaam . '" ' . $inhoudstype .'>
+    <input name="voornaam" class="form-control" type="text" placeholder=" ' . $voornaam . '" ' . $inhoudstype .'>
     <label>Achternaam</label>
-    <input name="Achternaam" class="form-control" type="text" placeholder=" ' . $achternaam . '" ' . $inhoudstype .'>
+    <input name="achternaam" class="form-control" type="text" placeholder=" ' . $achternaam . '" ' . $inhoudstype .'>
     <label>Geboortedatum</label>
-    <input name="Geboortedatum" class="form-control" type="text" placeholder=" ' . $datum . '" ' . $inhoudstype .'>
+    <input name="geboortedatum" class="form-control" type="text" placeholder=" ' . $datum . '" ' . $inhoudstype .'>
     <label>Woonplaats</label>
-    <input name="Woonplaats" class="form-control" type="text" placeholder=" ' . $plaatsnaam . '" ' . $inhoudstype .'>
+    <input name="woonplaats" class="form-control" type="text" placeholder=" ' . $plaatsnaam . '" ' . $inhoudstype .'>
     <label>Straatnaam</label>
-    <input name="Straatnaam" class="form-control" type="text" placeholder=" ' . $adres . '" ' . $inhoudstype .'>
+    <input name="straatnaam" class="form-control" type="text" placeholder=" ' . $adres . '" ' . $inhoudstype .'>
     <label>Postcode</label>
-    <input name="Postcode" class="form-control" type="text" placeholder=" ' . $postcode .'" ' . $inhoudstype .'>
+    <input name="postcode" class="form-control" type="text" placeholder=" ' . $postcode .'" ' . $inhoudstype .'>
     <label>Verkoper</label>
-    <input name="Verkoper" class="form-control" type="text" placeholder=" ' . $verkoper .'" ' . $inhoudstype .'>';
+    <input name="verkoper" class="form-control" type="text" placeholder=" ' . $verkoper .'" ' . $inhoudstype .'>';
     if($verkoper == 'ja  '){
     echo '
             <label>Bank</label>
-            <input name="Bank" class="form-control" type="text" placeholder=" ' . $banknaam . '" ' . $inhoudstype .'>
+            <input name="bank" class="form-control" type="text" placeholder=" ' . $banknaam . '" ' . $inhoudstype .'>
             <label>Rekeningnummer</label>
-            <input name="Rekeningnummer" class="form-control" type="text" placeholder=" ' . $rekingnummer .' "' . $inhoudstype .'>
+            <input name="rekeningnummer" class="form-control" type="text" placeholder=" ' . $rekingnummer .' "' . $inhoudstype .'>
             <label>Controle optie</label>
-            <input name="Controle" class="form-control" type="text" placeholder=" ' . $controle_optie .' "' . $inhoudstype .'>
+            <input name="controle" class="form-control" type="text" placeholder=" ' . $controle_optie .' "' . $inhoudstype .'>
             <label>Creditcard</label>
-            <input name="Creditcard" class="form-control" type="text" placeholder=" ' . $creditcardnummer .' "' . $inhoudstype .'>
+            <input name="creditcard" class="form-control" type="text" placeholder=" ' . $creditcardnummer .' "' . $inhoudstype .'>
             
     ';
     }
 
 if(($_GET["bewerken"]=='true')){
     echo '
+    <a href="php_bestanden/gegevens_bijwerken.php"><button type="submit" name="oude_gebruikersnaam" class="btn btn-primary">Bijwerken</button></a>';
 
-    <a href="PHP_bestanden/gegevens_bijwerken.php"><button type="submit" class="btn btn-primary">Bijwerken</button></a>';
 }
 else {
 	if($verkoper == 'ja  '){

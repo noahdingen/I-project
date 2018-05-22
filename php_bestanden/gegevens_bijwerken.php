@@ -5,21 +5,13 @@ if (!isset($_SESSION)) {
     session_start();
 }
 $pdo = verbindMetDatabase();
-
-$sql = "UPDATE Gebruiker SET gebruikersnaam='GET_[gebruikersnaam]' WHERE gebruikersnaam = 'TEST'";
-$query = $pdo->prepare($sql);
-$query->execute([$_SESSION['gebruikers']]);
-
-echo 'hallo';
+$oude_gebruikersnaam = $_GET['gebruikersnaam'];
+echo $oude_gebruikersnaam;
 echo $_SESSION['gebruikers'];
-
-header("location: ../profielpagina.php?error");
-
+//header("location: ../profielpagina.php?error");
 
 
-//foreach ($klantgegevens as $value){
-//    if(isset($value)){
-//        echo $value;
-//    }
-//}
+$sql = "UPDATE Gebruiker SET 'gebruikersnaam'='Minus' WHERE 'gebruikersnaam'=$oude_gebruikersnaam";
+$query = $pdo->prepare($sql);
+$query->execute($_POST['gebruikersnaam']);
 //header("location: ../profielpagina.php?bewerken=false");

@@ -1,6 +1,5 @@
 <?php
 $pdo = verbindMetDatabase();
-
 $sql = "select gebruikersnaam, emailadres, voornaam, achternaam, datum, plaatsnaam, adresregel1, postcode, verkoper from Gebruiker where gebruikersnaam =?";
 $query = $pdo->prepare($sql);
 $query->execute([$_SESSION['gebruikers']]);
@@ -29,4 +28,5 @@ if($verkoper == 'ja  ') {
     $controle_optie = $rows_2[0]['controleoptienaam'];
     $creditcardnummer = $rows_2[0]['creditcardnummer'];
 }
+
 ?>
