@@ -48,7 +48,7 @@ if(isset($_SESSION['gebruikers'])) {
                         <a href="profielpagina.php?bewerken=false" class="dropdown-item" role="button">Mijn profiel</a>';
         if(isset($_SESSION['gebruikers'])) {
             if ($verkoper == 'ja  ') {
-                echo '<a href="veiling_toevoegen.php" class="dropdown-item" role="button">Plaats veiling</a>';
+                echo '<a href="rubriek_veiling_toevoegen.php  " class="dropdown-item" role="button">Plaats veiling</a>';
             }
         }
              echo      '<a href="php_bestanden/Loguit.php" class="dropdown-item" role="button">Loguit</a>

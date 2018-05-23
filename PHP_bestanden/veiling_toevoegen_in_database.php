@@ -1,7 +1,4 @@
 <?php
-if (!isset($_SESSION)) {
-    session_start();
-}
 include_once '../databaseverbinding/database_connectie.php';
 $conn = verbindMetDatabase();
 
@@ -26,7 +23,7 @@ $voorwerpnummer = count($resultaat) + 1;
 //afbeelding in map zetten
 $tijdelijkbestand = $_FILES["afbeelding_1"]["tmp_name"];
 $bestandsnaam = $_FILES["afbeelding_1"]["name"];
-$locatie = "../assets/veilingen_afbeeldingen/".$bestandsnaam;
+$locatie = "assets/veilingen_afbeeldingen/".$bestandsnaam;
 
 move_uploaded_file($tijdelijkbestand,$locatie);
 
@@ -49,14 +46,14 @@ $veilingen->execute(array($voorwerpnummer,
     $looptijd_dag,
     $verzendinstructies,
     $gebruiker,
-    $bestandsnaam
+    $locatie
     )
 );
 
 $sql_afbeelding = "insert into Bestand values(?,?)";
 
 $afbeelding = $conn->prepare($sql_afbeelding);
-$afbeelding->execute(array($bestandsnaam, $voorwerpnummer));
+$afbeelding->execute(array($locatie, $voorwerpnummer));
 
 
 
@@ -64,27 +61,27 @@ if(!empty($_FILES["afbeelding_2"]["tmp_name"]))
 {
     $tijdelijkbestand = $_FILES["afbeelding_2"]["tmp_name"];
     $bestandsnaam = $_FILES["afbeelding_2"]["name"];
-    $locatie = "../assets/veilingen_afbeeldingen/".$bestandsnaam;
+    $locatie = "assets/veilingen_afbeeldingen/".$bestandsnaam;
     move_uploaded_file($tijdelijkbestand,$locatie);
 
     $sql_afbeelding = "insert into Bestand values(?,?)";
 
     $afbeelding = $conn->prepare($sql_afbeelding);
-    $afbeelding->execute(array($bestandsnaam, $voorwerpnummer));
+    $afbeelding->execute(array($locatie, $voorwerpnummer));
 }
 
 if(!empty($_FILES["afbeelding_3"]["tmp_name"]))
 {
     $tijdelijkbestand = $_FILES["afbeelding_3"]["tmp_name"];
     $bestandsnaam = $_FILES["afbeelding_3"]["name"];
-    $locatie = "../assets/veilingen_afbeeldingen/".$bestandsnaam;
+    $locatie = "assets/veilingen_afbeeldingen/".$bestandsnaam;
 
     move_uploaded_file($tijdelijkbestand,$locatie);
 
     $sql_afbeelding = "insert into Bestand values(?,?)";
 
     $afbeelding = $conn->prepare($sql_afbeelding);
-    $afbeelding->execute(array($bestandsnaam, $voorwerpnummer));
+    $afbeelding->execute(array($locatie, $voorwerpnummer));
 }
 
 ?>

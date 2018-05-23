@@ -1,4 +1,5 @@
 <?php
+
 include_once 'Database_verbinding/database_connectie.php';
 $titel = 'Veiling toevoegen';
 
@@ -20,19 +21,9 @@ include 'header.php';
                 <input type="text" class="form-control" name="beschrijving" id="beschrijving" placeholder="Beschrijving" required>
             </div>
             <div class="form-group">
-                <label for="rubriek">Wat wil je precies verkopen? Type een steekwoord in om je rubriek te kiezen.</label>
-                <input type="text" class="form-control" name="rubriek" id="rubriek" placeholder="Zoeken" required>
+                <label for="rubriek">Dit is uw gekozen rubriek.</label>
+                <input type="text" class="form-control" name="rubriek" id="rubriek" placeholder="<?php echo $_POST['rubriek_keuze']; ?>" readonly>
             </div>
-            <div class="form-row">
-                <label for="rubriek_keuze">Kies je rubriek</label>
-                <select class="form-control form-control-md" id="rubriek_keuze" name="rubriek_keuze" required>
-                    <option value="">...</option>
-                    <option value="1">Hoofdrubriek</option>
-                    <option value="2">Hoofdrubriek</option>
-                    <option value="3">Hoofdrubriek</option>
-                </select>
-            </div>
-
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="startprijs">Startprijs</label>

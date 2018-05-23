@@ -7,7 +7,7 @@ function haalplaatjeop($i){
       $data->execute();
       $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
          echo '<figure>
-                    <img src="assets/veilingen_afbeeldingen'. $resultaat[$i]['filenaam'].'" alt="veilingitem">
+                    <img src="'. $resultaat[$i]['filenaam'].'" alt="veilingitem">
                </figure>';
 
     }
