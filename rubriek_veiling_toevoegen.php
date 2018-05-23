@@ -1,8 +1,7 @@
 <?php
-
-include_once 'Database_verbinding/database_connectie.php';
-$titel = 'Veiling toevoegen';
+include_once 'databaseverbinding/database_connectie.php';
 include_once 'PHP_bestanden/rubriek_zoeken.php';
+$titel = 'Veiling toevoegen';
 include 'header.php';
 ?>
 
@@ -22,11 +21,7 @@ include 'header.php';
                 <label for="rubriek_keuze">Kies je rubriek</label>
                 <select class="form-control form-control-md" id="rubriek_keuze" name="rubriek_keuze" required>
                     <option value="">...</option>
-                    <?php
-                    if(isset($rubriekzoek)){
-                        haalrubriekenop();
-                    }
-                    ?>
+                    <?php haalrubriekenop() ?>
                 </select>
             </div>
             <input type="submit" name="Verzenden" class="btn btn-primary">
