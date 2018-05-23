@@ -20,13 +20,64 @@ function haaldetailsop($voorwerpnummer){
 
     $bod = $conn->prepare("select bodbedrag, gebruikersnaam, bodTijdstip from Bod where voorwerpnummer = ?");
     $bod->execute(array($voorwerpnummer));
-    $resultaat_bod = $bod->fetchAll(PDO::FETCH_NAMED);
     $bodbedrag = $resultaat_bod[0]['bodbedrag'];
     $koper = $resultaat_bod[0]['gebruikersnaam'];
     $bod_tijdstip = $resultaat_bod[0]['bodTijdstip'];
 
     $voorwerp_informatie = array('titel' => $titel, 'beschrijving' => $beschrijving, 'looptijd' => $looptijd, 'afbeelding' => $afbeelding,
-                                'bodbedrag' => $bodbedrag, 'koper' => $koper, 'bodtijdstip' => $bod_tijdstip, 'verkoper' => $verkoper);
+        'bodbedrag' => $bodbedrag, 'koper' => $koper, 'bodtijdstip' => $bod_tijdstip, 'verkoper' => $verkoper);
+
+
+    if($resultaten = $bod -> fetch()){
+        do{
+            echo '<div class="col text-center">'.
+                             $voorwerp_informatie['koper'].'
+                        </div>
+                        <div class="col text-center">
+                            &euro;'. $voorwerp_informatie['bodbedrag'].'
+                        </div>
+                        <div class="col text-center">
+                             '.$voorwerp_informatie['bodtijdstip'].'
+                        </div>';
+        } while($resultaten = $bod -> fetch());
+    }
+    else{
+        echo"<p>Nog niks geboden </p>";
+    }
+
     return $voorwerp_informatie;
+}
+
+function haalafbeeldingenop($voorwerpnummer){
+    $slides = array('first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth');
+    $conn = verbindMetDatabase();
+    $bestand = $conn->prepare("select filenaam from Bestand where voorwerpnummer = ?");
+    $bestand->execute(array($voorwerpnummer));
+    $resultaat_bestand = $bestand->fetchAll(PDO::FETCH_NAMED);
+    foreach ($resultaat_bestand as $key => $value) {
+    if($key==0){
+        $afbeeling = 'active';
+    }
+        else{
+            $afbeeling = '';
+        }
+    echo '
+    <div class="carousel-item ' . $afbeeling . '">
+        <img src="' . $value['filenaam'] . '" alt="' . $slides[$key] . ' slide" height=500px width="500px">
+    </div>
+    ';
+    }
+}
+
+function haaltitelop($voorwerpnummer){
+    $conn = verbindMetDatabase();
+    $sql = $conn->prepare("SELECT titel FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    echo $titel[0]['titel'];
+}
+
+function haalbiedingenop($voorwerpnummer){
+
 }
 ?>

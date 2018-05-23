@@ -2,7 +2,7 @@
 include 'php_bestanden/veiling_gegevens.php';
 //include 'PHP_bestanden/sessie_bezoeker.php';
 $titel = 'Detailpagina';
-$voorwerp = haaldetailsop($_GET['voorwerpnummer']);
+$voorwerpnummer = $_GET['voorwerpnummer'];
 include 'header.php';
 ?>
 <link href="assets/css/detailpagina.css" rel="stylesheet">
@@ -11,23 +11,10 @@ include 'header.php';
         <div class="row">
             <div class="col-md-5 bg-light text-center">
                 <div class="container">
-                <h1><?php echo $voorwerp['titel'] ?></h1>
+                <h1><?php haaltitelop($voorwerpnummer) ?></h1>
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="w-75 h-75" src="<?php echo $voorwerp['afbeelding'] ?>" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="w-75 h-75" src="<?php echo $voorwerp['afbeelding'] ?>" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="w-75 h-75" src="<?php echo $voorwerp['afbeelding'] ?>" alt="Third slide">
-                        </div>
+                        <?php haalafbeeldingenop($voorwerpnummer) ?>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -45,26 +32,13 @@ include 'header.php';
             </div>
             <div class="col-md-5">
                 <div class="container bg-light">
-                    <h1>
-                        <?php echo $voorwerp['looptijd'] ?> dagen
-                    </h1>
-                    <div class="row">
-                        <div class="col text-center">
-                            <?php echo $voorwerp['koper'] ?>
-                        </div>
-                        <div class="col text-center">
-                            &euro;<?php echo $voorwerp['bodbedrag']?>
-                        </div>
-                        <div class="col text-center">
-                            <?php echo $voorwerp['bodtijdstip'] ?>
-                        </div>
-                    </div>
+<!--                  Hier komt een lijst met alle biedingen
+-->
                 </div>
-
-                <form>
+                <?php echo '<form method="post" action="php_bestanden/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
                 <div class="form-group">
                         <div class="my-md-3 form-group text-center">
-                            <input type="text" class="form-control" id="bieden" name="bieden" placeholder="Doe een bod">
+                            <input type="text" class="form-control" id="bodbedrag" name="bodbedrag" placeholder="Doe een bod">
                         </div>
                         <div class="form-group text-center">
                             <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>

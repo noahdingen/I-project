@@ -12,9 +12,8 @@ include_once 'php_bestanden/veilingenbekijken.php';
 <main>
     <div class="jumbotron">
         <div class="container">
-            <h1 class="display-3">Geachte <?php echo $bezoeker[0]. $bezoeker[1];?></h1>
+            <h1 class="display-3">Geachte <?php echo $bezoeker[0]. ' ' . $bezoeker[1];?></h1>
             <p>Wij van iConcepts willen U producten aanbieden waar U zelf kunt bepalen wat de prijs is.</p>
-
         </div>
     </div>
     <div class="container">
