@@ -78,6 +78,27 @@ function haaltitelop($voorwerpnummer){
 }
 
 function haalbiedingenop($voorwerpnummer){
-
+    $conn = verbindMetDatabase();
+    $sql = $conn->prepare("SELECT bodbedrag, gebruikersnaam, bodDag, bodTijdstip FROM Bod WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $bodgegevens = $sql->fetchAll(PDO::FETCH_NAMED);
+    echo '<h1>
+            ' . $bodgegevens[0]['bodDag'] . ' 
+       </h1>';
+    foreach ($bodgegevens as $value){
+        echo '
+       <div class="row">
+              <div class="col text-center">
+              ' . $value['gebruikersnaam'] . '
+              </div>
+              <div class="col text-center">
+              &euro;'.$value['bodbedrag'] . '
+              </div>
+              <div class="col text-center">
+              ' . $value['bodTijdstip'] . '
+              </div>
+       </div>
+        ';
+    }
 }
 ?>

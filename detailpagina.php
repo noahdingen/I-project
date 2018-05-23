@@ -8,7 +8,7 @@ include 'header.php';
 <link href="assets/css/detailpagina.css" rel="stylesheet">
 <main>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row mx-1">
             <div class="col-md-5 bg-light text-center">
                 <div class="container">
                 <h1><?php haaltitelop($voorwerpnummer) ?></h1>
@@ -32,8 +32,7 @@ include 'header.php';
             </div>
             <div class="col-md-5">
                 <div class="container bg-light">
-<!--                  Hier komt een lijst met alle biedingen
--->
+                    <?php haalbiedingenop($voorwerpnummer);?>
                 </div>
                 <?php echo '<form method="post" action="php_bestanden/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
                 <div class="form-group">
