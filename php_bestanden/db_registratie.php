@@ -46,11 +46,11 @@ if (isset($_POST['aanmelden'])){
 
     $data = $conn->prepare("SELECT verkoper FROM Gebruiker WHERE gebruikersnaam = '$gebruiker' ");
     $data->execute();
-    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-    for($i = 0; $i < count($resultaat); $i++){
+        $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+        for($i = 0; $i < count($resultaat); $i++){
 
-    }
-    if($i == 1) {
+        }
+        if($i == 1) {
         $error = "Gebruiksnaam bestaat al";
         header("refresh:0; url='../registreren.php?error=$error'");
     } else{
@@ -76,11 +76,13 @@ $emailtekst =
 
 '
 Dit is een verificatie mail om uw account te activeren op onze website: 
-Dit is uw activatie code: '.$code.'
-Deze dient in gevoerd te worden op:
+Dit is uw activatiecode: '.$code.'
+Deze dient ingevoerd te worden op:
 http://iproject39.icasites.nl/check_account.php
             
-Met vriendelijke groeten, IConcepts.
+Met vriendelijke groeten, 
+IConcepts
+
 Deze mail is automatisch gegenereed.';
 $to = $email;
 $from = 'iconcepts39@gmail.com';
