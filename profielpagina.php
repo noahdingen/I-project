@@ -51,7 +51,7 @@ else{
 
 echo '
     <link href="assets/css/profielpagina.css" rel="stylesheet">
-<form class="gegevenswijzigen" method="get" action="php_bestanden/gegevens_bijwerken.php">
+<form class="gegevenswijzigen" method="post" action="php_bestanden/gegevens_bijwerken.php">
 <div class="kolommen">
     <div class="persoons-gegevens">
     <label>Gebruikersnaam</label>
@@ -69,9 +69,7 @@ echo '
     <label>Straatnaam</label>
     <input name="Straatnaam" class="form-control" type="text" placeholder=" ' . $adres . '" ' . $inhoudstype .'>
     <label>Postcode</label>
-    <input name="Postcode" class="form-control" type="text" placeholder=" ' . $postcode .'" ' . $inhoudstype .'>
-    <label>Verkoper</label>
-    <input name="Verkoper" class="form-control" type="text" placeholder=" ' . $verkoper .'" ' . $inhoudstype .'>';
+    <input name="Postcode" class="form-control" type="text" placeholder=" ' . $postcode .'" ' . $inhoudstype .'>';
     if($verkoper == 'ja  '){
     echo '
             <label>Bank</label>
