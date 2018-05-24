@@ -1,6 +1,5 @@
 body{
     background-color: #FF7753;
-
 }
 
 h1{
@@ -16,7 +15,7 @@ h1{
 }
 
 .bg-light{
-    border-radius: 2em;
+    border-radius: 1em;
 }
 
 .carousel-indicators li{

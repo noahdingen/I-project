@@ -7,9 +7,9 @@ include 'header.php';
 <link href="assets/css/detailpagina.css" rel="stylesheet">
 <main>
     <div class="container-fluid">
-        <div class="row mx-1">
-            <div class="col-md-5 bg-light text-center">
-                <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-md-5 mx-3 my-4 bg-light text-center">
+
                 <h1><?php haaltitelop($voorwerpnummer) ?></h1>
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
@@ -24,13 +24,11 @@ include 'header.php';
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-                </div>
-            </div>
-            <div class="col-md-2">
 
             </div>
-            <div class="col-md-5">
-                <div class="container bg-light">
+
+            <div class="col-md-5 my-4">
+                <div class="bg-light">
                     <?php haalbiedingenop($voorwerpnummer);?>
                 </div>
                 <?php echo '<form method="post" action="php/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
@@ -43,19 +41,23 @@ include 'header.php';
                         </div>
                 </div>
                 </form>
-            </div>
-            <div class="w-100"></div>
-            <div class="col text-center">
-                <h1>
-                    Beschrijving
-                </h1>
 
+        <div class="col-md-5 my-4">
+            <h1>
+                Beschrijving
+            </h1>
+            <div class="bg-light text-center">
+            <?php haalbeschrijvingop($voorwerpnummer); ?>
             </div>
-            <div class="col text-center">
-                <h1>
-                    Verkoper informatie
-                </h1>
+        </div>
+        <div class="col-md-5 my-4">
+            <h1>
+                Verkoper informatie
+            </h1>
+            <div class="bg-light text-center">
+                <?php haalverkoperop($voorwerpnummer); ?>
             </div>
+        </div>
         </div>
     </div>
 </main>

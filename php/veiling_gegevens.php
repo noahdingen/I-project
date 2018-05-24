@@ -2,7 +2,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-include_once '../databaseverbinding/database_connectie.php';
+include_once 'databaseverbinding/database_connectie.php';
 
 function haalafbeeldingenop($voorwerpnummer){
     $slides = array('first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth');
@@ -33,9 +33,34 @@ function haaltitelop($voorwerpnummer){
     echo $titel[0]['titel'];
 }
 
+function haalbeschrijvingop($voorwerpnummer){
+    $conn = verbindMetDatabase();
+    $sql = $conn->prepare("SELECT beschrijving FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    echo $titel[0]['beschrijving'];
+}
+
+function haalverkoperop($voorwerpnummer){
+    $conn = verbindMetDatabase();
+    $sql = $conn->prepare("SELECT verkoper, land FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    echo '<div class="col">
+              <div class="col text-center">
+              Verkoper:
+              ' . $titel[0]['verkoper'] . '
+              </div>
+              <div class="col text-center">
+              Land:
+              '.$titel[0]['land'] . '
+              </div>
+       </div>';
+}
+
 function haalbiedingenop($voorwerpnummer){
     $conn = verbindMetDatabase();
-    $sql = $conn->prepare("SELECT bodbedrag, gebruikersnaam, bodDag, bodTijdstip FROM Bod WHERE voorwerpnummer = ?");
+    $sql = $conn->prepare("SELECT bodbedrag, gebruikersnaam, bodDag, bodTijdstip FROM Bod WHERE voorwerpnummer = ? ORDER BY bodbedrag DESC");
     $sql->execute(array($voorwerpnummer));
     $bodgegevens = $sql->fetchAll(PDO::FETCH_NAMED);
     echo '<h1>
