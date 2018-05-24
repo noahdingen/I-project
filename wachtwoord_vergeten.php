@@ -1,12 +1,11 @@
 <?php
 //error voor wat er fout is gegaan met het inloggen, al geset of niet?
 if(isset($_GET['error'])){
-    echo "zooi";
     $error = $_GET['error'];
 }else{
     $error = '';
 }
-echo "test";
+
 $titel = 'Wachtwoord vergeten';
 include 'header.php'
 ?>
@@ -34,6 +33,7 @@ include 'header.php'
         <div class="form-group">
             <input type="text" class="form-control" name="antwoord" id="antwoord" placeholder="Antwoord" required>
         </div>
+        <?php echo $error; ?>
         <div class="container">
             <button type="submit" name="wachtwoordvergeten" class="btn btn-primary">Verzenden</button>
         </div>

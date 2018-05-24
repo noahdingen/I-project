@@ -51,11 +51,12 @@ if (isset($_POST['wachtwoordvergeten'])) {
             $headers[] = "X-Mailer: PHP/" . phpversion();
 
             mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f" . $from);
-            header("refresh:0; url='../login.php'");
+            $error = "U heeft een mail toegestuurd gekregen.";
+            header("refresh:0; url='../login.php?error=$error'");
         }
         else{
-            $error = "Ingevulde gegevens kloppen niet";
-            header("refresh:0; url='../wachtwoorden_vergeten.php?error=$error'");
+            $error = "Ingevulde gegevens kloppen niet!";
+            header("refresh:0; url='../wachtwoord_vergeten.php?error=$error'");
         }
     }
     else{
