@@ -3,11 +3,11 @@
 function haalplaatjeop($i){
     $conn = verbindMetDatabase();
 
-      $data = $conn->query("SELECT TOP 6 * FROM Voorwerp");
+      $data = $conn->query("SELECT * FROM Bestand  ORDER BY voorwerpnummer ");
       $data->execute();
       $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
          echo '<figure>
-                    <img src="'. $resultaat[$i]['hoofdplaatje'].'" alt="veilingitem">
+                    <img src="'. $resultaat[$i]['filenaam'].'" alt="veilingitem">
                </figure>';
 
     }
@@ -16,7 +16,7 @@ function haalplaatjeop($i){
 function haaltitelop($i){
     $conn = verbindMetDatabase();
 
-    $data = $conn->prepare("SELECT TOP 6 * FROM Voorwerp");
+    $data = $conn->prepare("SELECT * FROM Voorwerp");
     $data->execute();
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     if(strlen ($resultaat[$i]['titel']) >21) {
@@ -31,7 +31,7 @@ function haaltitelop($i){
 function haalprijsop($i){
     $conn = verbindMetDatabase();
 
-    $data = $conn->prepare("SELECT TOP 6 * FROM Voorwerp");
+    $data = $conn->prepare("SELECT * FROM Voorwerp");
     $data->execute();
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
         echo "<p>€" . $resultaat[$i]['startprijs'] .",-</p>";
@@ -41,7 +41,7 @@ function haalprijsop($i){
 function haallooptijdop($i){
     $conn = verbindMetDatabase();
 
-    $data = $conn->prepare("SELECT TOP 6 * FROM Voorwerp");
+    $data = $conn->prepare("SELECT * FROM Voorwerp");
     $data->execute();
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     echo "<p>De looptijd is " . $resultaat[$i]['looptijd'] ." dagen</p>";
@@ -51,17 +51,16 @@ function haallooptijdop($i){
 function haalinformatieop(){
     $conn = verbindMetDatabase();
 
-    $data = $conn->prepare("SELECT TOP 6 * FROM Voorwerp");
+    $data = $conn->prepare("SELECT * FROM Voorwerp");
     $data->execute();
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-
     for($i = 0; $i < 6; $i++){
         echo '<div class="col-md-4">';
         echo haaltitelop($i);
         echo  haalplaatjeop($i);
         echo haallooptijdop($i);
         echo haalprijsop($i);
-        echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"]. '" role="button">Zie details &raquo;</a></p>
+        echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . ($i+1) . '" role="button">Zie details &raquo;</a></p>
         </div>';
     }
 }
