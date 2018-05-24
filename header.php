@@ -37,7 +37,7 @@ if(isset($_SESSION['gebruikers'])) {
 
 
         <?php
-        include 'php_bestanden/sessie_bezoeker.php';
+        include 'php/sessie_bezoeker.php';
         if(isset($_SESSION['gebruikers'])) {
             echo '
              <div class="btn-group">
@@ -51,7 +51,7 @@ if(isset($_SESSION['gebruikers'])) {
                 echo '<a href="rubriek_veiling_toevoegen.php  " class="dropdown-item" role="button">Plaats veiling</a>';
             }
         }
-             echo      '<a href="php_bestanden/Loguit.php" class="dropdown-item" role="button">Loguit</a>
+             echo '<a href="php/Loguit.php" class="dropdown-item" role="button">Loguit</a>
                   </div>
              </div>';
         }

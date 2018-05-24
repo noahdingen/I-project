@@ -87,7 +87,7 @@ include 'header.php';
                     <label for="land">Land</label>
                     <select class="form-control form-control-md" id="land" name="land" required>
                         <option value="">Land</option>
-                        <?php include 'PHP_bestanden/landen.php' ?>
+                        <?php include 'php/landen.php' ?>
                     </select>
                 </div>
 

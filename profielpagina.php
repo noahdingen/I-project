@@ -5,7 +5,7 @@ if (!isset($_SESSION)) {
 include_once 'databaseverbinding/database_connectie.php';
 $titel = 'Profielpagina';
 include_once 'header.php';
-include_once 'PHP_bestanden/gegevens_ophalen.php';
+include_once 'php/gegevens_ophalen.php';
 if($_GET["bewerken"] == 'false'){
     $inhoudstype = 'readonly';
 }

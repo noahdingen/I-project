@@ -10,7 +10,7 @@ include 'header.php'
 ?>
 <link href="assets/css/login.css" rel="stylesheet">
 <div class="container">
-    <form action="php_bestanden/inloggen.php" method="post" class="col-md-3 col-form-label">
+    <form action="php/inloggen.php" method="post" class="col-md-3 col-form-label">
         <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="logo" width="72" height="72">
         <div class="form-group">
             <label for="gebruikersnaam">Gebruikersnaam</label>
