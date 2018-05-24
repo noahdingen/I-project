@@ -1,40 +1,34 @@
 <?php
-//include_once 'database_verbinding/database_connectie.php';
-//include 'php_bestanden/sessie_bezoeker.php';
-// regel hieronder uit commentarisiren voor server
-include_once 'server_verbinding/sql_srv_connect.php';
+//include_once 'databaseverbinding/database_connectie.php';
+include 'php_bestanden/sessie_bezoeker.php';
 $titel = 'Homepagina';
 include 'header.php';
+// regel hieronder uit commentariëren voor server
+//include_once 'Database_verbinding/database_connectie.php';
 include_once 'php_bestanden/veilingenbekijken.php';
-
+//include_once 'Server_verbinding/SQLSrvConnect.php';
 ?>
 <link href="assets/css/index.css" rel="stylesheet">
 <main>
     <div class="jumbotron">
         <div class="container">
-            <h1 class="display-3">Geachte <?php echo $bezoeker[0]. $bezoeker[1];?></h1>
+            <h1 class="display-3">Geachte <?php echo $bezoeker[0]. ' ' . $bezoeker[1];?></h1>
             <p>Wij van iConcepts willen U producten aanbieden waar U zelf kunt bepalen wat de prijs is.</p>
-
         </div>
     </div>
     <div class="container">
-        <!-- Example row of columns -->
         <h1 class="display-4">Nieuwste veilingen</h1>
         <div class="row">
-              <?php
-              haalinformatieop();
-              ?>
-
-
+            <?php
+            haalinformatieop();
+            ?>
         </div>
 
-        <hr>
-
-    </div> <!-- /container -->
+    </div>
 
 </main>
 
-<footer class="container">
+<footer class="container text-center">
     <p>&copy; EenmaalAndermaal 2018</p>
 </footer>
 
@@ -45,3 +39,5 @@ include_once 'php_bestanden/veilingenbekijken.php';
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 </body>
+</html>
+

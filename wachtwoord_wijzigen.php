@@ -37,7 +37,7 @@ if (isset($_GET["token"])) {
     <link href="assets/css/login.css" rel="stylesheet">
     <div class="container">
         <form class="col-md-3 col-form-label" action='php_bestanden/wijzigen_ww.php' method="post">
-            <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="72"
+            <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="logo" width="72"
                  height="72">
             <p>Wijzig uw wachtwoord</p>
             <div class="form-group">

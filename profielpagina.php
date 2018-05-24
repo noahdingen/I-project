@@ -5,7 +5,7 @@ if (!isset($_SESSION)) {
 $titel = 'Profielpagina';
 
 
-include_once 'database_verbinding/database_connectie.php';
+include_once 'databaseverbinding/database_connectie.php';
 include_once 'header.php';
 global $conn;
 $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");

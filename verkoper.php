@@ -9,7 +9,7 @@ if (!isset($_SESSION)) {
         $error = '';
     }
 }
-include_once 'database_verbinding/database_connectie.php';
+include_once 'databaseverbinding/database_connectie.php';
 include_once 'header.php';
 include_once 'php_bestanden/php_verkoper.php';
 //Regel hieronder is voor server!

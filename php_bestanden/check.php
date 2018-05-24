@@ -4,7 +4,7 @@ $error_een = "Activatie code onjuist";
 $error_twee = "Gebruikersnaam bestaat niet";
 $error_drie = "U dient beide velden in te vullen";
 
-include_once '../database_verbinding/database_connectie.php';
+include_once '../databaseverbinding/database_connectie.php';
 //Regel hieronder is voor server!
 //require_once '../server_verbinding/sql_srv_connect.php';
 global $conn;

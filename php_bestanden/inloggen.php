@@ -8,7 +8,7 @@ $error_een = "Wachtwoord onjuist";
 $error_twee = "Gebruikersnaam bestaat niet";
 $error_drie = "U dient beide velden in te vullen";
 
-include_once '../database_verbinding/database_connectie.php';
+include_once '../databaseverbinding/database_connectie.php';
 //Regel hieronder is voor server!
 //require_once '../server_verbinding/sql_srv_connect.php';
 setlocale(LC_ALL, 'nld_nld');
@@ -34,11 +34,11 @@ return $i;
 // checkt alle ingevoegde waardes
 if (!empty($gebruikersnaam) && !empty($wachtwoord) && checkvalidatie($gebruikersnaam)) {
     if (bestaatGebruikersnaam($gebruikersnaam)) {
-        if (bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord)) {
+       if (bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord)) {
             $_SESSION['gebruikers'] = $gebruikersnaam;
-            header("location: ../index.php");
+           header("refresh:0; url='../index.php'");
         } else {
-            header("location: ../login.php?error=$error_een");
+           header("location: ../login.php?error=$error_een");
         }
     }else {
         header("location: ../login.php?error=$error_twee");
@@ -46,7 +46,6 @@ if (!empty($gebruikersnaam) && !empty($wachtwoord) && checkvalidatie($gebruikers
 }
 else {
     header("refresh:10; location: ../login.php?error=$error_drie");
-
 }
 // controleert of gebruikersnaam bestaat
 function bestaatGebruikersnaam($gebruikersnaam) {

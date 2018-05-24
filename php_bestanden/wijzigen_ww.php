@@ -1,7 +1,7 @@
 <?php
 session_start();
 // maak verbinding met database
-require_once '../database_verbinding/database_connectie.php';
+require_once '../databaseverbinding/database_connectie.php';
 //Regel hieronder is voor server!
 //require_once '../server_verbinding/';
 //if(isset($_GET['user'])){
