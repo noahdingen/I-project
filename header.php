@@ -7,7 +7,7 @@ if(isset($_SESSION['gebruikers'])) {
     global $conn;
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    $pdo = $conn;
     $sql = "select verkoper from Gebruiker where gebruikersnaam =?";
     $query = $pdo->prepare($sql);
     $query->execute([$_SESSION['gebruikers']]);
