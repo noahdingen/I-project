@@ -1,5 +1,5 @@
 <?php
-
+include_once 'php/rubriek_zoeken.php';
 include_once 'databaseverbinding/database_connectie.php';
 $titel = 'Veiling toevoegen';
 
@@ -21,8 +21,12 @@ include 'header.php';
                 <input type="text" class="form-control" name="beschrijving" id="beschrijving" placeholder="Beschrijving" required>
             </div>
             <div class="form-group">
+                <label for="rubriek">Dit is uw rubriek nummer</label>
+                <input type="text" class="form-control" name="rubriek" id="rubriek" value="<?php haalrubrieknummerop()?>" readonly>
+            </div>
+            <div class="form-group">
                 <label for="rubriek">Dit is uw gekozen rubriek.</label>
-                <input type="text" class="form-control" name="rubriek" id="rubriek" placeholder="<?php echo $_POST['rubriek_keuze']; ?>" readonly>
+                <input type="text" class="form-control" name="rubriek_onzin" id="rubriek_onzin"  value="<?php haalrubrieknaamop()?>" readonly>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
