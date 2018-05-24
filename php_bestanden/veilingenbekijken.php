@@ -3,11 +3,11 @@
 function haalplaatjeop($i){
     $conn = verbindMetDatabase();
 
-      $data = $conn->query("SELECT * FROM Bestand  ORDER BY voorwerpnummer ");
+      $data = $conn->query("SELECT TOP 6 hoofdplaatje FROM Voorwerp ");
       $data->execute();
       $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
          echo '<figure>
-                    <img src="'. $resultaat[$i]['filenaam'].'" alt="veilingitem">
+                    <img src="'. $resultaat[$i]['hoofdplaatje'].'" alt="veilingitem">
                </figure>';
 
     }
