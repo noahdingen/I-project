@@ -1,7 +1,7 @@
 <?php 
 session_start();
 // maak verbinding met database op localhost
-require_once '../Database_verbinding/database_connectie.php';
+require_once '../databaseverbinding/database_connectie.php';
 //Regel hieronder is voor server!
 //require_once '../Server_verbinding/SQLSrvConnect.php';
 

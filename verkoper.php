@@ -11,7 +11,7 @@ if (!isset($_SESSION)) {
 }
 include_once 'databaseverbinding/database_connectie.php';
 include_once 'header.php';
-include_once 'php_bestanden/php_verkoper.php'
+include_once 'php/php_verkoper.php'
 //Regel hieronder is voor server!
 //require_once '../Server_verbinding/SQLSrvConnect.php';
 ?>

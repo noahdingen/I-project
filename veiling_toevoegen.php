@@ -1,6 +1,6 @@
 <?php
 
-include_once 'Database_verbinding/database_connectie.php';
+include_once 'databaseverbinding/database_connectie.php';
 $titel = 'Veiling toevoegen';
 
 include 'header.php';

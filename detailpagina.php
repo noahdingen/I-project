@@ -1,5 +1,5 @@
 <?php
-include 'php_bestanden/veiling_gegevens.php';
+include 'php/veiling_gegevens.php';
 //include 'PHP_bestanden/sessie_bezoeker.php';
 $titel = 'Detailpagina';
 $voorwerpnummer = $_GET['voorwerpnummer'];

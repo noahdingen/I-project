@@ -1,6 +1,6 @@
 <?php
 include_once 'databaseverbinding/database_connectie.php';
-//include 'php_bestanden/sessie_bezoeker.php';
+//include 'php/sessie_bezoeker.php';
 $titel = 'Homepagina';
 include 'header.php';
 // regel hieronder uit commentariëren voor server
