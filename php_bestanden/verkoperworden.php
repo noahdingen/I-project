@@ -1,6 +1,6 @@
 <?php
 
-include_once('../Database_verbinding/database_connectie.php');
+include_once('../databaseverbinding/database_connectie.php');
 session_start();
 //Regel hieronder is voor server!
 //require_once '../Server_verbinding/SQLSrvConnect.php';
