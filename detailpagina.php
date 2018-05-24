@@ -1,6 +1,5 @@
 <?php
 include 'php/veiling_gegevens.php';
-//include 'PHP_bestanden/sessie_bezoeker.php';
 $titel = 'Detailpagina';
 $voorwerpnummer = $_GET['voorwerpnummer'];
 include 'header.php';
@@ -34,7 +33,7 @@ include 'header.php';
                 <div class="container bg-light">
                     <?php haalbiedingenop($voorwerpnummer);?>
                 </div>
-                <?php echo '<form method="post" action="php_bestanden/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
+                <?php echo '<form method="post" action="php/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
                 <div class="form-group">
                         <div class="my-md-3 form-group text-center">
                             <input type="text" class="form-control" id="bodbedrag" name="bodbedrag" placeholder="Doe een bod">

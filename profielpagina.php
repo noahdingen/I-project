@@ -17,7 +17,7 @@ else{
 echo '
     <link href="assets/css/profielpagina.css" rel="stylesheet">
 
-<form class="gegevenswijzigen" method="post" action="php_bestanden/gegevens_bijwerken.php?gebruikersnaam=' . $gebruikersnaam .  ' ">
+<form class="gegevenswijzigen" method="post" action="php/gegevens_bijwerken.php?gebruikersnaam=' . $gebruikersnaam .  ' ">
 
 <div class="kolommen">
     <div class="persoons-gegevens">
@@ -55,7 +55,7 @@ echo '
 
 if(($_GET["bewerken"]=='true')){
     echo '
-    <a href="PHP_bestanden/gegevens_bijwerken.php"><button type="submit" name="oude_gebruikersnaam" class="btn btn-primary">Bijwerken</button></a>';
+    <a href="php/gegevens_bijwerken.php"><button type="submit" name="oude_gebruikersnaam" class="btn btn-primary">Bijwerken</button></a>';
 
 }
 else {

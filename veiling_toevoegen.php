@@ -11,7 +11,7 @@ include 'header.php';
 <main>
     <div class="container">
         <h1 class="display-3">Veiling aanmaken</h1>
-        <form class="col-form-label-lg" action="PHP_bestanden/veiling_toevoegen_in_database.php" method="post" enctype="multipart/form-data">
+        <form class="col-form-label-lg" action="php/veiling_toevoegen_in_database.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="titel">Titel</label>
                 <input type="text" class="form-control" name="titel" id="titel" placeholder="Titel" required autofocus>

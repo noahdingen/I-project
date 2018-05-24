@@ -17,7 +17,7 @@ include_once 'php/php_verkoper.php'
 ?>
     <link href="assets/css/login.css" rel="stylesheet">
 <div class="container">
-    <form action="php_bestanden/verkoperworden.php" method="post" class="col-md-4 col-form-label">
+    <form action="php/verkoperworden.php" method="post" class="col-md-4 col-form-label">
         <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="" width="72" height="72">
         <div class="form-group">
             <select Name='banknaam' required>
