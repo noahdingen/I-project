@@ -1,6 +1,15 @@
 <?php
+include_once 'databaseverbinding/database_connectie.php';
+
 if (!isset($_SESSION)) {
     session_start();
+}
+
+if(isset($_POST['zoeken'])) {
+    $zoek = $_POST['zoeken'];
+}
+else {
+    $zoek = '';
 }
 
 if(isset($_SESSION['gebruikers'])) {
@@ -30,8 +39,9 @@ if(isset($_SESSION['gebruikers'])) {
 <header>
     <nav class="navbar navbar-light bg-dark justify-content-between">
         <a href="index.php" class="btn btn-primary" role="button">Home</a>
-        <form class="form-inline">
-            <input class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search">
+
+        <form class="form-inline" action="index.php" method="post">
+            <input class="form-control mr-sm-4" type="search" name="zoeken" placeholder="Search" aria-label="Search" required>
             <button class="btn btn-primary" type="submit">Zoeken</button>
         </form>
 
@@ -62,6 +72,14 @@ if(isset($_SESSION['gebruikers'])) {
             <a href="login.php" class="btn btn-primary" role="button">Login</a>
         </div>';
         }
+
+
+        $pdo = verbindMetDatabase();
+
+        $data = $pdo->prepare("SELECT TOP 6 Titel FROM Items WHERE Titel LIKE'%".$zoek."%'");
+        $data->execute();
+        $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+
         ?>
     </nav>
 </header>
