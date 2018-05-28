@@ -22,7 +22,11 @@ $gebruikersnaam = $rows[0]['gebruikersnaam'];
 $emailadres = $rows[0]['emailadres'];
 $voornaam = $rows[0]['voornaam'];
 $achternaam = $rows[0]['achternaam'];
-$datum = $rows[0]['datum'];
+
+//De datum wordt hier van jjjj-mm-dd omgezet naar dd-mm-jjjj
+$datum_oud = $rows[0]['datum'];
+$datum_nieuw = date("d-m-Y", strtotime($datum_oud));
+
 $plaatsnaam = $rows[0]['plaatsnaam'];
 $adres = $rows[0]['adresregel1'];
 $postcode = $rows[0]['postcode'];

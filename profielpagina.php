@@ -30,7 +30,7 @@ echo '
     <label>Achternaam</label>
     <input name="achternaam" class="form-control" type="text" placeholder=" ' . $achternaam . '" ' . $inhoudstype .'>
     <label>Geboortedatum</label>
-    <input name="datum" class="form-control" type="text" placeholder=" ' . $datum . '" ' . $inhoudstype .'>
+    <input name="datum" class="form-control" type="text" placeholder=" ' . $datum_nieuw . '" ' . $inhoudstype .'>
     <label>Woonplaats</label>
     <input name="plaatsnaam" class="form-control" type="text" placeholder=" ' . $plaatsnaam . '" ' . $inhoudstype .'>
     <label>Straatnaam</label>

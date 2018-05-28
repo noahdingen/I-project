@@ -24,6 +24,7 @@ if (isset($_POST['aanmelden'])){
 			$voornaam = $_POST['voornaam'];
 			$achternaam = $_POST['achternaam'];
 			$geboortedatum = $_POST['geboortedatum'];
+			echo $geboortedatum;
 			$adres = $_POST['adres'];
 			$postcode = $_POST['postcode'];
 			$plaatsnaam = $_POST['plaatsnaam'];
@@ -65,7 +66,7 @@ if (isset($_POST['aanmelden'])){
             $opdracht = $pdo->prepare($sql);
             $opdracht->execute(array($gebruiker, $wachtwoord, $voornaam, $achternaam, $adres, $adresregel2, $postcode,
                                                  $plaatsnaam, $landnaam, $geboortedatum, $email, $geheime_vraag, $antwoord, $verkoper));
-			header("refresh:0; url='../login.php'");
+//			header("refresh:0; url='../login.php'");
 		}
     }
 	else{
