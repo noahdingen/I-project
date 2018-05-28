@@ -5,24 +5,31 @@ if (!isset($_SESSION)) {
 }
 $conn = verbindMetDatabase();
 
+if(isset($_POST['betalingsinstructies'])){
+    $betalingsinstructies = $_POST['betalingsinstructies'];
+}else{
+    $betalingsinstructies = NULL;
+}
+
+if(isset($_POST['verzendinstructies'])){
+    $verzendinstructies = $_POST['verzendinstructies'];
+}else{
+    $verzendinstructies = NULL;
+}
 $titel = $_POST['titel'];
 $beschrijving = $_POST['beschrijving'];
 $rubriek = $_POST['rubriek'];
 $startprijs = $_POST['startprijs'];
 $looptijd_dag = $_POST['looptijd_dag'];
 $betalingswijze = $_POST['betalingswijze'];
-$betalingsinstructies = $_POST['betalingsinstructies'];
 $verzendoptie = $_POST['verzendoptie'];
 $land = $_POST['land'];
 $plaatsnaam = $_POST['plaatsnaam'];
-$verzendinstructies = $_POST['verzendinstructies'];
 $gebruiker = $_SESSION['gebruikers'];
 $data = $conn->prepare("SELECT * FROM Voorwerp");
 $data->execute();
 $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
 $voorwerpnummer = count($resultaat) + 1;
-
-//afbeelding in map zetten
 $tijdelijkbestand = $_FILES["afbeelding_1"]["tmp_name"];
 $bestandsnaam = $_FILES["afbeelding_1"]["name"];
 
@@ -32,6 +39,7 @@ $fileNameNew = uniqid('', true).".".$fileActualExt;
 $locatie_map = "../assets/veilingen_afbeeldingen/".$fileNameNew;
 $locatie_db = "assets/veilingen_afbeeldingen/".$fileNameNew;
 
+//afbeelding in map zetten
 move_uploaded_file($tijdelijkbestand,$locatie_map);
 
 

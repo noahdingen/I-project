@@ -5,6 +5,11 @@ $titel = 'Veiling toevoegen';
 
 include 'header.php';
 
+if(isset($_GET['error'])){
+    $error = $_GET['error'];
+}else{
+    $error = '';
+}
 ?>
 
 <link href="assets/css/veiling_toevoegen.css" rel="stylesheet">
@@ -21,8 +26,7 @@ include 'header.php';
                 <input type="text" class="form-control" name="beschrijving" id="beschrijving" placeholder="Beschrijving" required>
             </div>
             <div class="form-group">
-                <label for="rubriek">Dit is uw rubriek nummer</label>
-                <input type="text" class="form-control" name="rubriek" id="rubriek" value="<?php haalrubrieknummerop()?>" readonly>
+                <input type="hidden" class="form-control" name="rubriek" id="rubriek" value="<?php haalrubrieknummerop()?>" readonly>
             </div>
             <div class="form-group">
                 <label for="rubriek">Dit is uw gekozen rubriek.</label>
@@ -31,7 +35,7 @@ include 'header.php';
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="startprijs">Startprijs</label>
-                    <input type="text" class="form-control" name="startprijs" id="startprijs" placeholder="Startprijs" required>
+                    <input type="number" class="form-control" name="startprijs" id="startprijs" placeholder="Startprijs" min="0" max="1000000000" required>
                 </div>
 
                 <div class="form-group col-md-4">
@@ -73,7 +77,7 @@ include 'header.php';
 
             <div class="form-group">
                 <label for="betalingsinstructies">Betalingsinstructies</label>
-                <input type="text" class="form-control" name="betalingsinstructies" id="betalingsinstructies" placeholder="Betalingsinstructies" required>
+                <input type="text" class="form-control" name="betalingsinstructies" id="betalingsinstructies" placeholder="Betalingsinstructies">
             </div>
 
 
@@ -103,9 +107,9 @@ include 'header.php';
 
             <div class="form-group">
                 <label for="verzendinstructies">Verzendinstructies</label>
-                <input type="text" class="form-control" name="verzendinstructies" id="verzendinstructies" placeholder="verzendinstructies" required>
+                <input type="text" class="form-control" name="verzendinstructies" id="verzendinstructies" placeholder="verzendinstructies">
             </div>
-
+            <?php echo $error;?>
             <input type="submit" name="Verzenden" class="btn btn-primary">
         </form>
     </div>
