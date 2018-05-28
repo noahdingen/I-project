@@ -25,9 +25,14 @@ $voorwerpnummer = count($resultaat) + 1;
 //afbeelding in map zetten
 $tijdelijkbestand = $_FILES["afbeelding_1"]["tmp_name"];
 $bestandsnaam = $_FILES["afbeelding_1"]["name"];
-$locatie = "assets/veilingen_afbeeldingen/".$bestandsnaam;
 
-move_uploaded_file($bestandsnaam,$locatie);
+$fileExt = explode('.', $bestandsnaam);
+$fileActualExt = strtolower((end($fileExt)));
+$fileNameNew = uniqid('', true).".".$fileActualExt;
+$locatie_map = "../assets/veilingen_afbeeldingen/".$fileNameNew;
+$locatie_db = "assets/veilingen_afbeeldingen/".$fileNameNew;
+
+move_uploaded_file($tijdelijkbestand,$locatie_map);
 
 
 $informatie = array($titel, $beschrijving, $rubriek, $startprijs, $looptijd_dag, $betalingswijze,
@@ -49,7 +54,7 @@ convert(time,getdate()), NULL, ?, ?, NULL, DATEADD(dd, 5, CAST(GETDATE() AS DATE
             $looptijd_dag,
             $verzendinstructies,
             $gebruiker,
-            $locatie
+            $locatie_db
         )
     );
 
@@ -64,7 +69,7 @@ $rubrieken->execute(array($voorwerpnummer, $rubriek));
 $sql_afbeelding = "insert into Bestand values(?,?)";
 
 $afbeelding = $conn->prepare($sql_afbeelding);
-$afbeelding->execute(array($locatie, $voorwerpnummer));
+$afbeelding->execute(array($locatie_db, $voorwerpnummer));
 
 
 
@@ -72,27 +77,38 @@ if(!empty($_FILES["afbeelding_2"]["tmp_name"]))
 {
     $tijdelijkbestand = $_FILES["afbeelding_2"]["tmp_name"];
     $bestandsnaam = $_FILES["afbeelding_2"]["name"];
-    $locatie = "assets/veilingen_afbeeldingen/".$bestandsnaam;
-    move_uploaded_file($bestandsnaam,$locatie);
+
+    $fileExt = explode('.', $bestandsnaam);
+    $fileActualExt = strtolower((end($fileExt)));
+    $fileNameNew = uniqid('', true).".".$fileActualExt;
+    $locatie_map = "../assets/veilingen_afbeeldingen/".$fileNameNew;
+    $locatie_db = "assets/veilingen_afbeeldingen/".$fileNameNew;
+
+    move_uploaded_file($tijdelijkbestand,$locatie_map);
 
     $sql_afbeelding = "insert into Bestand values(?,?)";
 
     $afbeelding = $conn->prepare($sql_afbeelding);
-    $afbeelding->execute(array($locatie, $voorwerpnummer));
+    $afbeelding->execute(array($locatie_db, $voorwerpnummer));
 }
 
 if(!empty($_FILES["afbeelding_3"]["tmp_name"]))
 {
     $tijdelijkbestand = $_FILES["afbeelding_3"]["tmp_name"];
     $bestandsnaam = $_FILES["afbeelding_3"]["name"];
-    $locatie = "assets/veilingen_afbeeldingen/".$bestandsnaam;
 
-    move_uploaded_file($bestandsnaam,$locatie);
+    $fileExt = explode('.', $bestandsnaam);
+    $fileActualExt = strtolower((end($fileExt)));
+    $fileNameNew = uniqid('', true).".".$fileActualExt;
+    $locatie_map = "../assets/veilingen_afbeeldingen/".$fileNameNew;
+    $locatie_db = "assets/veilingen_afbeeldingen/".$fileNameNew;
+
+    move_uploaded_file($tijdelijkbestand,$locatie_map);
 
     $sql_afbeelding = "insert into Bestand values(?,?)";
 
     $afbeelding = $conn->prepare($sql_afbeelding);
-    $afbeelding->execute(array($locatie, $voorwerpnummer));
+    $afbeelding->execute(array($locatie_db, $voorwerpnummer));
 }
 
 header("location: ../succesvol_veiling.php");
