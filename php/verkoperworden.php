@@ -6,30 +6,64 @@ session_start();
 //require_once '../Server_verbinding/SQLSrvConnect.php';
 
 $bank = $_POST['banknaam'];
-$banknummer = $_POST['bankrekeningnummer'];
+$banknummer = $_POST['IBAN-Nummer'];
 var_dump($banknummer);
 $creditcardnummer = $_POST['creditcardnummer'];
+var_dump($creditcardnummer);
 $verkoper = 'ja  ';
 $gast = $_SESSION['gebruikers'];
 $controle = 'Creditcard';
 $dbh = verbindMetDatabase();
 $error = "Vul alle gegevens in";
-$error2 = "Geen letters invullen";
+$error2 = "No valid IBAN account number";
 
-if(!is_int($banknummer) || !is_int($creditcardnummer)){
-    header("location: ../verkoper.php?error=$error2");
+
+function checkIBAN($iban) {
+
+    // Normalize input (remove spaces and make upcase)
+    $iban = strtoupper(str_replace(' ', '', $iban));
+
+    if (preg_match('/^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/', $iban)) {
+        $country = substr($iban, 0, 2);
+        $check = intval(substr($iban, 2, 2));
+        $account = substr($iban, 4);
+
+        // To numeric representation
+        $search = range('A','Z');
+        foreach (range(10,35) as $tmp)
+            $replace[]=strval($tmp);
+        $numstr=str_replace($search, $replace, $account.$country.'00');
+
+        // Calculate checksum
+        $checksum = intval(substr($numstr, 0, 1));
+        for ($pos = 1; $pos < strlen($numstr); $pos++) {
+            $checksum *= 10;
+            $checksum += intval(substr($numstr, $pos,1));
+            $checksum %= 97;
+        }
+
+        return ((98-$checksum) == $check);
+    } else
+        return false;
 }
 
-if (empty($banknummer) || empty($creditcardnummer)|| empty($bank)) {
-        header("location: ../verkoper.php?error=$error");
-    }
 
-$sql = "INSERT INTO Verkoper  VALUES('$gast','$bank','$banknummer','$controle','$creditcardnummer')";
-$query = $dbh->prepare($sql);
-$query->execute(array($gast,$bank,$banknummer,'$controle',$creditcardnummer));
+    if (!checkIBAN($banknummer)) {
+        header("location: ../verkoper.php?error=$error2");
+    } else {
 
-$sql2 = "UPDATE Gebruiker  set verkoper = '$verkoper' WHERE gebruikersnaam = '$gast' ";
-$query = $dbh->prepare($sql2);
-$query->execute();
+        if (empty($banknummer) || empty($creditcardnummer) || empty($bank)) {
+            header("location: ../verkoper.php?error=$error");
+        } else {
+            $sql = "INSERT INTO Verkoper  VALUES('$gast','$bank','$banknummer','$controle','$creditcardnummer')";
+            $query = $dbh->prepare($sql);
+            $query->execute(array($gast, $bank, $banknummer, '$controle', $creditcardnummer));
 
-header("Location: ../profielpagina.php?bewerken=false");
+            $sql2 = "UPDATE Gebruiker  set verkoper = '$verkoper' WHERE gebruikersnaam = '$gast' ";
+            $query = $dbh->prepare($sql2);
+            $query->execute();
+
+            header("Location: ../profielpagina.php?bewerken=false");
+        }
+
+}

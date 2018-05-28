@@ -28,12 +28,12 @@ include_once 'php/php_verkoper.php'
             </select>
         </div>
         <div class="form-group">
-            <label for="bankrekeningnummer">Bankrekeningnummer</label>
-            <input id="bankrekeningnummer" class="form-control" name="bankrekeningnummer" type="text" required>
+            <label for="IBAN-Nummer">IBAN-Nummer</label>
+            <input id="IBAN-Nummer" class="form-control" name="IBAN-Nummer" type="text" required>
         </div>
         <div class="form-group">
             <label for="creditcardnummer">Creditcardnummer (controle)</label>
-            <input id="creditcardnummer" class="form-control" name="creditcardnummer" type="text" required>
+            <input id="creditcardnummer" class="form-control" name="creditcardnummer" type="number" min="0" required>
         </div>
         <div>
             <button type="submit" class="btn btn-primary">Verzenden</button>
