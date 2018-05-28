@@ -2,6 +2,10 @@
 include 'php/veiling_gegevens.php';
 $titel = 'Detailpagina';
 $voorwerpnummer = $_GET['voorwerpnummer'];
+if(!isset($_GET['error'])){
+    var_dump($_GET);
+    $_GET['error'] = '';
+}
 include 'header.php';
 ?>
 <link href="assets/css/detailpagina.css" rel="stylesheet">
@@ -33,6 +37,10 @@ include 'header.php';
                 </div>
                 <?php echo '<form method="post" action="php/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
                 <div class="form-group">
+                        <?php if ($_GET['error']!=''){
+                            var_dump($_GET);
+                            echo '<div class="text-center> ' . $_GET['error'] . '</div>"';
+                        } ?>
                         <div class="my-md-3 form-group text-center">
                             <input type="text" class="form-control" id="bodbedrag" name="bodbedrag" placeholder="Doe een bod">
                         </div>
