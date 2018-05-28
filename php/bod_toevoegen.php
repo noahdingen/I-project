@@ -11,14 +11,20 @@ $pdo = verbindMetDatabase();
 $sql_check = $pdo->prepare("SELECT MAX(bodbedrag) as hoogste_bod, gebruikersnaam FROM Bod WHERE voorwerpnummer = ? GROUP BY gebruikersnaam");
 $sql_check->execute(array($voorwerpnummer));
 $hoogste_bod = $sql_check->fetchAll(PDO:: FETCH_ASSOC);
-var_dump($hoogste_bod['']);
-if($hoogste_bod["hoogste_bod"]<$bodbedrag){
+//var_dump($hoogste_bod);
+if (empty($hoogste_bod)){
+    $sql_insert = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
+    $sql_insert->execute(array($voorwerpnummer, $bodbedrag, $gebruikersnaam));
+    $error = "";
+    header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer");
+}
+else if($hoogste_bod[0]["hoogste_bod"]<$bodbedrag ){
     var_dump($hoogste_bod);
-    if($hoogste_bod["gebruikersnaam"]!=$gebruikersnaam){
+    if($hoogste_bod[0]["gebruikersnaam"]!=$gebruikersnaam){
         $sql_insert = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
         $sql_insert->execute(array($voorwerpnummer, $bodbedrag, $gebruikersnaam));
         $error = "";
-//        header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer");
+        header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer");
     }
     else {
         $error = "U heeft al het hoogste bod geplaatst";
@@ -26,6 +32,7 @@ if($hoogste_bod["hoogste_bod"]<$bodbedrag){
     }
 }
 else{
-    header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error='bodbedrag is te laag'");
+    $error = "bodbedrag is te laag";
+    header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
 }
 ?>

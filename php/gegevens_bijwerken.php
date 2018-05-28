@@ -10,7 +10,7 @@ $nieuwe_gebruikersnaam = $_POST['gebruikersnaam'];
 foreach ($_POST as $key => $value){
     if($value != '') {
         // Past gebruikersnaam aan als deze word ngevuld
-        echo "UPDATE Gebruiker SET $key = '$value' WHERE gebruikersnaam = '$oude_gebruikersnaam'";
+        "UPDATE Gebruiker SET $key = '$value' WHERE gebruikersnaam = '$oude_gebruikersnaam'";
         if($key==='gebruikersnaam' && $nieuwe_gebruikersnaam!==''){
             $data = $pdo->prepare("UPDATE Gebruiker SET $key = '$value' WHERE gebruikersnaam = '$oude_gebruikersnaam'");
             $_SESSION['gebruikers'] = $nieuwe_gebruikersnaam;
