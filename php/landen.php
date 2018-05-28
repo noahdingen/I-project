@@ -1,4 +1,5 @@
 <?php
+
 $landen = array(
     "AF" => "Afghanistan",
     "AX" => "Alandeilanden",
