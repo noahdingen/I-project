@@ -20,16 +20,13 @@ include_once 'php/veilingenbekijken.php';
         <h1 class="display-4">Nieuwste veilingen</h1>
         <div class="row">
               <?php
-
-
-              haalinformatieop();
-
               if($zoek != ''){
-                  for ($i = 0; $i < 6; $i++) {
-                      echo $resultaat[$i]['Titel'];
-                      echo "<br>";
+                  if(!empty($resultaat)){
+                      haalinformatieop($resultaat);
                   }
+                  else echo "Niks gevonden sorry volgende keer beter";
               }
+              else haalhompeginaop();
               ?>
         </div>
 
