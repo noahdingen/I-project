@@ -16,7 +16,7 @@ include 'header.php';
                 <h1><?php haaltitelop($voorwerpnummer) ?></h1>
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        <?php haalafbeeldingenop($voorwerpnummer) ?>
+                        <?php haalafbeeldingenop($voorwerpnummer)?>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

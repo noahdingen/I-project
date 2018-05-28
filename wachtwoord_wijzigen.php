@@ -26,7 +26,6 @@ if (isset($_GET["token"])||isset($_GET["error"])) {
     $data->execute();
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     $gebruikersnaam = $resultaat[0]['gebruikersnaam'];
-    echo $gebruikersnaam;
     for ($i = 0; $i < count($resultaat); $i++) {
 
     }
@@ -46,7 +45,9 @@ if (isset($_GET["token"])||isset($_GET["error"])) {
                 <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="logo" width="72"
                      height="72">
                 <p>Wijzig uw wachtwoord</p>
-                <?php echo $error; ?>
+                <?php echo $error;
+                      echo $gebruikersnaam;
+                ?>
                 <div class="form-group">
                     <input type="hidden" class="form-control" name="gebruiker" value=<?php echo $gebruikersnaam ?>>
                 </div>

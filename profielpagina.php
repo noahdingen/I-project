@@ -24,7 +24,22 @@ echo '
     <label>Gebruikersnaam</label>
     <input name="gebruikersnaam" class="form-control" type="text" placeholder=" ' . $gebruikersnaam . '" ' . $inhoudstype . '>
     <label>E-mail</label>
-    <input name="emailadres" class="form-control" type="text" placeholder=" ' . $emailadres . '" ' . $inhoudstype .'>
+    <input name="emailadres" class="form-control" type="text" placeholder=" ' . $emailadres . '" ' . $inhoudstype .'>';
+    if(($_GET["bewerken"]=='true')){
+        echo '  <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Meer info
+                </button>
+                <div class="dropdown-menu dropdown-menu">
+                <p class="dropdown-item" >In het geval dat het emailadress wordt gewijzigd.
+                       <br>Dient u het account opnieuw te activeren.
+                       <br>Ook wordt u direct uitgelogd te berscherming van uw account.
+                       <br>De andere ingevulde gegevens worden nog wel aangepast.</p>
+            </div>
+    </div><br>';
+    }
+
+    echo' 
     <label>Voornaam</label>
     <input name="voornaam" class="form-control" type="text" placeholder=" ' . $voornaam . '" ' . $inhoudstype .'>
     <label>Achternaam</label>
@@ -55,7 +70,7 @@ if(($_GET["bewerken"]=='true')){
     echo '
     <div class="linkjes">
         <a href="php_bestanden/gegevens_bijwerken.php"><button type="submit" name="oude_gebruikersnaam" class="btn btn-primary">Bijwerken</button></a>
-    </div>';
+        </div>';
 
 }
 else {

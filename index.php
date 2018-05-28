@@ -40,4 +40,3 @@ include_once 'php_bestanden/veilingenbekijken.php';
 <script src="assets/js/bootstrap.min.js"></script>
 </body>
 </html>
-
