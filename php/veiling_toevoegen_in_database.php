@@ -1,11 +1,13 @@
 <?php
 include_once '../databaseverbinding/database_connectie.php';
+if (!isset($_SESSION)) {
+    session_start();
+}
 $conn = verbindMetDatabase();
 
 $titel = $_POST['titel'];
 $beschrijving = $_POST['beschrijving'];
 $rubriek = $_POST['rubriek'];
-$rubriek_keuze = $_POST['rubriek_keuze'];
 $startprijs = $_POST['startprijs'];
 $looptijd_dag = $_POST['looptijd_dag'];
 $betalingswijze = $_POST['betalingswijze'];
@@ -28,28 +30,37 @@ $locatie = "assets/veilingen_afbeeldingen/".$bestandsnaam;
 move_uploaded_file($tijdelijkbestand,$locatie);
 
 
-$informatie = array($titel, $beschrijving, $rubriek, $rubriek_keuze, $startprijs, $looptijd_dag, $betalingswijze,
+$informatie = array($titel, $beschrijving, $rubriek, $startprijs, $looptijd_dag, $betalingswijze,
     $betalingsinstructies, $verzendoptie, $land, $plaatsnaam, $verzendinstructies);
 
-$sql_veiling = "INSERT INTO Voorwerp VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CAST(GETDATE() AS DATE), 
+//voorwerp in database zetten
+    $sql_veiling = "INSERT INTO Voorwerp VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CAST(GETDATE() AS DATE), 
 convert(time,getdate()), NULL, ?, ?, NULL, DATEADD(dd, 5, CAST(GETDATE() AS DATE)), convert(time,getdate()),'nee', null, ?)";
 
-$veilingen = $conn->prepare($sql_veiling);
-$veilingen->execute(array($voorwerpnummer,
-    $titel,
-    $beschrijving,
-    $startprijs,
-    $betalingswijze,
-    $betalingsinstructies,
-    $plaatsnaam,
-    $land,
-    $looptijd_dag,
-    $verzendinstructies,
-    $gebruiker,
-    $locatie
-    )
-);
+    $veilingen = $conn->prepare($sql_veiling);
+    $veilingen->execute(array($voorwerpnummer,
+            $titel,
+            $beschrijving,
+            $startprijs,
+            $betalingswijze,
+            $betalingsinstructies,
+            $plaatsnaam,
+            $land,
+            $looptijd_dag,
+            $verzendinstructies,
+            $gebruiker,
+            $locatie
+        )
+    );
 
+//rubriek in database zetten
+$conn = verbindMetDatabase();
+$sql_rubriek = "insert into VoorwerpInRubriek values(?,?)";
+$rubrieken = $conn->prepare($sql_rubriek);
+$rubrieken->execute(array($voorwerpnummer, $rubriek));
+
+
+//afbeeldingen in database zetten
 $sql_afbeelding = "insert into Bestand values(?,?)";
 
 $afbeelding = $conn->prepare($sql_afbeelding);
@@ -84,4 +95,5 @@ if(!empty($_FILES["afbeelding_3"]["tmp_name"]))
     $afbeelding->execute(array($locatie, $voorwerpnummer));
 }
 
+header("location: ../succesvol_veiling.php");
 ?>
