@@ -27,7 +27,7 @@ $tijdelijkbestand = $_FILES["afbeelding_1"]["tmp_name"];
 $bestandsnaam = $_FILES["afbeelding_1"]["name"];
 $locatie = "assets/veilingen_afbeeldingen/".$bestandsnaam;
 
-move_uploaded_file($tijdelijkbestand,$locatie);
+move_uploaded_file($bestandsnaam,$locatie);
 
 
 $informatie = array($titel, $beschrijving, $rubriek, $startprijs, $looptijd_dag, $betalingswijze,
@@ -73,7 +73,7 @@ if(!empty($_FILES["afbeelding_2"]["tmp_name"]))
     $tijdelijkbestand = $_FILES["afbeelding_2"]["tmp_name"];
     $bestandsnaam = $_FILES["afbeelding_2"]["name"];
     $locatie = "assets/veilingen_afbeeldingen/".$bestandsnaam;
-    move_uploaded_file($tijdelijkbestand,$locatie);
+    move_uploaded_file($bestandsnaam,$locatie);
 
     $sql_afbeelding = "insert into Bestand values(?,?)";
 
@@ -87,7 +87,7 @@ if(!empty($_FILES["afbeelding_3"]["tmp_name"]))
     $bestandsnaam = $_FILES["afbeelding_3"]["name"];
     $locatie = "assets/veilingen_afbeeldingen/".$bestandsnaam;
 
-    move_uploaded_file($tijdelijkbestand,$locatie);
+    move_uploaded_file($bestandsnaam,$locatie);
 
     $sql_afbeelding = "insert into Bestand values(?,?)";
 
