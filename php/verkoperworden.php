@@ -15,7 +15,7 @@ $gast = $_SESSION['gebruikers'];
 $controle = 'Creditcard';
 $dbh = verbindMetDatabase();
 $error = "Vul alle gegevens in";
-$error2 = "No valid IBAN account number";
+$error2 = "Vul een geldig IBAN-Nummer in";
 
 
 function checkIBAN($iban) {
