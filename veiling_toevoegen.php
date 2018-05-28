@@ -1,5 +1,6 @@
 <?php
-include_once 'Database_verbinding/database_connectie.php';
+include_once 'php_bestanden/rubriek_zoeken.php';
+include_once 'databaseverbinding/database_connectie.php';
 $titel = 'Veiling toevoegen';
 
 include 'header.php';
@@ -10,7 +11,7 @@ include 'header.php';
 <main>
     <div class="container">
         <h1 class="display-3">Veiling aanmaken</h1>
-        <form class="col-form-label-lg" action="PHP_bestanden/veiling_toevoegen_in_database.php" method="post" enctype="multipart/form-data">
+        <form class="col-form-label-lg" action="php_bestanden/veiling_toevoegen_in_database.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="titel">Titel</label>
                 <input type="text" class="form-control" name="titel" id="titel" placeholder="Titel" required autofocus>
@@ -20,19 +21,13 @@ include 'header.php';
                 <input type="text" class="form-control" name="beschrijving" id="beschrijving" placeholder="Beschrijving" required>
             </div>
             <div class="form-group">
-                <label for="rubriek">Wat wil je precies verkopen? Type een steekwoord in om je rubriek te kiezen.</label>
-                <input type="text" class="form-control" name="rubriek" id="rubriek" placeholder="Zoeken" required>
+                <label for="rubriek">Dit is uw rubriek nummer</label>
+                <input type="text" class="form-control" name="rubriek" id="rubriek" value="<?php haalrubrieknummerop()?>" readonly>
             </div>
-            <div class="form-row">
-                <label for="rubriek_keuze">Kies je rubriek</label>
-                <select class="form-control form-control-md" id="rubriek_keuze" name="rubriek_keuze" required>
-                    <option value="">...</option>
-                    <option value="1">Hoofdrubriek</option>
-                    <option value="2">Hoofdrubriek</option>
-                    <option value="3">Hoofdrubriek</option>
-                </select>
+            <div class="form-group">
+                <label for="rubriek">Dit is uw gekozen rubriek.</label>
+                <input type="text" class="form-control" name="rubriek_onzin" id="rubriek_onzin"  value="<?php haalrubrieknaamop()?>" readonly>
             </div>
-
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="startprijs">Startprijs</label>
@@ -96,7 +91,7 @@ include 'header.php';
                     <label for="land">Land</label>
                     <select class="form-control form-control-md" id="land" name="land" required>
                         <option value="">Land</option>
-                        <?php include 'PHP_bestanden/landen.php' ?>
+                        <?php include 'php_bestanden/landen.php' ?>
                     </select>
                 </div>
 

@@ -22,7 +22,7 @@ if(isset($_GET['error'])){
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="wachtwoord">Wachtwoord</label>
-                <input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord" required pattern=".{8,25}" title="Wachtwoord moet tussen de 8 en 25 karakters bevatten">
+                <input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord" required pattern=".{8,200}" title="Wachtwoord moet tussen de 8 en 200 karakters bevatten">
             </div>
             <div class="form-group col-md-6">
                 <label for="wachtwoord">Herhaal Wachtwoord</label>

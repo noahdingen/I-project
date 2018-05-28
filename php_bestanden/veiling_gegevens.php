@@ -83,11 +83,41 @@ function haaltitelop($voorwerpnummer){
     echo $titel[0]['titel'];
 }
 
+function haalbeschrijvingop($voorwerpnummer){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT beschrijving FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    echo $titel[0]['beschrijving'];
+}
+
+function haalverkoperop($voorwerpnummer){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT verkoper, land FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    echo '<div class="col">
+              <div class="col text-center">
+              Verkoper:
+              ' . $titel[0]['verkoper'] . '
+              </div>
+              <div class="col text-center">
+              Land:
+              '.$titel[0]['land'] . '
+              </div>
+       </div>';
+}
+
+
 function haalbiedingenop($voorwerpnummer){
     global $conn;
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = $conn->prepare("SELECT bodbedrag, gebruikersnaam, bodDag, bodTijdstip FROM Bod WHERE voorwerpnummer = ?");
+    $sql = $conn->prepare("SELECT top 15 bodbedrag, gebruikersnaam, bodDag, bodTijdstip FROM Bod WHERE voorwerpnummer = ? ORDER BY bodbedrag DESC");
     $sql->execute(array($voorwerpnummer));
     $bodgegevens = $sql->fetchAll(PDO::FETCH_NAMED);
     echo '<h1>

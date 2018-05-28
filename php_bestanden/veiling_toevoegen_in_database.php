@@ -1,8 +1,8 @@
 <?php
+include_once '../databaseverbinding/database_connectie.php';
 if (!isset($_SESSION)) {
     session_start();
 }
-include_once '../databaseverbinding/database_connectie.php';
 global $conn;
 $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -10,15 +10,9 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $titel = $_POST['titel'];
 $beschrijving = $_POST['beschrijving'];
 $rubriek = $_POST['rubriek'];
-$rubriek_keuze = $_POST['rubriek_keuze'];
 $startprijs = $_POST['startprijs'];
 $looptijd_dag = $_POST['looptijd_dag'];
 $betalingswijze = $_POST['betalingswijze'];
-/*
-$afbeelding_1 = $_POST['afbeelding_1'];
-$afbeelding_2 = $_POST['afbeelding_2'];
-$afbeelding_3 = $_POST['afbeelding_3'];
-*/
 $betalingsinstructies = $_POST['betalingsinstructies'];
 $verzendoptie = $_POST['verzendoptie'];
 $land = $_POST['land'];
@@ -30,11 +24,25 @@ $data->execute();
 $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
 $voorwerpnummer = count($resultaat) + 1;
 
-$informatie = array($titel, $beschrijving, $rubriek, $rubriek_keuze, $startprijs, $looptijd_dag, $betalingswijze,
-    /*$afbeelding_1,*/ $betalingsinstructies, $verzendoptie, $land, $plaatsnaam, $verzendinstructies);
+//afbeelding in map zetten
+$tijdelijkbestand = $_FILES["afbeelding_1"]["tmp_name"];
+$bestandsnaam = $_FILES["afbeelding_1"]["name"];
 
+$fileExt = explode('.', $bestandsnaam);
+$fileActualExt = strtolower((end($fileExt)));
+$fileNameNew = uniqid('', true).".".$fileActualExt;
+$locatie_map = "../assets/veilingen_afbeeldingen/".$fileNameNew;
+$locatie_db = "assets/veilingen_afbeeldingen/".$fileNameNew;
+
+move_uploaded_file($tijdelijkbestand,$locatie_map);
+
+
+$informatie = array($titel, $beschrijving, $rubriek, $startprijs, $looptijd_dag, $betalingswijze,
+    $betalingsinstructies, $verzendoptie, $land, $plaatsnaam, $verzendinstructies);
+
+//voorwerp in database zetten
 $sql_veiling = "INSERT INTO Voorwerp VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CAST(GETDATE() AS DATE), 
-convert(time,getdate()), NULL, ?, ?, NULL, DATEADD(dd, 5, CAST(GETDATE() AS DATE)), convert(time,getdate()),'nee', null)";
+convert(time,getdate()), NULL, ?, ?, NULL, DATEADD(dd, 5, CAST(GETDATE() AS DATE)), convert(time,getdate()),'nee', null, ?)";
 
 $veilingen = $conn->prepare($sql_veiling);
 $veilingen->execute(array($voorwerpnummer,
@@ -47,31 +55,65 @@ $veilingen->execute(array($voorwerpnummer,
         $land,
         $looptijd_dag,
         $verzendinstructies,
-        $gebruiker
+        $gebruiker,
+        $locatie_db
     )
 );
 
-$tijdelijkbestand = $_FILES["afbeelding_1"]["tmp_name"];
-$bestandsnaam = $_FILES["afbeelding_1"]["name"];
-$locatie = "../assets/veilingen_afbeeldingen/".$bestandsnaam;
+//rubriek in database zetten
+global $conn;
+$conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$sql_rubriek = "insert into VoorwerpInRubriek values(?,?)";
+$rubrieken = $conn->prepare($sql_rubriek);
+$rubrieken->execute(array($voorwerpnummer, $rubriek));
 
-move_uploaded_file($tijdelijkbestand,$locatie);
 
-if(isset($_POST['afbeelding_2']))
+//afbeeldingen in database zetten
+$sql_afbeelding = "insert into Bestand values(?,?)";
+
+$afbeelding = $conn->prepare($sql_afbeelding);
+$afbeelding->execute(array($locatie_db, $voorwerpnummer));
+
+
+
+if(!empty($_FILES["afbeelding_2"]["tmp_name"]))
 {
     $tijdelijkbestand = $_FILES["afbeelding_2"]["tmp_name"];
     $bestandsnaam = $_FILES["afbeelding_2"]["name"];
-    $locatie = "../assets/veilingen_afbeeldingen/".$bestandsnaam;
 
-    move_uploaded_file($tijdelijkbestand,$locatie);
+    $fileExt = explode('.', $bestandsnaam);
+    $fileActualExt = strtolower((end($fileExt)));
+    $fileNameNew = uniqid('', true).".".$fileActualExt;
+    $locatie_map = "../assets/veilingen_afbeeldingen/".$fileNameNew;
+    $locatie_db = "assets/veilingen_afbeeldingen/".$fileNameNew;
+
+    move_uploaded_file($tijdelijkbestand,$locatie_map);
+
+    $sql_afbeelding = "insert into Bestand values(?,?)";
+
+    $afbeelding = $conn->prepare($sql_afbeelding);
+    $afbeelding->execute(array($locatie_db, $voorwerpnummer));
 }
 
-if(isset($_POST['afbeelding_3']))
+if(!empty($_FILES["afbeelding_3"]["tmp_name"]))
 {
     $tijdelijkbestand = $_FILES["afbeelding_3"]["tmp_name"];
     $bestandsnaam = $_FILES["afbeelding_3"]["name"];
-    $locatie = "../assets/veilingen_afbeeldingen/".$bestandsnaam;
 
-    move_uploaded_file($tijdelijkbestand,$locatie);
+    $fileExt = explode('.', $bestandsnaam);
+    $fileActualExt = strtolower((end($fileExt)));
+    $fileNameNew = uniqid('', true).".".$fileActualExt;
+    $locatie_map = "../assets/veilingen_afbeeldingen/".$fileNameNew;
+    $locatie_db = "assets/veilingen_afbeeldingen/".$fileNameNew;
+
+    move_uploaded_file($tijdelijkbestand,$locatie_map);
+
+    $sql_afbeelding = "insert into Bestand values(?,?)";
+
+    $afbeelding = $conn->prepare($sql_afbeelding);
+    $afbeelding->execute(array($locatie_db, $voorwerpnummer));
 }
+
+header("location: ../succesvol_veiling.php");
 ?>

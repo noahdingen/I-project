@@ -29,7 +29,7 @@ function checkvalidatie($gebruiker){
     for($i = 0; $i < count($resultaat); $i++){
 
     }
-return $i;
+    return $i;
 }
 // checkt alle ingevoegde waardes
 if (!empty($gebruikersnaam) && !empty($wachtwoord) && checkvalidatie($gebruikersnaam)) {
@@ -45,7 +45,7 @@ if (!empty($gebruikersnaam) && !empty($wachtwoord) && checkvalidatie($gebruikers
     }
 }
 else {
-    header("refresh:10; location: ../login.php?error=$error_drie");
+    header("location: ../login.php?error=$error_drie");
 }
 // controleert of gebruikersnaam bestaat
 function bestaatGebruikersnaam($gebruikersnaam) {

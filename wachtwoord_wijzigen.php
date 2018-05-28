@@ -51,10 +51,10 @@ if (isset($_GET["token"])||isset($_GET["error"])) {
                     <input type="hidden" class="form-control" name="gebruiker" value=<?php echo $gebruikersnaam ?>>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="wachtwoord" id="wachtwoord" required pattern=".{8,25}" placeholder="Wachtwoord">
+                    <input type="password" class="form-control" name="wachtwoord" id="wachtwoord" required pattern=".{8,200}" placeholder="Wachtwoord">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="bevestig_wachtwoord" id="bevestig_wachtwoord" required pattern=".{8,25}" placeholder="Herhaal wachtwoord">
+                    <input type="password" class="form-control" name="bevestig_wachtwoord" id="bevestig_wachtwoord" required pattern=".{8,200}" placeholder="Herhaal wachtwoord">
                 </div>
                 <div class="container">
                     <button type="submit" name="wijzigen" class="btn btn-primary">Wijzigen</button>

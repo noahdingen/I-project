@@ -11,10 +11,31 @@ global $conn;
 $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $pdo = $conn;
-
-$data = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
-
-$data->execute(array($voorwerpnummer, $bodbedrag, $gebruikersnaam));
-
-header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer");
+$sql_check = $pdo->prepare("SELECT MAX(bodbedrag) as hoogste_bod, gebruikersnaam FROM Bod WHERE voorwerpnummer = ? GROUP BY gebruikersnaam");
+$sql_check->execute(array($voorwerpnummer));
+$hoogste_bod = $sql_check->fetchAll(PDO:: FETCH_ASSOC);
+//var_dump($hoogste_bod);
+if (empty($hoogste_bod)){
+    $sql_insert = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
+    $sql_insert->execute(array($voorwerpnummer, $bodbedrag, $gebruikersnaam));
+    $error = "";
+    header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer");
+}
+else if($hoogste_bod[0]["hoogste_bod"]<$bodbedrag ){
+    var_dump($hoogste_bod);
+    if($hoogste_bod[0]["gebruikersnaam"]!=$gebruikersnaam){
+        $sql_insert = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
+        $sql_insert->execute(array($voorwerpnummer, $bodbedrag, $gebruikersnaam));
+        $error = "";
+        header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer");
+    }
+    else {
+        $error = "U heeft al het hoogste bod geplaatst";
+        header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
+    }
+}
+else{
+    $error = "bodbedrag is te laag";
+    header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
+}
 ?>

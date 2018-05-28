@@ -71,7 +71,7 @@ function haalinformatieop(){
         echo  haalplaatjeop($i);
         echo haallooptijdop($i);
         echo haalprijsop($i);
-        echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"]. '" role="button">Zie details &raquo;</a></p>
+        echo '<p><a class="btn btn-secondary" href="../detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"]. '" role="button">Zie details &raquo;</a></p>
         </div>';
     }
 }
