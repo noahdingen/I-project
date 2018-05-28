@@ -55,7 +55,9 @@ echo '
 
 if(($_GET["bewerken"]=='true')){
     echo '
-    <a href="php/gegevens_bijwerken.php"><button type="submit" name="oude_gebruikersnaam" class="btn btn-primary">Bijwerken</button></a>';
+    <div class="linkjes">
+        <a href="php/gegevens_bijwerken.php"><button type="submit" name="oude_gebruikersnaam" class="btn btn-primary">Bijwerken</button></a>
+    </div>';
 
 }
 else {
