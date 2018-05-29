@@ -50,10 +50,11 @@ include 'header.php';
 
                 <div class="col-md-5 my-4">
                     <h1>
-                        Beschrijving
+                        Veiling info
                     </h1>
                     <div class="bg-light text-center">
-                        <?php haalbeschrijvingop($voorwerpnummer); ?>
+                        <?php haalbeschrijvingop($voorwerpnummer);
+                              haalverzendingop($voorwerpnummer);?>
                     </div>
                 </div>
                 <div class="col-md-5 my-4">
@@ -61,8 +62,10 @@ include 'header.php';
                         Verkoper informatie
                     </h1>
                     <div class="bg-light text-center">
-                        <?php haalverkoperop($voorwerpnummer); ?>
+                        <?php haalverkoperop($voorwerpnummer);?>
+
                     </div>
+                </div>
                 </div>
             </div>
         </div>

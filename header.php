@@ -64,7 +64,7 @@ if(isset($_SESSION['gebruikers'])) {
                     echo '<a href="rubriek_veiling_toevoegen.php  " class="dropdown-item" role="button">Plaats veiling</a>';
                 }
             }
-            echo '<a href="php_bestanden/Loguit.php" class="dropdown-item" role="button">Loguit</a>
+            echo '<a href="php_bestanden/loguit.php" class="dropdown-item" role="button">Loguit</a>
                   </div>
              </div>';
         }
@@ -81,7 +81,7 @@ if(isset($_SESSION['gebruikers'])) {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $pdo = $conn;
 
-        $data = $pdo->prepare("SELECT TOP 6 * FROM Voorwerp WHERE Titel LIKE'%".$zoek."%'");
+        $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE titel LIKE'%".$zoek."%'");
         $data->execute();
         $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
 

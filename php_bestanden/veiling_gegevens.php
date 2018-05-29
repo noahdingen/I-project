@@ -67,7 +67,7 @@ function haalafbeeldingenop($voorwerpnummer){
         }
         echo '
     <div class="carousel-item ' . $afbeeling . ' "><div class="zoom">
-        <img src="' . $value['filenaam'] . '" alt="' . $slides[$key] . ' slide" height=250px width="250px">
+        <img src="' . $value['filenaam'] . '" alt="' . $slides[$key] . ' slide" height=250px width="350px">
     </div></div>
     ';
     }
@@ -90,7 +90,7 @@ function haalbeschrijvingop($voorwerpnummer){
     $sql = $conn->prepare("SELECT beschrijving FROM Voorwerp WHERE voorwerpnummer = ?");
     $sql->execute(array($voorwerpnummer));
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
-    echo $titel[0]['beschrijving'];
+    echo '<h4>Beschrijving:</h4>'.$titel[0]['beschrijving'].'';
 }
 
 function haalverkoperop($voorwerpnummer){
@@ -102,16 +102,34 @@ function haalverkoperop($voorwerpnummer){
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
     echo '<div class="col">
               <div class="col text-center">
-              Verkoper:
+              <h4>Verkoper:</h4>
               ' . $titel[0]['verkoper'] . '
               </div>
               <div class="col text-center">
-              Land:
+              <h4>Land:</h4>
               '.$titel[0]['land'] . '
               </div>
        </div>';
 }
 
+function haalverzendingop($voorwerpnummer){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT betalingsinstructie, verzendinstructies FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    echo '<div class="col">
+              <div class="col text-center">
+              <h4>Betaling instructie:</h4>
+              ' . $titel[0]['betalingsinstructie'] . '
+              </div>
+              <div class="col text-center">
+              <h4>Verzendinstucties:</h4>
+              '.$titel[0]['verzendinstructies'] . '
+              </div>
+       </div>';
+}
 
 function haalbiedingenop($voorwerpnummer){
     global $conn;
