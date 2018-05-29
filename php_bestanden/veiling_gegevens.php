@@ -66,9 +66,9 @@ function haalafbeeldingenop($voorwerpnummer){
             $afbeeling = '';
         }
         echo '
-    <div class="carousel-item ' . $afbeeling . '">
-        <img src="' . $value['filenaam'] . '" alt="' . $slides[$key] . ' slide" height=500px width="500px">
-    </div>
+    <div class="carousel-item ' . $afbeeling . ' "><div class="zoom">
+        <img src="' . $value['filenaam'] . '" alt="' . $slides[$key] . ' slide" height=250px width="250px">
+    </div></div>
     ';
     }
 }

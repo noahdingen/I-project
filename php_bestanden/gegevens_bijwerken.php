@@ -22,6 +22,8 @@ foreach ($_POST as $key => $value){
             $_SESSION['gebruikers'] = $nieuwe_gebruikersnaam;
         }
         if($key=='emailadres' && $email != ''){
+            $data = $pdo->prepare("UPDATE Gebruiker SET $key = '$value' WHERE gebruikersnaam = '$oude_gebruikersnaam'");
+            $data->execute();
             $data = $pdo->prepare("UPDATE Gebruiker SET activatie = 0 WHERE gebruikersnaam = '$oude_gebruikersnaam'");
             function genereerRandomString($length = 15) {
                 $karakters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
