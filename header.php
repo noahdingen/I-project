@@ -76,7 +76,7 @@ if(isset($_SESSION['gebruikers'])) {
 
         $pdo = verbindMetDatabase();
 
-        $data = $pdo->prepare("SELECT TOP 6 * FROM Voorwerp WHERE Titel LIKE'%".$zoek."%'");
+        $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE titel LIKE'%".$zoek."%'");
         $data->execute();
         $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
 

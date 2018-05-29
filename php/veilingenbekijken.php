@@ -17,7 +17,7 @@ function haaltitelop($i, $resultaat){
 }
 
 function haalstartprijsop($i, $resultaat){
-    echo "<p>Bieden vanaf: €" . $resultaat[$i]['startprijs'] .",-</p>";
+    echo "<p>Bieden vanaf: €" . $resultaat[$i]['startprijs'] ."</p>";
 }
 
 function haalhuidigeprijsop($i, $resultaat){
@@ -34,7 +34,6 @@ function haalhuidigeprijsop($i, $resultaat){
 
 function haallooptijdop($i, $resultaat){
     echo "<p>De looptijd is " . $resultaat[$i]['looptijd'] ." dagen</p>";
-
 }
 
 function haalhompeginaop(){
@@ -46,14 +45,14 @@ function haalhompeginaop(){
 }
 
 function haalinformatieop($resultaat){
-    for($i = 0; $i < 6; $i++){
-        echo '<div class="col-md-4">';
-        echo haaltitelop($i, $resultaat);
-        echo  haalplaatjeop($i, $resultaat);
-        echo haallooptijdop($i, $resultaat);
-        echo haalstartprijsop($i, $resultaat);
-        echo haalhuidigeprijsop($i, $resultaat);
-        echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p>
-        </div>';
+    $lijstnummer = 1;
+    for($i = 0; $i < count($resultaat); $i++) {
+            echo '<div class="col-md-4">';
+            echo haaltitelop($i, $resultaat);
+            echo haalplaatjeop($i, $resultaat);
+            echo haallooptijdop($i, $resultaat);
+            echo haalstartprijsop($i, $resultaat);
+            echo haalhuidigeprijsop($i, $resultaat);
+            echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"] . '?nummer=' . $lijstnummer . '" role="button">Zie details &raquo;</a></p></div>';
     }
 }
