@@ -61,7 +61,7 @@ if(isset($_SESSION['gebruikers'])) {
                 echo '<a href="rubriek_veiling_toevoegen.php  " class="dropdown-item" role="button">Plaats veiling</a>';
             }
         }
-             echo '<a href="php/Loguit.php" class="dropdown-item" role="button">Loguit</a>
+             echo '<a href="php/loguit.php" class="dropdown-item" role="button">Loguit</a>
                   </div>
              </div>';
         }
