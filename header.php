@@ -1,6 +1,15 @@
 <?php
+include_once 'databaseverbinding/database_connectie.php';
+
 if (!isset($_SESSION)) {
     session_start();
+}
+
+if(isset($_GET['zoeken'])) {
+    $zoek = $_GET['zoeken'];
+}
+else {
+    $zoek = '';
 }
 
 if(isset($_SESSION['gebruikers'])) {
@@ -8,6 +17,7 @@ if(isset($_SESSION['gebruikers'])) {
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo = $conn;
+
     $sql = "select verkoper from Gebruiker where gebruikersnaam =?";
     $query = $pdo->prepare($sql);
     $query->execute([$_SESSION['gebruikers']]);
@@ -32,8 +42,9 @@ if(isset($_SESSION['gebruikers'])) {
 <header>
     <nav class="navbar navbar-light bg-dark justify-content-between">
         <a href="index.php" class="btn btn-primary" role="button">Home</a>
-        <form class="form-inline">
-            <input class="form-control mr-sm-4" type="search" placeholder="Zoeken..." aria-label="Search">
+
+        <form class="form-inline" action="index.php" method="get">
+            <input class="form-control mr-sm-4" type="search" name="zoeken" placeholder="Search" aria-label="Search" required>
             <button class="btn btn-primary" type="submit">Zoeken</button>
         </form>
 
@@ -53,7 +64,7 @@ if(isset($_SESSION['gebruikers'])) {
                     echo '<a href="rubriek_veiling_toevoegen.php  " class="dropdown-item" role="button">Plaats veiling</a>';
                 }
             }
-            echo      '<a href="php_bestanden/loguit.php" class="dropdown-item" role="button">Loguit</a>
+            echo '<a href="php_bestanden/Loguit.php" class="dropdown-item" role="button">Loguit</a>
                   </div>
              </div>';
         }
@@ -64,6 +75,16 @@ if(isset($_SESSION['gebruikers'])) {
             <a href="login.php" class="btn btn-primary" role="button">Login</a>
         </div>';
         }
+
+        global $conn;
+        $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo = $conn;
+
+        $data = $pdo->prepare("SELECT TOP 6 * FROM Voorwerp WHERE Titel LIKE'%".$zoek."%'");
+        $data->execute();
+        $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+
         ?>
     </nav>
 </header>
