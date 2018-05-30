@@ -1,5 +1,4 @@
 <?php
-
 function haalplaatjeop($i, $resultaat){
     echo '<figure>
         <img src="'. $resultaat[$i]['hoofdplaatje'].'" alt="veilingitem">
@@ -32,8 +31,17 @@ function haalhuidigeprijsop($i, $resultaat){
     else echo "Nog geen bod uitgebracht";
 }
 
-function haallooptijdop($i, $resultaat){
-    echo "<p>De looptijd is " . $resultaat[$i]['looptijd'] ." dagen</p>";
+function haaltimerop($i, $resultaat){
+	$voorwerpnummer =  $resultaat[$i]["voorwerpnummer"];
+	$conn = verbindMetDatabase();
+	$sql = $conn->prepare("SELECT looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE voorwerpnummer = ?");
+	$sql->execute(array($voorwerpnummer));
+	$info = $sql->fetchAll(PDO::FETCH_ASSOC);
+	$eindtijd = $info[0]['looptijdeindeDag']." ".$info[0]['looptijdeindeTijdstip'].' GMT+0200';
+
+	echo "<div id='clockdiv".$i."'><script> setDeadline('".$eindtijd."'); initializeClock('clockdiv".$i."', deadline);</script></div>";
+
+
 }
 
 function haalhompeginaop(){
@@ -45,13 +53,16 @@ function haalhompeginaop(){
 }
 
 function haalinformatieop($resultaat){
+    $lijstnummer = 1;
     for($i = 0; $i < count($resultaat); $i++) {
             echo '<div class="col-md-4">';
             echo haaltitelop($i, $resultaat);
             echo haalplaatjeop($i, $resultaat);
-            echo haallooptijdop($i, $resultaat);
+            echo haaltimerop($i, $resultaat);
             echo haalstartprijsop($i, $resultaat);
             echo haalhuidigeprijsop($i, $resultaat);
             echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
-    }
+
+   
+    }	
 }

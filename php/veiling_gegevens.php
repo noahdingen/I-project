@@ -63,9 +63,6 @@ function haalbiedingenop($voorwerpnummer){
     $sql = $conn->prepare("SELECT bodbedrag, gebruikersnaam, bodDag, bodTijdstip FROM Bod WHERE voorwerpnummer = ? ORDER BY bodbedrag DESC");
     $sql->execute(array($voorwerpnummer));
     $bodgegevens = $sql->fetchAll(PDO::FETCH_NAMED);
-    echo '<h1>
-            ' . $bodgegevens[0]['bodDag'] . ' 
-       </h1>';
     foreach ($bodgegevens as $value){
         echo '
        <div class="row">
@@ -81,5 +78,18 @@ function haalbiedingenop($voorwerpnummer){
        </div>
         ';
     }
+}
+
+function timer(){
+	$timer_info = haaltijdop($_GET['voorwerpnummer']);
+	}
+	
+	function haaltijdop($voorwerp){
+	$conn = verbindMetDatabase();
+	$sql = $conn->prepare("SELECT looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE voorwerpnummer = ?");
+	$sql->execute(array($_GET['voorwerpnummer']));
+	$info = $sql->fetchAll(PDO::FETCH_ASSOC);
+	$eindtijd = $info[0]['looptijdeindeDag']." ".$info[0]['looptijdeindeTijdstip'].' GMT+0200';
+	echo "<script> setDeadline('".$eindtijd."'); initializeClock('clockdiv', deadline);</script>";
 }
 ?>

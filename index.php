@@ -10,6 +10,7 @@ include_once 'php/rubriekenboom.php';
 //include_once 'Server_verbinding/SQLSrvConnect.php';
 ?>
 <link href="assets/css/index.css" rel="stylesheet">
+<script type="application/javascript" src="./assets/js/timerJava.js"></script>
 <main>
     <div class="row">
     <aside class="col-2">
@@ -20,7 +21,6 @@ include_once 'php/rubriekenboom.php';
 
             <h1 class="display-3">Geachte <?php echo $bezoeker[0]. ' ' . $bezoeker[1];?></h1>
             <p>Wij van iConcepts willen U producten aanbieden waar U zelf kunt bepalen wat de prijs is.</p>
-
         </div>
         <div class="container">
             <h1 class="display-4">Nieuwste veilingen</h1>
@@ -30,13 +30,14 @@ include_once 'php/rubriekenboom.php';
                     if(!empty($resultaat)){
                         haalinformatieop($resultaat);
                     }
-                    else echo "Niks gevonden sorry volgende keer beter";
+                    else echo "Geen veilingen gevonden";
                 }
                 else haalhompeginaop();
                 ?>
             </div>
         </div>
     </div>
+
     </div>
 </main>
 
