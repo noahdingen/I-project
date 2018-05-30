@@ -6,13 +6,17 @@ body{
     background-color: #FF7753!important;
 }
 
+.card{
+    width: 300px;
+    background-color: #F2552C;
+}
+
 h1.display-4{
     text-align: center;
 }
 
 .row{
     justify-content: space-between;
-    flex-basis: 33%;
 }
 
 .col-md-4{
