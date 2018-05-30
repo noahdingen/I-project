@@ -38,6 +38,21 @@ function haallooptijdop($i, $resultaat){
     echo "<p>De looptijd is " . $resultaat[$i]['looptijd'] ." dagen</p>";
 }
 
+function haaltimerop($i, $resultaat){
+    $voorwerpnummer =  $resultaat[$i]["voorwerpnummer"];
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $info = $sql->fetchAll(PDO::FETCH_ASSOC);
+    $eindtijd = $info[0]['looptijdeindeDag']." ".$info[0]['looptijdeindeTijdstip'].' GMT+0200';
+
+    echo "<div id='clockdiv".$i."'><script> setDeadline('".$eindtijd."'); initializeClock('clockdiv".$i."', deadline);</script></div>";
+
+
+}
+
 function haalhompeginaop(){
     global $conn;
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
@@ -54,9 +69,11 @@ function haalinformatieop($resultaat){
         echo '<div class="col-md-4">';
         echo haaltitelop($i, $resultaat);
         echo haalplaatjeop($i, $resultaat);
-        echo haallooptijdop($i, $resultaat);
+        echo haaltimerop($i, $resultaat);
         echo haalstartprijsop($i, $resultaat);
         echo haalhuidigeprijsop($i, $resultaat);
         echo '<p><a class="btn btn-secondary" href="../detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
+
+
     }
 }

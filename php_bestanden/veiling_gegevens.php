@@ -178,4 +178,18 @@ function startprijs($voorwerpnummer){
          </div>';
 }
 
+function timer(){
+    $timer_info = haaltijdop($_GET['voorwerpnummer']);
+}
+
+function haaltijdop($voorwerp){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($_GET['voorwerpnummer']));
+    $info = $sql->fetchAll(PDO::FETCH_ASSOC);
+    $eindtijd = $info[0]['looptijdeindeDag']." ".$info[0]['looptijdeindeTijdstip'].' GMT+0200';
+    echo "<script> setDeadline('".$eindtijd."'); initializeClock('clockdiv', deadline);</script>";
+}
 ?>

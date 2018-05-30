@@ -8,6 +8,8 @@ if(!isset($_GET['error'])){
 include 'header.php';
 ?>
 <link href="assets/css/detailpagina.css" rel="stylesheet">
+<link href="assets/css/timer.css" rel="stylesheet">
+<script type="application/javascript" src="./assets/js/timerJava.js"></script>
 <main>
     <div class="container-fluid">
         <div class="row justify-content-between">
@@ -32,6 +34,9 @@ include 'header.php';
 
             <div class="col-md-5 my-4">
                 <div class="bg-light">
+                    <div class="timer" id="clockdiv">
+                        <?php timer(); ?>
+                    </div>
                     <?php haalbiedingenop($voorwerpnummer);?>
                 </div>
                 <?php echo '<form method="post" action="php_bestanden/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
