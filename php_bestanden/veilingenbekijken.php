@@ -25,11 +25,11 @@ function haalhuidigeprijsop($i, $resultaat){
     global $conn;
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $data = $conn->prepare("SELECT bodbedrag  FROM Bod WHERE voorwerpnummer = ?");
+    $data = $conn->prepare("SELECT MAX(bodbedrag) as hoogste_bod, gebruikersnaam FROM Bod WHERE voorwerpnummer = ? GROUP BY bodbedrag, gebruikersnaam  ORDER BY bodbedrag DESC ");
     $data->execute(array($voorwerpnummer));
     $bod = $data->fetchAll(PDO::FETCH_NAMED);
     if(!empty($bod)){
-        echo "<p>Huidige bod: €" . $bod[$i]['bodbedrag'] .",-</p>";
+        echo "<p>Huidige bod: €" . $bod[0]['hoogste_bod'] .",-</p>";
     }
     else echo "Nog geen bod uitgebracht";
 }

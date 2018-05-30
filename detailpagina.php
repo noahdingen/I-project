@@ -53,7 +53,8 @@ include 'header.php';
                         Veiling info
                     </h1>
                     <div class="bg-light text-center">
-                        <?php haalbeschrijvingop($voorwerpnummer);
+                        <?php startprijs($voorwerpnummer);
+                              haalbeschrijvingop($voorwerpnummer);
                               haalverzendingop($voorwerpnummer);?>
                     </div>
                 </div>

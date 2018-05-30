@@ -120,22 +120,27 @@ function haalverzendingop($voorwerpnummer){
     $sql->execute(array($voorwerpnummer));
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
     echo '<div class="col">
-              <div class="col text-center">
-              <h4>Betaling instructie:</h4>
-              ' . $titel[0]['betalingsinstructie'] . '
-              </div>
-              <div class="col text-center">
+              <div class="col text-center">';
+    if($titel[0]['betalingsinstructie'] != ''){
+        echo"<h4>Betaling instructie:</h4>
+         " . $titel[0]['betalingsinstructie'] ." ";
+    }
+    echo '</div>';
+    if($titel[0]['verzendinstructies'] != ''){
+       echo'  <div class="col text-center">
               <h4>Verzendinstucties:</h4>
               '.$titel[0]['verzendinstructies'] . '
-              </div>
-       </div>';
+              </div>';
+
+       }
+        echo '</div>';
 }
 
 function haalbiedingenop($voorwerpnummer){
     global $conn;
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = $conn->prepare("SELECT top 15 bodbedrag, gebruikersnaam, bodDag, bodTijdstip FROM Bod WHERE voorwerpnummer = ? ORDER BY bodbedrag DESC");
+    $sql = $conn->prepare("SELECT top 10 bodbedrag, gebruikersnaam, bodDag, bodTijdstip FROM Bod WHERE voorwerpnummer = ? ORDER BY bodbedrag DESC");
     $sql->execute(array($voorwerpnummer));
     $bodgegevens = $sql->fetchAll(PDO::FETCH_NAMED);
     echo '<h1>
@@ -157,4 +162,20 @@ function haalbiedingenop($voorwerpnummer){
         ';
     }
 }
+
+function startprijs($voorwerpnummer){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT startprijs FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    echo '<div class="col">
+              <div class="col text-center">
+              <h4>Startprijs:</h4>
+              €' . $titel[0]['startprijs'] . ',-
+              </div>
+         </div>';
+}
+
 ?>
