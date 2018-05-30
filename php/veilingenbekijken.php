@@ -26,7 +26,7 @@ function haalhuidigeprijsop($i, $resultaat){
     $data->execute(array($voorwerpnummer));
     $bod = $data->fetchAll(PDO::FETCH_NAMED);
     if(!empty($bod)){
-        echo "<p>Huidige bod: €" . $bod[$i]['bodbedrag'] .",-</p>";
+        echo "<p>Huidige bod: €" . $bod[$i]['bodbedrag'] ."</p>";
     }
     else echo "Nog geen bod uitgebracht";
 }

@@ -1,10 +1,15 @@
 <?php
+$sql = "select verkoper, beheerder from Gebruiker where gebruikersnaam =?";
+$query = $pdo->prepare($sql);
+$query->execute([$_SESSION['gebruikers']]);
+
+
 $conn = verbindMetDatabase();
 
 function haalgebruikersop(){
     $conn = verbindMetDatabase();
     $sql_gebruikersnaam = '%' . $_POST['gebruikersnaam_zoeken'] . '%';
-    $sql = "SELECT gebruikersnaam, emailadres FROM Gebruiker WHERE gebruikersnaam LIKE ?";
+    $sql = "SELECT gebruikersnaam, emailadres, geblokkeerd FROM Gebruiker WHERE gebruikersnaam LIKE ?";
     $data = $conn->prepare($sql);
     $data->execute(array($sql_gebruikersnaam));
     $rijen = $data->fetchAll(PDO::FETCH_NAMED);
@@ -17,6 +22,7 @@ function haalgebruikersop(){
                   <th scope="col">#</th>
                   <th scope="col">Gebruikersnaam</th>
                   <th scope="col">Email adres</th>
+                  <th scope="col">Geblokkeerd</th>
                   <th scope="col">Details</th>
                 </tr>
               </thead>
@@ -27,9 +33,10 @@ function haalgebruikersop(){
             echo '<th scope="row">' . $hoeveelheid . '</th>';
             echo '<td>' . $rijen[$i]['gebruikersnaam'] . '</td>';
             echo '<td>' . $rijen[$i]['emailadres'] . '</td>';
+            echo '<td>' . $rijen[$i]['geblokkeerd'] . '</td>';
             echo '<td>
                     <div class="link">
-                        <a href="index.php" >Zie details</a>
+                        <a href="detailpagina_gebruiker.php?gebruikersnaam=' . $rijen[$i]['gebruikersnaam'] . '" >Zie details</a>
                     </div>
                   </td>
                   ';

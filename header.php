@@ -15,12 +15,13 @@ else {
 if(isset($_SESSION['gebruikers'])) {
     $pdo = verbindMetDatabase();
 
-    $sql = "select verkoper from Gebruiker where gebruikersnaam =?";
+    $sql = "select verkoper, beheerder from Gebruiker where gebruikersnaam =?";
     $query = $pdo->prepare($sql);
     $query->execute([$_SESSION['gebruikers']]);
 
     $rows = $query->fetchAll(PDO::FETCH_ASSOC);
     $verkoper = $rows[0]['verkoper'];
+    $beheerder = $rows[0]['beheerder'];
 }
 ?>
 
@@ -56,11 +57,12 @@ if(isset($_SESSION['gebruikers'])) {
                   </button>
                   <div class="dropdown-menu dropdown-menu-right">
                         <a href="profielpagina.php?bewerken=false" class="dropdown-item" role="button">Mijn profiel</a>';
-        if(isset($_SESSION['gebruikers'])) {
             if ($verkoper == 'ja  ') {
                 echo '<a href="rubriek_veiling_toevoegen.php  " class="dropdown-item" role="button">Plaats veiling</a>';
             }
-        }
+            if ($beheerder == 'ja') {
+                echo '<a href="gebruiker_zoeken.php" class="dropdown-item" role="button">Gebruiker zoeken</a>';
+            }
              echo '<a href="php/loguit.php" class="dropdown-item" role="button">Loguit</a>
                   </div>
              </div>';
