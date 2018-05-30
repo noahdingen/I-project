@@ -58,8 +58,15 @@ include 'header.php';
                         </div>';}?>
                 </div>
                 </form>
+                <?php echo '<form method="post" action="php/blokkeerveiling.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
+                <div class="form-group text-center">
+                    <input type="hidden" id="voorwerpnummer" name="voorwerpnummer"><br>
+                    <button type="submit" name="blokkeerknop" value="<?php echo isset($_POST['update']) ? 'Update' : 'Show'; ?>"   class="btn btn-primary">Blokkeer</button>
+                </div>
+                </form>
 
-        <div class="col-md-5 my-4">
+
+                <div class="col-md-5 my-4">
             <h1>
                 Beschrijving
             </h1>
