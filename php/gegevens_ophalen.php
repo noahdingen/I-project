@@ -2,11 +2,15 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+if(isset($_GET['gebruikersnaam'])){
+    $gebruiker= $_GET['gebruikersnaam'];
+}else{
+    $gebruiker= $_SESSION['gebruikers'];
+}
 
-$gebruiker= $_SESSION['gebruikers'];
 
 $pdo = verbindMetDatabase();
-$sql = "select gebruikersnaam, emailadres, voornaam, achternaam, datum, plaatsnaam, adresregel1, postcode, verkoper from Gebruiker where gebruikersnaam ='$gebruiker'";
+$sql = "select gebruikersnaam, emailadres, voornaam, achternaam, datum, plaatsnaam, adresregel1, postcode, verkoper, geblokkeerd from Gebruiker where gebruikersnaam ='$gebruiker'";
 $query = $pdo->prepare($sql);
 $query->execute();
 
@@ -14,7 +18,7 @@ $rows = $query->fetchAll(PDO::FETCH_ASSOC);
 
 $sql_2 = "select banknaam, rekeningnummer, controleoptienaam, creditcardnummer from Verkoper where gebruikersnaam =?";
 $query_2 = $pdo->prepare($sql_2);
-$query_2->execute([$_SESSION['gebruikers']]);
+$query_2->execute(array($gebruiker));
 
 $rows_2 = $query_2->fetchAll(PDO::FETCH_ASSOC);
 
@@ -31,6 +35,7 @@ $plaatsnaam = $rows[0]['plaatsnaam'];
 $adres = $rows[0]['adresregel1'];
 $postcode = $rows[0]['postcode'];
 $verkoper = $rows[0]['verkoper'];
+$geblokkeerd = $rows[0]['geblokkeerd'];
 
 if($verkoper == 'ja  ') {
     $banknaam = $rows_2[0]['banknaam'];

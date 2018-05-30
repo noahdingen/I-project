@@ -33,6 +33,8 @@ if (isset($_POST['aanmelden'])){
 			$adresregel2 = $adres;
 			$landnaam = 'nederland';
 			$verkoper = 'nee';
+			$geblokkeerd = 'nee';
+			$beheerder = 'nee';
             $conn = verbindMetDatabase();
 
             $data = $conn->prepare("SELECT verkoper FROM Gebruiker WHERE gebruikersnaam = '$gebruiker' ");
@@ -62,10 +64,10 @@ if (isset($_POST['aanmelden'])){
             mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f".$from );
             $sql = "INSERT INTO Gebruiker(gebruikersnaam, wachtwoord, voornaam, 
                                                     achternaam, adresregel1, adresregel2, postcode, plaatsnaam, landnaam, datum, emailadres
-                                                    ,vraagnummer, antwoordtekst, verkoper) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                                                    ,vraagnummer, antwoordtekst, verkoper, geblokkeerd, beheerder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?)";
             $opdracht = $pdo->prepare($sql);
             $opdracht->execute(array($gebruiker, $wachtwoord, $voornaam, $achternaam, $adres, $adresregel2, $postcode,
-                                                 $plaatsnaam, $landnaam, $geboortedatum, $email, $geheime_vraag, $antwoord, $verkoper));
+                                                 $plaatsnaam, $landnaam, $geboortedatum, $email, $geheime_vraag, $antwoord, $verkoper, $geblokkeerd, $beheerder));
 //			header("refresh:0; url='../login.php'");
 		}
     }

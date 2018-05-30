@@ -69,4 +69,5 @@ function bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtw
     $wachtwoord_hash = $query->fetchColumn();
     return password_verify($wachtwoord, $wachtwoord_hash);
 }
+
 ?>

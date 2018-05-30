@@ -51,13 +51,20 @@ function checkIBAN($iban) {
     if (!checkIBAN($banknummer)) {
         header("location: ../verkoper.php?error=$error");
     }else{
-        $sql = "INSERT INTO Verkoper  VALUES($gast, $bank, $banknummer, $controle, $creditcardnummer)";
+        echo "hallo";
+        var_dump($gast);
+
+        $sql = "INSERT INTO Verkoper  VALUES(?, ?, ?, ?, ?)";
         $query = $conn->prepare($sql);
         $query->execute(array($gast, $bank, $banknummer, $controle, $creditcardnummer));
+
+        echo "hallo";
+        var_dump($gast);
 
         $sql2 = "UPDATE Gebruiker  set verkoper = '$verkoper' WHERE gebruikersnaam = '$gast' ";
         $query = $conn->prepare($sql2);
         $query->execute();
 
-        header("Location: ../profielpagina.php?bewerken=false");
+        header("Location: verkoperworden.php?bewerken=false");
+        //header("Location: ../profielpagina.php?bewerken=false");
 }

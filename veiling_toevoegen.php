@@ -26,10 +26,10 @@ if(isset($_GET['error'])){
                 <input type="text" class="form-control" name="beschrijving" id="beschrijving" placeholder="Beschrijving" required>
             </div>
             <div class="form-group">
-                <input type="hidden" class="form-control" name="rubriek" id="rubriek" value="<?php haalrubrieknummerop()?>" readonly>
+                <input type="hidden" class="form-control" name="rubriek" id="rubriek" value="<?php haalrubrieknummerop()?>">
             </div>
             <div class="form-group">
-                <label for="rubriek">Dit is uw gekozen rubriek.</label>
+                <label for="rubriek_onzin">Dit is uw gekozen rubriek.</label>
                 <input type="text" class="form-control" name="rubriek_onzin" id="rubriek_onzin"  value="<?php haalrubrieknaamop()?>" readonly>
             </div>
             <div class="form-row">
@@ -61,16 +61,16 @@ if(isset($_GET['error'])){
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="afbeelding">Afbeelding één</label>
-                    <input type="file" class="form-control" name="afbeelding_1" id="afbeelding_1" placeholder="Afbeelding" accept="image/*" required>
+                    <label for="afbeelding_1">Afbeelding één</label>
+                    <input type="file" class="form-control" name="afbeelding_1" id="afbeelding_1"  accept="image/*" required>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="afbeelding">Afbeelding twee</label>
-                    <input type="file" class="form-control" name="afbeelding_2" id="afbeelding_2" accept="image/* placeholder="Afbeelding">
+                    <label for="afbeelding_2">Afbeelding twee</label>
+                    <input type="file" class="form-control" name="afbeelding_2" id="afbeelding_2" accept="image/* ">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="afbeelding">Afbeelding drie</label>
-                    <input type="file" class="form-control" name="afbeelding_3" id="afbeelding_3" accept="image/* placeholder="Afbeelding">
+                    <label for="afbeelding_3">Afbeelding drie</label>
+                    <input type="file" class="form-control" name="afbeelding_3" id="afbeelding_3" accept="image/* ">
                 </div>
             </div>
 
@@ -84,7 +84,7 @@ if(isset($_GET['error'])){
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="verzendoptie">Verzendopties</label>
-                    <select class="form-control" name="verzendoptie" id="verzendoptie" placeholder="verzendoptie" required>
+                    <select class="form-control" name="verzendoptie" id="verzendoptie" required>
                         <option value="">...</option>
                         <option value="verzenden">Verzenden</option>
                         <option value="ophalen">Ophalen</option>

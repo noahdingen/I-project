@@ -47,16 +47,26 @@ include 'header.php';
                         <?php if ($_GET['error']!=''){
                             echo '<div class="form-group"> ' . $_GET['error'] . '</div>';
                         } ?>
+						<?php if(isset($_GET['veilingstatus']) && $_GET['veilingstatus'] == 0){
+							echo ' ';}
+						else{ echo '
                         <div class="my-md-3 form-group text-center">
                             <input type="text" class="form-control" id="bodbedrag" name="bodbedrag" placeholder="Doe een bod">
                         </div>
                         <div class="form-group text-center">
                             <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
-                        </div>
+                        </div>';}?>
+                </div>
+                </form>
+                <?php echo '<form method="post" action="php/blokkeerveiling.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
+                <div class="form-group text-center">
+                    <input type="hidden" id="voorwerpnummer" name="voorwerpnummer"><br>
+                    <button type="submit" name="blokkeerknop" value="<?php echo isset($_POST['update']) ? 'Update' : 'Show'; ?>"   class="btn btn-primary">Blokkeer</button>
                 </div>
                 </form>
 
-        <div class="col-md-5 my-4">
+
+                <div class="col-md-5 my-4">
             <h1>
                 Beschrijving
             </h1>
