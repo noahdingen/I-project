@@ -1,47 +1,36 @@
 <?php
 include_once 'databaseverbinding/database_connectie.php';
-include 'header.php';
-include_once 'zoek_gebruiker.php';
-
 $titel = 'Gebruiker zoeken';
+include 'header.php';
+include_once 'php/zoek_gebruiker.php';
 
 
-if(isset($_GET['gebruikers'])){
-    $gebruikers = $_GET['gebruikers'];
-}else{
-    $gebruikers = '';
-}
-
-if(isset($_GET['error'])){
-    $error = $_GET['error'];
-}else{
-    $error = '';
-}
-
-
-echo $error;
-if(empty($gebruikers)){
-
-    echo '
-    <link href="assets/css/login.css" rel="stylesheet">
+?>
+    <link href="assets/css/gebruiker_zoeken.css" rel="stylesheet">
 
       <div class="container">
-    <form action="zoek_gebruiker.php" method="post" class="col-md-3 col-form-label">
-        <div class="form-group">
-            <label for="gebruikersnaam">Gebruiker zoeken</label>
-            <input id="gebruikersnaam_zoeken" class="form-control" name="gebruikersnaam_zoeken" type="text" required>
-        </div>
-        <?php echo $error;?>
-        <div class="container">
-            <button type="submit" class="btn btn-primary">Zoek</button>
-        </div>
-    </form>
-</div>';
-}
-else {
-
+          <form action="" method="post" class="form-inline">
+                <div class="form-group">
+                    <input id="gebruikersnaam_zoeken" class="form-control mr-sm-2" name="gebruikersnaam_zoeken"
+                           placeholder="Gebruiker zoeken"
+                            <?php
+                            if(isset($_POST['gebruikersnaam_zoeken'])) {
+                                echo 'value="' . $_POST['gebruikersnaam_zoeken'] . '"';
+                            }
+                            ?>
+                           type="text" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Zoek</button>
+                </div>
+          </form>
+      </div>
+<?php
+if(isset($_POST['gebruikersnaam_zoeken'])){
+    haalgebruikersop();
 }
 ?>
+
 <footer class="container">
     <p>&copy; EenmaalAndermaal 2018</p>
 </footer>
