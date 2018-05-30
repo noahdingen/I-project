@@ -24,7 +24,7 @@ $huidige = date('Y-m-d H:i:s');
 $eind = $eind_dag." ".$eind_tijdstip;
 
 if($huidige > $eind){
-	header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer");
+	header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&veilingstatus=0");
 }else{
 
 if (empty($hoogste_bod)){
