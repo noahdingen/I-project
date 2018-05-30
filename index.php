@@ -9,6 +9,7 @@ include_once 'php/veilingenbekijken.php';
 //include_once 'Server_verbinding/SQLSrvConnect.php';
 ?>
 <link href="assets/css/index.css" rel="stylesheet">
+<script type="application/javascript" src="./assets/js/timerJava.js"></script>
 <main>
     <div class="jumbotron">
         <div class="container">
@@ -29,9 +30,7 @@ include_once 'php/veilingenbekijken.php';
               else haalhompeginaop();
               ?>
         </div>
-
     </div>
-
 </main>
 
 <footer class="container text-center">
