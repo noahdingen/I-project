@@ -48,7 +48,7 @@ $informatie = array($titel, $beschrijving, $rubriek, $startprijs, $looptijd_dag,
 
 //voorwerp in database zetten
     $sql_veiling = "INSERT INTO Voorwerp VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CAST(GETDATE() AS DATE), 
-convert(time,getdate()), NULL, ?, ?, NULL, DATEADD(dd, 5, CAST(GETDATE() AS DATE)), convert(time,getdate()),'nee', null, ?)";
+convert(time,getdate()), NULL, ?, ?, NULL, DATEADD(dd, 5, CAST(GETDATE() AS DATE)), convert(time,getdate()),'nee', null, ?,'nee')";
 
     $veilingen = $conn->prepare($sql_veiling);
     $veilingen->execute(array($voorwerpnummer,
