@@ -41,7 +41,7 @@ if(isset($_SESSION['gebruikers'])) {
         <a href="index.php" class="btn btn-primary" role="button">Home</a>
 
         <form class="form-inline" action="index.php" method="get">
-            <input class="form-control mr-sm-4" type="search" name="zoeken" placeholder="Search" aria-label="Search" required>
+            <input class="form-control mr-sm-4" type="search" name="zoeken" placeholder="Zoeken" aria-label="Search" required>
             <button class="btn btn-primary" type="submit">Zoeken</button>
         </form>
 
