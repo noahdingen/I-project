@@ -1,8 +1,7 @@
 <?php
 include_once 'databaseverbinding/database_connectie.php';
-gebruikers_ophalen();
-    function gebruikers_ophalen()
-    {
+
+
 
         $conn = verbindMetDatabase();
         if(isset($_POST['gebruikersnaam_zoeken'])) {
@@ -22,11 +21,12 @@ gebruikers_ophalen();
                 echo $rijen[$i]['gebruikersnaam'];
                 echo '<br>';
             }
-            header("location:gebruiker_zoeken.php?gebruikers=$resultaat");
-        } else {
-
-            header("location: gebruiker_zoeken.php?error=Geen gebruikers gevonden");
         }
-    }
-
-header("location:gebruiker_zoeken.php?gebruikers=$resultaat");
+           // header("location:zoek_gebruiker.php?gebruikers=$resultaat");
+//        } else {
+//
+//            //header("location: gebruiker_zoeken.php?error=Geen gebruikers gevonden");
+//        }
+//    }
+//gebruikers_ophalen();
+///header("location:gebruiker_zoeken.php?gebruikers=$resultaat");
