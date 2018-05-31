@@ -5,6 +5,7 @@ $gebruiker = $_POST['gebruikersnaam'];
 $pdo = verbindMetDatabase();
 $geblokkeerd = $_POST['geblokkeerd'];
 $email = $_POST['emailadres'];
+
 if($geblokkeerd == 'nee'){
     $data = $pdo->prepare("UPDATE Gebruiker SET geblokkeerd = 'ja' WHERE gebruikersnaam = '$gebruiker'");
     $data->execute();

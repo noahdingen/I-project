@@ -6,7 +6,7 @@ include_once 'databaseverbinding/database_connectie.php';
 include_once 'php/beheerder_zoeken.php';
 if($vraag == true) {
     $titel = 'Gebruiker zoeken';
-    include 'header.php';
+    include_once 'header.php';
     include_once 'php/zoek_gebruiker.php';
 
 
@@ -14,7 +14,7 @@ if($vraag == true) {
     <link href="assets/css/gebruiker_zoeken.css" rel="stylesheet">
 
     <div class="container">
-        <form action="" method="post" class="form-inline">
+        <form method="post" class="form-inline">
             <div class="form-group">
                 <input id="gebruikersnaam_zoeken" class="form-control mr-sm-2" name="gebruikersnaam_zoeken"
                        placeholder="Gebruiker zoeken"

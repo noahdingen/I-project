@@ -8,6 +8,7 @@ if(isset($_GET['error'])){
 $titel = 'Login';
 include 'header.php'
 ?>
+
 <link href="assets/css/login.css" rel="stylesheet">
 <div class="container">
     <form action="php/inloggen.php" method="post" class="col-md-3 col-form-label">

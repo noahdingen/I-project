@@ -41,6 +41,8 @@ function haalrubrieknaamop(){
     echo $rijen[0]['rubriekenpad'];
 }
 
+
+
 ?>
 
 
