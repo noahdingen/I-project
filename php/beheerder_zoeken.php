@@ -8,15 +8,15 @@ if (isset($_SESSION['gebruikers'])) {
     $query = $pdo->prepare($sql);
     $query->execute(array($gebruiker));
     $rows = $query->fetchAll(PDO::FETCH_ASSOC);
-    $beheerder = $rows[0]['beheerder'];
-    if($beheerder == 'ja'){
-        $vraag = true;
+    $vraag = $rows[0]['beheerder'];
+    if($vraag == 'ja'){
+        $beheerder = true;
 
     }else{
-        $vraag = false;
+        $beheerder = false;
     }
 }else {
-    $vraag = false;
+    $beheerder = false;
 }
 
     if(isset($_GET['voorwerpnummer'])) {

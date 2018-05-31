@@ -67,7 +67,7 @@ include 'header.php';
                         </div>
                         </form>';}?>
                     <?php
-                    if($vraag == true) {
+                    if($beheerder) {
                     echo '
                 <form method="post" action="php/blokkeerveiling.php?voorwerpnummer=' . $voorwerpnummer . '"
 
