@@ -75,11 +75,14 @@ if(isset($_SESSION['gebruikers'])) {
         </div>';
         }
 
-
+	
+		date_default_timezone_set("Europe/Amsterdam");
+		$huidige_tijd = date('H:i:s');
+		$huidige_dag =  date('Y-m-d');
         $pdo = verbindMetDatabase();
 
-        $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE titel LIKE'%".$zoek."%'");
-        $data->execute();
+        $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE titel LIKE'%".$zoek."%' AND looptijdeindeDag >= ? AND looptijdeindeTijdstip > ?");
+        $data->execute(array($huidige_dag, $huidige_tijd));
         $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
 
         ?>
