@@ -82,6 +82,14 @@ include 'header.php';
                 <?php haalverkoperop($voorwerpnummer); ?>
             </div>
         </div>
+                <div class="col-md-5 my-4">
+                    <h1>
+                        Product informatie
+                    </h1>
+                    <div class="bg-light text-center">
+                        <?php haalvoorwerpdetailsop($voorwerpnummer); ?>
+                    </div>
+                </div>
         </div>
     </div>
 </main>

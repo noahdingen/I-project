@@ -49,19 +49,19 @@ function haalverkoperop($voorwerpnummer){
     $verkoper = $titel[0]['verkoper'];
     echo '<div class="col">
               <div class="col text-center">
-              Verkoper:
+              <b>Verkoper:</b>
               ' .$verkoper . '
               </div>
               <div class="col text-center">
-              Land:
+             <b>Land:</b>
               '.$titel[0]['land'] . '
               </div>
               <div class="col text-center">
-              Aantal veilingen:
+             <b>Aantal veilingen:</b>
               '.haalaantalveilingenop($verkoper).'
               </div>
               <div class="col text-center">
-              Datum voor het eerst actief:
+              <b>Datum voor het eerst actief:</b>
               '.haaldatumeersteveilingop($verkoper).'
               </div>
        </div>';
@@ -83,6 +83,35 @@ function haaldatumeersteveilingop($verkoper){
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
     $looptijdbegindag = $titel[0]['looptijdbeginDag'];
     return $looptijdbegindag;
+}
+
+function haalvoorwerpdetailsop($voorwerpnummer){
+    $conn = verbindMetDatabase();
+    $sql = $conn->prepare("SELECT startprijs, betalingswijze, betalingsinstructie, verzendkosten, verzendinstructies  FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    echo '<div class="col">
+              <div class="col text-center">
+             <b> Bieden vanaf:</b>
+             '.$titel[0]['startprijs'] . '
+              </div>
+              <div class="col text-center">
+             <b> Betalingswijze:</b>
+              '.$titel[0]['betalingswijze'] . '
+              </div>
+              <div class="col text-center">
+             <b>Betalingsinstructie (optioneel):</b>
+              '.$titel[0]['betalingsinstructie'] . '
+              </div>
+              <div class="col text-center">
+              <b>Verzendkosten (optioneel):</b>
+               '.$titel[0]['verzendkosten'] . '
+              </div>
+              <div class="col text-center">
+              <b>Verzendinstructies (optioneel):</b>
+               '.$titel[0]['verzendinstructies'] . '
+              </div>
+       </div>';
 }
 
 function haalbiedingenop($voorwerpnummer){
