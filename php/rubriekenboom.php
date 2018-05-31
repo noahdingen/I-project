@@ -7,25 +7,20 @@ function weergeefrubriekenboom(){
     ';
 }
 
-function haalsubrubriekenop($i){
+function haalsubrubriekenop($i, $resultaat){
     $subrubrieken = '';
-    $conn = verbindMetDatabase();
-    $data = $conn->prepare("SELECT * FROM Rubriek WHERE rubriek = ?");
-    $data->execute(array($i));
-    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     for($j=0; $j<count($resultaat); $j++){
-        $subrubrieken = $subrubrieken . '<div class="container"><button class="btn btn-primary">' . $resultaat[$j]["rubrieknaam"] . '</button> ' . haalsubrubriekenop($resultaat[$j]["rubrieknummer"]) . '</div>';
+        if($resultaat[$j]["rubriek"]==$i)
+        $subrubrieken = $subrubrieken . '<div class="container"><button type="submit" name="rubrieknummer" value="' . $resultaat[$j]["rubrieknummer"] . '" class="btn btn-primary">' . $resultaat[$j]["rubrieknaam"] . '</button> ' . haalsubrubriekenop($resultaat[$j]["rubrieknummer"], $resultaat) . '</div>';
     }
     return $subrubrieken;
 }
 
 function haalhoofdrubriekenop(){
-    $conn = verbindMetDatabase();
-    $data = $conn->prepare("SELECT * FROM Rubriek WHERE rubriek = -1");
-    $data->execute();
-    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    $resultaat = haalallerubriekenop();
     for($i=0; $i<count($resultaat); $i++){
-        echo '
+        if($resultaat[$i]["rubriek"]==-1){
+            echo '
             <div class="card">
                 <div class="card-header" id="heading' . $i . '">
                     <h5 class="mb-0">
@@ -34,11 +29,21 @@ function haalhoofdrubriekenop(){
                     </button>
                     </h5>
                 </div>
+                <form method="get" action="">
                 <div id="collapse' . $i . '" class="collapse" aria-labelledby="heading' . $i . '" data-parent="#accordion">
-                    ' . haalsubrubriekenop($resultaat[$i]["rubrieknummer"]) . '
+                    ' . haalsubrubriekenop($resultaat[$i]["rubrieknummer"], $resultaat) . '
                </div>
+               </form>
                </div>';
+        }
     }
+}
 
+function haalallerubriekenop(){
+    $conn = verbindMetDatabase();
+    $data = $conn->prepare("SELECT * FROM Rubriek");
+    $data->execute();
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    return $resultaat;
 }
 

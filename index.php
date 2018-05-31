@@ -17,27 +17,42 @@ include_once 'php/rubriekenboom.php';
         <?php weergeefrubriekenboom(); ?>
     </aside>
     <div class="container text-center">
-        <div class="container">
-
-            <h1 class="display-3">Geachte <?php echo $bezoeker[0]. ' ' . $bezoeker[1];?></h1>
-            <p>Wij van iConcepts willen U producten aanbieden waar U zelf kunt bepalen wat de prijs is.</p>
-        </div>
-        <div class="container">
+        <?php if($zoek != ''){
+            if(!empty($resultaat)){
+                echo '
+                <div class="container">
+                <h1 class="display-4">Veilingen met zoekterm: ' . $zoek . '</h1>
+                <div class="row">
+                ';
+                haalinformatieop($resultaat);
+                echo '</div></div>';
+            }
+            else echo "Geen veilingen gevonden";
+        }
+        else if(isset($_GET["rubrieknummer"])){
+            echo '
+            <div class="container">
+            <h1 class="display-4"></h1>
+            <div class="row">
+            ';
+        }
+        else{
+            echo '
+            <div class="container">
+            <h1 class="display-3">Geachte ' . $bezoeker[0] . ' ' . $bezoeker[1] . ' </h1>
+            <p>Wij van iConcepts willen U producten aanbieden waar U zelf kunt bepalen wat de prijs is.</p>\'
+            </div>
+            <div class="container">
             <h1 class="display-4">Nieuwste veilingen</h1>
             <div class="row">
-                <?php
-                if($zoek != ''){
-                    if(!empty($resultaat)){
-                        haalinformatieop($resultaat);
-                    }
-                    else echo "Geen veilingen gevonden";
-                }
-                else haalhompeginaop();
-                ?>
-            </div>
-        </div>
+            ';
+            haalhompeginaop();
+            echo '
+            </div></div>
+            ';
+        };
+        ?>
     </div>
-
     </div>
 </main>
 
