@@ -78,7 +78,7 @@ function haalaantalveilingenop($verkoper){
 
 function haaldatumeersteveilingop($verkoper){
     $conn = verbindMetDatabase();
-    $sql = $conn->prepare("SELECT TOP 1 looptijdbeginDag FROM Voorwerp WHERE verkoper = 'ppstamps69' ORDER BY looptijdbeginDag ASC");
+    $sql = $conn->prepare("SELECT TOP 1 looptijdbeginDag FROM Voorwerp WHERE verkoper = ? ORDER BY looptijdbeginDag ASC");
     $sql->execute(array($verkoper));
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
     $looptijdbegindag = $titel[0]['looptijdbeginDag'];
