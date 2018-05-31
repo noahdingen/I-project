@@ -1,0 +1,27 @@
+.container{
+    margin-top: 3%;
+    text-align: center;
+
+}
+body {background-color: #FF7753;}
+
+p{
+    margin-left: 10px;
+}
+
+.link a{
+    color: black;
+    margin-bottom: 5px;
+}
+
+.link a:hover{
+    color: black;
+    text-decoration: underline;
+}
+
+.table{
+    max-width: 75%;
+    text-align: center;
+    margin: 0px auto;
+    margin-top: 10px;
+}

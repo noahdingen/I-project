@@ -18,12 +18,13 @@ if(isset($_SESSION['gebruikers'])) {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo = $conn;
 
-    $sql = "select verkoper from Gebruiker where gebruikersnaam =?";
+    $sql = "select verkoper, beheerder from Gebruiker where gebruikersnaam =?";
     $query = $pdo->prepare($sql);
     $query->execute([$_SESSION['gebruikers']]);
 
     $rows = $query->fetchAll(PDO::FETCH_ASSOC);
     $verkoper = $rows[0]['verkoper'];
+    $beheerder = $rows[0]['beheerder'];
 }
 ?>
 
@@ -44,7 +45,7 @@ if(isset($_SESSION['gebruikers'])) {
         <a href="index.php" class="btn btn-primary" role="button">Home</a>
 
         <form class="form-inline" action="index.php" method="get">
-            <input class="form-control mr-sm-4" type="search" name="zoeken" placeholder="Search" aria-label="Search" required>
+            <input class="form-control mr-sm-4" type="search" name="zoeken" placeholder="Zoeken naar veilingen" aria-label="Search" required>
             <button class="btn btn-primary" type="submit">Zoeken</button>
         </form>
 
@@ -59,10 +60,11 @@ if(isset($_SESSION['gebruikers'])) {
                   </button>
                   <div class="dropdown-menu dropdown-menu-right">
                         <a href="profielpagina.php?bewerken=false" class="dropdown-item" role="button">Mijn profiel</a>';
-            if(isset($_SESSION['gebruikers'])) {
-                if ($verkoper == 'ja  ') {
-                    echo '<a href="rubriek_veiling_toevoegen.php  " class="dropdown-item" role="button">Plaats veiling</a>';
-                }
+            if ($verkoper == 'ja  ') {
+                echo '<a href="rubriek_veiling_toevoegen.php  " class="dropdown-item" role="button">Plaats veiling</a>';
+            }
+            if ($beheerder == 'ja') {
+                echo '<a href="gebruiker_zoeken.php" class="dropdown-item" role="button">Gebruiker zoeken</a>';
             }
             echo '<a href="php_bestanden/loguit.php" class="dropdown-item" role="button">Loguit</a>
                   </div>
@@ -76,13 +78,18 @@ if(isset($_SESSION['gebruikers'])) {
         </div>';
         }
 
+
+
+        date_default_timezone_set("Europe/Amsterdam");
+        $huidige_tijd = date('H:i:s');
+        $huidige_dag =  date('Y-m-d');
         global $conn;
         $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $pdo = $conn;
 
-        $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE titel LIKE'%".$zoek."%'");
-        $data->execute();
+        $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE titel LIKE'%".$zoek."%' AND looptijdeindeDag >= ? AND looptijdeindeTijdstip > ?");
+        $data->execute(array($huidige_dag, $huidige_tijd));
         $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
 
         ?>

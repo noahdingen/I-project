@@ -7,6 +7,8 @@ if (!isset($_SESSION)) {
 $error_een = "Wachtwoord onjuist";
 $error_twee = "Gebruikersnaam bestaat niet";
 $error_drie = "U dient beide velden in te vullen";
+$error_vier = "Dit account  bestaat niet of is niet geactiveerd!";
+$error_vijf = "Uw account is geblokkeerd!";
 
 include_once '../databaseverbinding/database_connectie.php';
 //Regel hieronder is voor server!
@@ -16,7 +18,7 @@ setlocale(LC_ALL, 'nld_nld');
 
 $gebruikersnaam = valideerFormulierinput($_POST['gebruikersnaam']);
 $wachtwoord = valideerFormulierinput($_POST['wachtwoord']);
-
+$geblokkeerd = is_gebruiker_geblokkeerd($gebruikersnaam);
 // functie om te controleren of een account is geactiveerd
 function checkvalidatie($gebruiker){
     global $conn;
@@ -32,16 +34,25 @@ function checkvalidatie($gebruiker){
     return $i;
 }
 // checkt alle ingevoegde waardes
-if (!empty($gebruikersnaam) && !empty($wachtwoord) && checkvalidatie($gebruikersnaam)) {
+if (!empty($gebruikersnaam) && !empty($wachtwoord)) {
     if (bestaatGebruikersnaam($gebruikersnaam)) {
-       if (bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord)) {
-            $_SESSION['gebruikers'] = $gebruikersnaam;
-           header("refresh:0; url='../index.php'");
+        if (checkvalidatie($gebruikersnaam)) {
+            if($geblokkeerd == 'nee') {
+                if (bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord)) {
+                    $_SESSION['gebruikers'] = $gebruikersnaam;
+                    header("refresh:0; url='../index.php'");
+                } else {
+                    header("location: ../login.php?error=$error_een");
+                }
+            }
+            else{
+                header("location: ../login.php?error=$error_vijf");
+            }
         } else {
-           header("location: ../login.php?error=$error_een");
-        }
-    }else {
-        header("location: ../login.php?error=$error_twee");
+            header("location: ../login.php?error=$error_vier");
+        }}
+    else {
+            header("location: ../login.php?error=$error_twee");
     }
 }
 else {
@@ -70,5 +81,18 @@ function bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtw
     $query->execute([$gebruikersnaam]);
     $wachtwoord_hash = $query->fetchColumn();
     return password_verify($wachtwoord, $wachtwoord_hash);
+}
+
+function is_gebruiker_geblokkeerd($gebruikersnaam){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = $conn;
+
+    $sql = "SELECT geblokkeerd FROM Gebruiker WHERE gebruikersnaam = ?";
+    $query = $pdo->prepare($sql);
+    $query->execute([$gebruikersnaam]);
+    $geblokkeerd = $query->fetchColumn();
+    return $geblokkeerd;
 }
 ?>

@@ -23,6 +23,21 @@ $sql_check = $pdo->prepare("SELECT MAX(bodbedrag) as hoogste_bod, gebruikersnaam
 $sql_check->execute(array($voorwerpnummer));
 $hoogste_bod = $sql_check->fetchAll(PDO:: FETCH_ASSOC);
 $startbod = $sql->fetchAll();
+
+    $check_tijd = $pdo->prepare("SELECT looptijdeindeDag, looptijdeindeTijdstip FROM voorwerp WHERE voorwerpnummer = ?");
+    $check_tijd->execute(array($voorwerpnummer));
+    $eind_tijd = $check_tijd->fetchAll(PDO:: FETCH_ASSOC);
+
+    date_default_timezone_set("Europe/Amsterdam");
+    $eind_dag = $eind_tijd[0]['looptijdeindeDag'];
+    $eind_tijdstip = $eind_tijd[0]['looptijdeindeTijdstip'];
+    $huidige = date('Y-m-d H:i:s');
+
+    $eind = $eind_dag." ".$eind_tijdstip;
+
+    if($huidige > $eind){
+        header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&veilingstatus=0");
+    }else{
 //var_dump($hoogste_bod);
 if (empty($hoogste_bod) && $hoogste_bod > $startbod[0]['startprijs']){
     $sql_insert = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
@@ -54,5 +69,5 @@ else{
         $error = 'bodbedrag is te laag!<br> U dient boven het startbedrag te bieden en boven het hoogste bod<br> dit is: €'. $startbod[0]["startprijs"] ;
         header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
     }
-}}}
+}}}}
 ?>

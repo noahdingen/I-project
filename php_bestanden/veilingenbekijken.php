@@ -29,7 +29,7 @@ function haalhuidigeprijsop($i, $resultaat){
     $data->execute(array($voorwerpnummer));
     $bod = $data->fetchAll(PDO::FETCH_NAMED);
     if(!empty($bod)){
-        echo "<p>Huidige bod: €" . $bod[0]['hoogste_bod'] .",-</p>";
+        echo "<p>Huidige bod: €" . $bod[0]['hoogste_bod'] ."</p>";
     }
     else echo "Nog geen bod uitgebracht";
 }
@@ -54,11 +54,15 @@ function haaltimerop($i, $resultaat){
 }
 
 function haalhompeginaop(){
+    date_default_timezone_set("Europe/Amsterdam");
+    $huidige_tijd = date('H:i:s');
+    $huidige_dag =  date('Y-m-d');
+
     global $conn;
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $data = $conn->prepare("SELECT TOP 6 * FROM Voorwerp");
-    $data->execute();
+    $data = $conn->prepare("SELECT TOP 6 * FROM Voorwerp WHERE looptijdeindeDag >= ? AND looptijdeindeTijdstip > ?");
+    $data->execute(array($huidige_dag, $huidige_tijd));
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     haalinformatieop($resultaat);
 }
@@ -72,8 +76,9 @@ function haalinformatieop($resultaat){
         echo haaltimerop($i, $resultaat);
         echo haalstartprijsop($i, $resultaat);
         echo haalhuidigeprijsop($i, $resultaat);
-        echo '<p><a class="btn btn-secondary" href="../detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
+        echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
 
 
     }
 }
+

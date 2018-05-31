@@ -67,21 +67,22 @@ if (!checkIBAN($banknummer)) {
 
 
 if (!checkIBAN($banknummer)) {
-    header("location: ../verkoper.php?error=$error2");
-} else {
+    header("location: ../verkoper.php?error=$error");
+}else{
+    echo "hallo";
+    var_dump($gast);
 
-    if (empty($banknummer) || empty($creditcardnummer) || empty($bank)) {
-        header("location: ../verkoper.php?error=$error");
-    } else {
-        $sql = "INSERT INTO Verkoper  VALUES('$gast','$bank','$banknummer','$controle','$creditcardnummer')";
-        $query = $conn->prepare($sql);
-        $query->execute(array($gast, $bank, $banknummer, '$controle', $creditcardnummer));
+    $sql = "INSERT INTO Verkoper  VALUES(?, ?, ?, ?, ?)";
+    $query = $conn->prepare($sql);
+    $query->execute(array($gast, $bank, $banknummer, $controle, $creditcardnummer));
 
-        $sql2 = "UPDATE Gebruiker  set verkoper = '$verkoper' WHERE gebruikersnaam = '$gast' ";
-        $query = $conn->prepare($sql2);
-        $query->execute();
+    echo "hallo";
+    var_dump($gast);
 
-        header("Location: ../profielpagina.php?bewerken=false");
-    }
+    $sql2 = "UPDATE Gebruiker  set verkoper = '$verkoper' WHERE gebruikersnaam = '$gast' ";
+    $query = $conn->prepare($sql2);
+    $query->execute();
 
+    header("Location: verkoperworden.php?bewerken=false");
+    //header("Location: ../profielpagina.php?bewerken=false");
 }

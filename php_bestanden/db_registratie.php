@@ -40,6 +40,8 @@ if (isset($_POST['aanmelden'])){
 			$landnaam = 'nederland';
 			$verkoper = 'nee';
 			$activatie = 0;
+            $geblokkeerd = 'nee';
+            $beheerder = 'nee';
 
 
 
@@ -99,11 +101,11 @@ mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f".$from );
 // invoegen van de gegevens in de database
 $sql = "INSERT INTO Gebruiker(gebruikersnaam, wachtwoord, voornaam, 
 										achternaam, adresregel1, adresregel2, postcode, plaatsnaam, landnaam, datum, emailadres
-										,vraagnummer, antwoordtekst, verkoper, activatie, mailcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+										,vraagnummer, antwoordtekst, verkoper, activatie, mailcode, geblokkeerd, beheerder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
 
 			$opdracht = $pdo->prepare($sql);
 			$opdracht->execute(array($gebruiker, $wachtwoord, $voornaam, $achternaam, $adres, $adresregel2, $postcode,
-									 $plaatsnaam, $landnaam, $geboortedatum, $email, $geheime_vraag, $antwoord, $verkoper, $activatie, $code));
+									 $plaatsnaam, $landnaam, $geboortedatum, $email, $geheime_vraag, $antwoord, $verkoper, $activatie, $code, $geblokkeerd, $beheerder));
 			header("refresh:0; url='../check_account.php'");
 	}	} else{
 			$error = "Wachtwoorden komen niet overeen";

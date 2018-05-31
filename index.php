@@ -6,33 +6,39 @@ include 'header.php';
 // regel hieronder uit commentariëren voor server
 //include_once 'Database_verbinding/database_connectie.php';
 include_once 'php_bestanden/veilingenbekijken.php';
+include_once 'php_bestanden/rubriekenboom.php';
 //include_once 'Server_verbinding/SQLSrvConnect.php';
 ?>
 <link href="assets/css/index.css" rel="stylesheet">
 <script type="application/javascript" src="./assets/js/timerJava.js"></script>
 <main>
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="display-3">Geachte <?php echo $bezoeker[0]. ' ' . $bezoeker[1];?></h1>
-            <p>Wij van iConcepts willen U producten aanbieden waar U zelf kunt bepalen wat de prijs is.</p>
+    <div class="row">
+        <aside class="col-2">
+            <?php weergeefrubriekenboom(); ?>
+        </aside>
+        <div class="container text-center">
+            <div class="container">
+
+                <h1 class="display-3">Geachte <?php echo $bezoeker[0]. ' ' . $bezoeker[1];?></h1>
+                <p>Wij van iConcepts willen U producten aanbieden waar U zelf kunt bepalen wat de prijs is.</p>
+
+            </div>
+            <div class="container">
+                <h1 class="display-4">Nieuwste veilingen</h1>
+                <div class="row">
+                    <?php
+                    if($zoek != ''){
+                        if(!empty($resultaat)){
+                            haalinformatieop($resultaat);
+                        }
+                        else echo "Niks gevonden sorry volgende keer beter";
+                    }
+                    else haalhompeginaop();
+                    ?>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="container">
-        <h1 class="display-4">Nieuwste veilingen</h1>
-        <div class="row">
-            <?php
-            if($zoek != ''){
-                if(!empty($resultaat)){
-                    haalinformatieop($resultaat);
-                }
-                else echo "Niks gevonden sorry volgende keer beter";
-            }
-            else haalhompeginaop();
-            ?>
-        </div>
-
-    </div>
-
 </main>
 
 <footer class="container text-center">

@@ -11,14 +11,17 @@ include 'header.php';
 <link href="assets/css/timer.css" rel="stylesheet">
 <script type="application/javascript" src="./assets/js/timerJava.js"></script>
 <main>
+
     <div class="container-fluid">
+
         <div class="row justify-content-between">
+
             <div class="col-md-5 mx-3 my-4 bg-light text-center">
 
                 <h1><?php haaltitelop($voorwerpnummer) ?></h1>
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        <?php haalafbeeldingenop($voorwerpnummer)?>
+                        <?php haalafbeeldingenop($voorwerpnummer) ?>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -39,28 +42,36 @@ include 'header.php';
                     </div>
                     <?php haalbiedingenop($voorwerpnummer);?>
                 </div>
-                <?php echo '<form method="post" action="php_bestanden/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
+                <?php echo '<form method="post" action="php/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
                 <div class="form-group">
                     <?php if ($_GET['error']!=''){
                         echo '<div class="form-group"> ' . $_GET['error'] . '</div>';
                     } ?>
-                    <div class="my-md-3 form-group text-center">
-                        <input type="text" class="form-control" id="bodbedrag" name="bodbedrag" placeholder="Doe een bod">
-                    </div>
-                    <div class="form-group text-center">
-                        <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
-                    </div>
+                    <?php if(isset($_GET['veilingstatus']) && $_GET['veilingstatus'] == 0){
+                        echo ' ';}
+                    else{ echo '
+                        <div class="my-md-3 form-group text-center">
+                            <input type="text" class="form-control" id="bodbedrag" name="bodbedrag" placeholder="Doe een bod">
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
+                        </div>';}?>
+                </div>
+                </form>
+                <?php echo '<form method="post" action="php/blokkeerveiling.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
+                <div class="form-group text-center">
+                    <input type="hidden" id="voorwerpnummer" name="voorwerpnummer"><br>
+                    <button type="submit" name="blokkeerknop" value="<?php echo isset($_POST['update']) ? 'Update' : 'Show'; ?>"   class="btn btn-primary">Blokkeer</button>
                 </div>
                 </form>
 
+
                 <div class="col-md-5 my-4">
                     <h1>
-                        Veiling info
+                        Beschrijving
                     </h1>
                     <div class="bg-light text-center">
-                        <?php startprijs($voorwerpnummer);
-                              haalbeschrijvingop($voorwerpnummer);
-                              haalverzendingop($voorwerpnummer);?>
+                        <?php haalbeschrijvingop($voorwerpnummer); ?>
                     </div>
                 </div>
                 <div class="col-md-5 my-4">
@@ -68,10 +79,8 @@ include 'header.php';
                         Verkoper informatie
                     </h1>
                     <div class="bg-light text-center">
-                        <?php haalverkoperop($voorwerpnummer);?>
-
+                        <?php haalverkoperop($voorwerpnummer); ?>
                     </div>
-                </div>
                 </div>
             </div>
         </div>

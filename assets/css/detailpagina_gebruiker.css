@@ -1,0 +1,36 @@
+.persoons-gegevens{
+    margin-top: 10px;
+    flex: 50%;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+}
+
+.kolommen {
+    width: 30%;
+}
+
+.btn-primary{
+    margin-top: 10px;
+}
+
+
+
+h1.display-4{
+    text-align: center;
+}
+
+.col-md-4{
+    text-align: center;
+}
+
+body{
+    background-color: #FF7753!important;
+}
+
+
+footer{
+    text-align: center;
+}
