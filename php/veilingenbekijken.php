@@ -38,15 +38,10 @@ function haaltimerop($i, $resultaat){
 	$sql->execute(array($voorwerpnummer));
 	$info = $sql->fetchAll(PDO::FETCH_ASSOC);
 	$eindtijd = $info[0]['looptijdeindeDag']." ".$info[0]['looptijdeindeTijdstip'].' GMT+0200';
-
 	echo "<div id='clockdiv".$i."'><script> setDeadline('".$eindtijd."'); initializeClock('clockdiv".$i."', deadline);</script></div>";
-
-
 }
 
 function haalhompeginaop(){
-	
-	
 	date_default_timezone_set("Europe/Amsterdam");
 	$huidige_tijd = date('H:i:s');
 	$huidige_dag =  date('Y-m-d');
@@ -71,4 +66,10 @@ function haalinformatieop($resultaat){
 
    
     }	
+}
+
+function haalrubriekinformatieop($i){
+    $conn = verbindMetDatabase();
+    $sql = $conn->prepare("SELECT * FROM VoorwerpInRubriek WHERE rubriek = ?");
+    $sql->execute(array($i));
 }
