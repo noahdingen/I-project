@@ -32,12 +32,7 @@ function haalhuidigeprijsop($i, $resultaat){
 }
 
 function haaltimerop($i, $resultaat){
-	$voorwerpnummer =  $resultaat[$i]["voorwerpnummer"];
-	$conn = verbindMetDatabase();
-	$sql = $conn->prepare("SELECT looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE voorwerpnummer = ?");
-	$sql->execute(array($voorwerpnummer));
-	$info = $sql->fetchAll(PDO::FETCH_ASSOC);
-	$eindtijd = $info[0]['looptijdeindeDag']." ".$info[0]['looptijdeindeTijdstip'].' GMT+0200';
+	$eindtijd = $resultaat[0]['looptijdeindeDag']." ".$resultaat[0]['looptijdeindeTijdstip'].' GMT+0200';
 	echo "<div id='clockdiv".$i."'><script> setDeadline('".$eindtijd."'); initializeClock('clockdiv".$i."', deadline);</script></div>";
 }
 
@@ -54,7 +49,6 @@ function haalhompeginaop(){
 }
 
 function haalinformatieop($resultaat){
-    $lijstnummer = 1;
     for($i = 0; $i < count($resultaat); $i++) {
             echo '<div class="col-md-4">';
             echo haaltitelop($i, $resultaat);
@@ -70,6 +64,8 @@ function haalinformatieop($resultaat){
 
 function haalrubriekinformatieop($i){
     $conn = verbindMetDatabase();
-    $sql = $conn->prepare("SELECT * FROM VoorwerpInRubriek WHERE rubriek = ?");
-    $sql->execute(array($i));
+    $data = $conn->prepare("SELECT V.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer WHERE rubrieknummerOpLaagsteNiveau = ?");
+    $data->execute(array($i));
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    haalinformatieop($resultaat);
 }

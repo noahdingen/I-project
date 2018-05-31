@@ -78,7 +78,7 @@ function haalaantalveilingenop($verkoper){
 
 function haaldatumeersteveilingop($verkoper){
     $conn = verbindMetDatabase();
-    $sql = $conn->prepare("SELECT TOP 1 looptijdbeginDag FROM Voorwerp WHERE verkoper = 'ppstamps69' ORDER BY looptijdbeginDag ASC");
+    $sql = $conn->prepare("SELECT TOP 1 looptijdbeginDag FROM Voorwerp WHERE verkoper = ? ORDER BY looptijdbeginDag ASC");
     $sql->execute(array($verkoper));
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
     $looptijdbegindag = $titel[0]['looptijdbeginDag'];
@@ -119,4 +119,13 @@ function timer(){
 	$eindtijd = $info[0]['looptijdeindeDag']." ".$info[0]['looptijdeindeTijdstip'].' GMT+0200';
 	echo "<script> setDeadline('".$eindtijd."'); initializeClock('clockdiv', deadline);</script>";
 }
+
+function haalblokadeop($voorwerpnummer){
+    $conn = verbindMetDatabase();
+    $sql = $conn->prepare("SELECT geblokkeerd FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $blokkeer = $sql->fetchAll(PDO::FETCH_NAMED);
+    return $blokkeer;
+}
+
 ?>

@@ -32,15 +32,17 @@ include_once 'php/rubriekenboom.php';
         else if(isset($_GET["rubrieknummer"])){
             echo '
             <div class="container">
-            <h1 class="display-4"></h1>
+            <h1 class="display-4">Resultaten</h1>
             <div class="row">
             ';
+            haalrubriekinformatieop($_GET["rubrieknummer"]);
+            echo '</div></div>';
         }
         else{
             echo '
             <div class="container">
             <h1 class="display-3">Geachte ' . $bezoeker[0] . ' ' . $bezoeker[1] . ' </h1>
-            <p>Wij van iConcepts willen U producten aanbieden waar U zelf kunt bepalen wat de prijs is.</p>\'
+            <p>Wij van iConcepts willen U producten aanbieden waar U zelf kunt bepalen wat de prijs is.</p>
             </div>
             <div class="container">
             <h1 class="display-4">Nieuwste veilingen</h1>
