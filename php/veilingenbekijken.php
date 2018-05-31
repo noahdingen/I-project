@@ -22,11 +22,11 @@ function haalstartprijsop($i, $resultaat){
 function haalhuidigeprijsop($i, $resultaat){
     $voorwerpnummer = $resultaat[$i]["voorwerpnummer"];
     $conn = verbindMetDatabase();
-    $data = $conn->prepare("SELECT bodbedrag  FROM Bod WHERE voorwerpnummer = ?");
+    $data = $conn->prepare("SELECT bodbedrag  FROM Bod WHERE voorwerpnummer = ? ORDER BY bodbedrag DESC");
     $data->execute(array($voorwerpnummer));
     $bod = $data->fetchAll(PDO::FETCH_NAMED);
     if(!empty($bod)){
-        echo "<p>Huidige bod: €" . $bod[$i]['bodbedrag'] ."</p>";
+        echo "<p>Huidige bod: €" . $bod[0]['bodbedrag'] ."</p>";
     }
     else echo "Nog geen bod uitgebracht";
 }
@@ -66,6 +66,32 @@ function haalrubriekinformatieop($i){
     $conn = verbindMetDatabase();
     $data = $conn->prepare("SELECT V.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer WHERE rubrieknummerOpLaagsteNiveau = ?");
     $data->execute(array($i));
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    haalinformatieop($resultaat);
+}
+
+
+function haalbekekenveilingenop($gebruikersnaam){
+    date_default_timezone_set("Europe/Amsterdam");
+    $huidige_tijd = date('H:i:s');
+    $huidige_dag =  date('Y-m-d');
+
+    $conn = verbindMetDatabase();
+    $data = $conn->prepare("SELECT DISTINCT Voorwerp.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs FROM Voorwerp INNER JOIN Bod ON Voorwerp.voorwerpnummer = Bod.voorwerpnummer WHERE Bod.gebruikersnaam =?");
+    $data->execute(array($gebruikersnaam));
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    haalinformatieop($resultaat);
+}
+
+
+function haalmijnveilingenop($gebruikersnaam){
+    date_default_timezone_set("Europe/Amsterdam");
+    $huidige_tijd = date('H:i:s');
+    $huidige_dag =  date('Y-m-d');
+
+    $conn = verbindMetDatabase();
+    $data = $conn->prepare("SELECT DISTINCT Voorwerp.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs FROM Voorwerp INNER JOIN Verkoper ON Voorwerp.verkoper = Verkoper.gebruikersnaam WHERE Verkoper.gebruikersnaam =? ");
+    $data->execute(array($gebruikersnaam));
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     haalinformatieop($resultaat);
 }

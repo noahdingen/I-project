@@ -7,6 +7,7 @@ $titel = 'Profielpagina';
 include_once 'header.php';
 include_once 'php/gegevens_ophalen.php';
 include_once 'php/beheerder_zoeken.php';
+include_once 'php/veilingenbekijken.php';
 if($_GET["bewerken"] == 'false'){
     $inhoudstype = 'readonly';
 }
@@ -16,6 +17,7 @@ else{
 
 
 echo '
+    <script type="application/javascript" src="./assets/js/timerJava.js"></script>
     <link href="assets/css/profielpagina.css" rel="stylesheet">
 
 <form class="gegevenswijzigen" method="post" action="php/gegevens_bijwerken.php?gebruikersnaam=' . $gebruikersnaam .  ' ">
@@ -82,50 +84,27 @@ else {
     <div class="persoonlijke-veilingen">
 <?php
 if($verkoper == 'ja  '){
-    echo '
-        <h1>Mijn lopende veilingen</h1>
-        <div class="container">
-            <!-- Example row of columns -->
+    echo'   
+            <h1>Mijn lopende veilingen</h1>   
+            <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <img src="assets/images/hammer.png" >
-                    <p>Hier staat de beschrijving van bovenstaande veiling</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
-                </div>
-                <div class="col-md-4">
-                    <img src="assets/images/hammer.png" >
-                    <p>Hier staat de beschrijving van bovenstaande veiling</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
-                </div>
-                <div class="col-md-4">
-                    <img src="assets/images/hammer.png" >
-                    <p>Hier staat de beschrijving van bovenstaande veiling</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
-                </div>
-            </div>';
+            ';
+    haalmijnveilingenop($gebruikersnaam);
+    echo '
+            </div></div>
+            ';
         }
         else{
         echo'
             <h1>Mijn geboden veilingen</h1>
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-            <div class="col-md-4">
-                <img src="assets/images/hammer.png" alt="logo">
-                <p>Hier staat de beschrijving van bovenstaande veiling</p>
-                <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <img src="assets/images/hammer.png" alt="logo">
-                <p>Hier staat de beschrijving van bovenstaande veiling</p>
-                <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <img src="assets/images/hammer.png" alt="logo">
-                <p>Hier staat de beschrijving van bovenstaande veiling</p>
-                <p><a class="btn btn-secondary" href="#" role="button">Zie details &raquo;</a></p>
-            </div>
-        </div>';
+            
+            <div class="container">
+            <div class="row">
+            ';
+            haalbekekenveilingenop($gebruikersnaam);
+            echo '
+            </div></div>
+            ';
         }
         ?>
         </div>

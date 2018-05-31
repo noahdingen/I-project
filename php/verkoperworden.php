@@ -15,8 +15,7 @@ $verkoper = 'ja  ';
 $gast = $_SESSION['gebruikers'];
 $controle = 'Creditcard';
 $conn = verbindMetDatabase();
-$error = "Vul alle gegevens in";
-$error2 = "Vul een geldig IBAN-Nummer in";
+$error = "Vul een geldig IBAN-Nummer in";
 
 
 function checkIBAN($iban) {
@@ -51,15 +50,11 @@ function checkIBAN($iban) {
     if (!checkIBAN($banknummer)) {
         header("location: ../verkoper.php?error=$error");
     }else{
-        echo "hallo";
-        var_dump($gast);
 
         $sql = "INSERT INTO Verkoper  VALUES(?, ?, ?, ?, ?)";
         $query = $conn->prepare($sql);
         $query->execute(array($gast, $bank, $banknummer, $controle, $creditcardnummer));
-
-        echo "hallo";
-        var_dump($gast);
+;
 
         $sql2 = "UPDATE Gebruiker  set verkoper = '$verkoper' WHERE gebruikersnaam = '$gast' ";
         $query = $conn->prepare($sql2);

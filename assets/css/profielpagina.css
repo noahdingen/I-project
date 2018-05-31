@@ -50,3 +50,27 @@ body{
 footer{
     text-align: center;
 }
+
+.row{
+    justify-content: space-between;
+}
+
+.col-md-4{
+    margin-left: 5%;
+    background-color: white;
+    margin-bottom: 10px;
+    float: left;
+    max-width: 28%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+img{
+    max-height: 100%;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+figure{
+    height: 100px;
+}
