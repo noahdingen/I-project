@@ -45,13 +45,15 @@ function haaltimerop($i, $resultaat){
 }
 
 function haalhompeginaop(){
+	
+	
 	date_default_timezone_set("Europe/Amsterdam");
 	$huidige_tijd = date('H:i:s');
 	$huidige_dag =  date('Y-m-d');
 
     $conn = verbindMetDatabase();
-    $data = $conn->prepare("SELECT TOP 6 * FROM Voorwerp WHERE looptijdeindeDag >= ? AND looptijdeindeTijdstip > ?");
-    $data->execute(array($huidige_dag, $huidige_tijd));
+    $data = $conn->prepare("SELECT TOP 6 * FROM Voorwerp WHERE (looptijdeindeDag = ? AND looptijdeindeTijdstip > ?) OR looptijdeindeDag > ?");
+    $data->execute(array($huidige_dag, $huidige_tijd, $huidige_dag));
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     haalinformatieop($resultaat);
 }

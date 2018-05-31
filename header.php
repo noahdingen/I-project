@@ -81,9 +81,9 @@ if(isset($_SESSION['gebruikers'])) {
 		$huidige_dag =  date('Y-m-d');
         $pdo = verbindMetDatabase();
 
-        $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE titel LIKE'%".$zoek."%' AND looptijdeindeDag >= ? AND looptijdeindeTijdstip > ?");
-        $data->execute(array($huidige_dag, $huidige_tijd));
-        $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+		$data = $conn->prepare("SELECT * FROM Voorwerp WHERE titel LIKE'%".$zoek."%' AND ((looptijdeindeDag = ? AND looptijdeindeTijdstip > ?) OR looptijdeindeDag > ?)");
+		$data->execute(array($huidige_dag, $huidige_tijd, $huidige_dag));
+		$resultaat = $data->fetchAll(PDO::FETCH_NAMED);
 
         ?>
     </nav>
