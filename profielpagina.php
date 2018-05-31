@@ -6,6 +6,7 @@ include_once 'databaseverbinding/database_connectie.php';
 $titel = 'Profielpagina';
 include_once 'header.php';
 include_once 'php/gegevens_ophalen.php';
+include_once 'php/beheerder_zoeken.php';
 if($_GET["bewerken"] == 'false'){
     $inhoudstype = 'readonly';
 }
@@ -61,12 +62,12 @@ if(($_GET["bewerken"]=='true')){
 
 }
 else {
-	if($verkoper == 'ja  '){
+	if($verkoper == 'ja  ' || $vraag == true){
 		echo '
     <div class="linkjes">
         <a href="profielpagina.php?bewerken=true">Gegevens bijwerken</a>
     </div>';
-	} else{ 
+	}else{
 		echo '
         <div class="linkjes">
             <p>

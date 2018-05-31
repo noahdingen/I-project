@@ -107,7 +107,17 @@ include 'header.php';
             <div class="bg-light text-center">
                 <?php haalverkoperop($voorwerpnummer); ?>
             </div>
+
+                <h1>
+                    Product informatie
+                </h1>
+                <div class="bg-light text-center">
+                    <?php haalvoorwerpdetailsop($voorwerpnummer); ?>
+                </div>
+            
+
         </div>
+
         </div>
     </div>
 </main>
