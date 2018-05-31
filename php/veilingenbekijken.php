@@ -1,4 +1,5 @@
 <?php
+
 function haalplaatjeop($i, $resultaat){
     echo '<figure>
         <img src="'. $resultaat[$i]['hoofdplaatje'].'" alt="veilingitem">
@@ -32,20 +33,30 @@ function haalhuidigeprijsop($i, $resultaat){
 }
 
 function haaltimerop($i, $resultaat){
-	$eindtijd = $resultaat[0]['looptijdeindeDag']." ".$resultaat[0]['looptijdeindeTijdstip'].' GMT+0200';
-	echo "<div id='clockdiv".$i."'><script> setDeadline('".$eindtijd."'); initializeClock('clockdiv".$i."', deadline);</script></div>";
+    if($resultaat[$i]["geblokkeerd"] == 'nee') {
+        $eindtijd = $resultaat[0]['looptijdeindeDag'] . " " . $resultaat[0]['looptijdeindeTijdstip'] . ' GMT+0200';
+        echo "<div id='clockdiv" . $i . "'><script> setDeadline('" . $eindtijd . "'); initializeClock('clockdiv" . $i . "', deadline);</script></div>";
+    }else{
+        echo 'Deze veiling is geblokkeerd';
+    }
 }
 
-function haalhompeginaop(){
+function haalhompeginaop($beheerder){
 	date_default_timezone_set("Europe/Amsterdam");
 	$huidige_tijd = date('H:i:s');
 	$huidige_dag =  date('Y-m-d');
-
     $conn = verbindMetDatabase();
-    $data = $conn->prepare("SELECT TOP 6 * FROM Voorwerp WHERE (looptijdeindeDag = ? AND looptijdeindeTijdstip > ?) OR looptijdeindeDag > ?");
-    $data->execute(array($huidige_dag, $huidige_tijd, $huidige_dag));
-    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-    haalinformatieop($resultaat);
+    if($beheerder){
+        $data = $conn->prepare("SELECT TOP 12 * FROM Voorwerp WHERE veilingGesloten = 'nee'");
+        $data->execute();
+        $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+        haalinformatieop($resultaat);
+        }else{
+        $data = $conn->prepare("SELECT TOP 12 * FROM Voorwerp WHERE geblokkeerd = 'nee' AND veilingGesloten = 'nee'");
+        $data->execute();
+        $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+        haalinformatieop($resultaat);
+    }
 }
 
 function haalinformatieop($resultaat){
@@ -62,12 +73,19 @@ function haalinformatieop($resultaat){
     }	
 }
 
-function haalrubriekinformatieop($i){
+function haalrubriekinformatieop($i, $beheerder){
     $conn = verbindMetDatabase();
-    $data = $conn->prepare("SELECT V.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer WHERE rubrieknummerOpLaagsteNiveau = ?");
-    $data->execute(array($i));
-    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-    haalinformatieop($resultaat);
+    if($beheerder){
+        $data = $conn->prepare("SELECT V.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer WHERE rubrieknummerOpLaagsteNiveau = ?");
+        $data->execute(array($i));
+        $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+        haalinformatieop($resultaat);
+    }else {
+        $data = $conn->prepare("SELECT V.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer WHERE rubrieknummerOpLaagsteNiveau = ? and geblokkeerd = 'nee'");
+        $data->execute(array($i));
+        $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+        haalinformatieop($resultaat);
+    }
 }
 
 

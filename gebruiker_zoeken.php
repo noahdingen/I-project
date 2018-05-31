@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
 }
 include_once 'databaseverbinding/database_connectie.php';
 include_once 'php/beheerder_zoeken.php';
-if($vraag == true) {
+if($beheerder) {
     $titel = 'Gebruiker zoeken';
     include_once 'header.php';
     include_once 'php/zoek_gebruiker.php';

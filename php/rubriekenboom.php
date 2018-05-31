@@ -41,7 +41,7 @@ function haalhoofdrubriekenop(){
 
 function haalallerubriekenop(){
     $conn = verbindMetDatabase();
-    $data = $conn->prepare("SELECT * FROM Rubriek");
+    $data = $conn->prepare("SELECT * FROM Rubriek order by rubrieknaam asc");
     $data->execute();
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     return $resultaat;
