@@ -148,4 +148,13 @@ function timer(){
 	$eindtijd = $info[0]['looptijdeindeDag']." ".$info[0]['looptijdeindeTijdstip'].' GMT+0200';
 	echo "<script> setDeadline('".$eindtijd."'); initializeClock('clockdiv', deadline);</script>";
 }
+
+function haalblokadeop($voorwerpnummer){
+    $conn = verbindMetDatabase();
+    $sql = $conn->prepare("SELECT geblokkeerd FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $blokkeer = $sql->fetchAll(PDO::FETCH_NAMED);
+    return $blokkeer;
+}
+
 ?>
