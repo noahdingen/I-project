@@ -46,16 +46,43 @@ function haalverkoperop($voorwerpnummer){
     $sql = $conn->prepare("SELECT verkoper, land FROM Voorwerp WHERE voorwerpnummer = ?");
     $sql->execute(array($voorwerpnummer));
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    $verkoper = $titel[0]['verkoper'];
     echo '<div class="col">
               <div class="col text-center">
               Verkoper:
-              ' . $titel[0]['verkoper'] . '
+              ' .$verkoper . '
               </div>
               <div class="col text-center">
               Land:
               '.$titel[0]['land'] . '
               </div>
+              <div class="col text-center">
+              Aantal veilingen:
+              '.haalaantalveilingenop($verkoper).'
+              </div>
+              <div class="col text-center">
+              Datum voor het eerst actief:
+              '.haaldatumeersteveilingop($verkoper).'
+              </div>
        </div>';
+}
+
+function haalaantalveilingenop($verkoper){
+    $conn = verbindMetDatabase();
+    $sql = $conn->prepare("SELECT COUNT(verkoper) AS aantalverkocht FROM Voorwerp WHERE verkoper = ?");
+    $sql->execute(array($verkoper));
+    $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    $aantalverkocht = $titel[0]['aantalverkocht'];
+    return $aantalverkocht;
+}
+
+function haaldatumeersteveilingop($verkoper){
+    $conn = verbindMetDatabase();
+    $sql = $conn->prepare("SELECT TOP 1 looptijdbeginDag FROM Voorwerp WHERE verkoper = 'ppstamps69' ORDER BY looptijdbeginDag ASC");
+    $sql->execute(array($verkoper));
+    $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    $looptijdbegindag = $titel[0]['looptijdbeginDag'];
+    return $looptijdbegindag;
 }
 
 function haalbiedingenop($voorwerpnummer){
