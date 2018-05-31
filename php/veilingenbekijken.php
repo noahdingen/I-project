@@ -7,10 +7,10 @@ function haalplaatjeop($i, $resultaat){
 
 function haaltitelop($i, $resultaat){
     if(strlen ($resultaat[$i]['titel']) >21) {
-        $veiling = substr($resultaat[$i]['titel'], 0, 20);
-        echo "<h3>" . $veiling . "...</h3>";
+        $veiling = substr($resultaat[$i]['titel'], 0, 17);
+        echo "<h4>" . $veiling . "...</h4>";
     }else{
-        echo "<h3>" . $resultaat[$i]['titel']. "</h3>";
+        echo "<h4>" . $resultaat[$i]['titel']. "</h4>";
     }
 
 }
