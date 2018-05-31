@@ -114,7 +114,7 @@ include 'header.php';
                 <div class="bg-light text-center">
                     <?php haalvoorwerpdetailsop($voorwerpnummer); ?>
                 </div>
-            
+
 
         </div>
 

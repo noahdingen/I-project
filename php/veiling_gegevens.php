@@ -57,11 +57,11 @@ function haalverkoperop($voorwerpnummer){
               '.$titel[0]['land'] . '
               </div>
               <div class="col text-center">
-             <b>Aantal veilingen:</b>
+             <b>Totaal aantal veilingen:</b>
               '.haalaantalveilingenop($verkoper).'
               </div>
               <div class="col text-center">
-              <b>Datum voor het eerst actief:</b>
+              <b>Eerste veiling toegevoegd op:</b>
               '.haaldatumeersteveilingop($verkoper).'
               </div>
        </div>';
@@ -94,6 +94,10 @@ function haalvoorwerpdetailsop($voorwerpnummer){
               <div class="col text-center">
              <b> Bieden vanaf:</b>
              '.$titel[0]['startprijs'] . '
+              </div>
+               <div class="col text-center">
+             <b> Rubriekenpad:</b>
+             '.haalrubriekenpadop($voorwerpnummer). '
               </div>
               <div class="col text-center">
              <b> Betalingswijze:</b>
@@ -135,6 +139,18 @@ function haalbiedingenop($voorwerpnummer){
         ';
     }
 }
+
+function haalrubriekenpadop($voorwerpnummer){
+    $conn = verbindMetDatabase();
+    $sql = $conn->prepare("SELECT rubriekenpad, voorwerpnummer FROM Allerubrieken INNER JOIN VoorwerpInRubriek ON rubrieknummer = rubrieknummerOpLaagsteNiveau WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $titel= $sql->fetchAll(PDO::FETCH_NAMED);
+    $rubriekenpad = $titel[0]['rubriekenpad'];
+        return $rubriekenpad;
+
+    }
+
+
 
 function timer(){
 	$timer_info = haaltijdop($_GET['voorwerpnummer']);
