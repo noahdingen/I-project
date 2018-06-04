@@ -50,7 +50,7 @@ if (!empty($gebruikersnaam) && !empty($wachtwoord)) {
 else {
     header("location: ../login.php?error=$error_drie");
 }
-
+//Kijkt of de gebruikersnaam al bestaat in de database.
 function bestaatGebruikersnaam($gebruikersnaam) {
     $pdo = verbindMetDatabase();
 
@@ -60,7 +60,7 @@ function bestaatGebruikersnaam($gebruikersnaam) {
     $gebruikersnaam = $query->fetchColumn();
     return $gebruikersnaam;
 }
-
+//Kijkt of de gebruikersnaam en het wachtwoord overeenkomen.
 function bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord) {
     $pdo = verbindMetDatabase();
     $sql = "SELECT wachtwoord FROM Gebruiker WHERE gebruikersnaam = ?";

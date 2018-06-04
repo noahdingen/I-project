@@ -1,11 +1,11 @@
 <?php
-
+//Haalt de thumbnail op van het voorwerp.
 function haalplaatjeop($i, $resultaat){
     echo '<figure>
         <img src="'. $resultaat[$i]['hoofdplaatje'].'" alt="veilingitem">
           </figure>';
     }
-
+//Haalt de titel op van het voorwerp.
 function haaltitelop($i, $resultaat){
     if(strlen ($resultaat[$i]['titel']) >21) {
         $veiling = substr($resultaat[$i]['titel'], 0, 17);
@@ -14,11 +14,11 @@ function haaltitelop($i, $resultaat){
         echo "<h4>" . $resultaat[$i]['titel']. "</h4>";
     }
 }
-
+//Haalt de startprijs (minimale bod) van het voorwerp op.
 function haalstartprijsop($i, $resultaat){
     echo "<p>Bieden vanaf: €" . $resultaat[$i]['startprijs'] ."</p>";
 }
-
+//Kijkt wat het hoogst geboden bedrag is en laat deze zien. Is er nog niks geboden, dan komt er Nog geen bod uitgebracht te staan.
 function haalhuidigeprijsop($i, $resultaat){
     $voorwerpnummer = $resultaat[$i]["voorwerpnummer"];
     $conn = verbindMetDatabase();
@@ -30,7 +30,7 @@ function haalhuidigeprijsop($i, $resultaat){
     }
     else echo "Nog geen bod uitgebracht";
 }
-
+//Haalt de looptijd van de veiling op.
 function haaltimerop($i, $resultaat){
     if($resultaat[$i]["geblokkeerd"] == 'nee') {
         $eindtijd = $resultaat[0]['looptijdeindeDag'] . " " . $resultaat[0]['looptijdeindeTijdstip'] . ' GMT+0200';
@@ -39,7 +39,7 @@ function haaltimerop($i, $resultaat){
         echo 'Deze veiling is geblokkeerd';
     }
 }
-
+//Haalt de 12 nieuwste veilingen op.
 function haalhompeginaop($beheerder){
 	date_default_timezone_set("Europe/Amsterdam");
     $conn = verbindMetDatabase();
@@ -54,7 +54,7 @@ function haalhompeginaop($beheerder){
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     haalinformatieop($resultaat);
 }
-
+//Combineert de functies samen in 1 functie om onderstaande informatie op te halen.
 function haalinformatieop($resultaat){
     for($i = 0; $i < count($resultaat); $i++) {
             echo '<div class="col-md-4">';
@@ -66,7 +66,7 @@ function haalinformatieop($resultaat){
             echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
     }
 }
-
+//
 function haalrubriekinformatieop($i, $beheerder){
     $conn = verbindMetDatabase();
     if($beheerder){
@@ -79,8 +79,8 @@ function haalrubriekinformatieop($i, $beheerder){
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     haalinformatieop($resultaat);
 }
-
-function haalbekekenveilingenop($gebruikersnaam){
+//Haalt veilingen op waarop de gebruiker heeft geboden.
+function haalgebodenveilingenop($gebruikersnaam){
     date_default_timezone_set("Europe/Amsterdam");
     $conn = verbindMetDatabase();
     $data = $conn->prepare("SELECT DISTINCT Voorwerp.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs FROM Voorwerp INNER JOIN Bod ON Voorwerp.voorwerpnummer = Bod.voorwerpnummer WHERE Bod.gebruikersnaam =?");
@@ -92,7 +92,7 @@ function haalbekekenveilingenop($gebruikersnaam){
     }
 }
 
-
+//Haalt de veilingen op die door de ingelogde persoon zijn geplaatst.
 function haalmijnveilingenop($gebruikersnaam){
     date_default_timezone_set("Europe/Amsterdam");
     $conn = verbindMetDatabase();

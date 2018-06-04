@@ -1,5 +1,4 @@
 <?php
-
 include_once('../databaseverbinding/database_connectie.php');
 if (!isset($_SESSION)) {
     session_start();
@@ -17,7 +16,7 @@ $controle = 'Creditcard';
 $conn = verbindMetDatabase();
 $error = "Vul een geldig IBAN-Nummer in";
 
-
+//Controleert of het ingevoerde IBAN nummer geldig is.
 function checkIBAN($iban) {
 
     // maakt input normaal (haalt grote letters en spaties weg)

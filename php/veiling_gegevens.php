@@ -4,6 +4,7 @@ if (!isset($_SESSION)) {
 }
 include_once 'databaseverbinding/database_connectie.php';
 
+//Haalt meerdere afbeeldingen op voor de detail pagina.
 function haalafbeeldingenop($voorwerpnummer){
     $slides = array('first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth');
     $conn = verbindMetDatabase();
@@ -24,7 +25,7 @@ function haalafbeeldingenop($voorwerpnummer){
     ';
     }
 }
-
+//Haalt titel van het voorwerp op.
 function haaltitelop($voorwerpnummer){
     $conn = verbindMetDatabase();
     $sql = $conn->prepare("SELECT titel FROM Voorwerp WHERE voorwerpnummer = ?");
@@ -32,7 +33,7 @@ function haaltitelop($voorwerpnummer){
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
     echo $titel[0]['titel'];
 }
-
+//Haalt beschrijving van het voorwerp op.
 function haalbeschrijvingop($voorwerpnummer){
     $conn = verbindMetDatabase();
     $sql = $conn->prepare("SELECT beschrijving FROM Voorwerp WHERE voorwerpnummer = ?");
@@ -40,7 +41,7 @@ function haalbeschrijvingop($voorwerpnummer){
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
     echo $titel[0]['beschrijving'];
 }
-
+//Haalt verkoper van het voorwerp op.
 function haalverkoperop($voorwerpnummer){
     $conn = verbindMetDatabase();
     $sql = $conn->prepare("SELECT verkoper, land FROM Voorwerp WHERE voorwerpnummer = ?");
@@ -66,7 +67,7 @@ function haalverkoperop($voorwerpnummer){
               </div>
        </div>';
 }
-
+//Haalt aantal veiligen van de verkoper op.
 function haalaantalveilingenop($verkoper){
     $conn = verbindMetDatabase();
     $sql = $conn->prepare("SELECT COUNT(verkoper) AS aantalverkocht FROM Voorwerp WHERE verkoper = ?");
@@ -75,7 +76,7 @@ function haalaantalveilingenop($verkoper){
     $aantalverkocht = $titel[0]['aantalverkocht'];
     return $aantalverkocht;
 }
-
+//Haalt de datum waarop de verkoper zijn eerste veilig heeft geplaatst op.
 function haaldatumeersteveilingop($verkoper){
     $conn = verbindMetDatabase();
     $sql = $conn->prepare("SELECT TOP 1 looptijdbeginDag FROM Voorwerp WHERE verkoper = ? ORDER BY looptijdbeginDag ASC");
@@ -86,7 +87,7 @@ function haaldatumeersteveilingop($verkoper){
     $looptijdbegindag = date("d-m-Y", strtotime($datum_oud));
     return $looptijdbegindag;
 }
-
+//
 function haalvoorwerpdetailsop($voorwerpnummer){
     $conn = verbindMetDatabase();
     $sql = $conn->prepare("SELECT startprijs, betalingswijze, betalingsinstructie, verzendkosten, verzendinstructies  FROM Voorwerp WHERE voorwerpnummer = ?");
@@ -119,7 +120,7 @@ function haalvoorwerpdetailsop($voorwerpnummer){
               </div>
        </div>';
 }
-
+//Haalt de geboden bedragen op
 function haalbiedingenop($voorwerpnummer){
     $conn = verbindMetDatabase();
     $sql = $conn->prepare("SELECT bodbedrag, gebruikersnaam, bodDag, bodTijdstip FROM Bod WHERE voorwerpnummer = ? ORDER BY bodbedrag DESC");
@@ -141,7 +142,7 @@ function haalbiedingenop($voorwerpnummer){
         ';
     }
 }
-
+//Haalt het rubriekenpad van het voorwerp op.
 function haalrubriekenpadop($voorwerpnummer){
     $conn = verbindMetDatabase();
     $sql = $conn->prepare("SELECT rubriekenpad, voorwerpnummer FROM Allerubrieken INNER JOIN VoorwerpInRubriek ON rubrieknummer = rubrieknummerOpLaagsteNiveau WHERE voorwerpnummer = ?");
@@ -153,7 +154,7 @@ function haalrubriekenpadop($voorwerpnummer){
     }
 
 
-
+//
 function timer(){
 	$timer_info = haaltijdop($_GET['voorwerpnummer']);
 	}
@@ -166,7 +167,7 @@ function timer(){
 	$eindtijd = $info[0]['looptijdeindeDag']." ".$info[0]['looptijdeindeTijdstip'].' GMT+0200';
 	echo "<script> setDeadline('".$eindtijd."'); initializeClock('clockdiv', deadline);</script>";
 }
-
+//Haalt op of een voorwerp geblokkeerd is o niet.
 function haalblokadeop($voorwerpnummer){
     $conn = verbindMetDatabase();
     $sql = $conn->prepare("SELECT geblokkeerd FROM Voorwerp WHERE voorwerpnummer = ?");

@@ -99,7 +99,7 @@ if($verkoper == 'ja  '){
             <div class="container">
             <div class="row">
             ';
-            haalbekekenveilingenop($gebruikersnaam);
+            haalgebodenveilingenop($gebruikersnaam);
             echo '
             </div></div>
             ';

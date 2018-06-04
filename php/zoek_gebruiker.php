@@ -3,9 +3,10 @@ $sql = "select verkoper, beheerder from Gebruiker where gebruikersnaam =?";
 $query = $pdo->prepare($sql);
 $query->execute([$_SESSION['gebruikers']]);
 
-
+//Zorgt voor de database connectie (uit datase_connectie.php)
 $conn = verbindMetDatabase();
 
+//Zoekt een ingevoerde gebruiker op
 function haalgebruikersop(){
     $conn = verbindMetDatabase();
     $sql_gebruikersnaam = '%' . $_POST['gebruikersnaam_zoeken'] . '%';
