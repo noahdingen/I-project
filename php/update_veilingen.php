@@ -25,13 +25,36 @@ foreach($veilingen AS $info_veiling){
 	$data = $conn->prepare($sql_bericht);
 	$data->execute(array($voorwerp, $voorwerp));
 	$info = $data->fetchAll(PDO::FETCH_ASSOC);
-	if(!empty($info[0]['bodbedrag'])){
-	echo 'Voorwerp: '.$info[0]['titel'].'<br> De winnaar is: '.$info[0]['gebruikersnaam'].'<br> Het te betalen bedrag: €'
-		 .$info[0]['bodbedrag'].'<br> Verkoper: '.$info[0]['verkoper'].'<br><br>';
-		 $i = $i + 1;
-	} else{
-		echo 'Voorwerp: '.$veilingen[$i]['titel'].'<br> Verkoper: '.$veilingen[$i]['verkoper'].'<br> Er is geen bod gedaan op dit product <br><br>';
-		$i = $i + 1;
-	}	
+	
+	
+	 $subject = 'Bedankt voor uw registratie op IConcept';
+            $emailtekst = if(!empty($info[0]['bodbedrag'])){
+						'Voorwerp: '.$info[0]['titel'].'
+						De winnaar is: '.$info[0]['gebruikersnaam'].'Het te betalen bedrag: €'
+						   	 .$info[0]['bodbedrag'].'<br> Verkoper: '.$info[0]['verkoper'].'
+							 ';
+							 $i = $i + 1;
+							} else{
+								'Voorwerp: '.$veilingen[$i]['titel'].'Verkoper: '.$veilingen[$i]['verkoper'].'Er is geen bod gedaan op dit product
+								
+								';
+								$i = $i + 1;
+							}	
+                        
+           ' Met vriendelijke groeten, IConcepts.
+            Deze mail is automatisch gegenereed.';
+			$email = 'reno.rovers@gmail.com';
+            $to = $email;
+            $from = 'iconcepts39@gmail.com';
+
+            $headers   = array();
+            $headers[] = "MIME-Version: 1.0";
+            $headers[] = "Content-type: text/plain; charset=iso-8859-1";
+            $headers[] = "From: IConcepts <{$from}>";
+            $headers[] = "X-Mailer: PHP/".phpversion();
+
+            mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f".$from );
 }
 ?>
+
+
