@@ -33,8 +33,9 @@ if(isset($_SESSION['gebruikers'])) {
     <meta name="description" content="">
     <meta name="author" content="">
     <title><?php echo $titel; ?></title>
-<link href="assets/css/bootstrap.min.css" rel="stylesheet">
-<link href="assets/css/header.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/header.css" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/images/hammer.png" type="image/x-icon"/>
 </head>
 <body>
 <header>
