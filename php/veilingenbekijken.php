@@ -69,8 +69,8 @@ function haalinformatieop($resultaat){
             echo haalhuidigeprijsop($i, $resultaat);
             echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
 
-   
-    }	
+
+    }
 }
 
 function haalrubriekinformatieop($i, $beheerder){
@@ -99,6 +99,9 @@ function haalbekekenveilingenop($gebruikersnaam){
     $data->execute(array($gebruikersnaam));
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     haalinformatieop($resultaat);
+    if(empty($resultaat)){
+       echo '<div class="text-center">'.'U heeft nog geen bod uitgebracht.'.'</div>';
+    }
 }
 
 
@@ -112,4 +115,7 @@ function haalmijnveilingenop($gebruikersnaam){
     $data->execute(array($gebruikersnaam));
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     haalinformatieop($resultaat);
+    if(empty($resultaat)){
+        echo '<div>'.'U heeft nog geen geen veilingen geplaatst.'.'</div>';
+    }
 }

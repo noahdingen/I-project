@@ -85,7 +85,7 @@ else {
 <?php
 if($verkoper == 'ja  '){
     echo'   
-            <h1>Mijn lopende veilingen</h1>   
+            <h1>Mijn lopende veilingen</h1> 
             <div class="container">
             <div class="row">
             ';
@@ -97,7 +97,6 @@ if($verkoper == 'ja  '){
         else{
         echo'
             <h1>Mijn geboden veilingen</h1>
-            
             <div class="container">
             <div class="row">
             ';
