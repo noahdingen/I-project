@@ -40,21 +40,23 @@ foreach($veilingen AS $info_veiling){
 								';
 								$i = $i + 1;
 							}	
-                        
-           ' Met vriendelijke groeten, IConcepts.
-            Deze mail is automatisch gegenereed.';
-			$email = 'reno.rovers@gmail.com';
-            $to = $email;
-            $from = 'iconcepts39@gmail.com';
-
-            $headers   = array();
-            $headers[] = "MIME-Version: 1.0";
-            $headers[] = "Content-type: text/plain; charset=iso-8859-1";
-            $headers[] = "From: IConcepts <{$from}>";
-            $headers[] = "X-Mailer: PHP/".phpversion();
-
-            mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f".$from );
 }
+echo '<pre>';
+var_dump($emailtekst);
+echo '</pre>';
+         //  ' Met vriendelijke groeten, IConcepts.
+          //  Deze mail is automatisch gegenereed.';
+			//$email = 'reno.rovers@gmail.com';
+          //  $to = $email;
+          //  $from = 'iconcepts39@gmail.com';
+//
+           // $headers   = array();
+          // $headers[] = "MIME-Version: 1.0";
+          //  $headers[] = "Content-type: text/plain; charset=iso-8859-1";
+          //  $headers[] = "From: IConcepts <{$from}>";
+         //   $headers[] = "X-Mailer: PHP/".phpversion();
+
+           // mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f".$from );
 ?>
 
 
