@@ -2,6 +2,14 @@ body{
     background-color: #FF7753;
 }
 
+a{
+    color: #3A80A2;
+}
+
+a:hover{
+    color: #0069d9;
+}
+
 .jumbotron{
     background-color: #FF7753!important;
 }

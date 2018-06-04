@@ -1,8 +1,8 @@
 <?php
-function weergeefrubriekenboom(){
+function weergeefrubriekenboom($rubrieken){
     echo '
     <div id="accordion">
-            ' . haalhoofdrubriekenop() . '
+            ' . haalhoofdrubriekenop($rubrieken) . '
     </div>
     ';
 }
@@ -25,8 +25,7 @@ function haalouderrubriekop($rubrieknummer){
     }
 }
 
-function haalhoofdrubriekenop(){
-    $resultaat = haalallerubriekenop();
+function haalhoofdrubriekenop($resultaat){
     for($i=0; $i<count($resultaat); $i++){
         if($resultaat[$i]["rubriek"]==-1){
             echo '
