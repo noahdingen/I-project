@@ -8,7 +8,7 @@ include 'header.php';
 include_once 'php/beheerder_zoeken.php';
 include_once 'php/veilingenbekijken.php';
 include_once 'php/rubriekenboom.php';
-
+$rubrieken = haalallerubriekenop();
 
 //include_once 'Server_verbinding/SQLSrvConnect.php';
 ?>
@@ -34,6 +34,11 @@ include_once 'php/rubriekenboom.php';
         }
         else if(isset($_GET["rubrieknummer"])){
             echo '
+              <ol class="breadcrumb bg-light">
+                ';
+                echo haalouderrubriekop($_GET["rubrieknummer"]) . '
+              </ol>
+            
             <div class="container">
             <h1 class="display-4">Resultaten</h1>
             <div class="row">

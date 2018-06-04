@@ -2,7 +2,6 @@
 
 if (isset($_SESSION['gebruikers'])) {
     $gebruiker = $_SESSION['gebruikers'];
-
     $pdo = verbindMetDatabase();
     $sql = "select beheerder from Gebruiker where gebruikersnaam =?";
     $query = $pdo->prepare($sql);

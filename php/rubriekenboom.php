@@ -16,6 +16,15 @@ function haalsubrubriekenop($i, $resultaat){
     return $subrubrieken;
 }
 
+function haalouderrubriekop($rubrieknummer){
+    $resultaat = haalallerubriekenop();
+    for($i=0; $i<count($resultaat); $i++){
+        if($rubrieknummer==$resultaat[$i]["rubrieknummer"] && $rubrieknummer!=-1){
+            echo '<li class="breadcrumb-item"><a href=index.php?rubrieknummer=' . $resultaat[$i]["rubrieknummer"] . '>' . $resultaat[$i]["rubrieknaam"] .'</a></li> ' . haalouderrubriekop($resultaat[$i]["rubriek"]) . '';
+        }
+    }
+}
+
 function haalhoofdrubriekenop(){
     $resultaat = haalallerubriekenop();
     for($i=0; $i<count($resultaat); $i++){
