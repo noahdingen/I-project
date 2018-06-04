@@ -3,11 +3,11 @@ body{
 }
 
 a{
-    color: #3A80A2;
+    color: black;
 }
 
 a:hover{
-    color: #0069d9;
+    color: #0C5F88;
 }
 
 .jumbotron{

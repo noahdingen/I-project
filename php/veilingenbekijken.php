@@ -73,8 +73,10 @@ function haalrubriekenop($rubrieknummer, $rubrieken, $beheerder){
         if($rubrieken[$i]["rubriek"]==$rubrieknummer){
             haalrubriekinformatieop($rubrieken[$i]["rubrieknummer"], $beheerder);
         }
+        else if($rubrieken[$i]["rubrieknummer"]==$rubrieknummer){
+            haalrubriekinformatieop($rubrieken[$i]["rubrieknummer"], $beheerder);
+        }
     }
-
 }
 
 function haalrubriekinformatieop($i, $beheerder){
