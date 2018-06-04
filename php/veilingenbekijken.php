@@ -13,7 +13,6 @@ function haaltitelop($i, $resultaat){
     }else{
         echo "<h4>" . $resultaat[$i]['titel']. "</h4>";
     }
-
 }
 
 function haalstartprijsop($i, $resultaat){
@@ -43,20 +42,17 @@ function haaltimerop($i, $resultaat){
 
 function haalhompeginaop($beheerder){
 	date_default_timezone_set("Europe/Amsterdam");
-	$huidige_tijd = date('H:i:s');
-	$huidige_dag =  date('Y-m-d');
     $conn = verbindMetDatabase();
     if($beheerder){
         $data = $conn->prepare("SELECT TOP 12 * FROM Voorwerp WHERE veilingGesloten = 'nee'");
-        $data->execute();
-        $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-        haalinformatieop($resultaat);
-        }else{
-        $data = $conn->prepare("SELECT TOP 12 * FROM Voorwerp WHERE geblokkeerd = 'nee' AND veilingGesloten = 'nee'");
-        $data->execute();
-        $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-        haalinformatieop($resultaat);
+
     }
+    else{
+        $data = $conn->prepare("SELECT TOP 12 * FROM Voorwerp WHERE geblokkeerd = 'nee' AND veilingGesloten = 'nee'");
+    }
+    $data->execute();
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    haalinformatieop($resultaat);
 }
 
 function haalinformatieop($resultaat){
@@ -68,8 +64,6 @@ function haalinformatieop($resultaat){
             echo haalstartprijsop($i, $resultaat);
             echo haalhuidigeprijsop($i, $resultaat);
             echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
-
-
     }
 }
 
@@ -77,23 +71,17 @@ function haalrubriekinformatieop($i, $beheerder){
     $conn = verbindMetDatabase();
     if($beheerder){
         $data = $conn->prepare("SELECT V.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer WHERE rubrieknummerOpLaagsteNiveau = ?");
-        $data->execute(array($i));
-        $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-        haalinformatieop($resultaat);
-    }else {
-        $data = $conn->prepare("SELECT V.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer WHERE rubrieknummerOpLaagsteNiveau = ? and geblokkeerd = 'nee'");
-        $data->execute(array($i));
-        $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-        haalinformatieop($resultaat);
     }
+    else {
+        $data = $conn->prepare("SELECT V.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer WHERE rubrieknummerOpLaagsteNiveau = ? and geblokkeerd = 'nee'");
+    }
+    $data->execute(array($i));
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    haalinformatieop($resultaat);
 }
-
 
 function haalbekekenveilingenop($gebruikersnaam){
     date_default_timezone_set("Europe/Amsterdam");
-    $huidige_tijd = date('H:i:s');
-    $huidige_dag =  date('Y-m-d');
-
     $conn = verbindMetDatabase();
     $data = $conn->prepare("SELECT DISTINCT Voorwerp.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs FROM Voorwerp INNER JOIN Bod ON Voorwerp.voorwerpnummer = Bod.voorwerpnummer WHERE Bod.gebruikersnaam =?");
     $data->execute(array($gebruikersnaam));
@@ -107,9 +95,6 @@ function haalbekekenveilingenop($gebruikersnaam){
 
 function haalmijnveilingenop($gebruikersnaam){
     date_default_timezone_set("Europe/Amsterdam");
-    $huidige_tijd = date('H:i:s');
-    $huidige_dag =  date('Y-m-d');
-
     $conn = verbindMetDatabase();
     $data = $conn->prepare("SELECT DISTINCT Voorwerp.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs FROM Voorwerp INNER JOIN Verkoper ON Voorwerp.verkoper = Verkoper.gebruikersnaam WHERE Verkoper.gebruikersnaam =? ");
     $data->execute(array($gebruikersnaam));

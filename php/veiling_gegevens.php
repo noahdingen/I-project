@@ -81,7 +81,9 @@ function haaldatumeersteveilingop($verkoper){
     $sql = $conn->prepare("SELECT TOP 1 looptijdbeginDag FROM Voorwerp WHERE verkoper = ? ORDER BY looptijdbeginDag ASC");
     $sql->execute(array($verkoper));
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
-    $looptijdbegindag = $titel[0]['looptijdbeginDag'];
+    //zet datum goed naar dd-mm-jjjj
+    $datum_oud = $titel[0]['looptijdbeginDag'];
+    $looptijdbegindag = date("d-m-Y", strtotime($datum_oud));
     return $looptijdbegindag;
 }
 

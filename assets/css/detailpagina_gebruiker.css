@@ -12,11 +12,9 @@ form{
     width: 30%;
 }
 
-.btn-primary{
+.linkjes{
     margin-top: 10px;
 }
-
-
 
 h1.display-4{
     text-align: center;
@@ -29,6 +27,7 @@ h1.display-4{
 body{
     background-color: #FF7753!important;
 }
+
 
 
 footer{
