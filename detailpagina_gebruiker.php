@@ -6,6 +6,16 @@ include_once 'databaseverbinding/database_connectie.php';
 include_once 'php/beheerder_zoeken.php';
 $titel = 'Profielpagina';
 include_once 'header.php';
+
+$sql = "select gebruikersnaam from Gebruiker where beheerder = 'ja'";
+$query = $pdo->prepare($sql);
+$query->execute([$_SESSION['gebruikers']]);
+$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+
+$beheerder_1 = $rows[0]['gebruikersnaam'];
+$beheerder_2 = $rows[1]['gebruikersnaam'];
+$beheerder_3 = $rows[2]['gebruikersnaam'];
+
 if($beheerder == 'ja') {
     include_once 'php/gegevens_ophalen.php';
     $inhoudstype = 'readonly';
@@ -85,18 +95,22 @@ if($beheerder == 'ja') {
         }
         echo '<input name="geblokkeerd" class="form-control" type="hidden" value="' . $geblokkeerd . '">';
 
-        if ($geblokkeerd == 'nee') {
-            echo '
+        if($_GET['gebruikersnaam'] != $beheerder_1 && $_GET['gebruikersnaam'] != $beheerder_2 && $_GET['gebruikersnaam'] != $beheerder_3) {
+            if ($geblokkeerd == 'nee') {
+                echo '
     <div class="linkjes">
         <button type="submit" class="btn btn-primary">Blokkeren</button>
     </div>
     ';
-        } else {
-            echo '
+            } else {
+                echo '
     <div class="linkjes">
         <button type="submit" class="btn btn-primary">Deblokkeren</button>
     </div>
     ';
+            }
+        }else{
+            echo '<p>U kunt niet een andere beheerder blokkeren</p>';
         }
         ?>
 
