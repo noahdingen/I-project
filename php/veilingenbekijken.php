@@ -71,14 +71,10 @@ function haalinformatieop($resultaat){
 function haalrubriekenop($rubrieknummer, $rubrieken, $beheerder){
     for($i=0; $i<count($rubrieken); $i++){
         if($rubrieken[$i]["rubriek"]==$rubrieknummer){
-
+            haalrubriekinformatieop($rubrieken[$i]["rubrieknummer"], $beheerder);
         }
     }
-    echo '
-    <div class="container">
-    <h1 class="display-4">Resultaten</h1>
-    <div class="row">
-    ';
+
 }
 
 function haalrubriekinformatieop($i, $beheerder){

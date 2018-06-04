@@ -38,6 +38,9 @@ $rubrieken = haalallerubriekenop();
                 ';
                 echo haalouderrubriekop($_GET["rubrieknummer"]) . '
               </ol>
+                <div class="container">
+                <h1 class="display-4">Resultaten</h1>
+                <div class="row">
             ';
             haalrubriekenop($_GET["rubrieknummer"], $rubrieken, $beheerder);
             echo '</div></div>';
