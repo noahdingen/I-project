@@ -12,7 +12,7 @@ include 'header.php';
 ?>
 <link href="assets/css/detailpagina.css" rel="stylesheet">
 <link href="assets/css/timer.css" rel="stylesheet">
-<script type="application/javascript" src="./assets/js/timerJava.js"></script>
+<script src="./assets/js/timerJava.js"></script>
 <main>
 
     <div class="container-fluid">

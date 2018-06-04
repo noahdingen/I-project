@@ -20,7 +20,7 @@ function haalafbeeldingenop($voorwerpnummer){
         }
     echo '
     <div class="carousel-item ' . $afbeeling . '">
-        <img src="' . $value['filenaam'] . '" alt="' . $slides[$key] . ' slide" height=500px width="500px">
+        <img src="' . $value['filenaam'] . '" alt="' . $slides[$key] . ' slide" height="500" width="500">
     </div>
     ';
     }
