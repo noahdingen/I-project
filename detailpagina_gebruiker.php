@@ -87,11 +87,15 @@ if($beheerder) {
 
         if ($geblokkeerd == 'nee') {
             echo '
-    <button type="submit" class="btn btn-primary">Blokkeren</button>
+    <div class="linkjes">
+        <button type="submit" class="btn btn-primary">Blokkeren</button>
+    </div>
     ';
         } else {
             echo '
-    <button type="submit" class="btn btn-primary">Deblokkeren</button>
+    <div class="linkjes">
+        <button type="submit" class="btn btn-primary">Deblokkeren</button>
+    </div>
     ';
         }
         ?>

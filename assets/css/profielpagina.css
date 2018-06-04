@@ -32,6 +32,10 @@ body{
     background-color: #FF7753!important;
 }
 
+.linkjes{
+    margin-top: 10px;
+}
+
 .linkjes a{
     color: black;
     text-decoration: underline;
