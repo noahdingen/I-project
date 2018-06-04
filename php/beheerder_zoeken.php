@@ -1,5 +1,6 @@
 <?php
 
+$beheerder = false;
 if (isset($_SESSION['gebruikers'])) {
     $gebruiker = $_SESSION['gebruikers'];
     $pdo = verbindMetDatabase();

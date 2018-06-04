@@ -67,6 +67,19 @@ function haalinformatieop($resultaat){
     }
 }
 
+function haalrubriekenop($rubrieknummer, $rubrieken, $beheerder){
+    for($i=0; $i<count($rubrieken); $i++){
+        if($rubrieken[$i]["rubrieknummer"]==$rubrieknummer){
+
+        }
+    }
+    echo '
+    <div class="container">
+    <h1 class="display-4">Resultaten</h1>
+    <div class="row">
+    ';
+}
+
 function haalrubriekinformatieop($i, $beheerder){
     $conn = verbindMetDatabase();
     if($beheerder){
