@@ -3,6 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 include_once 'databaseverbinding/database_connectie.php';
+
 $titel = 'Profielpagina';
 include_once 'header.php';
 include_once 'php/gegevens_ophalen.php';
@@ -10,11 +11,9 @@ include_once 'php/beheerder_zoeken.php';
 include_once 'php/veilingenbekijken.php';
 if($_GET["bewerken"] == 'false'){
     $inhoudstype = 'readonly';
-}
-else{
+} else{
     $inhoudstype = '';
 }
-
 
 echo '
     <script type="application/javascript" src="./assets/js/timerJava.js"></script>
