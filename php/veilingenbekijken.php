@@ -100,7 +100,7 @@ function haalbekekenveilingenop($gebruikersnaam){
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     haalinformatieop($resultaat);
     if(empty($resultaat)){
-       echo '<div class="text-center">'.'U heeft nog geen bod uitgebracht.'.'</div>';
+       echo '<div class="col text-center">'.'U heeft nog geen bod uitgebracht.'.'</div>';
     }
 }
 
@@ -116,6 +116,6 @@ function haalmijnveilingenop($gebruikersnaam){
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     haalinformatieop($resultaat);
     if(empty($resultaat)){
-        echo '<div>'.'U heeft nog geen geen veilingen geplaatst.'.'</div>';
+        echo '<div class="col text-center">'.'U heeft nog geen geen veilingen geplaatst.'.'</div>';
     }
 }
