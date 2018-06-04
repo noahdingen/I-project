@@ -1,4 +1,5 @@
 <?php
+include_once 'beheerder_zoeken.php';
 
 function haalplaatjeop($i, $resultaat){
     echo '<figure>
@@ -43,7 +44,7 @@ function haaltimerop($i, $resultaat){
 function haalhompeginaop($beheerder){
 	date_default_timezone_set("Europe/Amsterdam");
     $conn = verbindMetDatabase();
-    if($beheerder){
+    if($beheerder == 'ja'){
         $data = $conn->prepare("SELECT TOP 12 * FROM Voorwerp WHERE veilingGesloten = 'nee'");
 
     }
@@ -69,7 +70,7 @@ function haalinformatieop($resultaat){
 
 function haalrubriekenop($rubrieknummer, $rubrieken, $beheerder){
     for($i=0; $i<count($rubrieken); $i++){
-        if($rubrieken[$i]["rubrieknummer"]==$rubrieknummer){
+        if($rubrieken[$i]["rubriek"]==$rubrieknummer){
 
         }
     }
@@ -82,7 +83,7 @@ function haalrubriekenop($rubrieknummer, $rubrieken, $beheerder){
 
 function haalrubriekinformatieop($i, $beheerder){
     $conn = verbindMetDatabase();
-    if($beheerder){
+    if($beheerder == 'ja'){
         $data = $conn->prepare("SELECT V.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer WHERE rubrieknummerOpLaagsteNiveau = ?");
     }
     else {

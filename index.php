@@ -17,7 +17,7 @@ $rubrieken = haalallerubriekenop();
 <main>
     <div class="row">
     <aside class="col-2">
-        <?php weergeefrubriekenboom(); ?>
+        <?php weergeefrubriekenboom($rubrieken); ?>
     </aside>
     <div class="container text-center">
         <?php if($zoek != ''){
@@ -38,12 +38,8 @@ $rubrieken = haalallerubriekenop();
                 ';
                 echo haalouderrubriekop($_GET["rubrieknummer"]) . '
               </ol>
-            
-            <div class="container">
-            <h1 class="display-4">Resultaten</h1>
-            <div class="row">
             ';
-            haalrubriekinformatieop($_GET["rubrieknummer"], $beheerder);
+            haalrubriekenop($_GET["rubrieknummer"], $rubrieken, $beheerder);
             echo '</div></div>';
         }
         else{

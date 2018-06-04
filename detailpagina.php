@@ -56,18 +56,37 @@ include 'header.php';
                 <?php echo '<form method="post" action="php/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
                 <div class="form-group">
                         <?php  ?>
-						<?php if(isset($_GET['veilingstatus']) && $_GET['veilingstatus'] == 0){
-							echo ' ';}
-						else{ echo '
+						<?php
+                        if(!$item) {
+                            if (isset($_GET['veilingstatus']) && $_GET['veilingstatus'] == 0) {
+                                echo ' ';
+                            } else {
+                                echo '
                         <div class="my-md-3 form-group text-center">
                             <input type="text" class="form-control" id="bodbedrag" name="bodbedrag" placeholder="Doe een bod">
                         </div>
                         <div class="form-group text-center">
                             <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
                         </div>
-                        </form>';}?>
+                        </form>';
+                            }
+                        }else{
+                            if (isset($_GET['veilingstatus']) && $_GET['veilingstatus'] == 0) {
+                                echo ' ';
+                            } else {
+                                echo '
+                        <div class="my-md-3 form-group text-center">
+                            <input type="text" class="form-control" id="bodbedrag" name="bodbedrag" placeholder="Deze veiling is geblokkeerd" readonly>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
+                        </div>
+                        </form>';
+                            }
+                        }?>
                     <?php
-                    if($beheerder) {
+                        echo '<br>';
+                    if($beheerder == 'ja') {
                     echo '
                 <form method="post" action="php/blokkeerveiling.php?voorwerpnummer=' . $voorwerpnummer . '"
 
