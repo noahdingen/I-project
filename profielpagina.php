@@ -63,7 +63,7 @@ if(($_GET["bewerken"]=='true')){
 
 }
 else {
-	if($verkoper == 'ja  ' || $beheerder){
+	if($verkoper == 'ja  ' || $beheerder == 'ja'){
 		echo '
     <div class="linkjes">
         <a href="profielpagina.php?bewerken=true">Gegevens bijwerken</a>

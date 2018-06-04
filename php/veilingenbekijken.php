@@ -1,5 +1,7 @@
 <?php
+
 //Haalt de thumbnail op van het voorwerp.
+
 function haalplaatjeop($i, $resultaat){
     echo '<figure>
         <img src="'. $resultaat[$i]['hoofdplaatje'].'" alt="veilingitem">
@@ -43,7 +45,7 @@ function haaltimerop($i, $resultaat){
 function haalhompeginaop($beheerder){
 	date_default_timezone_set("Europe/Amsterdam");
     $conn = verbindMetDatabase();
-    if($beheerder){
+    if($beheerder == 'ja'){
         $data = $conn->prepare("SELECT TOP 12 * FROM Voorwerp WHERE veilingGesloten = 'nee'");
 
     }
@@ -66,10 +68,18 @@ function haalinformatieop($resultaat){
             echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
     }
 }
-//
+function haalrubriekenop($rubrieknummer, $rubrieken, $beheerder){
+    for($i=0; $i<count($rubrieken); $i++){
+        if($rubrieken[$i]["rubriek"]==$rubrieknummer){
+            haalrubriekinformatieop($rubrieken[$i]["rubrieknummer"], $beheerder);
+        }
+    }
+
+}
+
 function haalrubriekinformatieop($i, $beheerder){
     $conn = verbindMetDatabase();
-    if($beheerder){
+    if($beheerder == 'ja'){
         $data = $conn->prepare("SELECT V.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer WHERE rubrieknummerOpLaagsteNiveau = ?");
     }
     else {

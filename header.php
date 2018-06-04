@@ -1,5 +1,6 @@
 <?php
 include_once 'databaseverbinding/database_connectie.php';
+include_once 'php/beheerder_zoeken.php';
 
 if (!isset($_SESSION)) {
     session_start();
@@ -22,6 +23,10 @@ if(isset($_SESSION['gebruikers'])) {
     $rows = $query->fetchAll(PDO::FETCH_ASSOC);
     $verkoper = $rows[0]['verkoper'];
     $beheerder = $rows[0]['beheerder'];
+}
+
+if(!isset($beheerder)){
+    $beheerder = 'nee';
 }
 ?>
 
@@ -81,10 +86,15 @@ if(isset($_SESSION['gebruikers'])) {
 		$huidige_tijd = date('H:i:s');
 		$huidige_dag =  date('Y-m-d');
         $pdo = verbindMetDatabase();
-
-		$data = $pdo->prepare("SELECT * FROM Voorwerp WHERE titel LIKE'%".$zoek."%' AND ((looptijdeindeDag = ? AND looptijdeindeTijdstip > ?) OR looptijdeindeDag > ?)");
-		$data->execute(array($huidige_dag, $huidige_tijd, $huidige_dag));
-		$resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+if($beheerder == 'nee') {
+    $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE geblokkeerd = 'nee' AND titel LIKE'%" . $zoek . "%' AND ((looptijdeindeDag = ? AND looptijdeindeTijdstip > ?) OR looptijdeindeDag > ?)");
+    $data->execute(array($huidige_dag, $huidige_tijd, $huidige_dag));
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+}elseif($beheerder == 'ja'){
+    $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE titel LIKE'%" . $zoek . "%' AND ((looptijdeindeDag = ? AND looptijdeindeTijdstip > ?) OR looptijdeindeDag > ?)");
+    $data->execute(array($huidige_dag, $huidige_tijd, $huidige_dag));
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+}
 
         ?>
     </nav>

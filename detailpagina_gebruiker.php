@@ -4,9 +4,9 @@ if (!isset($_SESSION)) {
 }
 include_once 'databaseverbinding/database_connectie.php';
 include_once 'php/beheerder_zoeken.php';
-if($beheerder) {
-    $titel = 'Profielpagina';
-    include_once 'header.php';
+$titel = 'Profielpagina';
+include_once 'header.php';
+if($beheerder == 'ja') {
     include_once 'php/gegevens_ophalen.php';
     $inhoudstype = 'readonly';
 
