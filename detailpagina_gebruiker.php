@@ -6,7 +6,7 @@ include_once 'databaseverbinding/database_connectie.php';
 include_once 'php/beheerder_zoeken.php';
 $titel = 'Profielpagina';
 include_once 'header.php';
-
+$pdo = verbindMetDatabase();
 $sql = "select gebruikersnaam from Gebruiker where beheerder = 'ja'";
 $query = $pdo->prepare($sql);
 $query->execute([$_SESSION['gebruikers']]);

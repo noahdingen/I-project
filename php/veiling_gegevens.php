@@ -67,6 +67,7 @@ function haalverkoperop($voorwerpnummer){
               </div>
        </div>';
 }
+
 //Haalt aantal veiligen van de verkoper op.
 function haalaantalveilingenop($verkoper){
     $conn = verbindMetDatabase();
