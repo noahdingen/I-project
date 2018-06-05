@@ -52,7 +52,6 @@ if (empty($hoogste_bod) && $hoogste_bod > $startbod[0]['startprijs']){
 }
 else{
 if($hoogste_bod[0]["hoogste_bod"]<$bodbedrag && $bodbedrag > $startbod[0]['startprijs'] && $bodbedrag - $hoogste_bod[0]["hoogste_bod"] >= 1 ) {
-    //var_dump($hoogste_bod);
     $lengte =  sizeof($hoogste_bod);
     if($hoogste_bod[0]["gebruikersnaam"]!=$gebruikersnaam){
         $sql_insert = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
