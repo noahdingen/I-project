@@ -93,7 +93,7 @@ if($verkoper == 'ja  '){
             </div></div>
             ';
         }
-        else{
+
         echo'
             <h1>Mijn geboden veilingen</h1>
             <div class="container">
@@ -103,7 +103,7 @@ if($verkoper == 'ja  '){
             echo '
             </div></div>
             ';
-        }
+
         ?>
         </div>
     </div>
