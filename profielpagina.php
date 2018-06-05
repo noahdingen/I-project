@@ -82,6 +82,7 @@ else {
 </div>
     <div class="persoonlijke-veilingen">
 <?php
+
 if($verkoper == 'ja  ') {
     if(isset($_GET['wissel']) && $_GET['wissel'] == true) {
        echo '
@@ -96,7 +97,6 @@ if($verkoper == 'ja  ') {
         echo '
             </div></div>
             ';
-
     }
     else {
             echo '
@@ -105,9 +105,7 @@ if($verkoper == 'ja  ') {
             <a href="profielpagina.php?wissel=true&bewerken=false">Bekijk mijn geboden veilingen</a>
             </div>
             ';
-
-
-
+        haalmijnveilingenop($gebruikersnaam);
         }
     }        ?>
         </div>

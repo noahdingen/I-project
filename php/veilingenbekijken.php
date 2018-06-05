@@ -116,10 +116,3 @@ function haalmijnveilingenop($gebruikersnaam){
         echo '<div class="col text-center">'.'U heeft nog geen geen veilingen geplaatst.'.'</div>';
     }
 }
-
-//if(isset($_GET['wissel']) && $_GET['wissel'] == true) {
-//header('location: profielpagina.php?wissel=false&bewerken=false');
-//}
-//elseif(isset($_GET['wissel']) && $_GET['wissel'] == false){
-//    header('location: profielpagina.php?wissel=true&bewerken=false');
-//}
