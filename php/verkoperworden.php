@@ -53,7 +53,6 @@ function checkIBAN($iban) {
         $sql = "INSERT INTO Verkoper  VALUES(?, ?, ?, ?, ?)";
         $query = $conn->prepare($sql);
         $query->execute(array($gast, $bank, $banknummer, $controle, $creditcardnummer));
-;
 
         $sql2 = "UPDATE Gebruiker  set verkoper = '$verkoper' WHERE gebruikersnaam = '$gast' ";
         $query = $conn->prepare($sql2);
