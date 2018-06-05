@@ -25,30 +25,31 @@ $eind = $eind_dag." ".$eind_tijdstip;
 
 if($huidige > $eind){
 	header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&veilingstatus=0");
-}else{
-
-if (empty($hoogste_bod)){
-    $sql_insert = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
-    $sql_insert->execute(array($voorwerpnummer, $bodbedrag, $gebruikersnaam));
-    $error = "";
-    header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer");
-}
-else if($hoogste_bod[0]["hoogste_bod"]<$bodbedrag ){
-    var_dump($hoogste_bod);
-    if($hoogste_bod[0]["gebruikersnaam"]!=$gebruikersnaam){
-        $sql_insert = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
-        $sql_insert->execute(array($voorwerpnummer, $bodbedrag, $gebruikersnaam));
-        $error = "";
-        header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer");
-    }
-    else {
-        $error = "U heeft al het hoogste bod geplaatst";
+}else {
+    if ($bodbedrag < 10000000) {
+        if (empty($hoogste_bod)) {
+            $sql_insert = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
+            $sql_insert->execute(array($voorwerpnummer, $bodbedrag, $gebruikersnaam));
+            $error = "";
+            header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer");
+        } else if ($hoogste_bod[0]["hoogste_bod"] < $bodbedrag) {
+            var_dump($hoogste_bod);
+            if ($hoogste_bod[0]["gebruikersnaam"] != $gebruikersnaam) {
+                $sql_insert = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
+                $sql_insert->execute(array($voorwerpnummer, $bodbedrag, $gebruikersnaam));
+                $error = "";
+                header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer");
+            } else {
+                $error = "U heeft al het hoogste bod geplaatst";
+                header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
+            }
+        } else {
+            $error = "bodbedrag is te laag";
+            header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
+        }
+    } else {
+        $error = "U kunt geen bod plaatsen hoger dan €10.000.000,-";
         header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
     }
-}
-else{
-    $error = "bodbedrag is te laag";
-    header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
-}
 }
 ?>
