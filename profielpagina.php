@@ -96,20 +96,18 @@ if($verkoper == 'ja  ') {
         echo '
             </div></div>
             ';
+
     }
-    if($_GET['wissel'] == false) {
+    else {
             echo '
             <h1>Mijn lopende veilingen</h1> 
             <div class="linkjes">
             <a href="profielpagina.php?wissel=true&bewerken=false">Bekijk mijn geboden veilingen</a>
             </div>
-            <div class="container">
-            <div class="row">
             ';
-            haalmijnveilingenop($gebruikersnaam);
-            echo '
-            </div></div>
-            ';
+
+
+
         }
     }        ?>
         </div>
