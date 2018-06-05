@@ -42,7 +42,7 @@ else {
         $state->execute(array($voorwerpnummer));
         $verkoper = $state->fetchAll();
         if ($gebruikersnaam != $verkoper[0]['verkoper']) {
-            if ($bodbedrag < 10000000) {
+            if ($bodbedrag < 100000000) {
                 if (empty($hoogste_bod) && $hoogste_bod > $startbod[0]['startprijs']) {
                     var_dump($startbod[0]['startprijs']);
                     echo $hoogste_bod;
@@ -73,7 +73,7 @@ else {
                     }
                 }
             }else {
-                $error = 'U kunt niet hoger dan €9.999.999,99 bieden';
+                $error = 'U kunt niet hoger dan €99.999.999,99 bieden';
                 header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
             }
         } else {
