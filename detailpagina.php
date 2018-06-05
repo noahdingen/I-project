@@ -55,7 +55,7 @@ include 'header.php';
                 </div>
                 <?php echo '<form method="post" action="php/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
                 <div class="form-group">
-                        <?php  ?>
+
 						<?php
                         if(!$item) {
                             if (isset($_GET['veilingstatus']) && $_GET['veilingstatus'] == 0) {
@@ -88,7 +88,7 @@ include 'header.php';
                         echo '<br>';
                     if($beheerder == 'ja') {
                     echo '
-                <form method="post" action="php/blokkeerveiling.php?voorwerpnummer=' . $voorwerpnummer . '"
+                    <form method="post" action="php/blokkeerveiling.php?voorwerpnummer=' . $voorwerpnummer . '"
 
                     ';
                     if($item == false) {
@@ -103,9 +103,7 @@ include 'header.php';
                     <input type="hidden" id="voorwerpnummer" name="voorwerpnummer"><br>
 
                         <button type="submit" name="blokkeerknop" class="btn btn-primary">Deblokkeer</button>';
-                    }echo'
-                    
-                
+                    }echo'     
                 </form>';
                     } ?>
                 </div>
