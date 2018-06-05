@@ -2,14 +2,7 @@
 include_once 'php/rubriek_zoeken.php';
 include_once 'databaseverbinding/database_connectie.php';
 $titel = 'Veiling toevoegen';
-
 include 'header.php';
-
-if(isset($_GET['error'])){
-    $error = $_GET['error'];
-}else{
-    $error = '';
-}
 ?>
 
 <link href="assets/css/veiling_toevoegen.css" rel="stylesheet">
@@ -109,7 +102,6 @@ if(isset($_GET['error'])){
                 <label for="verzendinstructies">Verzendinstructies</label>
                 <input type="text" class="form-control" name="verzendinstructies" id="verzendinstructies" placeholder="verzendinstructies">
             </div>
-            <?php echo $error;?>
             <input type="submit" name="Verzenden" class="btn btn-primary">
         </form>
     </div>

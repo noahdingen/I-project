@@ -1,6 +1,6 @@
 <?php
-function haalrubriekenop()
-{
+//haalt alle rubrieken op en zet ze in de select menu.
+function haalrubriekenop(){
     $conn = verbindMetDatabase();
 
     $resultaat = $_POST['rubriek'];
@@ -15,8 +15,12 @@ function haalrubriekenop()
         echo '<option value = "' . $rows[$i]['rubrieknummer'] . '" >' . $rows[$i]['rubriekenpad'] . '</option >';
 
     }
+    if($aantal == 0){
+        echo '<option value = "" >Er zijn geen rubrieken gevonden.</option >';
+    }
 }
 
+//Haalt de rubrieknummer op, zodat de toegevoegde veiling goed in de veiling komt te staan
 function haalrubrieknummerop(){
     $conn = verbindMetDatabase();
 
@@ -29,6 +33,7 @@ function haalrubrieknummerop(){
     echo $rijen[0]['rubrieknummer'];
 }
 
+//haalt de rubrieknaam op voor in de veiling-toevoeg pagina
 function haalrubrieknaamop(){
     $conn = verbindMetDatabase();
 
@@ -40,8 +45,6 @@ function haalrubrieknaamop(){
     $rijen = $db_rubrieken->fetchAll(PDO::FETCH_ASSOC);
     echo $rijen[0]['rubriekenpad'];
 }
-
-
 
 ?>
 

@@ -1,7 +1,7 @@
 <?php
 include_once 'databaseverbinding/database_connectie.php';
 include_once 'php/rubriek_zoeken.php';
-$titel = 'Veiling toevoegen';
+$titel = 'Rubriek zoeken';
 include 'header.php';
 ?>
 

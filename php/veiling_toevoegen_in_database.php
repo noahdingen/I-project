@@ -5,17 +5,21 @@ if (!isset($_SESSION)) {
 }
 $conn = verbindMetDatabase();
 
+//betalingsinstructies is niet verplicht
 if(isset($_POST['betalingsinstructies'])){
     $betalingsinstructies = $_POST['betalingsinstructies'];
 }else{
     $betalingsinstructies = NULL;
 }
 
+//verzendinstructies is niet verplicht
 if(isset($_POST['verzendinstructies'])){
     $verzendinstructies = $_POST['verzendinstructies'];
 }else{
     $verzendinstructies = NULL;
 }
+
+//Alle inputs in een variabele zetten
 $titel = $_POST['titel'];
 $beschrijving = $_POST['beschrijving'];
 $rubriek = $_POST['rubriek'];
@@ -42,7 +46,7 @@ $locatie_db = "assets/veilingen_afbeeldingen/".$fileNameNew;
 //afbeelding in map zetten
 move_uploaded_file($tijdelijkbestand,$locatie_map);
 
-
+//Array met alle variabelen, gemaakt voor controle mocht er ooit iets zijn.
 $informatie = array($titel, $beschrijving, $rubriek, $startprijs, $looptijd_dag, $betalingswijze,
     $betalingsinstructies, $verzendoptie, $land, $plaatsnaam, $verzendinstructies);
 
@@ -75,12 +79,11 @@ $rubrieken->execute(array($voorwerpnummer, $rubriek));
 
 //afbeeldingen in database zetten
 $sql_afbeelding = "insert into Bestand values(?,?)";
-
 $afbeelding = $conn->prepare($sql_afbeelding);
 $afbeelding->execute(array($locatie_db, $voorwerpnummer));
 
 
-
+//Als afbeelding 2 is geupload, hier in mapje en database zetten
 if(!empty($_FILES["afbeelding_2"]["tmp_name"]))
 {
     $tijdelijkbestand = $_FILES["afbeelding_2"]["tmp_name"];
@@ -100,6 +103,7 @@ if(!empty($_FILES["afbeelding_2"]["tmp_name"]))
     $afbeelding->execute(array($locatie_db, $voorwerpnummer));
 }
 
+//Als afbeelding 3 is geupload, hier in mapje en database zetten
 if(!empty($_FILES["afbeelding_3"]["tmp_name"]))
 {
     $tijdelijkbestand = $_FILES["afbeelding_3"]["tmp_name"];
@@ -119,5 +123,6 @@ if(!empty($_FILES["afbeelding_3"]["tmp_name"]))
     $afbeelding->execute(array($locatie_db, $voorwerpnummer));
 }
 
+//Doorsturen naar de succesvolle pagina
 header("location: ../succesvol_veiling.php");
 ?>
