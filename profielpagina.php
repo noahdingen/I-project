@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 include_once 'databaseverbinding/database_connectie.php';
-
+//$_GET['wissel'] =false;
 $titel = 'Profielpagina';
 include_once 'header.php';
 include_once 'php/gegevens_ophalen.php';
@@ -84,11 +84,11 @@ else {
 <?php
 
 if($verkoper == 'ja  ') {
-    if(isset($_GET['wissel']) && $_GET['wissel'] == true) {
-       echo '
+    if (isset($_GET['wissel']) && $_GET['wissel'] == true) {
+        echo '
             <h1>Mijn geboden veilingen</h1> 
             <div class="linkjes">
-            <a href="profielpagina.php?wissel=false&bewerken=false">Bekijk mijn lopende veilingen</a>
+            <a href="profielpagina.php?bewerken=false">Bekijk mijn lopende veilingen</a>
             </div>
             <div class="container">
             <div class="row">
@@ -97,17 +97,16 @@ if($verkoper == 'ja  ') {
         echo '
             </div></div>
             ';
-    }
-    else {
-            echo '
+    } else {
+        echo '
             <h1>Mijn lopende veilingen</h1> 
             <div class="linkjes">
-            <a href="profielpagina.php?wissel=true&bewerken=false">Bekijk mijn geboden veilingen</a>
+            <a href="profielpagina.php?wissel=false&bewerken=false">Bekijk mijn geboden veilingen</a>
             </div>
             ';
         haalmijnveilingenop($gebruikersnaam);
-        }
-    }        ?>
+    }
+}?>
         </div>
     </div>
 </div>
