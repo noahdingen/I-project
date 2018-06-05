@@ -1,18 +1,19 @@
 <?php
-$gebruiker = $_SESSION['gebruikers'];
-global $conn;
-$conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$pdo = $conn;
-$sql = "select beheerder from Gebruiker where gebruikersnaam =?";
-$query = $pdo->prepare($sql);
-$query->execute(array($gebruiker));
-$rows = $query->fetchAll(PDO::FETCH_ASSOC);
-$beheerder = $rows[0]['beheerder'];
-if($beheerder == 'ja'){
-    $vraag = true;
-}else{
-    $vraag = false;
+$beheerder = false;
+if(isset($_GET['voorwerpnummer'])) {
+    $voorwerp = $_GET['voorwerpnummer'];
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = $conn;
+    $sql_2 = "select geblokkeerd from Voorwerp where voorwerpnummer =?";
+    $query_2 = $pdo->prepare($sql_2);
+    $query_2->execute(array($voorwerp));
+    $rows_2 = $query_2->fetchAll(PDO::FETCH_ASSOC);
+    $geblokkeerd = $rows_2[0]['geblokkeerd'];
+    if ($geblokkeerd == 'ja') {
+        $item = true;
+    } else {
+        $item = false;
+    }
 }
-
-?>

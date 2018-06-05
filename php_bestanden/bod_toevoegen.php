@@ -38,12 +38,17 @@ $startbod = $sql->fetchAll();
     if($huidige > $eind){
         header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&veilingstatus=0");
     }else{
-//var_dump($hoogste_bod);
+$state = $pdo->prepare("SELECT verkoper FROM voorwerp WHERE voorwerpnummer = ?");
+$state->execute(array($voorwerpnummer));
+$verkoper = $state->fetchAll();
+if($gebruikersnaam != $verkoper[0]['verkoper']){
 if (empty($hoogste_bod) && $hoogste_bod > $startbod[0]['startprijs']){
+    var_dump( $startbod[0]['startprijs']);
+    echo $hoogste_bod;
     $sql_insert = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
     $sql_insert->execute(array($voorwerpnummer, $bodbedrag, $gebruikersnaam));
     $error = "";
-    header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer");
+   header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer");
 }
 else{
 if($hoogste_bod[0]["hoogste_bod"]<$bodbedrag && $bodbedrag > $startbod[0]['startprijs'] && $bodbedrag - $hoogste_bod[0]["hoogste_bod"] >= 1 ) {
@@ -69,5 +74,11 @@ else{
         $error = 'bodbedrag is te laag!<br> U dient boven het startbedrag te bieden en boven het hoogste bod<br> dit is: €'. $startbod[0]["startprijs"] ;
         header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
     }
-}}}}
+}}}
+
+else{
+        $error = 'U kunt niet op uw eigen veilingen bieden!';
+        header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
+    }}}
+
 ?>

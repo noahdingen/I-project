@@ -1,6 +1,6 @@
 <?php
 include_once 'databaseverbinding/database_connectie.php';
-
+include_once 'php_bestanden/beheerder_zoeken.php';
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -17,7 +17,6 @@ if(isset($_SESSION['gebruikers'])) {
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo = $conn;
-
     $sql = "select verkoper, beheerder from Gebruiker where gebruikersnaam =?";
     $query = $pdo->prepare($sql);
     $query->execute([$_SESSION['gebruikers']]);
@@ -25,6 +24,9 @@ if(isset($_SESSION['gebruikers'])) {
     $rows = $query->fetchAll(PDO::FETCH_ASSOC);
     $verkoper = $rows[0]['verkoper'];
     $beheerder = $rows[0]['beheerder'];
+}
+if(!isset($beheerder)){
+    $beheerder = 'nee';
 }
 ?>
 
@@ -38,6 +40,7 @@ if(isset($_SESSION['gebruikers'])) {
     <title><?php echo $titel; ?></title>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/header.css" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/images/hammer.png" type="image/x-icon"/>
 </head>
 <body>
 <header>
@@ -86,11 +89,17 @@ if(isset($_SESSION['gebruikers'])) {
         global $conn;
         $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $pdo = $conn;
 
-        $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE titel LIKE'%".$zoek."%' AND looptijdeindeDag >= ? AND looptijdeindeTijdstip > ?");
-        $data->execute(array($huidige_dag, $huidige_tijd));
-        $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+        if($beheerder == 'nee') {
+            $data = $conn->prepare("SELECT * FROM Voorwerp WHERE geblokkeerd = 'nee' AND titel LIKE'%" . $zoek . "%' AND ((looptijdeindeDag = ? AND looptijdeindeTijdstip > ?) OR looptijdeindeDag > ?)");
+            $data->execute(array($huidige_dag, $huidige_tijd, $huidige_dag));
+            $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+        }elseif($beheerder == 'ja'){
+            $data = $conn->prepare("SELECT * FROM Voorwerp WHERE titel LIKE'%" . $zoek . "%' AND ((looptijdeindeDag = ? AND looptijdeindeTijdstip > ?) OR looptijdeindeDag > ?)");
+            $data->execute(array($huidige_dag, $huidige_tijd, $huidige_dag));
+            $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+        }
+
 
         ?>
     </nav>

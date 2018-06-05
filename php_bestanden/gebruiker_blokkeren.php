@@ -8,7 +8,19 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $pdo = $conn;
 $geblokkeerd = $_POST['geblokkeerd'];
 $email = $_POST['emailadres'];
-if($geblokkeerd == 'nee'){
+
+$sql = "select gebruikersnaam from Gebruiker where beheerder = 'ja'";
+$query = $pdo->prepare($sql);
+$query->execute([$_SESSION['gebruikers']]);
+$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+
+$beheerder_1 = $rows[0]['gebruikersnaam'];
+$beheerder_2 = $rows[1]['gebruikersnaam'];
+$beheerder_3 = $rows[2]['gebruikersnaam'];
+
+
+if($geblokkeerd == 'nee' && $gebruiker != $beheerder_1 && $gebruiker != $beheerder_2 && $gebruiker != $beheerder_3){
+
     $data = $pdo->prepare("UPDATE Gebruiker SET geblokkeerd = 'ja' WHERE gebruikersnaam = '$gebruiker'");
     $data->execute();
     //mailtje sturen dat gebruiker is geblokkeerd

@@ -4,9 +4,23 @@ if (!isset($_SESSION)) {
 }
 include_once 'databaseverbinding/database_connectie.php';
 include_once 'php_bestanden/beheerder_zoeken.php';
-if($vraag == true) {
-    $titel = 'Profielpagina';
-    include_once 'header.php';
+$titel = 'Profielpagina';
+include_once 'header.php';
+
+global $conn;
+$conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo = $conn;
+$sql = "select gebruikersnaam from Gebruiker where beheerder = 'ja'";
+$query = $pdo->prepare($sql);
+$query->execute([$_SESSION['gebruikers']]);
+$rows = $query->fetchAll(PDO::FETCH_ASSOC);
+
+$beheerder_1 = $rows[0]['gebruikersnaam'];
+$beheerder_2 = $rows[1]['gebruikersnaam'];
+$beheerder_3 = $rows[2]['gebruikersnaam'];
+
+if($beheerder == 'ja') {
     include_once 'php_bestanden/gegevens_ophalen.php';
     $inhoudstype = 'readonly';
 
@@ -87,11 +101,15 @@ if($vraag == true) {
 
         if ($geblokkeerd == 'nee') {
             echo '
-    <button type="submit" class="btn btn-primary">Blokkeren</button>
+   <div class="linkjes">
+        <button type="submit" class="btn btn-primary">Blokkeren</button>
+    </div>
     ';
         } else {
             echo '
-    <button type="submit" class="btn btn-primary">Deblokkeren</button>
+    <div class="linkjes">
+        <button type="submit" class="btn btn-primary">Deblokkeren</button>
+    </div>
     ';
         }
         ?>

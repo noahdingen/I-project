@@ -3,53 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 include_once '../databaseverbinding/database_connectie.php';
-function haaldetailsop($voorwerpnummer){
-    global $conn;
-    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $voorwerp = $conn->prepare("select titel, beschrijving, looptijd, verkoper from Voorwerp where voorwerpnummer = ?");
-    $voorwerp->execute(array($voorwerpnummer));
-    $resultaat_voorwerp = $voorwerp->fetchAll(PDO::FETCH_NAMED);
-    $titel = $resultaat_voorwerp[0]['titel'];
-    $beschrijving = $resultaat_voorwerp[0]['beschrijving'];
-    $looptijd = $resultaat_voorwerp[0]['looptijd'];
-    $verkoper = $resultaat_voorwerp[0]['verkoper'];
-
-    $bestand = $conn->prepare("select filenaam from Bestand where voorwerpnummer = ?");
-    $bestand->execute(array($voorwerpnummer));
-    $resultaat_bestand = $bestand->fetchAll(PDO::FETCH_NAMED);
-    $afbeelding = $resultaat_bestand[0]['filenaam'];
-
-    $bod = $conn->prepare("select bodbedrag, gebruikersnaam, bodTijdstip from Bod where voorwerpnummer = ?");
-    $bod->execute(array($voorwerpnummer));
-    $bodbedrag = $resultaat_bod[0]['bodbedrag'];
-    $koper = $resultaat_bod[0]['gebruikersnaam'];
-    $bod_tijdstip = $resultaat_bod[0]['bodTijdstip'];
-
-    $voorwerp_informatie = array('titel' => $titel, 'beschrijving' => $beschrijving, 'looptijd' => $looptijd, 'afbeelding' => $afbeelding,
-        'bodbedrag' => $bodbedrag, 'koper' => $koper, 'bodtijdstip' => $bod_tijdstip, 'verkoper' => $verkoper);
-
-
-    if($resultaten = $bod -> fetch()){
-        do{
-            echo '<div class="col text-center">'.
-                $voorwerp_informatie['koper'].'
-                        </div>
-                        <div class="col text-center">
-                            &euro;'. $voorwerp_informatie['bodbedrag'].'
-                        </div>
-                        <div class="col text-center">
-                             '.$voorwerp_informatie['bodtijdstip'].'
-                        </div>';
-        } while($resultaten = $bod -> fetch());
-    }
-    else{
-        echo"<p>Nog niks geboden </p>";
-    }
-
-    return $voorwerp_informatie;
-}
-
+//Haalt meerdere afbeeldingen op voor de detail pagina.
 function haalafbeeldingenop($voorwerpnummer){
     $slides = array('first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth');
     global $conn;
@@ -67,12 +21,12 @@ function haalafbeeldingenop($voorwerpnummer){
         }
         echo '
     <div class="carousel-item ' . $afbeeling . ' "><div class="zoom">
-        <img src="' . $value['filenaam'] . '" alt="' . $slides[$key] . ' slide" height=250px width="350px">
+        <img src="' . $value['filenaam'] . '" alt="' . $slides[$key] . ' slide" height="250" width="350">
     </div></div>
     ';
     }
 }
-
+//Haalt titel van het voorwerp op.
 function haaltitelop($voorwerpnummer){
     global $conn;
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
@@ -82,7 +36,7 @@ function haaltitelop($voorwerpnummer){
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
     echo $titel[0]['titel'];
 }
-
+//Haalt beschrijving van het voorwerp op.
 function haalbeschrijvingop($voorwerpnummer){
     global $conn;
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
@@ -92,7 +46,7 @@ function haalbeschrijvingop($voorwerpnummer){
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
     echo '<h4>Beschrijving:</h4>'.$titel[0]['beschrijving'].'';
 }
-
+//Haalt verkoper van het voorwerp op.
 function haalverkoperop($voorwerpnummer){
     global $conn;
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
@@ -100,16 +54,87 @@ function haalverkoperop($voorwerpnummer){
     $sql = $conn->prepare("SELECT verkoper, land FROM Voorwerp WHERE voorwerpnummer = ?");
     $sql->execute(array($voorwerpnummer));
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    $verkoper = $titel[0]['verkoper'];
     echo '<div class="col">
               <div class="col text-center">
-              <h4>Verkoper:</h4>
-              ' . $titel[0]['verkoper'] . '
+              <b>Verkoper:</b>
+              ' .$verkoper . '
               </div>
               <div class="col text-center">
-              <h4>Land:</h4>
+              <b>Land:</b>
               '.$titel[0]['land'] . '
               </div>
+              <div class="col text-center">
+             <b>Totaal aantal veilingen:</b>
+              '.haalaantalveilingenop($verkoper).'
+              </div>
+              <div class="col text-center">
+              <b>Eerste veiling toegevoegd op:</b>
+              '.haaldatumeersteveilingop($verkoper).'
+              </div>
        </div>';
+}
+//Haalt aantal veiligen van de verkoper op.
+function haalaantalveilingenop($verkoper){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT COUNT(verkoper) AS aantalverkocht FROM Voorwerp WHERE verkoper = ?");
+    $sql->execute(array($verkoper));
+    $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    $aantalverkocht = $titel[0]['aantalverkocht'];
+    return $aantalverkocht;
+}
+//Haalt de datum waarop de verkoper zijn eerste veilig heeft geplaatst op.
+function haaldatumeersteveilingop($verkoper){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT TOP 1 looptijdbeginDag FROM Voorwerp WHERE verkoper = ? ORDER BY looptijdbeginDag ASC");
+    $sql->execute(array($verkoper));
+    $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    //zet datum goed naar dd-mm-jjjj
+    $datum_oud = $titel[0]['looptijdbeginDag'];
+    $looptijdbegindag = date("d-m-Y", strtotime($datum_oud));
+    return $looptijdbegindag;
+}
+function haalvoorwerpdetailsop($voorwerpnummer){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT startprijs, betalingswijze, betalingsinstructie, verzendkosten, verzendinstructies  FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $titel = $sql->fetchAll(PDO::FETCH_NAMED);
+    echo '<div class="col">
+              <div class="col text-center">
+             <b> Bieden vanaf:</b>
+             '.$titel[0]['startprijs'] . '
+              </div>
+              <div class="col text-center">
+             <b> Rubriekenpad:</b>
+             '.haalrubriekenpadop($voorwerpnummer). '
+              </div>
+              <div class="col text-center">
+             <b> Betalingswijze:</b>
+              '.$titel[0]['betalingswijze'] . '
+              </div>';
+            if($titel[0]['betalingsinstructie'] != ''){ echo'
+                <div class="col text-center">
+             <b> Betalingsinstructie:</b>
+                '.$titel[0]['betalingsinstructie'] . '
+                </div>';}
+            if($titel[0]['verzendkosten'] != ''){ echo'
+            <div class="col text-center">
+              <b>Verzendkosten:</b>
+            '.$titel[0]['verzendkosten'] . '
+            </div>';
+             }
+             if($titel[0]['verzendinstructies'] != ''){ echo'
+              <div class="col text-center">
+              <b>Verzendinstructies:</b>
+               '.$titel[0]['verzendinstructies'] . '
+              </div>';}
+              echo '</div>';
 }
 
 function haalverzendingop($voorwerpnummer){
@@ -135,7 +160,7 @@ function haalverzendingop($voorwerpnummer){
        }
         echo '</div>';
 }
-
+//Haalt de geboden bedragen op
 function haalbiedingenop($voorwerpnummer){
     global $conn;
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
@@ -143,9 +168,6 @@ function haalbiedingenop($voorwerpnummer){
     $sql = $conn->prepare("SELECT top 10 bodbedrag, gebruikersnaam, bodDag, bodTijdstip FROM Bod WHERE voorwerpnummer = ? ORDER BY bodbedrag DESC");
     $sql->execute(array($voorwerpnummer));
     $bodgegevens = $sql->fetchAll(PDO::FETCH_NAMED);
-    echo '<h1>
-            ' . $bodgegevens[0]['bodDag'] . ' 
-       </h1>';
     foreach ($bodgegevens as $value){
         echo '
        <div class="row">
@@ -192,4 +214,29 @@ function haaltijdop($voorwerp){
     $eindtijd = $info[0]['looptijdeindeDag']." ".$info[0]['looptijdeindeTijdstip'].' GMT+0200';
     echo "<script> setDeadline('".$eindtijd."'); initializeClock('clockdiv', deadline);</script>";
 }
+
+//Haalt op of een voorwerp geblokkeerd is of niet.
+function haalblokadeop($voorwerpnummer){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT geblokkeerd FROM Voorwerp WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $blokkeer = $sql->fetchAll(PDO::FETCH_NAMED);
+    return $blokkeer;
+}
+//Haalt het rubriekenpad van het voorwerp op.
+function haalrubriekenpadop($voorwerpnummer){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT rubriekenpad, voorwerpnummer FROM Allerubrieken INNER JOIN VoorwerpInRubriek ON rubrieknummer = rubrieknummerOpLaagsteNiveau WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $titel= $sql->fetchAll(PDO::FETCH_NAMED);
+    $rubriekenpad = $titel[0]['rubriekenpad'];
+    return $rubriekenpad;
+
+}
+
+
 ?>

@@ -17,10 +17,9 @@ $controle = 'Creditcard';
 global $conn;
 $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$error = "Vul alle gegevens in";
-$error2 = "Vul een geldig IBAN-Nummer in";
+$error = "Vul een geldig IBAN-Nummer in";
 
-
+//Controleert of het ingevoerde IBAN nummer geldig is.
 function checkIBAN($iban) {
 
     // maakt input normaal (haalt grote letters en spaties weg)
