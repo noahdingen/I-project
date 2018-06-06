@@ -101,7 +101,9 @@ function haalvoorwerpdetailsop($voorwerpnummer){
               </div>
                <div class="col text-center">
              <b> Rubriekenpad:</b>
-             '.haalrubriekenpadop($voorwerpnummer). '
+             <ol class="breadcrumb bg-light">
+                ' . haalouderrubriekop(haalrubriekenpadop($_GET["voorwerpnummer"])) . '
+              </ol>
               </div>
               <div class="col text-center">
              <b> Betalingswijze:</b>
@@ -151,7 +153,6 @@ function haalrubriekenpadop($voorwerpnummer){
     $titel= $sql->fetchAll(PDO::FETCH_NAMED);
     $rubriekenpad = $titel[0]['rubriekenpad'];
         return $rubriekenpad;
-
     }
 
 
