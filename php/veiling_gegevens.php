@@ -101,7 +101,7 @@ function haalvoorwerpdetailsop($voorwerpnummer,$rubrieken){
               </div>
                <div class="col text-center">
              <b> Rubriekenpad:</b>
-             '; echo haalrubrieknummerop($voorwerpnummer,$rubrieken). ' Dit voorwerp
+             '; echo haalrubrieknummerop($voorwerpnummer,$rubrieken). '
               </div>
               <div class="col text-center">
              <b> Betalingswijze:</b>
