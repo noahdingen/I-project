@@ -83,21 +83,22 @@ else {
     <div class="persoonlijke-veilingen">
 <?php
 
-if($verkoper == 'ja  ') {
     if (isset($_GET['wissel']) && $_GET['wissel'] == true) {
         echo '
             <h1>Mijn geboden veilingen</h1> 
-            <div class="linkjes">
-            <a href="profielpagina.php?bewerken=false">Bekijk mijn lopende veilingen</a>
-            </div>
-            <div class="container">
-            <div class="row">
             ';
-        haalgebodenveilingenop($gebruikersnaam);
+
+        if($verkoper == 'ja  ') {
+            echo '<div class="linkjes">
+            <a href="profielpagina.php?bewerken=false">Bekijk mijn geboden veilingen</a>
+            </div>';
+        }
+            haalgebodenveilingenop($gebruikersnaam);
+        
         echo '
             </div></div>
             ';
-    } else {
+    } elseif($verkoper == 'ja  ') {
         echo '
             <h1>Mijn lopende veilingen</h1> 
             <div class="linkjes">
@@ -106,7 +107,7 @@ if($verkoper == 'ja  ') {
             ';
         haalmijnveilingenop($gebruikersnaam);
     }
-}?>
+?>
         </div>
     </div>
 </div>

@@ -3,6 +3,7 @@
 $error_een = "Activatie code onjuist";
 $error_twee = "Gebruikersnaam bestaat niet";
 $error_drie = "U dient beide velden in te vullen";
+$error_vier = "U mag geen SQL invoeren!";
 
 include_once '../databaseverbinding/database_connectie.php';
 //Regel hieronder is voor server!
@@ -16,19 +17,23 @@ setlocale(LC_ALL, 'nld_nld');
 $gebruikersnaam = valideerFormulierinput($_POST['gebruikersnaam']);
 $mailcode = valideerFormulierinput($_POST['mailcode']);
 if (!empty($gebruikersnaam) && !empty($mailcode)) {
-    if (bestaatGebruikersnaam($gebruikersnaam)) {
-        $bool = bestaatCombinatieVanGebruikersnaamEnmailcode($mailcode);
-        if ($bool) {
-            $_SESSION['gebruikers'] = $gebruikersnaam;
-            $activeren = "UPDATE Gebruiker set activatie = 1 FROM Gebruiker WHERE gebruikersnaam = '$gebruikersnaam' ";
-            $query = $conn->prepare($activeren);
-            $query->execute();
-           header("location: ../index.php");
+    if(strpos($gebruikersnaam, '.')===false) {
+        if (bestaatGebruikersnaam($gebruikersnaam)) {
+            $bool = bestaatCombinatieVanGebruikersnaamEnmailcode($mailcode);
+            if ($bool) {
+                $_SESSION['gebruikers'] = $gebruikersnaam;
+                $activeren = "UPDATE Gebruiker set activatie = 1 FROM Gebruiker WHERE gebruikersnaam = '$gebruikersnaam' ";
+                $query = $conn->prepare($activeren);
+                $query->execute();
+                header("location: ../index.php");
+            } else {
+                header("location: ../check_account.php?error=$error_een");
+            }
         } else {
-            header("location: ../check_account.php?error=$error_een");
+            header("location: ../check_account.php?error=$error_twee");
         }
-    }else {
-        header("location: ../check_account.php?error=$error_twee");
+    } else {
+        header("location: ../check_account.php?error=$error_vier");
     }
 }
 else {

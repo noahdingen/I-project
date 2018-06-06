@@ -16,4 +16,14 @@ function valideerFormulierinput($data) {
     return $data;
 }
 
+function checksqlinjectie($invoer){
+    if (strpos($invoer, '.' || $invoer, '/') === false){
+    return true;
+    }
+    else{
+        return false;
+    }
+}
+
+
 ?>
