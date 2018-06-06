@@ -1,6 +1,8 @@
 <?php
 include_once 'databaseverbinding/database_connectie.php';
 include_once 'php/beheerder_zoeken.php';
+include_once 'php/rubriekenboom.php';
+$rubrieken = haalallerubriekenop();
 
 if (!isset($_SESSION)) {
     session_start();
@@ -44,11 +46,33 @@ if(!isset($beheerder)){
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/header.css" rel="stylesheet">
     <link rel="shortcut icon" href="assets/images/hammer.png" type="image/x-icon"/>
+	<link href="assets/css/sidebar.css" rel="stylesheet">
+	<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>
 </head>
 <body>
 <header>
+
     <nav class="navbar navbar-light bg-dark justify-content-between">
+	<div>
+	<?php $pagina = $_SERVER['REQUEST_URI'];
+		if (strpos($_SERVER['REQUEST_URI'], "php/iProject/index.php") !== false){
+			echo '<div id="mySidenav" class="sidenav">
+				  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
+				  weergeefrubriekenboom($rubrieken);			  
+			echo  '</div>
+				 <button onclick="openNav()" class="btn btn-primary">Rubrieken » </button>';			}		
+		?>
+			
         <a href="index.php" class="btn btn-primary" role="button">Home</a>
+		</div>
 
         <form class="form-inline" action="index.php" method="get">
             <input class="form-control mr-sm-4" type="search" name="zoeken" placeholder="Zoeken naar veilingen" aria-label="Search" required>
@@ -89,6 +113,7 @@ if(!isset($beheerder)){
 		$huidige_tijd = date('H:i:s');
 		$huidige_dag =  date('Y-m-d');
         $pdo = verbindMetDatabase();
+
 if($beheerder == 'nee') {
     $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE geblokkeerd = 'nee' AND titel LIKE'%" . $zoek . "%' AND ((looptijdeindeDag = ? AND looptijdeindeTijdstip > ?) OR looptijdeindeDag > ?)");
     $data->execute(array($huidige_dag, $huidige_tijd, $huidige_dag));
@@ -98,8 +123,7 @@ if($beheerder == 'nee') {
     $data->execute(array($huidige_dag, $huidige_tijd, $huidige_dag));
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
 }
-
-        ?>
+?>
     </nav>
 </header>
 
