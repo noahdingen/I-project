@@ -42,7 +42,7 @@ $rubrieken = haalallerubriekenop();
                 <h1 class="display-4">Resultaten</h1>
                 <div class="row">
             ';
-            haalrubriekenop($_GET["rubrieknummer"], $rubrieken, $beheerder);
+            haalrubriekenop($_GET["rubrieknummer"], $rubrieken, haalvoorwerpeninrubriekenop(), $beheerder);
             echo '</div></div>';
         }
         else{

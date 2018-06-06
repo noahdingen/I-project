@@ -3,6 +3,7 @@ include 'php/veiling_gegevens.php';
 $titel = 'Detailpagina';
 $voorwerpnummer = $_GET['voorwerpnummer'];
 include_once 'php/beheerder_zoeken.php';
+include_once 'php/rubriekenboom.php';
 
 if(!isset($_GET['error'])){
     $_GET['error'] = '';
@@ -129,7 +130,7 @@ include 'header.php';
                     Product informatie
                 </h1>
                 <div class="bg-light text-center">
-                    <?php haalvoorwerpdetailsop($voorwerpnummer); ?>
+                    <?php haalvoorwerpdetailsop($voorwerpnummer,haalallerubriekenop()); ?>
                 </div>
 
 

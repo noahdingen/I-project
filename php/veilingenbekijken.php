@@ -2,27 +2,26 @@
 
 //Haalt de thumbnail op van het voorwerp.
 
-function haalplaatjeop($i, $resultaat){
+function haalplaatjeop($plaatje){
     echo '<figure>
-        <img src="'. $resultaat[$i]['hoofdplaatje'].'" alt="veilingitem">
+        <img src="'. $plaatje .'" alt="veilingitem">
           </figure>';
     }
 //Haalt de titel op van het voorwerp.
-function haaltitelop($i, $resultaat){
-    if(strlen ($resultaat[$i]['titel']) >21) {
-        $veiling = substr($resultaat[$i]['titel'], 0, 17);
+function haaltitelop($titel){
+    if(strlen ($titel) >21) {
+        $veiling = substr($titel, 0, 17);
         echo "<h4>" . $veiling . "...</h4>";
     }else{
-        echo "<h4>" . $resultaat[$i]['titel']. "</h4>";
+        echo "<h4>" . $titel . "</h4>";
     }
 }
 //Haalt de startprijs (minimale bod) van het voorwerp op.
-function haalstartprijsop($i, $resultaat){
-    echo "<p>Bieden vanaf: €" . $resultaat[$i]['startprijs'] ."</p>";
+function haalstartprijsop($startprijs){
+    echo "<p>Bieden vanaf: €" . $startprijs ."</p>";
 }
 //Kijkt wat het hoogst geboden bedrag is en laat deze zien. Is er nog niks geboden, dan komt er Nog geen bod uitgebracht te staan.
-function haalhuidigeprijsop($i, $resultaat){
-    $voorwerpnummer = $resultaat[$i]["voorwerpnummer"];
+function haalhuidigeprijsop($voorwerpnummer){
     $conn = verbindMetDatabase();
     $data = $conn->prepare("SELECT bodbedrag  FROM Bod WHERE voorwerpnummer = ? ORDER BY bodbedrag DESC");
     $data->execute(array($voorwerpnummer));
@@ -33,9 +32,9 @@ function haalhuidigeprijsop($i, $resultaat){
     else echo "Nog geen bod uitgebracht";
 }
 //Haalt de looptijd van de veiling op.
-function haaltimerop($i, $resultaat){
-    if($resultaat[$i]["geblokkeerd"] == 'nee') {
-        $eindtijd = $resultaat[0]['looptijdeindeDag'] . " " . $resultaat[0]['looptijdeindeTijdstip'] . ' GMT+0200';
+function haaltimerop($dag, $tijdstip, $geblokkeerd, $i){
+    if($geblokkeerd == 'nee') {
+        $eindtijd = $dag . " " . $tijdstip . ' GMT+0200';
         echo "<div id='clockdiv" . $i . "'><script> setDeadline('" . $eindtijd . "'); initializeClock('clockdiv" . $i . "', deadline);</script></div>";
     }else{
         echo 'Deze veiling is geblokkeerd';
@@ -60,36 +59,52 @@ function haalhompeginaop($beheerder){
 function haalinformatieop($resultaat){
     for($i = 0; $i < count($resultaat); $i++) {
             echo '<div class="col-md-4">';
-            echo haaltitelop($i, $resultaat);
-            echo haalplaatjeop($i, $resultaat);
-            echo haaltimerop($i, $resultaat);
-            echo haalstartprijsop($i, $resultaat);
-            echo haalhuidigeprijsop($i, $resultaat);
+            echo haaltitelop($resultaat[$i]["titel"]);
+            echo haalplaatjeop($resultaat[$i]["hoofdplaatje"]);
+            echo haaltimerop($resultaat[$i]["looptijdeindeDag"], $resultaat[$i]["looptijdeindeTijdstip"], $resultaat[$i]["geblokkeerd"], $i);
+            echo haalstartprijsop($resultaat[$i]["startprijs"]);
+            echo haalhuidigeprijsop($resultaat[$i]["voorwerpnummer"]);
             echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
     }
 }
-function haalrubriekenop($rubrieknummer, $rubrieken, $beheerder){
+function haalrubriekenop($rubrieknummer, $rubrieken, $voorwerpen, $beheerder){
     for($i=0; $i<count($rubrieken); $i++){
-        if($rubrieken[$i]["rubriek"]==$rubrieknummer){
-            haalrubriekinformatieop($rubrieken[$i]["rubrieknummer"], $beheerder);
-        }
-        else if($rubrieken[$i]["rubrieknummer"]==$rubrieknummer){
-            haalrubriekinformatieop($rubrieken[$i]["rubrieknummer"], $beheerder);
+        if($rubrieken[$i]["rubrieknummer"]==$rubrieknummer){
+            haalrubriekinformatieop($rubrieken[$i]["rubrieknummer"], $voorwerpen, $beheerder);
+            haalkindrubriekop($rubrieken[$i]["rubrieknummer"], $rubrieken, $voorwerpen, $beheerder);
         }
     }
 }
 
-function haalrubriekinformatieop($i, $beheerder){
+function haalkindrubriekop($rubrieknummer, $rubrieken, $voorwerpen, $beheerder){
+    for($i=0; $i<count($rubrieken); $i++){
+        if($rubrieken[$i]["rubriek"]==$rubrieknummer){
+            haalrubriekinformatieop($rubrieken[$i]["rubrieknummer"], $voorwerpen, $beheerder);
+            haalkindrubriekop($rubrieken[$i]["rubrieknummer"], $rubrieken, $voorwerpen, $beheerder);
+        }
+    }
+}
+
+function haalvoorwerpeninrubriekenop(){
     $conn = verbindMetDatabase();
-    if($beheerder == 'ja'){
-        $data = $conn->prepare("SELECT V.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer WHERE rubrieknummerOpLaagsteNiveau = ?");
-    }
-    else {
-        $data = $conn->prepare("SELECT V.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer WHERE rubrieknummerOpLaagsteNiveau = ? and geblokkeerd = 'nee'");
-    }
-    $data->execute(array($i));
+    $data = $conn->prepare("SELECT V.voorwerpnummer, rubrieknummerOpLaagsteNiveau, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer");
+    $data->execute();
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-    haalinformatieop($resultaat);
+    return $resultaat;
+}
+
+function haalrubriekinformatieop($rubrieknummer, $voorwerpen, $beheerder){
+    for($i=0; $i<count($voorwerpen); $i++){
+        if($voorwerpen[$i]["rubrieknummerOpLaagsteNiveau"]==$rubrieknummer){
+            echo '<div class="col-md-4">';
+            echo haaltitelop($voorwerpen[$i]["titel"]);
+            echo haalplaatjeop($voorwerpen[$i]["hoofdplaatje"]);
+            echo haaltimerop($voorwerpen[$i]["looptijdeindeDag"], $voorwerpen[$i]["looptijdeindeTijdstip"], $voorwerpen[$i]["geblokkeerd"], $i);
+            echo haalstartprijsop($voorwerpen[$i]["startprijs"]);
+            echo haalhuidigeprijsop($voorwerpen[$i]["voorwerpnummer"]);
+            echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $voorwerpen[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
+        }
+    }
 }
 //Haalt veilingen op waarop de gebruiker heeft geboden.
 function haalgebodenveilingenop($gebruikersnaam){

@@ -89,7 +89,7 @@ function haaldatumeersteveilingop($verkoper){
     return $looptijdbegindag;
 }
 //
-function haalvoorwerpdetailsop($voorwerpnummer){
+function haalvoorwerpdetailsop($voorwerpnummer,$rubrieken){
     $conn = verbindMetDatabase();
     $sql = $conn->prepare("SELECT startprijs, betalingswijze, betalingsinstructie, verzendkosten, verzendinstructies  FROM Voorwerp WHERE voorwerpnummer = ?");
     $sql->execute(array($voorwerpnummer));
@@ -101,9 +101,7 @@ function haalvoorwerpdetailsop($voorwerpnummer){
               </div>
                <div class="col text-center">
              <b> Rubriekenpad:</b>
-             <ol class="breadcrumb bg-light">
-                ' . haalouderrubriekop(haalrubriekenpadop($_GET["voorwerpnummer"])) . '
-              </ol>
+             '; echo haalrubrieknummerop($voorwerpnummer,$rubrieken). ' Dit voorwerp
               </div>
               <div class="col text-center">
              <b> Betalingswijze:</b>
@@ -146,14 +144,22 @@ function haalbiedingenop($voorwerpnummer){
     }
 }
 //Haalt het rubriekenpad van het voorwerp op.
-function haalrubriekenpadop($voorwerpnummer){
-    $conn = verbindMetDatabase();
-    $sql = $conn->prepare("SELECT rubriekenpad, voorwerpnummer FROM Allerubrieken INNER JOIN VoorwerpInRubriek ON rubrieknummer = rubrieknummerOpLaagsteNiveau WHERE voorwerpnummer = ?");
-    $sql->execute(array($voorwerpnummer));
-    $titel= $sql->fetchAll(PDO::FETCH_NAMED);
-    $rubriekenpad = $titel[0]['rubriekenpad'];
-        return $rubriekenpad;
+function haalrubriekenpadop($rubrieknummer,$rubrieken){
+    for($i=0; $i<count($rubrieken); $i++){
+        if($rubrieken[$i]["rubrieknummer"] == $rubrieknummer && $rubrieknummer!=-1){
+            echo '<a href=index.php?rubrieknummer=' . $rubrieken[$i]["rubrieknummer"] . '>' . $rubrieken[$i]["rubrieknaam"] .'</a> / '  . haalrubriekenpadop($rubrieken[$i]["rubriek"], $rubrieken) . '';
+        }
     }
+    }
+
+
+function haalrubrieknummerop($voorwerpnummer,$rubrieken){
+    $conn = verbindMetDatabase();
+    $sql = $conn->prepare("SELECT rubrieknummerOpLaagsteNiveau FROM VoorwerpInRubriek WHERE voorwerpnummer = ?");
+    $sql->execute(array($voorwerpnummer));
+    $rubrieknummerOpLaagsteNiveau = $sql->fetchAll(PDO::FETCH_NAMED);
+    haalrubriekenpadop($rubrieknummerOpLaagsteNiveau[0]["rubrieknummerOpLaagsteNiveau"],$rubrieken);
+}
 
 
 //
