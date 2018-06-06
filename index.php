@@ -21,12 +21,15 @@ $rubrieken = haalallerubriekenop();
     </aside>
     <div class="container text-center">
         <?php if($zoek != ''){
+
+            //haalt resultaten op, onder in 'Header.php'
             if(!empty($resultaat)){
                 echo '
                 <div class="container">
                 <h1 class="display-4">Veilingen met zoekterm: ' . $zoek . '</h1>
                 <div class="row">
                 ';
+                //Laat de veilingen zien met de resultaten uit de zoekfunctie
                 haalinformatieop($resultaat);
                 echo '</div></div>';
             }
