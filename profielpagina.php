@@ -94,7 +94,7 @@ else {
             </div>';
         }
             haalgebodenveilingenop($gebruikersnaam);
-        
+
         echo '
             </div></div>
             ';
@@ -102,7 +102,7 @@ else {
         echo '
             <h1>Mijn lopende veilingen</h1> 
             <div class="linkjes">
-            <a href="profielpagina.php?wissel=false&bewerken=false">Bekijk mijn geboden veilingen</a>
+            <a href="profielpagina.php?wissel=false&bewerken=false">Bekijk mijn lopende veilingen</a>
             </div>
             ';
         haalmijnveilingenop($gebruikersnaam);
