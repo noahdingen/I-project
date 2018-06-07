@@ -90,7 +90,7 @@ else {
 
         if($verkoper == 'ja  ') {
             echo '<div class="linkjes">
-            <a href="profielpagina.php?bewerken=false">Bekijk mijn geboden veilingen</a>
+            <a href="profielpagina.php?bewerken=false">Bekijk mijn lopende veilingen</a>
             </div>';
         }
             haalgebodenveilingenop($gebruikersnaam);
