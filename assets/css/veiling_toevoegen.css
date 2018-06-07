@@ -7,3 +7,18 @@ body{
     background-color: #FF7753!important;
 }
 
+.linkjes{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.linkjes a{
+    color: black;
+    text-decoration: underline;
+    margin-bottom: 5px;
+}
+
+.linkjes a:hover{
+    color: black;
+    text-decoration: none;
+}

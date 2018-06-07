@@ -4,9 +4,11 @@ include 'header.php';
 $titel = 'veiling toegevoegd';
 ?>
 <link href="assets/css/veiling_toevoegen.css" rel="stylesheet">
-<main>
     <div class="container">
         <h1 class="display-3">Veiling succesvol aangemaakt</h1>
+        <div class="linkjes text-center" >
+            <a href="index.php">Terug naar de homepagina</a>
+        </div>
     </div>
 
     <footer class="container text-center">
