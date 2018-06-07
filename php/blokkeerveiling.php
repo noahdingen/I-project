@@ -7,21 +7,24 @@ if (!isset($_SESSION)) {
 $pdo = verbindMetDatabase();
 $voorwerpnummer = $_GET['voorwerpnummer'];
 
-
+//status veilingen ophalen uit database
 $blokkeer = $pdo->prepare("select geblokkeerd, titel, veilingGesloten from Voorwerp where voorwerpnummer =?");
 $blokkeer->execute(array($voorwerpnummer));
 $rijen = $blokkeer->fetchAll(PDO::FETCH_ASSOC);
 
+//email verkoper ophalen van de veiling
 $email_verkoper_2 = $pdo->prepare("select Voorwerp.voorwerpnummer, Voorwerp.verkoper, Gebruiker.gebruikersnaam, Gebruiker.emailadres from Voorwerp inner join Gebruiker on Gebruiker.gebruikersnaam = Voorwerp.verkoper where voorwerpnummer =?");
 $email_verkoper_2->execute(array($voorwerpnummer));
 $email_verkoper = $email_verkoper_2->fetchAll(PDO::FETCH_ASSOC);
 
+//email bieder ophalen van de veiling
 $email_bieder_2 = $pdo->prepare("select top 1 Bod.voorwerpnummer, Bod.gebruikersnaam, Gebruiker.emailadres from Bod inner join Gebruiker on Bod.gebruikersnaam = Gebruiker.gebruikersnaam where voorwerpnummer = ? order by bodbedrag desc");
 $email_bieder_2->execute(array($voorwerpnummer));
 $email_bieder = $email_bieder_2->fetchAll(PDO::FETCH_ASSOC);
 
+//als de veiling is gesloten gaat hij terug naar de detailpagina met een foutmelding
 if($rijen[0]['veilingGesloten'] == 'ja'){
-    header("location: ../detailpagina.php?voorwerpnummer=".$voorwerpnummer."&error=Deze veiling is gesloten, U kunt hem niet blokkeren");
+    header("location: ../detailpagina.php?voorwerpnummer=".$voorwerpnummer."&error=Deze veiling is gesloten, U kunt hem niet blokkeren&status=verlopen");
 }else {
     if ($rijen[0]['geblokkeerd'] == 'nee') {
         $data = $pdo->prepare("UPDATE Voorwerp SET geblokkeerd = 'ja' WHERE geblokkeerd = 'nee' AND voorwerpnummer = '$voorwerpnummer'");

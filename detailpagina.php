@@ -96,7 +96,7 @@ include 'header.php';
 
                     ';
                     if($item == false) {
-                        if($error == 'Deze veiling is gesloten, U kunt hem niet blokkeren'){
+                        if(isset($status)){
                             echo $error;
                         }
                         echo '<label>Met deze knop kunt u de veiling blokkeren.</label>
@@ -104,7 +104,7 @@ include 'header.php';
 
                         <button type="submit" name="blokkeerknop" class="btn btn-primary">Blokkeer</button>';
                     }else{
-                        if($error == 'Deze veiling is gesloten, U kunt hem niet blokkeren'){
+                        if(isset($status)){
                             echo $error;
                         }
                         echo '
