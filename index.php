@@ -16,9 +16,6 @@ $rubrieken = haalallerubriekenop();
 <script type="application/javascript" src="./assets/js/timerJava.js"></script>
 <main>
     <div class="row">
-    <aside class="col-2">
-        <?php weergeefrubriekenboom($rubrieken); ?>
-    </aside>
     <div class="container text-center">
         <?php if($zoek != ''){
 

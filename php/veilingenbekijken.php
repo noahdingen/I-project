@@ -1,5 +1,6 @@
 <?php
 
+
 //Haalt de thumbnail op van het voorwerp.
 
 function haalplaatjeop($plaatje){

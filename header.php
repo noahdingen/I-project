@@ -63,7 +63,7 @@ function closeNav() {
     <nav class="navbar navbar-light bg-dark justify-content-between">
 	<div>
 	<?php $pagina = $_SERVER['REQUEST_URI'];
-		if (strpos($_SERVER['REQUEST_URI'], "php/iProject/index.php") !== false){
+		if (strpos($_SERVER['REQUEST_URI'], "php/index.php") !== false){
 			echo '<div id="mySidenav" class="sidenav">
 				  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
 				  weergeefrubriekenboom($rubrieken);			  
