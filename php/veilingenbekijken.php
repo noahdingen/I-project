@@ -46,7 +46,7 @@ function haalhompeginaop($beheerder){
 	date_default_timezone_set("Europe/Amsterdam");
     $conn = verbindMetDatabase();
     if($beheerder == 'ja'){
-        $data = $conn->prepare("SELECT TOP 12 * FROM Voorwerp WHERE veilingGesloten = 'nee'");
+        $data = $conn->prepare("SELECT TOP 12 * FROM Voorwerp");
 
     }
     else{
@@ -88,7 +88,7 @@ function haalkindrubriekop($rubrieknummer, $rubrieken, $voorwerpen, $beheerder){
 
 function haalvoorwerpeninrubriekenop(){
     $conn = verbindMetDatabase();
-    $data = $conn->prepare("SELECT V.voorwerpnummer, rubrieknummerOpLaagsteNiveau, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer");
+    $data = $conn->prepare("SELECT V.voorwerpnummer, rubrieknummerOpLaagsteNiveau, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd, veilingGesloten FROM VoorwerpInRubriek R INNER JOIN Voorwerp V ON V.voorwerpnummer=R.voorwerpnummer");
     $data->execute();
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     return $resultaat;
@@ -97,13 +97,24 @@ function haalvoorwerpeninrubriekenop(){
 function haalrubriekinformatieop($rubrieknummer, $voorwerpen, $beheerder){
     for($i=0; $i<count($voorwerpen); $i++){
         if($voorwerpen[$i]["rubrieknummerOpLaagsteNiveau"]==$rubrieknummer){
-            echo '<div class="col-md-4">';
-            echo haaltitelop($voorwerpen[$i]["titel"]);
-            echo haalplaatjeop($voorwerpen[$i]["hoofdplaatje"]);
-            echo haaltimerop($voorwerpen[$i]["looptijdeindeDag"], $voorwerpen[$i]["looptijdeindeTijdstip"], $voorwerpen[$i]["geblokkeerd"], $i);
-            echo haalstartprijsop($voorwerpen[$i]["startprijs"]);
-            echo haalhuidigeprijsop($voorwerpen[$i]["voorwerpnummer"]);
-            echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $voorwerpen[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
+            if($voorwerpen[$i]["geblokkeerd"] == 'nee' && $voorwerpen[$i]["veilingGesloten"] == 'nee'){
+                echo '<div class="col-md-4">';
+                echo haaltitelop($voorwerpen[$i]["titel"]);
+                echo haalplaatjeop($voorwerpen[$i]["hoofdplaatje"]);
+                echo haaltimerop($voorwerpen[$i]["looptijdeindeDag"], $voorwerpen[$i]["looptijdeindeTijdstip"], $voorwerpen[$i]["geblokkeerd"], $i);
+                echo haalstartprijsop($voorwerpen[$i]["startprijs"]);
+                echo haalhuidigeprijsop($voorwerpen[$i]["voorwerpnummer"]);
+                echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $voorwerpen[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
+            }
+            else if($beheerder == 'ja'){
+                echo '<div class="col-md-4">';
+                echo haaltitelop($voorwerpen[$i]["titel"]);
+                echo haalplaatjeop($voorwerpen[$i]["hoofdplaatje"]);
+                echo haaltimerop($voorwerpen[$i]["looptijdeindeDag"], $voorwerpen[$i]["looptijdeindeTijdstip"], $voorwerpen[$i]["geblokkeerd"], $i);
+                echo haalstartprijsop($voorwerpen[$i]["startprijs"]);
+                echo haalhuidigeprijsop($voorwerpen[$i]["voorwerpnummer"]);
+                echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $voorwerpen[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
+            }
         }
     }
 }

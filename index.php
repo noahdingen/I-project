@@ -5,7 +5,6 @@ $titel = 'Homepagina';
 include 'header.php';
 // regel hieronder uit commentariëren voor server
 //include_once 'Database_verbinding/database_connectie.php';
-include_once 'php/beheerder_zoeken.php';
 include_once 'php/veilingenbekijken.php';
 include_once 'php/rubriekenboom.php';
 $rubrieken = haalallerubriekenop();
