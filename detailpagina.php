@@ -96,16 +96,16 @@ include 'header.php';
 
                     ';
                     if($item == false) {
-                        if(isset($status)){
-                            echo $error;
+                        if(isset($_GET['status'])){
+                            echo $_GET['error'];
                         }
                         echo '<label>Met deze knop kunt u de veiling blokkeren.</label>
                     <input type="hidden" id="voorwerpnummer" name="voorwerpnummer"><br>
 
                         <button type="submit" name="blokkeerknop" class="btn btn-primary">Blokkeer</button>';
                     }else{
-                        if(isset($status)){
-                            echo $error;
+                        if(isset($_GET['status'])){
+                            echo $_GET['error'];
                         }
                         echo '
                     <p>Met deze knop kunt u de veiling deblokkeren.</p>
