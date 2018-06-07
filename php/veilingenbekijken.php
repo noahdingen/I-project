@@ -1,5 +1,6 @@
 <?php
 
+$veilingenteller = 0;
 
 //Haalt de thumbnail op van het voorwerp.
 
@@ -60,15 +61,20 @@ function haalhompeginaop($beheerder){
 //Combineert de functies samen in 1 functie om onderstaande informatie op te halen.
 function haalinformatieop($resultaat){
     for($i = 0; $i < count($resultaat); $i++) {
-            echo '<div class="col-md-4">';
-            echo haaltitelop($resultaat[$i]["titel"]);
-            echo haalplaatjeop($resultaat[$i]["hoofdplaatje"]);
-            echo haaltimerop($resultaat[$i]["looptijdeindeDag"], $resultaat[$i]["looptijdeindeTijdstip"], $resultaat[$i]["geblokkeerd"], $i);
-            echo haalstartprijsop($resultaat[$i]["startprijs"]);
-            echo haalhuidigeprijsop($resultaat[$i]["voorwerpnummer"]);
-            echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $resultaat[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
+            haalveilinginformatieop($resultaat, $i);
     }
 }
+
+function haalveilinginformatieop($veiling, $i){
+    echo '<div class="col-md-4">';
+    echo haaltitelop($veiling[$i]["titel"]);
+    echo haalplaatjeop($veiling[$i]["hoofdplaatje"]);
+    echo haaltimerop($veiling[$i]["looptijdeindeDag"], $veiling[$i]["looptijdeindeTijdstip"], $veiling[$i]["geblokkeerd"], $i);
+    echo haalstartprijsop($veiling[$i]["startprijs"]);
+    echo haalhuidigeprijsop($veiling[$i]["voorwerpnummer"]);
+    echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $veiling[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
+}
+
 function haalrubriekenop($rubrieknummer, $rubrieken, $voorwerpen, $beheerder){
     for($i=0; $i<count($rubrieken); $i++){
         if($rubrieken[$i]["rubrieknummer"]==$rubrieknummer){
@@ -99,22 +105,12 @@ function haalrubriekinformatieop($rubrieknummer, $voorwerpen, $beheerder){
     for($i=0; $i<count($voorwerpen); $i++){
         if($voorwerpen[$i]["rubrieknummerOpLaagsteNiveau"]==$rubrieknummer){
             if($voorwerpen[$i]["geblokkeerd"] == 'nee' && $voorwerpen[$i]["veilingGesloten"] == 'nee'){
-                echo '<div class="col-md-4">';
-                echo haaltitelop($voorwerpen[$i]["titel"]);
-                echo haalplaatjeop($voorwerpen[$i]["hoofdplaatje"]);
-                echo haaltimerop($voorwerpen[$i]["looptijdeindeDag"], $voorwerpen[$i]["looptijdeindeTijdstip"], $voorwerpen[$i]["geblokkeerd"], $i);
-                echo haalstartprijsop($voorwerpen[$i]["startprijs"]);
-                echo haalhuidigeprijsop($voorwerpen[$i]["voorwerpnummer"]);
-                echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $voorwerpen[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
+                $GLOBALS['veilingenteller']++;
+                haalveilinginformatieop($voorwerpen, $i);
             }
             else if($beheerder == 'ja'){
-                echo '<div class="col-md-4">';
-                echo haaltitelop($voorwerpen[$i]["titel"]);
-                echo haalplaatjeop($voorwerpen[$i]["hoofdplaatje"]);
-                echo haaltimerop($voorwerpen[$i]["looptijdeindeDag"], $voorwerpen[$i]["looptijdeindeTijdstip"], $voorwerpen[$i]["geblokkeerd"], $i);
-                echo haalstartprijsop($voorwerpen[$i]["startprijs"]);
-                echo haalhuidigeprijsop($voorwerpen[$i]["voorwerpnummer"]);
-                echo '<p><a class="btn btn-secondary" href="detailpagina.php?voorwerpnummer=' . $voorwerpen[$i]["voorwerpnummer"] . '" role="button">Zie details &raquo;</a></p></div>';
+                $GLOBALS['veilingenteller']++;
+                haalveilinginformatieop($voorwerpen, $i);
             }
         }
     }

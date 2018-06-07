@@ -42,7 +42,10 @@ $rubrieken = haalallerubriekenop();
                 <div class="row">
             ';
             haalrubriekenop($_GET["rubrieknummer"], $rubrieken, haalvoorwerpeninrubriekenop(), $beheerder);
-            echo '</div></div>';
+            if ($veilingenteller==0){
+                echo 'Geen veilingen gevonden.</div></div>';
+            }
+            else echo '</div></div>';
         }
         else{
             echo '
