@@ -16,6 +16,7 @@ function haalgebruikersop(){
     $rijen = $data->fetchAll(PDO::FETCH_NAMED);
     $aantal = count($rijen);
     if(!empty($rijen)) {
+        //zet de gevonden gebruikers in een tabel
         echo '
         <table class="table table-hover">
             <thead>
