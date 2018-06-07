@@ -1,9 +1,24 @@
 <?php
-include 'php/veiling_gegevens.php';
 $titel = 'Detailpagina';
 $voorwerpnummer = $_GET['voorwerpnummer'];
+include_once 'databaseverbinding/database_connectie.php';
+$conn = verbindMetDatabase();
+$sql = "SELECT COUNT(voorwerpnummer) AS aantal
+		FROM voorwerp
+		WHERE voorwerpnummer = ?";
+	
+$count = $conn->prepare($sql);
+$count->execute(array($voorwerpnummer));
+$aantal = $count->fetchAll(PDO::FETCH_ASSOC);
+var_dump($aantal[0]['aantal']);
+
+if($aantal[0]['aantal'] == 0){
+	header("location: ./index.php");
+} else{
+include 'php/veiling_gegevens.php';
+
+
 include_once 'php/beheerder_zoeken.php';
-include_once 'php/rubriekenboom.php';
 
 if(!isset($_GET['error'])){
     $_GET['error'] = '';
@@ -54,8 +69,7 @@ include 'header.php';
 					</div>
                     <?php haalbiedingenop($voorwerpnummer);?>
                 </div>
-                <?php echo '<form method="post" action="php/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '">
-                '; ?>
+                <?php echo '<form method="post" action="php/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
                 <div class="form-group">
 
 						<?php
@@ -70,19 +84,11 @@ include 'header.php';
                         <div class="form-group text-center">
                             <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
                         </div>
-                        </div>
                         </form>';
                             }
                         }else{
                             if (isset($_GET['veilingstatus']) && $_GET['veilingstatus'] == 0) {
-                                echo '                        <div class="my-md-3 form-group text-center">
-                            <input type="text" class="form-control" id="bodbedrag" name="bodbedrag" placeholder="Deze veiling is geblokkeerd" readonly>
-                        </div>
-                        <div class="form-group text-center">
-                            <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
-                        </div>
-                        </div>
-                        </form>';
+                                echo ' ';
                             } else {
                                 echo '
                         <div class="my-md-3 form-group text-center">
@@ -91,7 +97,6 @@ include 'header.php';
                         <div class="form-group text-center">
                             <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
                         </div>
-                        </div>
                         </form>';
                             }
                         }?>
@@ -99,21 +104,15 @@ include 'header.php';
                         echo '<br>';
                     if($beheerder == 'ja') {
                     echo '
-                    <form method="post" action="php/blokkeerveiling.php?voorwerpnummer=' . $voorwerpnummer . '">
+                    <form method="post" action="php/blokkeerveiling.php?voorwerpnummer=' . $voorwerpnummer . '"
 
                     ';
                     if($item == false) {
-                        if(isset($_GET['status'])){
-                            echo $_GET['error'];
-                        }
                         echo '<label>Met deze knop kunt u de veiling blokkeren.</label>
                     <input type="hidden" id="voorwerpnummer" name="voorwerpnummer"><br>
 
                         <button type="submit" name="blokkeerknop" class="btn btn-primary">Blokkeer</button>';
                     }else{
-                        if(isset($_GET['status'])){
-                            echo $_GET['error'];
-                        }
                         echo '
                     <p>Met deze knop kunt u de veiling deblokkeren.</p>
                  <label>Als de veiling is gedeblokkeerd, komt de timer weer terug.</label>
@@ -146,7 +145,7 @@ include 'header.php';
                     Product informatie
                 </h1>
                 <div class="bg-light text-center">
-                    <?php haalvoorwerpdetailsop($voorwerpnummer,haalallerubriekenop()); ?>
+                    <?php haalvoorwerpdetailsop($voorwerpnummer); ?>
                 </div>
 
 
@@ -167,4 +166,4 @@ include 'header.php';
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 </body>
-</html>
+</html> <?php }; ?>
