@@ -54,7 +54,8 @@ include 'header.php';
 					</div>
                     <?php haalbiedingenop($voorwerpnummer);?>
                 </div>
-                <?php echo '<form method="post" action="php/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
+                <?php echo '<form method="post" action="php/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '">
+                '; ?>
                 <div class="form-group">
 
 						<?php
@@ -69,6 +70,7 @@ include 'header.php';
                         <div class="form-group text-center">
                             <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
                         </div>
+                        </div>
                         </form>';
                             }
                         }else{
@@ -82,6 +84,7 @@ include 'header.php';
                         <div class="form-group text-center">
                             <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
                         </div>
+                        </div>
                         </form>';
                             }
                         }?>
@@ -89,7 +92,7 @@ include 'header.php';
                         echo '<br>';
                     if($beheerder == 'ja') {
                     echo '
-                    <form method="post" action="php/blokkeerveiling.php?voorwerpnummer=' . $voorwerpnummer . '"
+                    <form method="post" action="php/blokkeerveiling.php?voorwerpnummer=' . $voorwerpnummer . '">
 
                     ';
                     if($item == false) {
