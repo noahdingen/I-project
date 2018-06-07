@@ -96,11 +96,17 @@ include 'header.php';
 
                     ';
                     if($item == false) {
+                        if($error == 'Deze veiling is gesloten, U kunt hem niet blokkeren'){
+                            echo $error;
+                        }
                         echo '<label>Met deze knop kunt u de veiling blokkeren.</label>
                     <input type="hidden" id="voorwerpnummer" name="voorwerpnummer"><br>
 
                         <button type="submit" name="blokkeerknop" class="btn btn-primary">Blokkeer</button>';
                     }else{
+                        if($error == 'Deze veiling is gesloten, U kunt hem niet blokkeren'){
+                            echo $error;
+                        }
                         echo '
                     <p>Met deze knop kunt u de veiling deblokkeren.</p>
                  <label>Als de veiling is gedeblokkeerd, komt de timer weer terug.</label>

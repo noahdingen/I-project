@@ -75,7 +75,13 @@ function closeNav() {
 		</div>
 
         <form class="form-inline" action="index.php" method="get">
-            <input class="form-control mr-sm-4" type="search" name="zoeken" placeholder="Zoeken naar veilingen" aria-label="Search" required>
+            <input class="form-control mr-sm-4" type="search" name="zoeken" placeholder="Zoeken naar veilingen" aria-label="Search"
+                <?php
+                if(isset($_GET['zoeken'])) {
+                    echo 'value="' . $_GET['zoeken'] . '"';
+                }
+                ?>
+                   required>
             <button class="btn btn-primary" type="submit">Zoeken</button>
         </form>
 
