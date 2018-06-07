@@ -10,7 +10,7 @@ if (!isset($_SESSION)) {
 $bank = $_POST['banknaam'];
 $banknummer = $_POST['IBAN-Nummer'];
 $creditcardnummer = $_POST['creditcardnummer'];
-$verkoper = 'ja  ';
+$verkoper = 'ja';
 $gast = $_SESSION['gebruikers'];
 $controle = 'Creditcard';
 $conn = verbindMetDatabase();

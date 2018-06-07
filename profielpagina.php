@@ -44,7 +44,7 @@ echo '
     <input name="postcode" class="form-control" type="text" placeholder=" ' . $postcode .'" ' . $inhoudstype .'>
     <label>Verkoper</label>
     <input name="verkoper" class="form-control" type="text" placeholder=" ' . $verkoper .'" ' . $inhoudstype .'>';
-    if($verkoper == 'ja  '){
+    if($verkoper == 'ja'){
     echo '
             <label>Bank</label>
             <input name="bank" class="form-control" type="text" placeholder=" ' . $banknaam . '" ' . $inhoudstype .'>
@@ -66,7 +66,7 @@ if(($_GET["bewerken"]=='true')){
 
 }
 else {
-	if($verkoper == 'ja  ' || $beheerder == 'ja'){
+	if($verkoper == 'ja' || $beheerder == 'ja'){
 		echo '
     <div class="linkjes">
         <a href="profielpagina.php?bewerken=true">Gegevens bijwerken</a>
@@ -91,7 +91,7 @@ else {
             <h1>Mijn geboden veilingen</h1> 
             ';
 
-        if($verkoper == 'ja  ') {
+        if($verkoper == 'ja') {
             echo '<div class="linkjes">
             <a href="profielpagina.php?bewerken=false">Bekijk mijn lopende veilingen</a>
             </div>';
@@ -101,7 +101,7 @@ else {
         echo '
             </div></div>
             ';
-    } elseif($verkoper == 'ja  ') {
+    } elseif($verkoper == 'ja') {
         echo '
             <h1>Mijn lopende veilingen</h1> 
             <div class="linkjes">

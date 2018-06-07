@@ -96,7 +96,7 @@ function closeNav() {
                   </button>
                   <div class="dropdown-menu dropdown-menu-right">
                         <a href="profielpagina.php?bewerken=false" class="dropdown-item" role="button">Mijn profiel</a>';
-            if ($verkoper == 'ja  ') {
+            if ($verkoper == 'ja') {
                 echo '<a href="rubriek_veiling_toevoegen.php  " class="dropdown-item" role="button">Plaats veiling</a>';
             }
             if ($beheerder == 'ja') {

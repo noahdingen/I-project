@@ -83,7 +83,7 @@ if($beheerder == 'ja') {
     <label>Verkoper</label>
     <input name="verkoper" class="form-control" type="text" value="' . $verkoper . '" ' . $inhoudstype . '>';
 
-        if ($verkoper == 'ja  ') {
+        if ($verkoper == 'ja') {
             echo '
             <label>Bank</label>
             <input name="bank" class="form-control" type="text" value="' . $banknaam . '" ' . $inhoudstype . '>

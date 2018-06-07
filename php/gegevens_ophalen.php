@@ -37,7 +37,7 @@ $postcode = $rows[0]['postcode'];
 $verkoper = $rows[0]['verkoper'];
 $geblokkeerd = $rows[0]['geblokkeerd'];
 
-if($verkoper == 'ja  ') {
+if($verkoper == 'ja') {
     $banknaam = $rows_2[0]['banknaam'];
     $rekingnummer = $rows_2[0]['rekeningnummer'];
     $controle_optie = $rows_2[0]['controleoptienaam'];
