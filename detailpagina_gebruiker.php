@@ -2,6 +2,9 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+if(isset($_SESSION['gebruikers']) || !empty($_SESSION['gebruikers'])){
+		header("location: ./index.php");
+} else{
 include_once 'databaseverbinding/database_connectie.php';
 include_once 'php/beheerder_zoeken.php';
 $titel = 'Profielpagina';
@@ -140,5 +143,6 @@ else{
         echo 'U bent hier niet voor geautoriseerd';
         echo '<p>Door deze <a href="index.php">link</a> gaat u terug naar de homepagina ';
     }
+}
 
 ?>

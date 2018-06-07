@@ -3,6 +3,10 @@ include_once 'php/rubriek_zoeken.php';
 include_once 'databaseverbinding/database_connectie.php';
 $titel = 'Veiling toevoegen';
 include 'header.php';
+
+if(!isset($_SESSION['gebruikers']) || empty($_SESSION['gebruikers'])){
+		header("location: ./index.php");
+}
 ?>
 
 <link href="assets/css/veiling_toevoegen.css" rel="stylesheet">

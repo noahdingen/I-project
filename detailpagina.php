@@ -75,7 +75,14 @@ include 'header.php';
                             }
                         }else{
                             if (isset($_GET['veilingstatus']) && $_GET['veilingstatus'] == 0) {
-                                echo ' ';
+                                echo '                        <div class="my-md-3 form-group text-center">
+                            <input type="text" class="form-control" id="bodbedrag" name="bodbedrag" placeholder="Deze veiling is geblokkeerd" readonly>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
+                        </div>
+                        </div>
+                        </form>';
                             } else {
                                 echo '
                         <div class="my-md-3 form-group text-center">
@@ -96,16 +103,16 @@ include 'header.php';
 
                     ';
                     if($item == false) {
-                        if($error == 'Deze veiling is gesloten, U kunt hem niet blokkeren'){
-                            echo $error;
+                        if(isset($_GET['status'])){
+                            echo $_GET['error'];
                         }
                         echo '<label>Met deze knop kunt u de veiling blokkeren.</label>
                     <input type="hidden" id="voorwerpnummer" name="voorwerpnummer"><br>
 
                         <button type="submit" name="blokkeerknop" class="btn btn-primary">Blokkeer</button>';
                     }else{
-                        if($error == 'Deze veiling is gesloten, U kunt hem niet blokkeren'){
-                            echo $error;
+                        if(isset($_GET['status'])){
+                            echo $_GET['error'];
                         }
                         echo '
                     <p>Met deze knop kunt u de veiling deblokkeren.</p>
