@@ -8,7 +8,7 @@ $pdo = verbindMetDatabase();
 $voorwerpnummer = $_GET['voorwerpnummer'];
 
 
-$blokkeer = $pdo->prepare("select geblokkeerd, titel from Voorwerp where voorwerpnummer =?");
+$blokkeer = $pdo->prepare("select geblokkeerd, titel, veilingGesloten from Voorwerp where voorwerpnummer =?");
 $blokkeer->execute(array($voorwerpnummer));
 $rijen = $blokkeer->fetchAll(PDO::FETCH_ASSOC);
 
@@ -20,16 +20,18 @@ $email_bieder_2 = $pdo->prepare("select top 1 Bod.voorwerpnummer, Bod.gebruikers
 $email_bieder_2->execute(array($voorwerpnummer));
 $email_bieder = $email_bieder_2->fetchAll(PDO::FETCH_ASSOC);
 
+if($rijen[0]['veilingGesloten'] == 'ja'){
+    header("location: ../detailpagina.php?voorwerpnummer=".$voorwerpnummer."&error=Deze veiling is gesloten, U kunt hem niet blokkeren");
+}else {
+    if ($rijen[0]['geblokkeerd'] == 'nee') {
+        $data = $pdo->prepare("UPDATE Voorwerp SET geblokkeerd = 'ja' WHERE geblokkeerd = 'nee' AND voorwerpnummer = '$voorwerpnummer'");
+        $data->execute();
+        $count = $data->rowCount();
 
-if($rijen[0]['geblokkeerd'] == 'nee'){
-    $data = $pdo->prepare("UPDATE Voorwerp SET geblokkeerd = 'ja' WHERE geblokkeerd = 'nee' AND voorwerpnummer = '$voorwerpnummer'");
-    $data->execute();
-    $count = $data->rowCount();
-
-    //mailtje sturen dat veiling is geblokkeerd naar hoogste bieder
-    $email_hoogstebieder = $email_bieder[0]['emailadres'];
-    $subject = 'Er is een veiling geblokkeerd';
-    $emailtekst = 'Dit is een mail om u te informeren dat er een veiling is geblokkeerd op de site:
+        //mailtje sturen dat veiling is geblokkeerd naar hoogste bieder
+        $email_hoogstebieder = $email_bieder[0]['emailadres'];
+        $subject = 'Er is een veiling geblokkeerd';
+        $emailtekst = 'Dit is een mail om u te informeren dat er een veiling is geblokkeerd op de site:
             http://iproject39.icasites.nl
             
             Het gaat hier om de veiling: ' . $rijen[0]['titel'] . '
@@ -42,21 +44,21 @@ if($rijen[0]['geblokkeerd'] == 'nee'){
             Met vriendelijke groeten, IConcepts.
             
             U kunt niet op deze mail reageren';
-    $to = $email_hoogstebieder;
-    $from = 'iconcepts39@gmail.com';
+        $to = $email_hoogstebieder;
+        $from = 'iconcepts39@gmail.com';
 
-    $headers   = array();
-    $headers[] = "MIME-Version: 1.0";
-    $headers[] = "Content-type: text/plain; charset=iso-8859-1";
-    $headers[] = "From: IConcepts <{$from}>";
-    $headers[] = "X-Mailer: PHP/".phpversion();
+        $headers = array();
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-type: text/plain; charset=iso-8859-1";
+        $headers[] = "From: IConcepts <{$from}>";
+        $headers[] = "X-Mailer: PHP/" . phpversion();
 
-    mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f".$from );
+        mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f" . $from);
 
-    //mailtje sturen dat veiling is geblokkeerd naar hoogste bieder
-    $email = $email_verkoper[0]['emailadres'];
-    $onderwerp = 'Er is een veiling geblokkeerd';
-    $tekst = 'Dit is een mail om u te informeren dat er een veiling is geblokkeerd op de site:
+        //mailtje sturen dat veiling is geblokkeerd naar hoogste bieder
+        $email = $email_verkoper[0]['emailadres'];
+        $onderwerp = 'Er is een veiling geblokkeerd';
+        $tekst = 'Dit is een mail om u te informeren dat er een veiling is geblokkeerd op de site:
             http://iproject39.icasites.nl
             
             Een veiling is geblokkeerd en u was de aanbieder.
@@ -69,27 +71,27 @@ if($rijen[0]['geblokkeerd'] == 'nee'){
             Met vriendelijke groeten, IConcepts.
             
             U kunt niet op deze mail reageren';
-    $naar = $email;
-    $van = 'iconcepts39@gmail.com';
+        $naar = $email;
+        $van = 'iconcepts39@gmail.com';
 
-    $headers   = array();
-    $headers[] = "MIME-Version: 1.0";
-    $headers[] = "Content-type: text/plain; charset=iso-8859-1";
-    $headers[] = "From: IConcepts <{$from}>";
-    $headers[] = "X-Mailer: PHP/".phpversion();
+        $headers = array();
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-type: text/plain; charset=iso-8859-1";
+        $headers[] = "From: IConcepts <{$from}>";
+        $headers[] = "X-Mailer: PHP/" . phpversion();
 
-    mail($naar, $onderwerp, $tekst, implode("\r\n", $headers), "-f".$van );
+        mail($naar, $onderwerp, $tekst, implode("\r\n", $headers), "-f" . $van);
 
-    header("location: ../detailpagina.php?voorwerpnummer=".$voorwerpnummer."&error=Deze veiling is geblokkeerd");
-}elseif($rijen[0]['geblokkeerd'] == 'ja'){
-    $data = $pdo->prepare("UPDATE Voorwerp SET geblokkeerd = 'nee' WHERE geblokkeerd = 'ja' AND voorwerpnummer = '$voorwerpnummer'");
-    $data->execute();
-    $count = $data->rowCount();
+        header("location: ../detailpagina.php?voorwerpnummer=" . $voorwerpnummer . "&error=Deze veiling is geblokkeerd");
+    } elseif ($rijen[0]['geblokkeerd'] == 'ja') {
+        $data = $pdo->prepare("UPDATE Voorwerp SET geblokkeerd = 'nee' WHERE geblokkeerd = 'ja' AND voorwerpnummer = '$voorwerpnummer'");
+        $data->execute();
+        $count = $data->rowCount();
 
-    //mailtje sturen dat veiling is gedeblokkeerd naar hoogste bieder
-    $email_hoogstebieder = $email_bieder[0]['emailadres'];
-    $subject = 'Er is een veiling gedeblokkeerd';
-    $emailtekst = 'Dit is een mail om u te informeren dat er een veiling is gedeblokkeerd op de site:
+        //mailtje sturen dat veiling is gedeblokkeerd naar hoogste bieder
+        $email_hoogstebieder = $email_bieder[0]['emailadres'];
+        $subject = 'Er is een veiling gedeblokkeerd';
+        $emailtekst = 'Dit is een mail om u te informeren dat er een veiling is gedeblokkeerd op de site:
             http://iproject39.icasites.nl
             
             Het gaat hier om de veiling: ' . $rijen[0]['titel'] . '
@@ -101,21 +103,21 @@ if($rijen[0]['geblokkeerd'] == 'nee'){
             Met vriendelijke groeten, IConcepts.
             
             U kunt niet op deze mail reageren';
-    $to = $email_hoogstebieder;
-    $from = 'iconcepts39@gmail.com';
+        $to = $email_hoogstebieder;
+        $from = 'iconcepts39@gmail.com';
 
-    $headers   = array();
-    $headers[] = "MIME-Version: 1.0";
-    $headers[] = "Content-type: text/plain; charset=iso-8859-1";
-    $headers[] = "From: IConcepts <{$from}>";
-    $headers[] = "X-Mailer: PHP/".phpversion();
+        $headers = array();
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-type: text/plain; charset=iso-8859-1";
+        $headers[] = "From: IConcepts <{$from}>";
+        $headers[] = "X-Mailer: PHP/" . phpversion();
 
-    mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f".$from );
+        mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f" . $from);
 
-    //mailtje sturen dat veiling is geblokkeerd naar hoogste bieder
-    $email = $email_verkoper[0]['emailadres'];
-    $onderwerp = 'Er is een veiling gedeblokkeerd';
-    $tekst = 'Dit is een mail om u te informeren dat er een veiling is gedeblokkeerd op de site:
+        //mailtje sturen dat veiling is geblokkeerd naar hoogste bieder
+        $email = $email_verkoper[0]['emailadres'];
+        $onderwerp = 'Er is een veiling gedeblokkeerd';
+        $tekst = 'Dit is een mail om u te informeren dat er een veiling is gedeblokkeerd op de site:
             http://iproject39.icasites.nl
             
             Een veiling is gedeblokkeerd en u was de aanbieder.
@@ -126,20 +128,20 @@ if($rijen[0]['geblokkeerd'] == 'nee'){
             Met vriendelijke groeten, IConcepts.
             
             U kunt niet op deze mail reageren';
-    $naar = $email;
-    $van = 'iconcepts39@gmail.com';
+        $naar = $email;
+        $van = 'iconcepts39@gmail.com';
 
-    $headers   = array();
-    $headers[] = "MIME-Version: 1.0";
-    $headers[] = "Content-type: text/plain; charset=iso-8859-1";
-    $headers[] = "From: IConcepts <{$from}>";
-    $headers[] = "X-Mailer: PHP/".phpversion();
+        $headers = array();
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-type: text/plain; charset=iso-8859-1";
+        $headers[] = "From: IConcepts <{$from}>";
+        $headers[] = "X-Mailer: PHP/" . phpversion();
 
-    mail($naar, $onderwerp, $tekst, implode("\r\n", $headers), "-f".$van );
+        mail($naar, $onderwerp, $tekst, implode("\r\n", $headers), "-f" . $van);
 
-   header("location: ../detailpagina.php?voorwerpnummer=".$voorwerpnummer."");
+        header("location: ../detailpagina.php?voorwerpnummer=" . $voorwerpnummer . "");
+    }
 }
-
 ?>
 
 
