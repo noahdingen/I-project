@@ -16,11 +16,11 @@ if(!isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers'] || $
         <form class="col-form-label-lg" action="php/veiling_toevoegen_in_database.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="titel">Titel</label>
-                <input type="text" class="form-control" name="titel" id="titel" placeholder="Titel" required autofocus>
+                <input type="text" class="form-control" name="titel" id="titel" placeholder="Titel" pattern=".{60}" required autofocus>
             </div>
             <div class="form-group">
                 <label for="beschrijving">Beschrijving</label>
-                <input type="text" class="form-control" name="beschrijving" id="beschrijving" placeholder="Beschrijving" required>
+                <input type="text" class="form-control" name="beschrijving" id="beschrijving" placeholder="Beschrijving" pattern=".{255}" required>
             </div>
             <div class="form-group">
                 <input type="hidden" class="form-control" name="rubriek" id="rubriek" value="<?php haalrubrieknummerop()?>">
@@ -74,7 +74,7 @@ if(!isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers'] || $
 
             <div class="form-group">
                 <label for="betalingsinstructies">Betalingsinstructies</label>
-                <input type="text" class="form-control" name="betalingsinstructies" id="betalingsinstructies" placeholder="Betalingsinstructies">
+                <input type="text" class="form-control" name="betalingsinstructies" id="betalingsinstructies" placeholder="Betalingsinstructies" pattern=".{255}">
             </div>
 
 
@@ -98,13 +98,13 @@ if(!isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers'] || $
 
                 <div class="form-group col-md-4">
                     <label for="plaatsnaam">Plaatsnaam</label>
-                    <input type="text" class="form-control" name="plaatsnaam" id="plaatsnaam" placeholder="Plaatsnaam" required>
+                    <input type="text" class="form-control" name="plaatsnaam" id="plaatsnaam" placeholder="Plaatsnaam" pattern=".{28}" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="verzendinstructies">Verzendinstructies</label>
-                <input type="text" class="form-control" name="verzendinstructies" id="verzendinstructies" placeholder="verzendinstructies">
+                <input type="text" class="form-control" name="verzendinstructies" id="verzendinstructies" placeholder="verzendinstructies" pattern=".{255}">
             </div>
             <input type="submit" name="Verzenden" class="btn btn-primary">
         </form>
