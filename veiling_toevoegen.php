@@ -32,7 +32,7 @@ if(!isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers'] || $
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="startprijs">Startprijs</label>
-                    <input type="number" class="form-control" name="startprijs" id="startprijs" placeholder="Startprijs" min="0" max="10000000" required>
+                    <input type="number" class="form-control" name="startprijs" id="startprijs" placeholder="Startprijs" min="1" max="10000000" required>
                 </div>
 
                 <div class="form-group col-md-4">
