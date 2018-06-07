@@ -24,7 +24,7 @@ $email_bieder = $email_bieder_2->fetchAll(PDO::FETCH_ASSOC);
 
 //als de veiling is gesloten gaat hij terug naar de detailpagina met een foutmelding
 if($rijen[0]['veilingGesloten'] == 'ja'){
-    header("location: ../detailpagina.php?voorwerpnummer=".$voorwerpnummer."&error=Deze veiling is gesloten, U kunt hem niet blokkeren&status=verlopen");
+    header("location: ../detailpagina.php?voorwerpnummer=".$voorwerpnummer."&error=Deze veiling is gesloten, U kunt hem niet blokkeren.&status=verlopen");
 }else {
     if ($rijen[0]['geblokkeerd'] == 'nee') {
         $data = $pdo->prepare("UPDATE Voorwerp SET geblokkeerd = 'ja' WHERE geblokkeerd = 'nee' AND voorwerpnummer = '$voorwerpnummer'");
