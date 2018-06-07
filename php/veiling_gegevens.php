@@ -97,7 +97,7 @@ function haalvoorwerpdetailsop($voorwerpnummer,$rubrieken){
     echo '<div class="col">
               <div class="col text-center">
              <b> Bieden vanaf:</b>
-             '.$titel[0]['startprijs'] . '
+             &euro;'.$titel[0]['startprijs'] . '
               </div>
                <div class="col text-center">
              <b> Rubriekenpad:</b>
