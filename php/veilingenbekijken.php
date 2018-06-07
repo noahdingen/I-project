@@ -31,7 +31,8 @@ function haalhuidigeprijsop($voorwerpnummer){
     if(!empty($bod)){
         echo "<p>Huidige bod: €" . $bod[0]['bodbedrag'] ."</p>";
     }
-    else echo "Nog geen bod uitgebracht";
+    else echo '<p>"Nog geen bod uitgebracht"</p>';
+//    <p>Huidige bod: €" . $bod[0]['bodbedrag'] ."</p>
 }
 //Haalt de looptijd van de veiling op.
 function haaltimerop($dag, $tijdstip, $geblokkeerd, $i){
@@ -118,7 +119,7 @@ function haalrubriekinformatieop($rubrieknummer, $voorwerpen, $beheerder){
 function haalgebodenveilingenop($gebruikersnaam){
     date_default_timezone_set("Europe/Amsterdam");
     $conn = verbindMetDatabase();
-    $data = $conn->prepare("SELECT DISTINCT Voorwerp.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs FROM Voorwerp INNER JOIN Bod ON Voorwerp.voorwerpnummer = Bod.voorwerpnummer WHERE Bod.gebruikersnaam =?");
+    $data = $conn->prepare("SELECT DISTINCT Voorwerp.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd FROM Voorwerp INNER JOIN Bod ON Voorwerp.voorwerpnummer = Bod.voorwerpnummer WHERE Bod.gebruikersnaam =?");
     $data->execute(array($gebruikersnaam));
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     haalinformatieop($resultaat);
@@ -131,7 +132,7 @@ function haalgebodenveilingenop($gebruikersnaam){
 function haalmijnveilingenop($gebruikersnaam){
     date_default_timezone_set("Europe/Amsterdam");
     $conn = verbindMetDatabase();
-    $data = $conn->prepare("SELECT DISTINCT Voorwerp.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs FROM Voorwerp INNER JOIN Verkoper ON Voorwerp.verkoper = Verkoper.gebruikersnaam WHERE Verkoper.gebruikersnaam =? ");
+    $data = $conn->prepare("SELECT DISTINCT Voorwerp.voorwerpnummer, titel, hoofdplaatje, looptijdeindeDag, looptijdeindeTijdstip, startprijs, geblokkeerd FROM Voorwerp INNER JOIN Verkoper ON Voorwerp.verkoper = Verkoper.gebruikersnaam WHERE Verkoper.gebruikersnaam =? ");
     $data->execute(array($gebruikersnaam));
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
     haalinformatieop($resultaat);

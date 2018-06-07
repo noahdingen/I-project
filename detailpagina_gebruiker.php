@@ -2,6 +2,9 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+if(isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers']){
+		header("location: ./index.php");
+} else{
 include_once 'databaseverbinding/database_connectie.php';
 include_once 'php/beheerder_zoeken.php';
 $titel = 'Profielpagina';
@@ -80,7 +83,7 @@ if($beheerder == 'ja') {
     <label>Verkoper</label>
     <input name="verkoper" class="form-control" type="text" value="' . $verkoper . '" ' . $inhoudstype . '>';
 
-        if ($verkoper == 'ja  ') {
+        if ($verkoper == 'ja') {
             echo '
             <label>Bank</label>
             <input name="bank" class="form-control" type="text" value="' . $banknaam . '" ' . $inhoudstype . '>
@@ -140,5 +143,6 @@ else{
         echo 'U bent hier niet voor geautoriseerd';
         echo '<p>Door deze <a href="index.php">link</a> gaat u terug naar de homepagina ';
     }
+}
 
 ?>

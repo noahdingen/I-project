@@ -7,7 +7,9 @@ if(isset($_GET['error'])){
 }else{
     $error = 'Gebruikersnaam';
 }
-
+if(isset($_SESSION['gebruikers']) || !empty($_SESSION['gebruikers'])){
+		header("location: ./index.php");
+}
 ?>
 
 <link href="assets/css/registreren.css" rel="stylesheet">

@@ -56,11 +56,11 @@ footer{
 }
 
 .col-md-4{
-    margin-left: 5%;
+    margin-left: 4%;
     background-color: white;
     margin-bottom: 10px;
     float: left;
-    max-width: 28%;
+    max-width: 29%;
     border-radius: 10px;
     text-align: center;
 }

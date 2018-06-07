@@ -6,7 +6,10 @@ if(isset($_GET['error'])){
     $error = '';
 }
 $titel = 'Wachtwoord vergeten';
-include 'header.php'
+include 'header.php';
+if(isset($_SESSION['gebruikers']) || $gebruiker = $_SESSION['gebruikers']){
+		header("location: ./index.php");
+}
 ?>
 <link href="assets/css/login.css" rel="stylesheet">
 <div class="container">

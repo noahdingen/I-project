@@ -6,7 +6,10 @@ if(isset($_GET['error'])){
 }
 
 $titel = 'Account activatie';
-include 'header.php'
+include 'header.php';
+if(isset($_SESSION['gebruikers'])){
+		header("location: ./index.php");
+}
 ?>
 
 <link href="assets/css/login.css" rel="stylesheet">

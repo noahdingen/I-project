@@ -3,6 +3,10 @@ include_once 'php/rubriek_zoeken.php';
 include_once 'databaseverbinding/database_connectie.php';
 $titel = 'Veiling toevoegen';
 include 'header.php';
+
+if(!isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers'] || $verkoper == 'nee'){
+		header("location: ./index.php");
+}
 ?>
 
 <link href="assets/css/veiling_toevoegen.css" rel="stylesheet">
@@ -28,7 +32,7 @@ include 'header.php';
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="startprijs">Startprijs</label>
-                    <input type="number" class="form-control" name="startprijs" id="startprijs" placeholder="Startprijs" min="0" max="1000000000" required>
+                    <input type="number" class="form-control" name="startprijs" id="startprijs" placeholder="Startprijs" min="1" max="10000000" required>
                 </div>
 
                 <div class="form-group col-md-4">
