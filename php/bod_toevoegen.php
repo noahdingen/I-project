@@ -1,9 +1,11 @@
 <?php
 include_once '../databaseverbinding/database_connectie.php';
+include_once '../header.php';
 
 if (!isset($_SESSION)) {
     session_start();
 }
+
 if($_SESSION['gebruikers'] == ''){
     $voorwerpnummer = $_GET['voorwerpnummer'];
     $error = "U dient ingelogd te zijn om te kunnen bieden";
