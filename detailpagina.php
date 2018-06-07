@@ -61,7 +61,7 @@ include 'header.php';
 						<?php
                         if(!$item) {
                             if (isset($_GET['veilingstatus']) && $_GET['veilingstatus'] == 0) {
-                                echo ' ';
+                                echo '</div>';
                             } else {
                                 echo '
                         <div class="my-md-3 form-group text-center">
