@@ -63,7 +63,7 @@ function closeNav() {
     <nav class="navbar navbar-light bg-dark justify-content-between">
 	<div>
 	<?php $pagina = $_SERVER['REQUEST_URI'];
-		if (strpos($_SERVER['REQUEST_URI'], "php/iProject/index.php") !== false){
+		if (strpos($_SERVER['REQUEST_URI'], "php/index.php") !== false){
 			echo '<div id="mySidenav" class="sidenav">
 				  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
 				  weergeefrubriekenboom($rubrieken);			  
@@ -75,7 +75,13 @@ function closeNav() {
 		</div>
 
         <form class="form-inline" action="index.php" method="get">
-            <input class="form-control mr-sm-4" type="search" name="zoeken" placeholder="Zoeken naar veilingen" aria-label="Search" required>
+            <input class="form-control mr-sm-4" type="search" name="zoeken" placeholder="Zoeken naar veilingen" aria-label="Search"
+                <?php
+                if(isset($_GET['zoeken'])) {
+                    echo 'value="' . $_GET['zoeken'] . '"';
+                }
+                ?>
+                   required>
             <button class="btn btn-primary" type="submit">Zoeken</button>
         </form>
 

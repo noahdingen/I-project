@@ -68,7 +68,7 @@ function haalverkoperop($voorwerpnummer){
        </div>';
 }
 
-//Haalt aantal veiligen van de verkoper op.
+//Haalt het totaal aantal veiligen op van de verkoper, dit zegt iets over de betrouwbaarheid van de gebruiker.
 function haalaantalveilingenop($verkoper){
     $conn = verbindMetDatabase();
     $sql = $conn->prepare("SELECT COUNT(verkoper) AS aantalverkocht FROM Voorwerp WHERE verkoper = ?");
@@ -101,7 +101,7 @@ function haalvoorwerpdetailsop($voorwerpnummer,$rubrieken){
               </div>
                <div class="col text-center">
              <b> Rubriekenpad:</b>
-             '; echo haalrubrieknummerop($voorwerpnummer,$rubrieken). ' Dit voorwerp
+             '; echo haalrubrieknummerop($voorwerpnummer,$rubrieken). '
               </div>
               <div class="col text-center">
              <b> Betalingswijze:</b>
@@ -147,7 +147,7 @@ function haalbiedingenop($voorwerpnummer){
 function haalrubriekenpadop($rubrieknummer,$rubrieken){
     for($i=0; $i<count($rubrieken); $i++){
         if($rubrieken[$i]["rubrieknummer"] == $rubrieknummer && $rubrieknummer!=-1){
-            echo '<a href=index.php?rubrieknummer=' . $rubrieken[$i]["rubrieknummer"] . '>' . $rubrieken[$i]["rubrieknaam"] .'</a> / '  . haalrubriekenpadop($rubrieken[$i]["rubriek"], $rubrieken) . '';
+            echo '<a class="rubriekenlink" href=index.php?rubrieknummer=' . $rubrieken[$i]["rubrieknummer"] . '>' . $rubrieken[$i]["rubrieknaam"] .'</a> / '  . haalrubriekenpadop($rubrieken[$i]["rubriek"], $rubrieken) . '';
         }
     }
     }

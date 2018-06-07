@@ -54,7 +54,8 @@ include 'header.php';
 					</div>
                     <?php haalbiedingenop($voorwerpnummer);?>
                 </div>
-                <?php echo '<form method="post" action="php/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '"'; ?>
+                <?php echo '<form method="post" action="php/bod_toevoegen.php?voorwerpnummer=' . $voorwerpnummer . '">
+                '; ?>
                 <div class="form-group">
 
 						<?php
@@ -69,6 +70,7 @@ include 'header.php';
                         <div class="form-group text-center">
                             <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
                         </div>
+                        </div>
                         </form>';
                             }
                         }else{
@@ -82,6 +84,7 @@ include 'header.php';
                         <div class="form-group text-center">
                             <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
                         </div>
+                        </div>
                         </form>';
                             }
                         }?>
@@ -89,15 +92,21 @@ include 'header.php';
                         echo '<br>';
                     if($beheerder == 'ja') {
                     echo '
-                    <form method="post" action="php/blokkeerveiling.php?voorwerpnummer=' . $voorwerpnummer . '"
+                    <form method="post" action="php/blokkeerveiling.php?voorwerpnummer=' . $voorwerpnummer . '">
 
                     ';
                     if($item == false) {
+                        if($error == 'Deze veiling is gesloten, U kunt hem niet blokkeren'){
+                            echo $error;
+                        }
                         echo '<label>Met deze knop kunt u de veiling blokkeren.</label>
                     <input type="hidden" id="voorwerpnummer" name="voorwerpnummer"><br>
 
                         <button type="submit" name="blokkeerknop" class="btn btn-primary">Blokkeer</button>';
                     }else{
+                        if($error == 'Deze veiling is gesloten, U kunt hem niet blokkeren'){
+                            echo $error;
+                        }
                         echo '
                     <p>Met deze knop kunt u de veiling deblokkeren.</p>
                  <label>Als de veiling is gedeblokkeerd, komt de timer weer terug.</label>

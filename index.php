@@ -5,7 +5,6 @@ $titel = 'Homepagina';
 include 'header.php';
 // regel hieronder uit commentariëren voor server
 //include_once 'Database_verbinding/database_connectie.php';
-include_once 'php/beheerder_zoeken.php';
 include_once 'php/veilingenbekijken.php';
 include_once 'php/rubriekenboom.php';
 $rubrieken = haalallerubriekenop();
@@ -16,9 +15,6 @@ $rubrieken = haalallerubriekenop();
 <script type="application/javascript" src="./assets/js/timerJava.js"></script>
 <main>
     <div class="row">
-    <aside class="col-2">
-        <?php weergeefrubriekenboom($rubrieken); ?>
-    </aside>
     <div class="container text-center">
         <?php if($zoek != ''){
 
