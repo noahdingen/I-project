@@ -32,6 +32,7 @@ if($beheerder == 'ja') {
         </form>
     </div>
     <?php
+    //haalt de gebruikers op en zet ze in een tabel
     if (isset($_POST['gebruikersnaam_zoeken'])) {
         haalgebruikersop();
     }
