@@ -41,7 +41,7 @@ function haalbeschrijvingop($voorwerpnummer){
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
     echo $titel[0]['beschrijving'];
 }
-//Haalt verkoper van het voorwerp op.
+//Haalt alle verkoperinformatie van het voorwerp op.
 function haalverkoperop($voorwerpnummer){
     $conn = verbindMetDatabase();
     $sql = $conn->prepare("SELECT verkoper, land FROM Voorwerp WHERE voorwerpnummer = ?");
