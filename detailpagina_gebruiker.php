@@ -2,7 +2,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-if(isset($_SESSION['gebruikers']) || !empty($_SESSION['gebruikers'])){
+if(isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers']){
 		header("location: ./index.php");
 } else{
 include_once 'databaseverbinding/database_connectie.php';
