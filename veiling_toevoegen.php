@@ -4,7 +4,7 @@ include_once 'databaseverbinding/database_connectie.php';
 $titel = 'Veiling toevoegen';
 include 'header.php';
 
-if(!isset($_SESSION['gebruikers']) || empty($_SESSION['gebruikers'])){
+if(!isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers'] || $verkoper == 'nee'){
 		header("location: ./index.php");
 }
 ?>

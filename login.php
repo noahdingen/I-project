@@ -7,7 +7,7 @@ if(isset($_GET['error'])){
 }
 $titel = 'Login';
 include 'header.php';
-if(isset($_SESSION['gebruikers']) || !empty($_SESSION['gebruiker'])){
+if(isset($_SESSION['gebruikers']) || $gebruiker = $_SESSION['gebruikers']){
 		header("location: ./index.php");
 }
 ?>

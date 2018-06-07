@@ -3,7 +3,7 @@ include_once 'databaseverbinding/database_connectie.php';
 include_once 'php/rubriek_zoeken.php';
 $titel = 'Rubriek zoeken';
 include 'header.php';
-if(!isset($_SESSION['gebruikers']) || empty($_SESSION['gebruikers'])){
+if(!isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers'] || $verkoper == 'nee'){
 		header("location: ./index.php");
 }
 ?>
