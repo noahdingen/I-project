@@ -7,7 +7,7 @@ if(isset($_GET['error'])){
 
 $titel = 'Account activatie';
 include 'header.php';
-if(isset($_SESSION['gebruikers']) || !empty($_SESSION['gebruikers'])){
+if(isset($_SESSION['gebruikers'])){
 		header("location: ./index.php");
 }
 ?>
