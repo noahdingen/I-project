@@ -68,7 +68,7 @@ function haalverkoperop($voorwerpnummer){
        </div>';
 }
 
-//Haalt aantal veiligen van de verkoper op.
+//Haalt het totaal aantal veiligen op van de verkoper, dit zegt iets over de betrouwbaarheid van de gebruiker.
 function haalaantalveilingenop($verkoper){
     $conn = verbindMetDatabase();
     $sql = $conn->prepare("SELECT COUNT(verkoper) AS aantalverkocht FROM Voorwerp WHERE verkoper = ?");
@@ -97,7 +97,7 @@ function haalvoorwerpdetailsop($voorwerpnummer,$rubrieken){
     echo '<div class="col">
               <div class="col text-center">
              <b> Bieden vanaf:</b>
-             '.$titel[0]['startprijs'] . '
+             &euro;'.$titel[0]['startprijs'] . '
               </div>
                <div class="col text-center">
              <b> Rubriekenpad:</b>
