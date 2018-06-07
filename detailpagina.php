@@ -61,8 +61,7 @@ include 'header.php';
 						<?php
                         if(!$item) {
                             if (isset($_GET['veilingstatus']) && $_GET['veilingstatus'] == 0) {
-                                echo '</div>
-                                </form>';
+                                echo ' ';
                             } else {
                                 echo '
                         <div class="my-md-3 form-group text-center">
@@ -76,8 +75,14 @@ include 'header.php';
                             }
                         }else{
                             if (isset($_GET['veilingstatus']) && $_GET['veilingstatus'] == 0) {
-                                echo '</div>
-                                   </form>';
+                                echo '                        <div class="my-md-3 form-group text-center">
+                            <input type="text" class="form-control" id="bodbedrag" name="bodbedrag" placeholder="Deze veiling is geblokkeerd" readonly>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
+                        </div>
+                        </div>
+                        </form>';
                             } else {
                                 echo '
                         <div class="my-md-3 form-group text-center">
