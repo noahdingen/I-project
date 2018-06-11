@@ -17,7 +17,8 @@ if($_SESSION['gebruikers'] == ''){
 }
 else {
     $voorwerpnummer = $_GET['voorwerpnummer'];
-    $bodbedrag = $_POST['bodbedrag'];
+    $bod = $_POST['bodbedrag'];
+    $bodbedrag = str_replace(',', '.', $bod);
     $gebruikersnaam = $_SESSION['gebruikers'];
     global $conn;
     $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
@@ -49,9 +50,7 @@ else {
         $verkoper = $state->fetchAll();
         if ($gebruikersnaam != $verkoper[0]['verkoper']) {
             if ($bodbedrag < 100000000) {
-                if (empty($hoogste_bod) && $hoogste_bod > $startbod[0]['startprijs']) {
-                    var_dump($startbod[0]['startprijs']);
-                    echo $hoogste_bod;
+                if (empty($hoogste_bod) && $bodbedrag > $startbod[0]['startprijs']) {
                     $sql_insert = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
                     $sql_insert->execute(array($voorwerpnummer, $bodbedrag, $gebruikersnaam));
                     $error = "";

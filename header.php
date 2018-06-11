@@ -21,13 +21,14 @@ if(isset($_SESSION['gebruikers'])) {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo = $conn;
 
-    $sql = "select verkoper, beheerder from Gebruiker where gebruikersnaam =?";
+    $sql = "select verkoper, beheerder, gebruikersnaam from Gebruiker where gebruikersnaam =?";
     $query = $pdo->prepare($sql);
     $query->execute([$_SESSION['gebruikers']]);
 
     $rows = $query->fetchAll(PDO::FETCH_ASSOC);
     $verkoper = $rows[0]['verkoper'];
     $beheerder = $rows[0]['beheerder'];
+    $gebruiker = $rows[0]['gebruikersnaam'];
 }
 
 if(!isset($beheerder)){
@@ -63,12 +64,12 @@ function closeNav() {
     <nav class="navbar navbar-light bg-dark justify-content-between">
 	<div>
 	<?php $pagina = $_SERVER['REQUEST_URI'];
-		if (strpos($_SERVER['REQUEST_URI'], "php/index.php") !== false){
+		if (strpos($_SERVER['REQUEST_URI'], "index.php") !== false ||$_SERVER['REQUEST_URI'] == '/' || strpos($_SERVER['REQUEST_URI'], "rubrieknummer")){
 			echo '<div id="mySidenav" class="sidenav">
 				  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
-				  weergeefrubriekenboom($rubrieken);			  
+				  weergeefrubriekenboom($rubrieken);
 			echo  '</div>
-				 <button onclick="openNav()" class="btn btn-primary">Rubrieken » </button>';			}		
+				 <button onclick="openNav()" class="btn btn-primary">Rubrieken » </button>';			}
 		?>
 			
         <a href="index.php" class="btn btn-primary" role="button">Home</a>
@@ -118,15 +119,19 @@ function closeNav() {
 		date_default_timezone_set("Europe/Amsterdam");
 		$huidige_tijd = date('H:i:s');
 		$huidige_dag =  date('Y-m-d');
-        $pdo = verbindMetDatabase();
-
+        global $conn;
+        $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        $pdo = $conn;
 if($beheerder == 'nee') {
-    $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE geblokkeerd = 'nee' AND titel LIKE'%" . $zoek . "%' AND ((looptijdeindeDag = ? AND looptijdeindeTijdstip > ?) OR looptijdeindeDag > ?)");
-    $data->execute(array($huidige_dag, $huidige_tijd, $huidige_dag));
+    $zoeken = '%'. $zoek . '%';
+    $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE geblokkeerd = 'nee' AND titel LIKE ? AND ((looptijdeindeDag = ? AND looptijdeindeTijdstip > ?) OR looptijdeindeDag > ?)");
+    $data->execute(array($zoeken, $huidige_dag, $huidige_tijd, $huidige_dag));
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
 }elseif($beheerder == 'ja'){
-    $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE titel LIKE'%" . $zoek . "%' AND ((looptijdeindeDag = ? AND looptijdeindeTijdstip > ?) OR looptijdeindeDag > ?)");
-    $data->execute(array($huidige_dag, $huidige_tijd, $huidige_dag));
+    $zoeken = '%'. $zoek . '%';
+    $data = $pdo->prepare("SELECT * FROM Voorwerp WHERE titel LIKE ? AND ((looptijdeindeDag = ? AND looptijdeindeTijdstip > ?) OR looptijdeindeDag > ?)");
+    $data->execute(array($zoeken,$huidige_dag, $huidige_tijd, $huidige_dag));
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
 }
 ?>

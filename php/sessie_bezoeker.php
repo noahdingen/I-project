@@ -5,7 +5,9 @@ session_start();
 
 if(isset($_SESSION['gebruikers'])){
 $gebruikersnaam = $_SESSION['gebruikers'];
-$conn = verbindMetDatabase();
+global $conn;
+$conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 $sql = "SELECT voornaam, achternaam FROM Gebruiker WHERE gebruikersnaam = ?";
 $data = $conn->prepare($sql);
 $data->execute(array($gebruikersnaam));

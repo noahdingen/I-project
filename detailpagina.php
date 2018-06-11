@@ -2,7 +2,9 @@
 $titel = 'Detailpagina';
 $voorwerpnummer = $_GET['voorwerpnummer'];
 include_once 'databaseverbinding/database_connectie.php';
-$conn = verbindMetDatabase();
+global $conn;
+$conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $sql = "SELECT COUNT(voorwerpnummer) AS aantal
 		FROM voorwerp
 		WHERE voorwerpnummer = ?";
@@ -10,7 +12,6 @@ $sql = "SELECT COUNT(voorwerpnummer) AS aantal
 $count = $conn->prepare($sql);
 $count->execute(array($voorwerpnummer));
 $aantal = $count->fetchAll(PDO::FETCH_ASSOC);
-var_dump($aantal[0]['aantal']);
 
 if($aantal[0]['aantal'] == 0){
 	header("location: ./index.php");
@@ -58,14 +59,8 @@ include 'header.php';
                 <div class="bg-light">
 					<div class="timer" id="clockdiv">
 					<?php
-                    if(haalblokadeop($voorwerpnummer)[0]['geblokkeerd'] == 'ja'){
-                        echo '<div class="form-group">Deze veiling is geblokkeerd.</div>';
-                    }elseif($_GET['error']!=''){
-                        echo '<div class="form-group"> ' . $_GET['error'] . '</div>';
-                        header("Refresh: 5; location: detailpagina.php?voorwerpnummer=".$voorwerpnummer."");
-                    }else {
-                        timer();
-                    }?>
+                    timer();
+                    ?>
 					</div>
                     <?php haalbiedingenop($voorwerpnummer);?>
                 </div>
@@ -99,6 +94,13 @@ include 'header.php';
                         </div>
                         </form>';
                             }
+                        }
+
+                        if(haalblokadeop($voorwerpnummer)[0]['geblokkeerd'] == 'ja'){
+                            echo '<div class="form-group">Deze veiling is geblokkeerd.</div>';
+                        }elseif($_GET['error']!=''){
+                            echo '<div class="form-group"> ' . $_GET['error'] . '</div>';
+                            header("Refresh: 5; location: detailpagina.php?voorwerpnummer=".$voorwerpnummer."");
                         }?>
                     <?php
                         echo '<br>';
@@ -145,7 +147,7 @@ include 'header.php';
                     Product informatie
                 </h1>
                 <div class="bg-light text-center">
-                    <?php haalvoorwerpdetailsop($voorwerpnummer); ?>
+                    <?php haalvoorwerpdetailsop($voorwerpnummer, haalallerubriekenop() ); ?>
                 </div>
 
 

@@ -14,7 +14,7 @@ if(!isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers'] || $
         <h1 class="display-3">Veiling aanmaken</h1>
         <form class="col-form-label-lg" method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="rubriek">Wat wil je precies verkopen? Type een steekwoord in om je rubriek te kiezen.</label>
+                <label for="rubriek">Wat wil je precies verkopen? Typ een steekwoord in om je rubriek te kiezen.</label>
                 <input type="text" class="form-control" name="rubriek" id="rubriek" placeholder="Zoeken"
                        <?php
                        if(isset($_POST['rubriek'])) {

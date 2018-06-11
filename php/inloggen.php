@@ -7,43 +7,51 @@ if (!isset($_SESSION)) {
 $error_een = "Wachtwoord onjuist";
 $error_twee = "Gebruikersnaam bestaat niet";
 $error_drie = "U dient beide velden in te vullen";
+$error_vier = "Dit account  bestaat niet of is niet geactiveerd!";
+$error_vijf = "Uw account is geblokkeerd!";
 
 include_once '../databaseverbinding/database_connectie.php';
 //Regel hieronder is voor server!
-//require_once '../Server_verbinding/SQLSrvConnect.php';
+//require_once '../server_verbinding/sql_srv_connect.php';
 setlocale(LC_ALL, 'nld_nld');
 
 
 $gebruikersnaam = valideerFormulierinput($_POST['gebruikersnaam']);
 $wachtwoord = valideerFormulierinput($_POST['wachtwoord']);
+$geblokkeerd = is_gebruiker_geblokkeerd($gebruikersnaam);
+// functie om te controleren of een account is geactiveerd
+function checkvalidatie($gebruiker){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    $data = $conn->prepare("SELECT gebruikersnaam FROM Gebruiker WHERE gebruikersnaam = '$gebruiker'AND activatie = 1");
+    $data->execute();
+    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+    for($i = 0; $i < count($resultaat); $i++){
 
-//
-//function checkvalidatie(){
-//    $conn = verbindMetDatabase();
-//    $Gebruiker = $_SESSION['gebruikers'];
-//
-//    $data = $conn->prepare("SELECT verkoper FROM Gebruiker WHERE gebruikersnaam = '$Gebruiker'AND activatie = 1");
-//    $data->execute();
-//    $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
-//    for($i = 0; $i < count($resultaat); $i++){
-//
-//    }
-//
-//    if($i == 1){
-//        return true;
-//    }
-//}
-
+    }
+    return $i;
+}
+// checkt alle ingevoegde waardes
 if (!empty($gebruikersnaam) && !empty($wachtwoord)) {
     if (bestaatGebruikersnaam($gebruikersnaam)) {
-        if (bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord)) {
-            $_SESSION['gebruikers'] = $gebruikersnaam;
-            header("location: ../index.php");
+        if (checkvalidatie($gebruikersnaam)) {
+            if($geblokkeerd == 'nee') {
+                if (bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord)) {
+                    $_SESSION['gebruikers'] = $gebruikersnaam;
+                    header("refresh:0; url='../index.php'");
+                } else {
+                    header("location: ../login.php?error=$error_een");
+                }
+            }
+            else{
+                header("location: ../login.php?error=$error_vijf");
+            }
         } else {
-            header("location: ../login.php?error=$error_een");
-        }
-    }else {
+            header("location: ../login.php?error=$error_vier");
+        }}
+    else {
         header("location: ../login.php?error=$error_twee");
     }
 }
@@ -52,22 +60,39 @@ else {
 }
 //Kijkt of de gebruikersnaam al bestaat in de database.
 function bestaatGebruikersnaam($gebruikersnaam) {
-    $pdo = verbindMetDatabase();
-
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = $conn;
     $sql = "SELECT gebruikersnaam FROM Gebruiker WHERE gebruikersnaam = ?";
     $query = $pdo->prepare($sql);
-    $query->execute([$gebruikersnaam]);
+    $query->execute(array($gebruikersnaam));
     $gebruikersnaam = $query->fetchColumn();
     return $gebruikersnaam;
 }
-//Kijkt of de gebruikersnaam en het wachtwoord overeenkomen.
+// controleert of combinatie van gebruikersnaam met wachtwoord bestaat
 function bestaatCombinatieVanGebruikersnaamEnWachtwoord($gebruikersnaam, $wachtwoord) {
-    $pdo = verbindMetDatabase();
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "SELECT wachtwoord FROM Gebruiker WHERE gebruikersnaam = ?";
+    $pdo = $conn;
     $query = $pdo->prepare($sql);
-    $query->execute([$gebruikersnaam]);
+    $query->execute(array($gebruikersnaam));
     $wachtwoord_hash = $query->fetchColumn();
     return password_verify($wachtwoord, $wachtwoord_hash);
 }
 
+function is_gebruiker_geblokkeerd($gebruikersnaam){
+    global $conn;
+    $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = $conn;
+
+    $sql = "SELECT geblokkeerd FROM Gebruiker WHERE gebruikersnaam = ?";
+    $query = $pdo->prepare($sql);
+    $query->execute(array($gebruikersnaam));
+    $geblokkeerd = $query->fetchColumn();
+    return $geblokkeerd;
+}
 ?>

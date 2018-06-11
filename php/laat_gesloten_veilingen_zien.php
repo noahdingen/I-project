@@ -1,6 +1,8 @@
 <?php
 include_once '../databaseverbinding/database_connectie.php';
-$conn = verbindMetDatabase();
+global $conn;
+$conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
 $sql = "SELECT voorwerpnummer, titel, verkoper FROM voorwerp WHERE veilingGesloten = 'ja'";
 $data = $conn->prepare($sql);

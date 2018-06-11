@@ -2,7 +2,10 @@
 include_once '../databaseverbinding/database_connectie.php';
 
 $gebruiker = $_POST['gebruikersnaam'];
-$pdo = verbindMetDatabase();
+global $conn;
+$conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo = $conn;
 $geblokkeerd = $_POST['geblokkeerd'];
 $email = $_POST['emailadres'];
 
@@ -17,8 +20,8 @@ $beheerder_3 = $rows[2]['gebruikersnaam'];
 
 
 if($geblokkeerd == 'nee' && $gebruiker != $beheerder_1 && $gebruiker != $beheerder_2 && $gebruiker != $beheerder_3){
-    $data = $pdo->prepare("UPDATE Gebruiker SET geblokkeerd = 'ja' WHERE gebruikersnaam = '$gebruiker'");
-    $data->execute();
+    $data = $pdo->prepare("UPDATE Gebruiker SET geblokkeerd = 'ja' WHERE gebruikersnaam = ?");
+    $data->execute(array($gebruiker));
     //mailtje sturen dat gebruiker is geblokkeerd
     $subject = 'u bent helaas geblokkeerd';
     $emailtekst = 'Dit is een mail om u te informeren dat u bent geblokkeerd op de site:
@@ -42,8 +45,8 @@ if($geblokkeerd == 'nee' && $gebruiker != $beheerder_1 && $gebruiker != $beheerd
     mail($to, $subject, $emailtekst, implode("\r\n", $headers), "-f".$from );
 }
 if($geblokkeerd == 'ja'){
-    $data = $pdo->prepare("UPDATE Gebruiker SET geblokkeerd = 'nee' WHERE gebruikersnaam = '$gebruiker'");
-    $data->execute();
+    $data = $pdo->prepare("UPDATE Gebruiker SET geblokkeerd = 'nee' WHERE gebruikersnaam = ?");
+    $data->execute(array($gebruiker));
     //mailtje sturen dat gebruiker is gedeblokkeerd
     $subject = 'u bent gedeblokkeerd';
     $emailtekst = 'Dit is een mail om u te informeren dat u bent gedeblokkeerd op de site:

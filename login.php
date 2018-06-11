@@ -16,6 +16,7 @@ if(isset($_SESSION['gebruikers']) || $gebruiker = $_SESSION['gebruikers']){
 <div class="container">
     <form action="php/inloggen.php" method="post" class="col-md-3 col-form-label">
         <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="logo" width="72" height="72">
+        <h2>Inloggen</h2>
         <div class="form-group">
             <label for="gebruikersnaam">Gebruikersnaam</label>
             <input id="gebruikersnaam" class="form-control" name="gebruikersnaam" type="text">

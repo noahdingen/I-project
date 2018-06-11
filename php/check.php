@@ -45,9 +45,9 @@ function bestaatGebruikersnaam($gebruikersnaam) {
     $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
     $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $pdo = $conn;
-    $sql = "SELECT gebruikersnaam FROM Gebruiker WHERE gebruikersnaam = '$gebruikersnaam'";
+    $sql = "SELECT gebruikersnaam FROM Gebruiker WHERE gebruikersnaam = ?";
     $query = $pdo->prepare($sql);
-    $query->execute();
+    $query->execute(array($gebruikersnaam));
     $gebruikersnaam = $query->fetchColumn();
     return $gebruikersnaam;
 }
@@ -56,8 +56,8 @@ function bestaatCombinatieVanGebruikersnaamEnmailcode($mailcode) {
     global $conn;
     $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
     $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-    $sql2 = $conn->prepare("SELECT gebruikersnaam FROM Gebruiker WHERE mailcode = '$mailcode'");
-    $sql2->execute();
+    $sql2 = $conn->prepare("SELECT gebruikersnaam FROM Gebruiker WHERE mailcode = ?");
+    $sql2->execute(array($mailcode));
     $mailcode = $sql2->fetchColumn();
     return $mailcode;
 }

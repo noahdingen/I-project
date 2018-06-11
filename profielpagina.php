@@ -1,65 +1,83 @@
 <?php
+include_once 'header.php';
 if (!isset($_SESSION)) {
     session_start();
 }
-if(isset($_SESSION['gebruikers']) || $gebruiker = $_SESSION['gebruikers']){
+if(!isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers']){
 		header("location: ./index.php");
 }
 include_once 'databaseverbinding/database_connectie.php';
 //$_GET['wissel'] =false;
 $titel = 'Profielpagina';
-include_once 'header.php';
 include_once 'php/gegevens_ophalen.php';
 include_once 'php/beheerder_zoeken.php';
 include_once 'php/veilingenbekijken.php';
 if($_GET["bewerken"] == 'false'){
     $inhoudstype = 'readonly';
+    $datum = 'text';
 } else{
     $inhoudstype = '';
+    $datum = 'date';
+}
+if(isset($_GET['error'])){
+    $error = $_GET['error'];
+}else{
+    $error = '';
 }
 
 echo '
     <script type="application/javascript" src="./assets/js/timerJava.js"></script>
     <link href="assets/css/profielpagina.css" rel="stylesheet">
-
 <form class="gegevenswijzigen" method="post" action="php/gegevens_bijwerken.php?gebruikersnaam=' . $gebruikersnaam .  ' ">
-
 <div class="kolommen">
     <div class="persoons-gegevens">
     <label>Gebruikersnaam</label>
     <input name="gebruikersnaam" class="form-control" type="text" placeholder=" ' . $gebruikersnaam . '" ' . $inhoudstype . '>
     <label>E-mail</label>
-    <input name="emailadres" class="form-control" type="text" placeholder=" ' . $emailadres . '" ' . $inhoudstype .'>
+    <input name="emailadres" class="form-control" type="text" placeholder=" ' . $emailadres . '" ' . $inhoudstype .'>';
+if(($_GET["bewerken"]=='true')){
+    echo '  <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Meer info
+                </button>
+                <div class="dropdown-menu dropdown-menu">
+                <p class="dropdown-item" >In het geval dat het emailadress wordt gewijzigd.
+                       <br>Dient u het account opnieuw te activeren.
+                       <br>Ook wordt u direct uitgelogd te berscherming van uw account.
+                       <br>De andere ingevulde gegevens worden nog wel aangepast.</p>
+            </div>
+    </div><br>';
+}
+echo'
+    
     <label>Voornaam</label>
     <input name="voornaam" class="form-control" type="text" placeholder=" ' . $voornaam . '" ' . $inhoudstype .'>
     <label>Achternaam</label>
     <input name="achternaam" class="form-control" type="text" placeholder=" ' . $achternaam . '" ' . $inhoudstype .'>
     <label>Geboortedatum</label>
-    <input name="datum" class="form-control" type="text" placeholder=" ' . $datum_nieuw . '" ' . $inhoudstype .'>
+    <input name="datum" class="form-control" type="'.$datum.'" placeholder=" ' . $datum_nieuw . '" ' . $inhoudstype .'>
     <label>Woonplaats</label>
     <input name="plaatsnaam" class="form-control" type="text" placeholder=" ' . $plaatsnaam . '" ' . $inhoudstype .'>
     <label>Straatnaam</label>
     <input name="adresregel1" class="form-control" type="text" placeholder=" ' . $adres . '" ' . $inhoudstype .'>
     <label>Postcode</label>
-    <input name="postcode" class="form-control" type="text" placeholder=" ' . $postcode .'" ' . $inhoudstype .'>
-    <label>Verkoper</label>
-    <input name="verkoper" class="form-control" type="text" placeholder=" ' . $verkoper .'" ' . $inhoudstype .'>';
-    if($verkoper == 'ja'){
+    <input name="postcode" class="form-control" type="text" maxlength="6" placeholder=" ' . $postcode .'" ' . $inhoudstype .'>';
+    if($verkoper == 'ja  '){
     echo '
             <label>Bank</label>
-            <input name="bank" class="form-control" type="text" placeholder=" ' . $banknaam . '" ' . $inhoudstype .'>
+            <input name="bank" class="form-control" type="text" placeholder=" ' . $banknaam . '" ' . $inhoudstype .' readonly>
             <label>Rekeningnummer</label>
-            <input name="rekeningnummer" class="form-control" type="text" placeholder=" ' . $rekingnummer .' "' . $inhoudstype .'>
+            <input name="rekeningnummer" class="form-control" type="text" placeholder=" ' . $rekingnummer .' "' . $inhoudstype .' readonly>
             <label>Controle optie</label>
-            <input name="controle" class="form-control" type="text" placeholder=" ' . $controle_optie .' "' . $inhoudstype .'>
+            <input name="controle" class="form-control" type="text" placeholder=" ' . $controle_optie .' "' . $inhoudstype .' readonly>
             <label>Creditcard</label>
-            <input name="creditcard" class="form-control" type="text" placeholder=" ' . $creditcardnummer .' "' . $inhoudstype .'>
+            <input name="creditcard" class="form-control" type="text" placeholder=" ' . $creditcardnummer .' "' . $inhoudstype .' readonly>
             
     ';
     }
 
 if(($_GET["bewerken"]=='true')){
-    echo '
+    echo '<h4>'.$error.'</h4>
     <div class="linkjes">
         <a href="php/gegevens_bijwerken.php"><button type="submit" name="oude_gebruikersnaam" class="btn btn-primary">Bijwerken</button></a>
     </div>';
@@ -105,7 +123,7 @@ else {
         echo '
             <h1>Mijn lopende veilingen</h1> 
             <div class="linkjes">
-            <a href="profielpagina.php?wissel=false&bewerken=false">Bekijk mijn lopende veilingen</a>
+            <a href="profielpagina.php?wissel=false&bewerken=false">Bekijk mijn geboden veilingen</a>
             </div>
             ';
         haalmijnveilingenop($gebruikersnaam);

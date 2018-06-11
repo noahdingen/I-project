@@ -20,7 +20,7 @@ function haalouderrubriekop($rubrieknummer){
     $resultaat = haalallerubriekenop();
     for($i=0; $i<count($resultaat); $i++){
         if($rubrieknummer==$resultaat[$i]["rubrieknummer"] && $rubrieknummer!=-1){
-            echo '<li class="breadcrumb-item"><a href=index.php?rubrieknummer=' . $resultaat[$i]["rubrieknummer"] . '>' . $resultaat[$i]["rubrieknaam"] .'</a></li> ' . haalouderrubriekop($resultaat[$i]["rubriek"]) . '';
+            echo '<li class="breadcrumb-item"><a href=../index.php?rubrieknummer=' . $resultaat[$i]["rubrieknummer"] . '>' . $resultaat[$i]["rubrieknaam"] .'</a></li> ' . haalouderrubriekop($resultaat[$i]["rubriek"]) . '';
         }
     }
 }
@@ -37,7 +37,7 @@ function haalhoofdrubriekenop($resultaat){
                     </button>
                     </h5>
                 </div>
-                <form method="get" action="">
+                <form method="get" action=".">
                 <div id="collapse' . $i . '" class="collapse" aria-labelledby="heading' . $i . '" data-parent="#accordion">
                     ' . haalsubrubriekenop($resultaat[$i]["rubrieknummer"], $resultaat) . '
                </div>
@@ -48,7 +48,9 @@ function haalhoofdrubriekenop($resultaat){
 }
 
 function haalallerubriekenop(){
-    $conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $data = $conn->prepare("SELECT * FROM Rubriek order by rubrieknaam asc");
     $data->execute();
     $resultaat = $data->fetchAll(PDO::FETCH_NAMED);

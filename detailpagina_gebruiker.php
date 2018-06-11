@@ -1,15 +1,19 @@
 <?php
+include_once 'header.php';
 if (!isset($_SESSION)) {
     session_start();
 }
-if(isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers']){
+if(!isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers']){
 		header("location: ./index.php");
 } else{
 include_once 'databaseverbinding/database_connectie.php';
 include_once 'php/beheerder_zoeken.php';
 $titel = 'Profielpagina';
-include_once 'header.php';
-$pdo = verbindMetDatabase();
+
+global $conn;
+$conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+$pdo = $conn;
 $sql = "select gebruikersnaam from Gebruiker where beheerder = 'ja'";
 $query = $pdo->prepare($sql);
 $query->execute([$_SESSION['gebruikers']]);
@@ -141,7 +145,7 @@ if($beheerder == 'ja') {
 }
 else{
         echo 'U bent hier niet voor geautoriseerd';
-        echo '<p>Door deze <a href="index.php">link</a> gaat u terug naar de homepagina ';
+        echo '<p>Door deze <div class="linkjes"><a href="index.php">link</a></div> gaat u terug naar de homepagina</p>';
     }
 }
 

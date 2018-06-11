@@ -57,13 +57,13 @@ $rubrieken = haalallerubriekenop();
             <h1 class="display-4">Nieuwste veilingen</h1>
             <div class="row">
             ';
-            haalhompeginaop($beheerder);
-            echo '
+                haalhompeginaop($beheerder);
+                echo '
             </div></div>
             ';
-        };
-        ?>
-    </div>
+            };
+            ?>
+        </div>
     </div>
 </main>
 

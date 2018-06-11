@@ -25,14 +25,14 @@ global $conn;
 $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $gebruikersnaam = $_POST['gebruiker'];
-    $query = $conn->prepare("DELETE FROM WachtwoordVeranderen WHERE  gebruikersnaam = '$gebruikersnaam'");
-    $query->execute();
+    $query = $conn->prepare("DELETE FROM WachtwoordVeranderen WHERE  gebruikersnaam = ?");
+    $query->execute($gebruikersnaam);
         if ($_POST['wachtwoord'] == $_POST['bevestig_wachtwoord']) {
             $wachtwoord = $_POST['wachtwoord'];
             $wachtwoord = password_hash($wachtwoord, PASSWORD_BCRYPT);
-            $statement = "update Gebruiker set wachtwoord = '$wachtwoord' where gebruikersnaam = '$gebruikersnaam'";
+            $statement = "update Gebruiker set wachtwoord = ? where gebruikersnaam = ?";
             $opdracht = $conn->prepare($statement);
-            $opdracht->execute();
+            $opdracht->execute(array($wachtwoord,$gebruikersnaam));
             echo 'Voltooid u wordt zo doorgestuurd.';
             header("refresh:5; url='../login.php'");
         }

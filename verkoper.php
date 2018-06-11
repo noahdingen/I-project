@@ -1,4 +1,6 @@
 <?php
+include_once 'databaseverbinding/database_connectie.php';
+include_once 'header.php';
 if (!isset($_SESSION)) {
     session_start();
     $titel = 'Verkoper';
@@ -9,9 +11,32 @@ if (!isset($_SESSION)) {
         $error = '';
     }
 }
-include_once 'databaseverbinding/database_connectie.php';
-include_once 'header.php';
-include_once 'php/php_verkoper.php'
+if($beheerder == 'ja'){
+    header("location: ./index.php");
+}
+if (!isset($_SESSION['gebruikers'])) {
+    header("location: ./index.php");
+}
+else if(isset($_SESSION['gebruikers'])){
+
+global $conn;
+$conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+$Gebruiker = $_SESSION['gebruikers'];
+
+$data = $conn->prepare("SELECT verkoper FROM Gebruiker WHERE gebruikersnaam = ? AND verkoper = 'wel'");
+$data->execute(array($Gebruiker));
+$resultaat = $data->fetchAll(PDO::FETCH_NAMED);
+for($i = 0; $i < count($resultaat); $i++){
+
+}
+
+$test = 'wel';
+if($i == 1){
+    header("location: ./index.php");
+}
+else {
+
 //Regel hieronder is voor server!
 //require_once '../Server_verbinding/SQLSrvConnect.php';
 ?>
@@ -46,3 +71,4 @@ include_once 'php/php_verkoper.php'
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 </body>
+<?php }} ?>

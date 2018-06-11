@@ -2,12 +2,14 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-include_once 'databaseverbinding/database_connectie.php';
+include_once '../databaseverbinding/database_connectie.php';
 
 //Haalt meerdere afbeeldingen op voor de detail pagina.
 function haalafbeeldingenop($voorwerpnummer){
     $slides = array('first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth');
-    $conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $bestand = $conn->prepare("select filenaam from Bestand where voorwerpnummer = ?");
     $bestand->execute(array($voorwerpnummer));
     $resultaat_bestand = $bestand->fetchAll(PDO::FETCH_NAMED);
@@ -19,15 +21,17 @@ function haalafbeeldingenop($voorwerpnummer){
             $afbeeling = '';
         }
     echo '
-    <div class="carousel-item ' . $afbeeling . '">
-        <img src="' . $value['filenaam'] . '" alt="' . $slides[$key] . ' slide" height="500" width="500">
-    </div>
+    <div class="carousel-item ' . $afbeeling . ' "><div class="zoom">
+        <img src="' . $value['filenaam'] . '" alt="' . $slides[$key] . ' slide" height="250" width="350">
+    </div></div>
     ';
     }
 }
 //Haalt titel van het voorwerp op.
 function haaltitelop($voorwerpnummer){
-    $conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $sql = $conn->prepare("SELECT titel FROM Voorwerp WHERE voorwerpnummer = ?");
     $sql->execute(array($voorwerpnummer));
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
@@ -35,7 +39,9 @@ function haaltitelop($voorwerpnummer){
 }
 //Haalt beschrijving van het voorwerp op.
 function haalbeschrijvingop($voorwerpnummer){
-    $conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $sql = $conn->prepare("SELECT beschrijving FROM Voorwerp WHERE voorwerpnummer = ?");
     $sql->execute(array($voorwerpnummer));
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
@@ -43,7 +49,9 @@ function haalbeschrijvingop($voorwerpnummer){
 }
 //Haalt alle verkoperinformatie van het voorwerp op.
 function haalverkoperop($voorwerpnummer){
-    $conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $sql = $conn->prepare("SELECT verkoper, land FROM Voorwerp WHERE voorwerpnummer = ?");
     $sql->execute(array($voorwerpnummer));
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
@@ -70,7 +78,9 @@ function haalverkoperop($voorwerpnummer){
 
 //Haalt het totaal aantal veiligen op van de verkoper, dit zegt iets over de betrouwbaarheid van de gebruiker.
 function haalaantalveilingenop($verkoper){
-    $conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $sql = $conn->prepare("SELECT COUNT(verkoper) AS aantalverkocht FROM Voorwerp WHERE verkoper = ?");
     $sql->execute(array($verkoper));
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
@@ -79,7 +89,9 @@ function haalaantalveilingenop($verkoper){
 }
 //Haalt de datum waarop de verkoper zijn eerste veilig heeft geplaatst op.
 function haaldatumeersteveilingop($verkoper){
-    $conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $sql = $conn->prepare("SELECT TOP 1 looptijdbeginDag FROM Voorwerp WHERE verkoper = ? ORDER BY looptijdbeginDag ASC");
     $sql->execute(array($verkoper));
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
@@ -89,8 +101,10 @@ function haaldatumeersteveilingop($verkoper){
     return $looptijdbegindag;
 }
 //
-function haalvoorwerpdetailsop($voorwerpnummer,$rubrieken){
-    $conn = verbindMetDatabase();
+function haalvoorwerpdetailsop($voorwerpnummer, $rubrieken){
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $sql = $conn->prepare("SELECT startprijs, betalingswijze, betalingsinstructie, verzendkosten, verzendinstructies  FROM Voorwerp WHERE voorwerpnummer = ?");
     $sql->execute(array($voorwerpnummer));
     $titel = $sql->fetchAll(PDO::FETCH_NAMED);
@@ -106,25 +120,31 @@ function haalvoorwerpdetailsop($voorwerpnummer,$rubrieken){
               <div class="col text-center">
              <b> Betalingswijze:</b>
               '.$titel[0]['betalingswijze'] . '
-              </div>
+              </div>';
+    if($titel[0]['betalingsinstructie'] != ''){ echo'
+                <div class="col text-center">
+             <b> Betalingsinstructie:</b>
+                '.$titel[0]['betalingsinstructie'] . '
+                </div>';}
+    if($titel[0]['verzendkosten'] != ''){ echo'
+            <div class="col text-center">
+              <b>Verzendkosten:</b>
+            '.$titel[0]['verzendkosten'] . '
+            </div>';
+    }
+    if($titel[0]['verzendinstructies'] != ''){ echo'
               <div class="col text-center">
-             <b>Betalingsinstructie (optioneel):</b>
-              '.$titel[0]['betalingsinstructie'] . '
-              </div>
-              <div class="col text-center">
-              <b>Verzendkosten (optioneel):</b>
-               '.$titel[0]['verzendkosten'] . '
-              </div>
-              <div class="col text-center">
-              <b>Verzendinstructies (optioneel):</b>
+              <b>Verzendinstructies:</b>
                '.$titel[0]['verzendinstructies'] . '
-              </div>
-       </div>';
+              </div>';}
+    echo '</div>';
 }
 //Haalt de geboden bedragen op
 function haalbiedingenop($voorwerpnummer){
-    $conn = verbindMetDatabase();
-    $sql = $conn->prepare("SELECT bodbedrag, gebruikersnaam, bodDag, bodTijdstip FROM Bod WHERE voorwerpnummer = ? ORDER BY bodbedrag DESC");
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+    $sql = $conn->prepare("SELECT top 10 bodbedrag, gebruikersnaam, bodDag, bodTijdstip FROM Bod WHERE voorwerpnummer = ? ORDER BY bodbedrag DESC");
     $sql->execute(array($voorwerpnummer));
     $bodgegevens = $sql->fetchAll(PDO::FETCH_NAMED);
     foreach ($bodgegevens as $value){
@@ -147,14 +167,16 @@ function haalbiedingenop($voorwerpnummer){
 function haalrubriekenpadop($rubrieknummer,$rubrieken){
     for($i=0; $i<count($rubrieken); $i++){
         if($rubrieken[$i]["rubrieknummer"] == $rubrieknummer && $rubrieknummer!=-1){
-            echo '<a class="rubriekenlink" href=index.php?rubrieknummer=' . $rubrieken[$i]["rubrieknummer"] . '>' . $rubrieken[$i]["rubrieknaam"] .'</a> / '  . haalrubriekenpadop($rubrieken[$i]["rubriek"], $rubrieken) . '';
+            echo '<a class="rubriekenlink" href=../index.php?rubrieknummer=' . $rubrieken[$i]["rubrieknummer"] . '>' . $rubrieken[$i]["rubrieknaam"] .'</a> / '  . haalrubriekenpadop($rubrieken[$i]["rubriek"], $rubrieken) . '';
         }
     }
     }
 
 
 function haalrubrieknummerop($voorwerpnummer,$rubrieken){
-    $conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $sql = $conn->prepare("SELECT rubrieknummerOpLaagsteNiveau FROM VoorwerpInRubriek WHERE voorwerpnummer = ?");
     $sql->execute(array($voorwerpnummer));
     $rubrieknummerOpLaagsteNiveau = $sql->fetchAll(PDO::FETCH_NAMED);
@@ -168,7 +190,9 @@ function timer(){
 	}
 	
 	function haaltijdop($voorwerp){
-	$conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 	$sql = $conn->prepare("SELECT looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE voorwerpnummer = ?");
 	$sql->execute(array($_GET['voorwerpnummer']));
 	$info = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -177,7 +201,9 @@ function timer(){
 }
 //Haalt op of een voorwerp geblokkeerd is o niet.
 function haalblokadeop($voorwerpnummer){
-    $conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $sql = $conn->prepare("SELECT geblokkeerd FROM Voorwerp WHERE voorwerpnummer = ?");
     $sql->execute(array($voorwerpnummer));
     $blokkeer = $sql->fetchAll(PDO::FETCH_NAMED);

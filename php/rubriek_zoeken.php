@@ -1,7 +1,9 @@
 <?php
 //haalt alle rubrieken op en zet ze in de select menu.
 function haalrubriekenop(){
-    $conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
     $resultaat = $_POST['rubriek'];
     $rubriek = "%" . $resultaat . "%";
@@ -22,7 +24,9 @@ function haalrubriekenop(){
 
 //Haalt de rubrieknummer op, zodat de toegevoegde veiling goed in de veiling komt te staan
 function haalrubrieknummerop(){
-    $conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
     $resultaat = $_POST['rubriek_keuze'];
 
@@ -35,7 +39,9 @@ function haalrubrieknummerop(){
 
 //haalt de rubrieknaam op voor in de veiling-toevoeg pagina
 function haalrubrieknaamop(){
-    $conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
     $resultaat = $_POST['rubriek_keuze'];
 

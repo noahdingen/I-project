@@ -1,14 +1,9 @@
 <?php
-$sql = "select verkoper, beheerder from Gebruiker where gebruikersnaam =?";
-$query = $pdo->prepare($sql);
-$query->execute([$_SESSION['gebruikers']]);
-
-//Zorgt voor de database connectie (uit datase_connectie.php)
-$conn = verbindMetDatabase();
-
 //Zoekt een ingevoerde gebruiker op
 function haalgebruikersop(){
-    $conn = verbindMetDatabase();
+    global $conn;
+    $conn =  new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $sql_gebruikersnaam = '%' . $_POST['gebruikersnaam_zoeken'] . '%';
     $sql = "SELECT gebruikersnaam, emailadres, geblokkeerd FROM Gebruiker WHERE gebruikersnaam LIKE ?";
     $data = $conn->prepare($sql);
@@ -38,7 +33,7 @@ function haalgebruikersop(){
             echo '<td>' . $rijen[$i]['geblokkeerd'] . '</td>';
             echo '<td>
                     <div class="link">
-                        <a href="detailpagina_gebruiker.php?gebruikersnaam=' . $rijen[$i]['gebruikersnaam'] . '" >Zie details</a>
+                        <a href="../detailpagina_gebruiker.php?gebruikersnaam=' . $rijen[$i]['gebruikersnaam'] . '" >Zie details</a>
                     </div>
                   </td>
                   ';

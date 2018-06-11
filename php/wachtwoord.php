@@ -11,8 +11,8 @@ if (isset($_POST['wachtwoordvergeten'])) {
         global $conn;
         $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $checkstate = $conn->prepare("select gebruikersnaam from Gebruiker WHERE gebruikersnaam = '$gebruikersnaam' AND antwoordtekst = '$andwoordtekst' AND emailadres = '$email' AND vraagnummer = '$vraagnummer'");
-        $checkstate->execute();
+        $checkstate = $conn->prepare("select gebruikersnaam from Gebruiker WHERE gebruikersnaam = ? AND antwoordtekst = ? AND emailadres = ? AND vraagnummer = ?");
+        $checkstate->execute(array($gebruikersnaam, $andwoordtekst, $email, $vraagnummer));
         $uitslag = $checkstate->fetchAll(PDO::FETCH_NAMED);
         for ($i = 0; $i < count($uitslag); $i++) {
 

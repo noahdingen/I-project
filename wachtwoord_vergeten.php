@@ -13,7 +13,7 @@ if(isset($_SESSION['gebruikers']) || $gebruiker = $_SESSION['gebruikers']){
 ?>
 <link href="assets/css/login.css" rel="stylesheet">
 <div class="container">
-    <form class="col-md-3 col-form-label" action="../wachtwoord.php">
+    <form class="col-md-3 col-form-label" action="php/wachtwoord.php">
         <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="logo" width="72" height="72">
         <p>Als U de geheime vraag correct beantwoordt, ontvangt U een e-mail met verdere instructies voor het veranderen van uw wachtwoord.</p>
         <div class="form-group">

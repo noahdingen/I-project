@@ -4,7 +4,10 @@ include_once '../databaseverbinding/database_connectie.php';
 if (!isset($_SESSION)) {
     session_start();
 }
-$pdo = verbindMetDatabase();
+global $conn;
+$conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo = $conn;
 $voorwerpnummer = $_GET['voorwerpnummer'];
 
 //status veilingen ophalen uit database
@@ -87,8 +90,8 @@ if($rijen[0]['veilingGesloten'] == 'ja'){
 
         header("location: ../detailpagina.php?voorwerpnummer=" . $voorwerpnummer . "&error=Deze veiling is geblokkeerd");
     } elseif ($rijen[0]['geblokkeerd'] == 'ja') {
-        $data = $pdo->prepare("UPDATE Voorwerp SET geblokkeerd = 'nee' WHERE geblokkeerd = 'ja' AND voorwerpnummer = '$voorwerpnummer'");
-        $data->execute();
+        $data = $pdo->prepare("UPDATE Voorwerp SET geblokkeerd = 'nee' WHERE geblokkeerd = 'ja' AND voorwerpnummer = ?");
+        $data->execute(array($voorwerpnummer));
         $count = $data->rowCount();
 
         //mailtje sturen dat veiling is gedeblokkeerd naar hoogste bieder
