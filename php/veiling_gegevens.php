@@ -187,9 +187,13 @@ function timer(){
 	$sql = $conn->prepare("SELECT looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE voorwerpnummer = ?");
 	$sql->execute(array($_GET['voorwerpnummer']));
 	$info = $sql->fetchAll(PDO::FETCH_ASSOC);
-	$eindtijd = $info[0]['looptijdeindeDag']." ".$info[0]['looptijdeindeTijdstip'].' GMT+0200';
+	
+	$datum_trimmed = str_replace("-", ", ", $info[0]['looptijdeindeDag');
+	$tijd_trimmed = str_replace(":", ", ", $info[0]['looptijdeindeTijdstip']);
+	$eindtijd =  "new Date(Date.UTC)".$datum_trimmed . ', ' . $tijd_trimmed."))";
 	echo "<script> setDeadline('".$eindtijd."'); initializeClock('clockdiv', deadline);</script>";
 }
+
 //Haalt op of een voorwerp geblokkeerd is o niet.
 function haalblokadeop($voorwerpnummer){
     $conn = verbindMetDatabase();

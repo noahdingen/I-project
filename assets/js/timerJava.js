@@ -1,11 +1,12 @@
 var deadline = '';
 
+
 function setDeadline(time){
 	deadline = time;
 }
 
 function getTimeRemaining(endtime){
-  var t = Date.parse(endtime) - Date.parse(new Date());
+  var t = endtime - new Date();
   var seconds = Math.floor( (t/1000) % 60 );
   var minutes = Math.floor( (t/1000/60) % 60 );
   var hours = Math.floor( (t/(1000*60*60)) % 24 );
