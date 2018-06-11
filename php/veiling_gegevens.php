@@ -97,7 +97,7 @@ function haalvoorwerpdetailsop($voorwerpnummer,$rubrieken){
     echo '<div class="col">
               <div class="col text-center">
              <b> Bieden vanaf:</b>
-             &euro;'.$titel[0]['startprijs'] . '
+             &euro;'.haalstartpijsop($voorwerpnummer) . '
               </div>
                <div class="col text-center">
              <b> Rubriekenpad:</b>
@@ -121,6 +121,21 @@ function haalvoorwerpdetailsop($voorwerpnummer,$rubrieken){
               </div>
        </div>';
 }
+
+function haalstartpijsop($voorwerpnummer){
+$conn = verbindMetDatabase();
+$sql = $conn->prepare("SELECT startprijs, betalingswijze, betalingsinstructie, verzendkosten, verzendinstructies  FROM Voorwerp WHERE voorwerpnummer = ?");
+$sql->execute(array($voorwerpnummer));
+$titel = $sql->fetchAll(PDO::FETCH_NAMED);
+$startprijs = $titel[0]['startprijs'];
+if (substr($startprijs, 0, 1) == '.'){
+    $startprijsonderde1 = "0". $startprijs;
+    return $startprijsonderde1;
+}else {
+    return $startprijs;
+
+}}
+
 //Haalt de geboden bedragen op
 function haalbiedingenop($voorwerpnummer){
     $conn = verbindMetDatabase();
