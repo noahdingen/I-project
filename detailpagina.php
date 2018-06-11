@@ -114,8 +114,7 @@ include 'header.php';
                         <button type="submit" name="blokkeerknop" class="btn btn-primary">Blokkeer</button>';
                     }else{
                         echo '
-                    <p>Met deze knop kunt u de veiling deblokkeren.</p>
-                 <label>Als de veiling is gedeblokkeerd, komt de timer weer terug.</label>
+                 <label>Met deze knop kunt u de veiling deblokkeren.</label>
                     <input type="hidden" id="voorwerpnummer" name="voorwerpnummer"><br>
 
                         <button type="submit" name="blokkeerknop" class="btn btn-primary">Deblokkeer</button>';
