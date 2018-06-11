@@ -28,6 +28,7 @@ function initializeClock(id, endtime){
                       ('0' + t.minutes).slice(-2) + ' : ' +
                       ('0' + t.seconds).slice(-2);
     if(t.total<=0){
+	 clock.innerHTML = 'DE VEILING IS GESLOTEN!'
      clearInterval(timeinterval);
     }
   },1000);
