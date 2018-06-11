@@ -4,13 +4,13 @@ include_once 'header.php';
 if (!isset($_SESSION)) {
     session_start();
     $titel = 'Verkoper';
-
+}
     if(isset($_GET['error'])){
         $error = $_GET['error'];
     }else{
         $error = '';
     }
-}
+
 if($beheerder == 'ja'){
     header("location: ./index.php");
 }

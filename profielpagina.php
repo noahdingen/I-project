@@ -62,7 +62,7 @@ echo'
     <input name="adresregel1" class="form-control" type="text" placeholder=" ' . $adres . '" ' . $inhoudstype .'>
     <label>Postcode</label>
     <input name="postcode" class="form-control" type="text" maxlength="6" placeholder=" ' . $postcode .'" ' . $inhoudstype .'>';
-    if($verkoper == 'ja  '){
+    if($verkoper == 'ja'){
     echo '
             <label>Bank</label>
             <input name="bank" class="form-control" type="text" placeholder=" ' . $banknaam . '" ' . $inhoudstype .' readonly>

@@ -145,7 +145,7 @@ if($beheerder == 'ja') {
 }
 else{
         echo 'U bent hier niet voor geautoriseerd';
-        echo '<p>Door deze <div class="linkjes"><a href="index.php">link</a></div> gaat u terug naar de homepagina</p>';
+        echo '<p>Door deze <a href="index.php">link</a> gaat u terug naar de homepagina</p>';
     }
 }
 

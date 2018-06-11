@@ -1,6 +1,6 @@
 <?php
 include_once('../databaseverbinding/database_connectie.php');
-
+session_start();
 
 //Regel hieronder is voor server!
 //require_once '../Server_verbinding/SQLSrvConnect.php';
@@ -50,14 +50,13 @@ function checkIBAN($iban) {
         header("location: ../verkoper.php?error=$error");
     }else{
 
-        $sql = "INSERT INTO Verkoper  VALUES(?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO Verkoper VALUES(?, ?, ?, ?, ?)";
         $query = $conn->prepare($sql);
         $query->execute(array($gast, $bank, $banknummer, $controle, $creditcardnummer));
 
         $sql2 = "UPDATE Gebruiker set verkoper = '$verkoper' WHERE gebruikersnaam = ? ";
         $query = $conn->prepare($sql2);
-        $query->execute($gast);
+        $query->execute(array($gast));
 
-        //header("Location: verkoperworden.php?bewerken=false");
         header("Location: ../profielpagina.php?bewerken=false");
 }

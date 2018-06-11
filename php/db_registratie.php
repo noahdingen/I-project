@@ -67,7 +67,7 @@ http://iproject39.icasites.nl/check_account.php
 Met vriendelijke groeten, 
 IConcepts
 
-Deze mail is automatisch gegenereed.';
+Deze mail is automatisch gegenereerd.';
             $to = $email;
             $from = 'iconcepts39@gmail.com';
 
