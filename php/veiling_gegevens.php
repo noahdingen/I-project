@@ -188,9 +188,7 @@ function timer(){
 	$sql->execute(array($_GET['voorwerpnummer']));
 	$info = $sql->fetchAll(PDO::FETCH_ASSOC);
 	
-	$datum_trimmed = str_replace("-", ", ", $info[0]['looptijdeindeDag']);
-	$tijd_trimmed = str_replace(":", ", ", $info[0]['looptijdeindeTijdstip']);
-	$eindtijd =  "new Date(Date.UTC)".$datum_trimmed . ', ' . $tijd_trimmed."))";
+	$eindtijd = $info[0]['looptijdeindeDag']." ".$info[0]['looptijdeindeTijdstip'].' GMT+0200';
 	echo "<script> setDeadline('".$eindtijd."'); initializeClock('clockdiv', deadline);</script>";
 }
 
