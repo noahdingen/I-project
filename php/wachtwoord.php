@@ -1,8 +1,7 @@
 <?php
 include '../server_verbinding/mail.php';
 include '../server_verbinding/SQLSrvConnect.php';
-
-if (isset($_POST['wachtwoordvergeten'])) {
+session_start();
     if (!empty($_POST['gebruikersnaam']) && !empty($_POST['geheime_vraag']) && !empty($_POST['antwoord'])) {
         $gebruikersnaam = $_POST['gebruikersnaam'];
         $andwoordtekst = $_POST['antwoord'];
@@ -63,5 +62,5 @@ if (isset($_POST['wachtwoordvergeten'])) {
         $error = "Niet alle gegevens ingevuld";
         header("refresh:0; url='../wachtwoorden_vergeten.php?error=$error'");
     }
-}
+
 ?>

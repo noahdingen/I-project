@@ -1,5 +1,6 @@
 <?php
 //error ?
+session_start();
 if(isset($_GET['error'])){
     $error = $_GET['error'];
 }else{
@@ -13,11 +14,15 @@ if(isset($_SESSION['gebruikers']) || $gebruiker = $_SESSION['gebruikers']){
 ?>
 <link href="assets/css/login.css" rel="stylesheet">
 <div class="container">
-    <form class="col-md-3 col-form-label" action="php/wachtwoord.php">
+    <form class="col-md-3 col-form-label" action="php/wachtwoord.php" method="post" >
         <img class="mb-4" src="https://icon-icons.com/icons2/474/PNG/512/auction-hammer_46873.png" alt="logo" width="72" height="72">
         <p>Als U de geheime vraag correct beantwoordt, ontvangt U een e-mail met verdere instructies voor het veranderen van uw wachtwoord.</p>
         <div class="form-group">
             <input id="gebruikersnaam" class="form-control" name="gebruikersnaam" type="text" placeholder="Gebruikersnaam" required>
+        </div>
+        <div class="form-group">
+            <label for="email">E-mailadres</label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="E-mailadres" required>
         </div>
         <div class="form-group">
             <label for="geheime_vraag">Geheime vraag</label>
@@ -31,6 +36,7 @@ if(isset($_SESSION['gebruikers']) || $gebruiker = $_SESSION['gebruikers']){
         <div class="form-group">
             <input type="text" class="form-control" name="antwoord" id="antwoord" placeholder="Antwoord" required>
         </div>
+        <?php echo $error ?>
         <div class="container">
             <button type="submit" class="btn btn-primary">Verzenden</button>
         </div>
