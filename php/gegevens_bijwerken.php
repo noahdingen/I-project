@@ -33,8 +33,8 @@ foreach ($_POST as $key => $value){
             }
         }
         if($key=='emailadres' && $email != ''){
-            $data = $pdo->prepare("UPDATE Gebruiker SET $key = ? WHERE gebruikersnaam = '$oude_gebruikersnaam'");
-            $data->execute($value);
+            $data = $pdo->prepare("UPDATE Gebruiker SET emailadres = ? WHERE gebruikersnaam = '$oude_gebruikersnaam'");
+            $data->execute(array($value));
             $data = $pdo->prepare("UPDATE Gebruiker SET activatie = 0 WHERE gebruikersnaam = '$oude_gebruikersnaam'");
             function genereerRandomString($length = 15) {
                 $karakters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -58,7 +58,7 @@ http://iproject39.icasites.nl/check_account.php
 Met vriendelijke groeten, 
 IConcepts
 
-Deze mail is automatisch gegenereed.';
+Deze mail is automatisch gegenereerd.';
             $to = $email;
             $from = 'iconcepts39@gmail.com';
 

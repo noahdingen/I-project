@@ -36,7 +36,7 @@ session_start();
             Met vriendelijke groeten,
             IConcepts
             
-            Deze mail is automatisch gegenereed.
+            Deze mail is automatisch gegenereerd.
             
             Heeft u het wijzigen van het wachtwoord niet aangevraagd dan kan het wezen dat uw account gegevens bekend zijn bij derderen.
             Neem in dit geval contact met ons op!';
