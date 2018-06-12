@@ -1,9 +1,10 @@
 <?php
+
 include_once '../databaseverbinding/database_connectie.php';
 if (!isset($_SESSION)) {
     session_start();
 }
-session_start();
+
 global $conn;
 $conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -19,6 +20,7 @@ if(isset($_POST['verzendinstructies'])){
 }else{
     $verzendinstructies = NULL;
 }
+
 $titel = $_POST['titel'];
 $beschrijving = $_POST['beschrijving'];
 $rubriek = $_POST['rubriek'];
@@ -35,7 +37,6 @@ $resultaat = $data->fetchAll(PDO::FETCH_NAMED);
 $voorwerpnummer = count($resultaat) + 1;
 $tijdelijkbestand = $_FILES["afbeelding_1"]["tmp_name"];
 $bestandsnaam = $_FILES["afbeelding_1"]["name"];
-
 $fileExt = explode('.', $bestandsnaam);
 $fileActualExt = strtolower((end($fileExt)));
 $fileNameNew = uniqid('', true).".".$fileActualExt;
@@ -45,10 +46,12 @@ $locatie_db = "assets/veilingen_afbeeldingen/".$fileNameNew;
 //afbeelding in map zetten
 move_uploaded_file($tijdelijkbestand,$locatie_map);
 
+$informatie = array($titel, $beschrijving, $rubriek, $startprijs, $looptijd_dag, $betalingswijze,
+    $betalingsinstructies, $verzendoptie, $land, $plaatsnaam, $verzendinstructies);
+
 //voorwerp in database zetten
 $sql_veiling = "INSERT INTO Voorwerp VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CAST(GETDATE() AS DATE),
-convert(time,getdate()), NULL, ?, ?, NULL, DATEADD(dd, 5, CAST(GETDATE() AS DATE)), convert(time,getdate()),'nee', null, ?,'nee')";
-
+convert(time,getdate()), NULL, ?, ?, NULL,DATEADD(dd,CAST(? AS int),CAST(GETDATE() AS DATE)), convert(time,getdate()),'nee', null, ?,'nee')";
 $veilingen = $conn->prepare($sql_veiling);
 $veilingen->execute(array($voorwerpnummer,
         $titel,
@@ -61,16 +64,12 @@ $veilingen->execute(array($voorwerpnummer,
         $looptijd_dag,
         $verzendinstructies,
         $gebruiker,
+        $looptijd_dag,
         $locatie_db
     )
 );
 
-
-
 //rubriek in database zetten
-global $conn;
-$conn = new PDO("sqlsrv:Server=mssql.iproject.icasites.nl; Database=iproject39; ConnectionPooling = 0", "iproject39", "Mj9cP5NoYv");
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $sql_rubriek = "insert into VoorwerpInRubriek values(?,?)";
 $rubrieken = $conn->prepare($sql_rubriek);
 $rubrieken->execute(array($voorwerpnummer, $rubriek));
@@ -122,7 +121,6 @@ if(!empty($_FILES["afbeelding_3"]["tmp_name"]))
     $afbeelding->execute(array($locatie_db, $voorwerpnummer));
 }
 
-header("location: ../succesvol_veiling.php");
 
-//Als afbeelding 2 is geupload, hier in mapje en database zetten
+header("location: ../succesvol_veiling.php");
 ?>

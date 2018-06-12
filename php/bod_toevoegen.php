@@ -12,7 +12,7 @@ if($_SESSION['gebruikers'] == ''){
     header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
 }if($beheerder == 'ja'){
     $voorwerpnummer = $_GET['voorwerpnummer'];
-    $error = "U als beheerder mag geen boden plaatsen.";
+    $error = "Als beheerder mag U geen biedingen plaatsen.";
     header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
 }
 else {
@@ -69,7 +69,8 @@ else {
                         }
                     } else {
                         if ($hoogste_bod[0]["hoogste_bod"] > $startbod[0]['startprijs']) {
-                            $error = 'bodbedrag is te laag!<br> U dient boven het startbedrag te bieden en boven het hoogste bod<br>U dient een minimale verhoging van €1,- te doen<br> dit is: €' . $hoogste_bod[0]["hoogste_bod"];
+                            $bedrag = $hoogste_bod[0]["hoogste_bod"] + 1;
+                            $error = 'Bodbedrag is te laag!<br> U dient boven het startbedrag te bieden en boven het hoogste bod.<br>U dient een minimale verhoging van €1,- te doen.<br> Het minimale te bieden bedrag is: €' . $bedrag;
                             header("location: ../detailpagina.php?voorwerpnummer=$voorwerpnummer&error=$error");
                         } else {
                             $error = 'bodbedrag is te laag!<br> U dient boven het startbedrag te bieden en boven het hoogste bod<br> dit is: €' . $startbod[0]["startprijs"];
