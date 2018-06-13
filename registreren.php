@@ -5,7 +5,7 @@ include 'header.php';
 if(isset($_GET['error'])){
     $error = $_GET['error'];
 }else{
-    $error = 'Gebruikersnaam';
+    $error = '';
 }
 if(isset($_SESSION['gebruikers']) || !empty($_SESSION['gebruikers'])){
 		header("location: ./index.php");
@@ -17,9 +17,10 @@ if(isset($_SESSION['gebruikers']) || !empty($_SESSION['gebruikers'])){
     <div class="container">
         <h1 class="display-3">Registreren</h1>
     <form class="col-form-label-lg" action="php/db_registratie.php" method="post">
+        <b><?php echo $error;?></b>
         <div class="form-group">
             <label for="gebruikersnaam">Gebruikersnaam</label>
-            <input type="text" class="form-control" name="gebruikersnaam" id="gebruikersnaam" placeholder="<?php echo $error;?>" required autofocus>
+            <input type="text" class="form-control" name="gebruikersnaam" id="gebruikersnaam" placeholder="Gebruikersnaam" required autofocus>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">

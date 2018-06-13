@@ -74,7 +74,7 @@ include 'header.php';
                             } else {
                                 echo '
                         <div class="my-md-3 form-group text-center">
-                            <input type="text" class="form-control" id="bodbedrag" name="bodbedrag" placeholder="Doe een bod">
+                            <input type="number" step="0.01" class="form-control" id="bodbedrag" name="bodbedrag" placeholder="Doe een bod">
                         </div>
                         <div class="form-group text-center">
                             <button type="submit" name="biedenknop" class="btn btn-primary">Bied</button>
