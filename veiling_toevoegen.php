@@ -20,7 +20,7 @@ if(!isset($_SESSION['gebruikers']) || $gebruiker != $_SESSION['gebruikers'] || $
             </div>
             <div class="form-group">
                 <label for="beschrijving">Beschrijving</label>
-                <input type="text" class="form-control" name="beschrijving" id="beschrijving" placeholder="Beschrijving" pattern=".{0,1000}" title="De beschrijving mag niet meer dan 255 tekens zijn." required>
+                <input type="text" class="form-control" name="beschrijving" id="beschrijving" placeholder="Beschrijving" pattern=".{0,1000}" title="De beschrijving mag niet meer dan 1000 tekens zijn." required>
             </div>
             <div class="form-group">
                 <input type="hidden" class="form-control" name="rubriek" id="rubriek" value="<?php haalrubrieknummerop()?>">
