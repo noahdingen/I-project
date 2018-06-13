@@ -50,7 +50,7 @@ else {
         $verkoper = $state->fetchAll();
         if ($gebruikersnaam != $verkoper[0]['verkoper']) {
             if ($bodbedrag < 100000000) {
-                if (empty($hoogste_bod) && $bodbedrag > $startbod[0]['startprijs']) {
+                if (empty($hoogste_bod) && $bodbedrag >= $startbod[0]['startprijs']) {
                     $sql_insert = $pdo->prepare("INSERT INTO Bod VALUES (?, ?, ?, CAST(GETDATE() AS DATE), convert(time,GETDATE()))");
                     $sql_insert->execute(array($voorwerpnummer, $bodbedrag, $gebruikersnaam));
                     $error = "";
